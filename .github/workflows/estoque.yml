@@ -1,0 +1,35 @@
+name: Atualizar estoque
+
+on:
+  schedule:
+    - cron: "17 */2 * * *"   # a cada 2 horas
+  workflow_dispatch:          # botao "Run workflow" para rodar na hora
+
+permissions:
+  contents: write
+
+concurrency:
+  group: estoque
+  cancel-in-progress: false
+
+jobs:
+  atualizar:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Buscar estoque e precos no Solidus
+        env:
+          SOLIDUS_TOKEN: ${{ secrets.SOLIDUS_TOKEN }}
+        run: python scripts/atualizar_estoque.py
+      - name: Salvar se mudou
+        run: |
+          git diff --quiet estoque.js && { echo "Sem mudancas"; exit 0; }
+          git config user.name "atualizacao-estoque"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add estoque.js
+          git commit -m "Atualiza estoque"
+          git push

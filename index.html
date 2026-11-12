@@ -1,0 +1,1244 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Lojas Tropical</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;700;800&family=Figtree:wght@400;500;600;700&display=swap">
+<style>
+/* Layout: cabeçalho vermelho da marca com logo, busca e carrinho; página inicial (vitrine, catálogo, lojas) e página de produto no mesmo arquivo */
+:root {
+  --red: #d8121b;
+  --red-deep: #9c0a10;
+  --green: #3aa52a;
+  --buy: #1f9d3a;
+  --sun: #ffd400;
+  --bg: #fbf7f4;
+  --surface: #ffffff;
+  --fg: #231a18;
+  --muted: #6e6360;
+  --line: #ecdfd9;
+  --chip: #fde9e7;
+  --price: #c3101a;
+  --font-display: "Baloo 2", "Arial Rounded MT Bold", system-ui, sans-serif;
+  --font-body: "Figtree", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --radius: 14px;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --red: #e3242c; --red-deep: #7a0a0e; --green: #5cc94a; --buy: #27b347; --sun: #ffd84d;
+    --bg: #141010; --surface: #1e1817; --fg: #f4ece9; --muted: #b3a6a2;
+    --line: #352b29; --chip: #2c1d1c; --price: #ff6b6b;
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --red: #e3242c; --red-deep: #7a0a0e; --green: #5cc94a; --buy: #27b347; --sun: #ffd84d;
+  --bg: #141010; --surface: #1e1817; --fg: #f4ece9; --muted: #b3a6a2;
+  --line: #352b29; --chip: #2c1d1c; --price: #ff6b6b;
+  color-scheme: dark;
+}
+* { box-sizing: border-box; }
+[hidden] { display: none !important; }
+body { background: var(--bg); color: var(--fg); font-family: var(--font-body); font-size: 16px; line-height: 1.5; }
+body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-area-inset-top, 0px); z-index: 10; background: var(--red-deep); }
+a { color: inherit; }
+button { font: inherit; }
+:focus-visible { outline: 3px solid var(--sun); outline-offset: 2px; }
+h1, h2, h3 { font-family: var(--font-display); text-wrap: balance; margin: 0; line-height: 1.05; }
+.wrap { max-width: 1200px; margin: 0 auto; padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); }
+
+.demo { background: var(--sun); color: #2b2200; font-size: 13px; font-weight: 600; text-align: center; }
+.demo .wrap { padding-block: 6px; }
+
+.topbar { background: var(--red-deep); color: #ffe3e1; font-size: 14px; }
+.topbar .wrap { display: flex; flex-wrap: wrap; gap: 6px 24px; justify-content: space-between; padding-block: 8px; }
+.topbar a { text-decoration: none; }
+.topbar a:hover { color: #fff; text-decoration: underline; }
+
+header.main { position: sticky; top: env(safe-area-inset-top, 0px); z-index: 5; background: var(--red); color: #fff; box-shadow: 0 2px 12px rgb(0 0 0 / .18); }
+header.main .row { display: flex; align-items: center; gap: 12px 24px; padding-block: 10px; flex-wrap: wrap; }
+.logo { display: block; flex: none; }
+.logo img { display: block; height: 64px; width: auto; }
+.search { flex: 1 1 280px; display: flex; background: #fff; border-radius: 999px; overflow: hidden; min-width: 0; order: 3; }
+.search input { flex: 1; min-width: 0; border: 0; padding: 12px 18px; font: inherit; color: #231a18; background: transparent; }
+.search input:focus { outline: none; }
+.search:focus-within { outline: 3px solid var(--sun); }
+.search button { border: 0; background: var(--sun); color: #2b2200; padding: 0 20px; font-weight: 700; cursor: pointer; }
+.head-actions { display: flex; gap: 10px; align-items: center; margin-left: auto; order: 2; }
+@media (min-width: 861px) { .search { order: 2; } .head-actions { order: 3; margin-left: 0; } }
+/* Barra de departamentos: rola para o lado (setas, roda do mouse ou arrastar) */
+nav.cats { position: relative; }
+nav.cats ul { scroll-behavior: smooth; cursor: grab; }
+nav.cats ul.arrastando { cursor: grabbing; scroll-behavior: auto; }
+nav.cats .cat-arrow { padding: 0; position: absolute; top: 50%; transform: translateY(-50%); z-index: 2; width: 34px; height: 34px; border-radius: 50%; border: 0; background: var(--sun); color: #2b2200; font-size: 20px; font-weight: 800; line-height: 1; cursor: pointer; box-shadow: 0 2px 8px rgb(0 0 0 / .3); display: grid; place-items: center; }
+nav.cats .cat-arrow.esq { left: 10px; } nav.cats .cat-arrow.dir { right: 10px; }
+nav.cats .cat-arrow:hover { background: #fff; color: var(--red-deep); }
+@media (min-width: 861px) { nav.cats ul { padding-left: 52px; padding-right: 52px; scroll-padding-inline: 52px; } }
+@media (max-width: 860px) { .cat-arrow { display: none !important; } }
+.wa-btn { display: inline-flex; align-items: center; gap: 8px; background: #25d366; color: #06301a; font-weight: 700; text-decoration: none; padding: 10px 16px; border-radius: 999px; white-space: nowrap; }
+.cart-btn { position: relative; border: 2px solid rgb(255 255 255 / .55); background: transparent; color: #fff; border-radius: 999px; padding: 8px 14px; display: inline-flex; gap: 8px; align-items: center; font-weight: 700; cursor: pointer; }
+.cart-btn:hover { background: rgb(255 255 255 / .12); }
+.cart-count { position: absolute; top: -8px; right: -6px; min-width: 22px; height: 22px; border-radius: 999px; background: var(--sun); color: #2b2200; font-size: 12px; font-weight: 800; display: grid; place-items: center; padding: 0 5px; font-variant-numeric: tabular-nums; }
+nav.cats { background: var(--red-deep); }
+nav.cats ul { list-style: none; margin: 0 auto; display: flex; gap: 4px; overflow-x: auto; padding-block: 6px; scrollbar-width: none; }
+nav.cats button { border: 0; background: transparent; color: #ffe9e7; font-weight: 600; padding: 8px 14px; border-radius: 999px; cursor: pointer; white-space: nowrap; }
+nav.cats button:hover, nav.cats button[aria-pressed="true"] { background: var(--sun); color: #2b2200; }
+
+.hero { background: radial-gradient(120% 140% at 80% 0%, #ff3a3f 0%, var(--red) 40%, var(--red-deep) 100%); color: #fff; overflow: hidden; }
+.hero .wrap { display: grid; grid-template-columns: 1.15fr 1fr; gap: 24px; align-items: center; padding-block: 40px; }
+.badge20 { display: inline-flex; align-items: baseline; gap: 6px; background: var(--sun); color: var(--red-deep); font-family: var(--font-display); font-weight: 800; padding: 2px 14px 0; border-radius: 999px; font-size: 18px; margin-bottom: 14px; }
+.badge20 b { font-size: 26px; }
+.hero h1 { font-size: clamp(38px, 6vw, 72px); font-weight: 800; letter-spacing: -.01em; }
+.hero h1 em { font-style: normal; color: var(--sun); }
+.hero p { font-size: 18px; max-width: 44ch; color: #ffe3e1; margin: 14px 0 22px; }
+.hero .ctas { display: flex; flex-wrap: wrap; gap: 12px; }
+.btn { display: inline-flex; align-items: center; justify-content: center; gap: 8px; padding: 12px 20px; border-radius: 999px; text-decoration: none; border: 2px solid transparent; cursor: pointer; font-weight: 700; }
+.btn.sun { background: var(--sun); color: #2b2200; }
+.btn.ghost { border-color: rgb(255 255 255 / .6); color: #fff; background: transparent; }
+.hero-shelf { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; align-items: end; }
+.hero-shelf a { display: block; background: #fff; border-radius: 14px; padding: 8px; box-shadow: 0 10px 24px rgb(0 0 0 / .25); text-decoration: none; }
+.hero-shelf a:nth-child(2) { transform: translateY(-18px); }
+.hero-shelf img { display: block; width: 100%; aspect-ratio: 1; object-fit: contain; }
+.hero-shelf span { display: block; font-size: 12px; font-weight: 700; color: var(--red-deep); text-align: center; font-variant-numeric: tabular-nums; }
+
+.perks { background: var(--surface); border-bottom: 1px solid var(--line); }
+.perks ul { list-style: none; margin: 0 auto; display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; padding-block: 18px; }
+.perks li { display: flex; gap: 12px; align-items: center; min-width: 0; }
+.ic { flex: none; width: 44px; height: 44px; border-radius: 50%; display: grid; place-items: center; background: var(--chip); color: var(--red); }
+.perks b { display: block; font-size: 15px; }
+.perks span { color: var(--muted); font-size: 13px; }
+
+section { padding-block: 44px; }
+.sec-head { display: flex; flex-wrap: wrap; gap: 8px 24px; align-items: end; justify-content: space-between; margin-bottom: 20px; }
+.sec-head h2 { font-size: clamp(28px, 3.6vw, 40px); font-weight: 800; }
+.eyebrow { font-size: 12px; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; color: var(--green); display: block; margin-bottom: 2px; }
+.count { color: var(--muted); font-size: 14px; }
+
+.grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(230px, 1fr)); gap: 18px; }
+.card { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); display: flex; flex-direction: column; overflow: hidden; transition: transform .15s, box-shadow .15s; position: relative; }
+.card:hover { transform: translateY(-2px); box-shadow: 0 10px 24px rgb(156 10 16 / .14); }
+.card .pic { aspect-ratio: 1; max-width: 100%; background: #fff; position: relative; display: block; }
+.card .pic img { width: 100%; height: 100%; object-fit: contain; display: block; }
+.card .pic.cover img { object-fit: cover; }
+.tag { position: absolute; top: 10px; left: 10px; background: var(--green); color: #fff; font-size: 11px; font-weight: 700; padding: 3px 9px; border-radius: 999px; text-transform: uppercase; letter-spacing: .04em; z-index: 1; }
+.card .body { padding: 14px 16px 16px; display: flex; flex-direction: column; gap: 4px; flex: 1; min-width: 0; }
+.cat { font-size: 12px; color: var(--muted); text-transform: uppercase; letter-spacing: .08em; font-weight: 600; }
+.card h3 { font-family: var(--font-body); font-size: 16px; font-weight: 600; line-height: 1.3; }
+.card h3 a { text-decoration: none; }
+.card h3 a:hover { text-decoration: underline; }
+.card .colors { font-size: 12px; color: var(--muted); }
+.dots { display: flex; flex-wrap: wrap; gap: 6px; align-items: center; margin-top: 4px; }
+.dot { width: 24px; height: 24px; border-radius: 50%; border: 2px solid #fff; box-shadow: 0 0 0 1px #b9aca7; padding: 0; cursor: pointer; flex: none; }
+.dot[aria-pressed="true"] { box-shadow: 0 0 0 2px var(--red); }
+.swatches .sw { display: inline-block; width: 16px; height: 16px; border-radius: 50%; box-shadow: 0 0 0 1px #b9aca7; vertical-align: -3px; margin-right: 6px; }
+.price { font-family: var(--font-display); font-size: 28px; font-weight: 800; color: var(--price); font-variant-numeric: tabular-nums; line-height: 1.1; margin-top: 6px; }
+.price small { font-size: 15px; font-weight: 700; margin-right: 3px; }
+.price.ask { font-size: 20px; color: var(--muted); }
+.inst { font-size: 13px; color: var(--muted); }
+.card .order { margin-top: auto; padding-top: 12px; display: grid; gap: 8px; }
+.card .order a { justify-content: center; text-decoration: none; display: flex; gap: 8px; align-items: center; padding: 10px; border-radius: 10px; font-weight: 700; font-size: 14px; }
+.card .order .see { background: var(--red); color: #fff; }
+.card .order .wa { background: #25d366; color: #06301a; }
+.empty { padding: 40px; text-align: center; color: var(--muted); border: 1px dashed var(--line); border-radius: var(--radius); grid-column: 1 / -1; }
+
+
+.cities { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 18px; }
+.cities span { background: var(--chip); color: var(--fg); font-weight: 700; padding: 8px 16px; border-radius: 999px; }
+.note { color: var(--muted); font-size: 14px; max-width: 65ch; }
+
+.social { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 16px; }
+.social a { display: flex; align-items: center; gap: 14px; padding: 18px; border-radius: var(--radius); text-decoration: none; color: #fff; font-weight: 700; }
+.social a span { display: block; font-weight: 500; font-size: 14px; opacity: .92; }
+.s-ig { background: linear-gradient(135deg, #f58529, #dd2a7b 55%, #8134af); }
+.s-lk { background: #2f8a22; }
+.s-wa { background: #128c4a; }
+
+/* ===== Página do produto ===== */
+.crumbs { font-size: 14px; color: var(--muted); padding-block: 16px; display: flex; flex-wrap: wrap; gap: 6px; }
+.crumbs a { text-decoration: none; }
+.crumbs a:hover { text-decoration: underline; color: var(--fg); }
+.crumbs b { color: var(--red); font-weight: 700; }
+.pdp { display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr); gap: 32px; align-items: start; padding-bottom: 40px; }
+.gallery { display: grid; grid-template-columns: 84px minmax(0, 1fr); gap: 14px; align-items: start; }
+.thumbs { display: flex; flex-direction: column; gap: 10px; max-height: 560px; overflow-y: auto; }
+.thumbs button { border: 2px solid var(--line); background: #fff; border-radius: 10px; padding: 4px; cursor: pointer; aspect-ratio: 1; width: 100%; }
+.thumbs button[aria-current="true"] { border-color: var(--red); }
+.thumbs img { width: 100%; height: 100%; object-fit: contain; display: block; }
+.stage { background: #fff; border: 1px solid var(--line); border-radius: var(--radius); aspect-ratio: 1; max-width: 100%; position: relative; overflow: hidden; }
+.stage img { width: 100%; height: 100%; object-fit: contain; display: block; }
+.stage .off { position: absolute; top: 14px; right: 14px; background: var(--red); color: #fff; font-family: var(--font-display); font-weight: 800; padding: 6px 12px 3px; border-radius: 999px; font-size: 14px; }
+.buy { display: flex; flex-direction: column; gap: 14px; min-width: 0; }
+.buy h1 { font-family: var(--font-body); font-size: clamp(22px, 2.6vw, 30px); font-weight: 700; line-height: 1.25; }
+.buy .meta { display: flex; flex-wrap: wrap; gap: 6px 16px; color: var(--muted); font-size: 14px; }
+.pricebox { border: 1px solid var(--line); background: var(--surface); border-radius: var(--radius); padding: 18px 20px; display: grid; gap: 4px; }
+.pricebox .price { font-size: 40px; margin: 0; }
+.pricebox .price small { font-size: 20px; }
+.pricebox .inst { font-size: 15px; }
+.field-label { font-weight: 700; font-size: 15px; }
+.field-label span { font-weight: 500; color: var(--muted); }
+.swatches { display: flex; flex-wrap: wrap; gap: 8px; }
+.swatches button { border: 2px solid var(--line); background: var(--surface); color: var(--fg); border-radius: 999px; padding: 6px 14px; cursor: pointer; font-size: 14px; font-weight: 600; }
+.swatches button[aria-pressed="true"] { border-color: var(--red); background: var(--chip); }
+.qty { display: inline-flex; align-items: center; border: 2px solid var(--red); border-radius: 10px; overflow: hidden; align-self: start; justify-self: start; }
+.qty button { border: 0; background: transparent; color: var(--red); width: 44px; height: 44px; font-size: 22px; font-weight: 700; cursor: pointer; }
+.qty output { min-width: 40px; text-align: center; font-weight: 700; font-size: 18px; font-variant-numeric: tabular-nums; }
+.buy-now { background: var(--buy); color: #fff; border: 0; border-radius: 12px; padding: 16px; font-weight: 800; font-size: 17px; letter-spacing: .08em; text-transform: uppercase; text-decoration: none; display: flex; justify-content: center; align-items: center; gap: 10px; cursor: pointer; }
+.buy-now:hover { filter: brightness(1.06); }
+.add-cart { background: transparent; color: var(--buy); border: 2px solid var(--buy); border-radius: 12px; padding: 14px; font-weight: 800; font-size: 16px; letter-spacing: .08em; text-transform: uppercase; display: flex; justify-content: center; align-items: center; gap: 10px; cursor: pointer; }
+.add-cart:hover { background: color-mix(in srgb, var(--buy) 10%, transparent); }
+.added { color: var(--buy); font-weight: 700; font-size: 14px; min-height: 1.5em; }
+.added a { color: inherit; }
+.benefits { background: var(--chip); border-radius: var(--radius); padding: 16px 18px; display: grid; gap: 12px; }
+.benefits ul { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: 1fr 1fr; gap: 10px 16px; }
+.benefits li { display: flex; gap: 10px; align-items: center; font-size: 14px; font-weight: 600; min-width: 0; }
+.benefits .ic { width: 34px; height: 34px; background: var(--surface); }
+.ship { display: flex; gap: 8px; flex-wrap: wrap; }
+.ship select { flex: 1 1 180px; min-width: 0; padding: 10px 12px; border-radius: 10px; border: 1px solid var(--line); background: var(--surface); color: var(--fg); font: inherit; }
+.ship a { padding: 10px 16px; border-radius: 10px; border: 2px solid var(--fg); text-decoration: none; font-weight: 700; white-space: nowrap; }
+.desc { border-top: 1px solid var(--line); padding-block: 32px; display: grid; gap: 36px; }
+.desc h2 { padding-bottom: 10px; border-bottom: 1px solid var(--line); }
+.desc .carac { margin: 8px 0 16px; padding-left: 20px; }
+.desc .carac li { margin: 2px 0; }
+.desc .carac-t { font-weight: 700; margin: 14px 0 4px; }
+.desc h2 { font-size: 28px; margin-bottom: 10px; }
+.desc p { max-width: 80ch; margin: 0 0 10px; }
+.specs { width: 100%; border-collapse: collapse; font-size: 15px; }
+.specs th, .specs td { text-align: left; padding: 14px 12px; vertical-align: top; }
+.specs tr:nth-child(even) { background: color-mix(in srgb, var(--line) 55%, transparent); }
+.specs th { font-weight: 500; width: 50%; }
+
+/* ===== Carrinho ===== */
+.scrim { position: fixed; inset: 0; background: rgb(0 0 0 / .45); z-index: 20; }
+.drawer { position: fixed; top: 0; right: 0; bottom: 0; width: min(420px, 100%); background: var(--surface); color: var(--fg); z-index: 21; display: flex; flex-direction: column; box-shadow: -10px 0 30px rgb(0 0 0 / .25); padding-top: env(safe-area-inset-top, 0px); padding-bottom: env(safe-area-inset-bottom, 0px); padding-right: env(safe-area-inset-right, 0px); }
+.drawer header { display: flex; justify-content: space-between; align-items: center; padding: 18px 20px; border-bottom: 1px solid var(--line); }
+.drawer header h2 { font-size: 26px; }
+.drawer .close { border: 0; background: var(--chip); color: var(--fg); width: 38px; height: 38px; border-radius: 50%; font-size: 20px; cursor: pointer; }
+.cart-items { flex: 1; overflow-y: auto; padding: 8px 20px; }
+.cart-item { display: grid; grid-template-columns: 72px minmax(0, 1fr); gap: 12px; padding-block: 14px; border-bottom: 1px solid var(--line); }
+.cart-item img { width: 72px; height: 72px; object-fit: contain; background: #fff; border-radius: 8px; border: 1px solid var(--line); }
+.cart-item b { display: block; font-size: 14px; line-height: 1.3; }
+.cart-item .sub { font-size: 13px; color: var(--muted); }
+.cart-item .ctl { display: flex; gap: 10px; align-items: center; margin-top: 6px; }
+.cart-item .ctl button { border: 1px solid var(--line); background: var(--surface); color: var(--fg); width: 30px; height: 30px; border-radius: 8px; cursor: pointer; font-weight: 700; }
+.cart-item .ctl .rm { width: auto; padding: 0 10px; font-size: 13px; font-weight: 600; color: var(--red); }
+.cart-foot { padding: 16px 20px 20px; border-top: 1px solid var(--line); display: grid; gap: 10px; }
+.cart-foot p { margin: 0; font-size: 13px; color: var(--muted); }
+.cart-empty { color: var(--muted); padding: 30px 0; text-align: center; }
+
+footer { background: var(--red-deep); color: #ffd9d6; font-size: 14px; }
+footer .wrap { padding-block: 28px; display: flex; flex-wrap: wrap; gap: 12px 32px; justify-content: space-between; align-items: center; }
+footer img { height: 48px; width: auto; }
+
+.float-wa { position: fixed; right: calc(18px + env(safe-area-inset-right, 0px)); bottom: calc(18px + env(safe-area-inset-bottom, 0px)); width: 58px; height: 58px; border-radius: 50%; background: #25d366; display: grid; place-items: center; box-shadow: 0 6px 18px rgb(0 0 0 / .25); z-index: 6; }
+
+@media (max-width: 860px) {
+  /* Celular: cabeçalho rola junto com a página (antes ocupava 1/3 da tela) */
+  header.main { position: static; }
+  header.main .row { padding-block: 8px; gap: 8px 12px; }
+  .search input { padding: 10px 14px; }
+  /* Menu de departamentos: itens menores e um degradê na borda indicando que dá para arrastar */
+  nav.cats ul { mask-image: linear-gradient(to right, #000 82%, transparent); -webkit-mask-image: linear-gradient(to right, #000 82%, transparent); padding-right: 40px; }
+  nav.cats button { padding: 7px 11px; font-size: 15px; }
+  /* Botão flutuante do WhatsApp: menor, e some na página do produto (que já tem o botão de comprar) */
+  .float-wa { width: 50px; height: 50px; }
+  body.no-produto .float-wa { display: none; }
+  footer .wrap { padding-bottom: 84px; }
+  .hero .wrap { grid-template-columns: 1fr; padding-block: 28px; }
+  .perks ul { grid-template-columns: repeat(2, 1fr); }
+  header.main .wa-btn { display: none; }
+  .logo img { height: 52px; }
+  .pdp { grid-template-columns: 1fr; gap: 20px; }
+  .specs th { width: 45%; }
+  .gallery { grid-template-columns: 1fr; }
+  .thumbs { flex-direction: row; order: 2; max-height: none; overflow-x: auto; }
+  .thumbs button { width: 68px; flex: none; }
+}
+@media (max-width: 480px) {
+  .perks ul { grid-template-columns: 1fr; }
+  .grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
+  .card .price { font-size: 22px; }
+  .card .body { padding: 12px; }
+  .card h3 { font-size: 14px; }
+  .benefits ul { grid-template-columns: 1fr; }
+  .cart-btn .lbl { display: none; }
+}
+@media (prefers-reduced-motion: reduce) { .card { transition: none; } .card:hover { transform: none; } }
+</style>
+</head>
+<body>
+
+<div class="demo"><div class="wrap">Versão de teste. Confirme preços e condições pelo WhatsApp. Os endereços das lojas ainda são exemplos.</div></div>
+
+<div class="topbar"><div class="wrap">
+  <span>Crediário próprio · Parcelamos em até 12x · Entrega e montagem grátis</span>
+  <a href="https://instagram.com/lojastropicaloficial" target="_blank" rel="noopener">@lojastropicaloficial</a>
+</div></div>
+
+<header class="main">
+  <div class="wrap row">
+    <a class="logo" href="#inicio" aria-label="Lojas Tropical, início"><img src="img/logo.png" alt="Lojas Tropical, Mania de preços baixos" width="520" height="223"></a>
+    <form class="search" id="searchForm" role="search">
+      <input id="q" type="search" placeholder="O que você procura?" aria-label="Buscar produtos">
+      <button type="submit">Buscar</button>
+    </form>
+    <div class="head-actions">
+      <a class="wa-btn wa-link" href="#" target="_blank" rel="noopener">Compre pelo WhatsApp</a>
+      <button class="cart-btn" type="button" id="openCart" aria-label="Abrir carrinho">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 4h2l2.4 11h11l2-8H6.2"/><circle cx="9" cy="19.5" r="1.5"/><circle cx="17" cy="19.5" r="1.5"/></svg>
+        <span class="lbl">Carrinho</span><span class="cart-count" id="cartCount">0</span>
+      </button>
+    </div>
+  </div>
+  <nav class="cats" aria-label="Departamentos"><button type="button" class="cat-arrow esq" id="catEsq" aria-label="Ver departamentos anteriores" hidden>‹</button><ul class="wrap" id="catNav"></ul><button type="button" class="cat-arrow dir" id="catDir" aria-label="Ver mais departamentos" hidden>›</button></nav>
+</header>
+
+<main id="home">
+  <div class="hero" id="inicio">
+    <div class="wrap">
+      <div>
+        <span class="badge20"><b>20</b> anos</span>
+        <h1>Mania de <em>preços baixos</em> no Maranhão.</h1>
+        <p>Móveis e eletrodomésticos com crediário próprio, parcelamento em até 12x e entrega e montagem grátis. Escolha no catálogo e fale com a gente pelo WhatsApp.</p>
+        <div class="ctas">
+          <a class="btn sun" href="#catalogo">Ver catálogo</a>
+          <a class="btn ghost wa-link" href="#" target="_blank" rel="noopener">Chamar no WhatsApp</a>
+        </div>
+      </div>
+      <div class="hero-shelf">
+        <a href="#produto-notavel-nt6020-capelinha"><img src="img/notavel-nt6020.jpg" alt="Guarda-Roupa Notável NT 6020 Capelinha"><span>12x R$ 89,00</span></a>
+        <a href="#produto-moval-aruba"><img src="img/moval-aruba.jpg" alt="Guarda-Roupa Moval Aruba"><span>12x R$ 129,90</span></a>
+        <a href="#produto-amvox-aca-1200"><img src="img/amvox-aca-1200.jpg" alt="Caixa de Som Amvox ACA 1200"><span>12x R$ 199,90</span></a>
+      </div>
+    </div>
+  </div>
+
+  <div class="perks"><ul class="wrap">
+    <li><span class="ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 7h16v10H4z"/><path d="M8 12h.01M12 12h4"/></svg></span><div><b>Crediário próprio</b><span>Compre no carnê da loja</span></div></li>
+    <li><span class="ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="6" width="18" height="12" rx="2"/><path d="M3 10h18"/></svg></span><div><b>Até 12x</b><span>Parcelamos sua compra</span></div></li>
+    <li><span class="ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 7h11v9H3zM14 10h4l3 3v3h-7"/><circle cx="7" cy="17" r="2"/><circle cx="17" cy="17" r="2"/></svg></span><div><b>Entrega grátis</b><span>Na região das lojas</span></div></li>
+    <li><span class="ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 4l6 6-9 9H5v-6z"/></svg></span><div><b>Montagem grátis</b><span>A gente monta pra você</span></div></li>
+  </ul></div>
+
+  <section id="catalogo">
+    <div class="wrap">
+      <div class="sec-head">
+        <div><span class="eyebrow">Catálogo</span><h2 id="catTitle">Todos os produtos</h2></div>
+        <span class="count" id="count"></span>
+      </div>
+      <div class="grid" id="grid"></div>
+    </div>
+  </section>
+
+
+  <section id="lojas">
+    <div class="wrap">
+      <div class="sec-head"><div><span class="eyebrow">Onde estamos</span><h2>Nossas lojas</h2></div></div>
+      <div class="cities" id="cities"></div>
+      <p class="note">Endereços, telefones e horários de cada loja entram aqui assim que forem enviados.</p>
+    </div>
+  </section>
+
+  <section id="redes" style="padding-top:0">
+    <div class="wrap">
+      <div class="sec-head"><div><span class="eyebrow">Redes sociais</span><h2>Siga a Tropical</h2></div></div>
+      <div class="social">
+        <a class="s-ig" href="https://instagram.com/lojastropicaloficial" target="_blank" rel="noopener"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="#fff"/></svg><div>Instagram<span>@lojastropicaloficial</span></div></a>
+        <a class="s-lk" href="https://linkme.bio/LojasTropical" target="_blank" rel="noopener"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2"><path d="M10 14a4 4 0 0 0 6 0l3-3a4 4 0 0 0-6-6l-1 1M14 10a4 4 0 0 0-6 0l-3 3a4 4 0 0 0 6 6l1-1"/></svg><div>Todos os links<span>linkme.bio/LojasTropical</span></div></a>
+        <a class="s-wa wa-link" href="#" target="_blank" rel="noopener"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2"><path d="M21 12a8 8 0 0 1-12 7l-5 1 1-4.5A8 8 0 1 1 21 12z"/></svg><div>WhatsApp<span class="wa-text"></span></div></a>
+      </div>
+    </div>
+  </section>
+</main>
+
+<main id="produto" hidden>
+  <div class="wrap">
+    <nav class="crumbs" id="crumbs" aria-label="Você está em"></nav>
+    <div class="pdp">
+      <div class="gallery">
+        <div class="thumbs" id="thumbs"></div>
+        <div class="stage" id="stage"></div>
+      </div>
+      <div class="buy">
+        <div>
+          <span class="cat" id="pCat"></span>
+          <h1 id="pName"></h1>
+        </div>
+        <div class="meta" id="pMeta"></div>
+        <div class="pricebox" id="pPrice"></div>
+        <div id="pColors"></div>
+        <div style="display:grid;gap:8px">
+          <span class="field-label">Quantidade</span>
+          <div class="qty">
+            <button type="button" id="qMinus" aria-label="Diminuir quantidade">−</button>
+            <output id="qVal" aria-live="polite">1</output>
+            <button type="button" id="qPlus" aria-label="Aumentar quantidade">+</button>
+          </div>
+        </div>
+        <a class="buy-now" id="buyNow" href="#" target="_blank" rel="noopener">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M21 12a8 8 0 0 1-12 7l-5 1 1-4.5A8 8 0 1 1 21 12z"/></svg>
+          <span id="buyNowTxt">Comprar pelo WhatsApp</span>
+        </a>
+        <button class="add-cart" type="button" id="addCart">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 4h2l2.4 11h11l2-8H6.2"/><circle cx="9" cy="19.5" r="1.5"/><circle cx="17" cy="19.5" r="1.5"/></svg>
+          Adicionar ao carrinho
+        </button>
+        <div class="added" id="added" aria-live="polite"></div>
+        <div class="benefits">
+          <ul>
+            <li><span class="ic"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 7h11v9H3zM14 10h4l3 3v3h-7"/><circle cx="7" cy="17" r="2"/><circle cx="17" cy="17" r="2"/></svg></span>Entrega grátis</li>
+            <li><span class="ic"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 4l6 6-9 9H5v-6z"/></svg></span>Montagem grátis</li>
+            <li><span class="ic"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 7h16v10H4z"/><path d="M8 12h.01M12 12h4"/></svg></span>Crediário próprio</li>
+            <li><span class="ic"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="6" width="18" height="12" rx="2"/><path d="M3 10h18"/></svg></span>Até 12x no cartão</li>
+          </ul>
+          <span class="field-label">Consulte a entrega na sua cidade</span>
+          <div class="ship">
+            <select id="shipCity" aria-label="Sua cidade"></select>
+            <a id="shipAsk" href="#" target="_blank" rel="noopener">Consultar</a>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="desc">
+      <section>
+        <h2>Descrição</h2>
+        <div id="pDesc"></div>
+      </section>
+      <section>
+        <h2>Especificações técnicas</h2>
+        <table class="specs"><tbody id="pSpecs"></tbody></table>
+      </section>
+    </div>
+    <section style="padding-top:8px">
+      <div class="sec-head"><div><span class="eyebrow">Veja também</span><h2>Você também pode gostar</h2></div></div>
+      <div class="grid" id="related"></div>
+    </section>
+  </div>
+</main>
+
+<div class="scrim" id="scrim" hidden></div>
+<aside class="drawer" id="drawer" hidden aria-label="Carrinho">
+  <header><h2>Seu carrinho</h2><button class="close" type="button" id="closeCart" aria-label="Fechar carrinho">×</button></header>
+  <div class="cart-items" id="cartItems"></div>
+  <div class="cart-foot">
+    <a class="buy-now" id="sendCart" href="#" target="_blank" rel="noopener">Enviar pedido pelo WhatsApp</a>
+    <p>Você combina a forma de pagamento (crediário, cartão em até 12x ou Pix) e a entrega com o vendedor.</p>
+  </div>
+</aside>
+
+<footer><div class="wrap">
+  <img src="img/logo.png" alt="Lojas Tropical" width="520" height="223">
+  <span>© 2026 Lojas Tropical · Móveis e eletrodomésticos · Maranhão</span>
+  <span>Em breve: compre online.</span>
+</div></footer>
+
+<a class="float-wa wa-link" href="#" target="_blank" rel="noopener" aria-label="Conversar no WhatsApp">
+  <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="#06301a" stroke-width="2.2"><path d="M21 12a8 8 0 0 1-12 7l-5 1 1-4.5A8 8 0 1 1 21 12z"/></svg>
+</a>
+
+<script src="estoque.js"></script>
+<script>
+// ===== Dados da loja: edite aqui =====
+const WHATSAPP = "559981771035";           // DDI 55 + DDD + número, só dígitos
+const WHATSAPP_TEXTO = "(99) 98177-1035";  // como o número aparece no site
+
+const CIDADES = ["Codó", "Timbiras", "Coroatá", "Dom Pedro"]; // completar com as demais
+
+const CATEGORIAS = ["Guarda-roupas", "Móveis", "Eletrodomésticos", "TVs e Eletrônicos", "Eletroportáteis", "Estofados", "Colchões", "Som", "Ventilação", "Bicicletas"];
+
+// Cada produto:
+//   id       → aparece no link da página (#produto-id), sem espaço nem acento
+//   parcela  → valor de cada parcela em 12x  |  avista → preço à vista  |  sem os dois = "Consulte o preço"
+//   imgs     → fotos da galeria (a primeira é a capa)
+//   cores    → opcional: [nome da cor, foto]
+//   desc     → resumo curto (também usado no texto da página se não houver "texto")
+//   texto    → descrição completa da página (opcional; "\n" separa parágrafos)
+//   destaques→ lista "Principais características" (opcional), ex.: ["Potência: 400 W"]
+//   detalhes → tabela "Especificações técnicas" (Marca e Código entram sozinhos)
+const PRODUTOS = [
+  { id: "moval-aruba", cod: "9952", nome: "Guarda-Roupa Moval Aruba 6 Portas", marca: "Moval", cat: "Guarda-roupas", parcela: 129.90,
+    imgs: ["moval-aruba.jpg", "moval-aruba-aberto.jpg"],
+    cores: [["Carvalho e Fendi", "moval-aruba.jpg"]],
+    desc: "Guarda-roupa casal de 6 portas com espelho, gavetas e bastante espaço para roupas de cabide e dobradas.",
+    detalhes: { Portas: "6", Espelho: "Sim" } },
+  { id: "moval-itatiba", cod: "9978", nome: "Guarda-Roupa Moval Itatiba 6 Portas", marca: "Moval", cat: "Guarda-roupas", parcela: 139.90,
+    imgs: ["moval-itatiba.jpg", "moval-itatiba-aberto.jpg"],
+    cores: [["Freijó e Cinza", "moval-itatiba.jpg"]],
+    desc: "Guarda-roupa casal de 6 portas com espelho e gavetas, em acabamento freijó com cinza.",
+    detalhes: { Portas: "6", Espelho: "Sim" } },
+  { id: "amvox-aca-1200", cod: "2023", nome: "Caixa de Som Amvox ACA 1200", marca: "Amvox", cat: "Som", parcela: 199.90,
+    imgs: ["v2023-preto-1.jpg", "v2023-preto-2.jpg", "v2023-preto-3.jpg"],
+    desc: "Caixa de som amplificada com iluminação de LED.",
+    detalhes: { Modelo: "ACA 1200 Party Vox Elite", Código: "2023" } },
+  { id: "p2021-amvox-aca-221-gigante-ii", cod: "2021", nome: "Caixa Amplificada Amvox ACA 221 Gigante II", marca: "Amvox", cat: "Som",
+    imgs: ["v2021-preto-1.jpg", "v2021-preto-2.jpg", "v2021-preto-3.jpg", "v2021-preto-4.jpg"],
+    desc: "Caixa amplificada Amvox ACA 221 Gigante II, com iluminação de LED e alça para transporte.", detalhes: { Modelo: "ACA 221 Gigante II", Código: "2021" } },
+  { id: "p2027-amvox-aca-410-neo", cod: "2027", nome: "Caixa Amplificada Amvox ACA 410 Neo", marca: "Amvox", cat: "Som",
+    imgs: ["v2027-preto-3.jpg", "v2027-preto-2.jpg", "v2027-preto-1.jpg"],
+    desc: "Caixa amplificada Amvox ACA 410 Neo, com painel de LED.", detalhes: { Modelo: "ACA 410 Neo", Código: "2027" } },
+  { id: "p2031-amvox-aca-855-pancadao-ii", cod: "2031", nome: "Caixa Amplificada Amvox ACA 855 Pancadão II", marca: "Amvox", cat: "Som",
+    imgs: ["v2031-preto-1.jpg", "v2031-preto-2.jpg"],
+    desc: "Caixa amplificada Amvox ACA 855 Pancadão II, com rodinhas e alça retrátil.", detalhes: { Modelo: "ACA 855 Pancadão II", Código: "2031" } },
+  { id: "p2224-amvox-duo-x", cod: "2224", nome: "Caixa de Som Bluetooth Amvox Duo X", marca: "Amvox", cat: "Som",
+    imgs: ["v2224-preto-vermelho-1.jpg", "v2224-preto-vermelho-2.jpg", "v2224-preto-vermelho-3.jpg"],
+    cores: [["Preto e Vermelho", "v2224-preto-vermelho-1.jpg"]],
+    desc: "Caixa de som Bluetooth Amvox Duo X, portátil.", detalhes: { Modelo: "Duo X", Código: "2224" } },
+  { id: "p2396-cama-box-gazin-guaruja", cod: "2396", nome: "Cama Box Conjugada Gazin Guarujá Casal 138x188x54 cm", marca: "Gazin", cat: "Colchões",
+    imgs: ["v2396-cinza-1.jpg"],
+    desc: "Cama box conjugada (unibox) Gazin Guarujá, tamanho casal.", detalhes: { Medidas: "138 x 188 x 54 cm", Código: "2396" } },
+  { id: "p2529-cama-box-onix-mirador", cod: "2529", nome: "Cama Box Onix Mirador Casal 138x188", marca: "Onix", cat: "Colchões",
+    imgs: ["p2529-11.jpg", "p2529-12.jpg", "p2529-13.jpg", "p2529-14.jpg", "p2529-15.jpg"],
+    desc: "Cama box unibox Onix Mirador, tamanho casal.", detalhes: { Medidas: "138 x 188 cm", Código: "2529" } },
+  { id: "p3268-colchao-onix-vegas", cod: "3268", nome: "Colchão Onix Vegas Casal 138x188 Molas", marca: "Onix", cat: "Colchões",
+    imgs: ["p3268-11.jpg", "p3268-12.jpg", "p3268-14.jpg", "p3268-15.jpg"],
+    desc: "Colchão Onix Vegas de molas, tamanho casal.", detalhes: { Medidas: "138 x 188 cm", Molas: "Sim", Código: "3268" } },
+  { id: "p4585-colchao-gazin-diamond-blue", cod: "4585", nome: "Colchão Gazin Diamond Blue Molas Ensacadas 158x198x32 cm", marca: "Gazin", cat: "Colchões",
+    imgs: ["v4585-branco-azul-1.jpg"],
+    desc: "Colchão Gazin Diamond Blue com molas ensacadas.", detalhes: { Medidas: "158 x 198 x 32 cm", Molas: "Ensacadas", Código: "4585" } },
+  { id: "moval-alasca", cod: "9950", nome: "Guarda-Roupa Moval Alasca", marca: "Moval", cat: "Guarda-roupas", avista: 2299.00,
+    imgs: ["moval-alasca.jpg", "moval-alasca-aberto.jpg", "moval-alasca-ambiente.jpg"],
+    cores: [["Carvalho e Fendi", "moval-alasca.jpg"], ["Freijó e Off White", "moval-alasca-freijo-offwhite.jpg"]],
+    desc: "Guarda-roupa casal com espelho central, cabideiros e gavetas.",
+    detalhes: { Espelho: "Sim" } },
+  { id: "comoda-texas", cod: "9967", nome: "Cômoda Moval Texas", marca: "Moval", cat: "Móveis", avista: 1099.00,
+    imgs: ["comoda-texas.jpg", "comoda-texas-decor.jpg", "comoda-texas-ambiente.jpg"],
+    cores: [["Freijó e Off White", "comoda-texas.jpg"], ["Branco", "comoda-texas-branco.jpg"], ["Carvalho e Fendi", "comoda-texas-carvalho-fendi.jpg"], ["Freijó", "comoda-texas-freijo.jpg"], ["Freijó e Cinza", "comoda-texas-freijo-cinza.jpg"]],
+    desc: "Cômoda com gavetas e porta ripada.",
+    detalhes: {} },
+  { id: "comoda-venus", cod: "9913", nome: "Cômoda Moval Vênus", marca: "Moval", cat: "Móveis", avista: 699.00,
+    imgs: ["comoda-venus.jpg", "comoda-venus-ambiente.jpg"],
+    cores: [["Branco", "comoda-venus.jpg"], ["Branco e Azul", "comoda-venus-branco-azul.jpg"], ["Branco e Lilás", "comoda-venus-branco-lilas.jpg"], ["Branco e Rosa", "comoda-venus-branco-rosa.jpg"], ["Castanho Wood", "comoda-venus-castanho.jpg"], ["Castanho e Avelã Wood", "comoda-venus-castanho-avela.jpg"], ["Freijó e Off White", "comoda-venus-freijo-offwhite.jpg"]],
+    desc: "Cômoda com 4 gavetas, 1 porta e pés.",
+    detalhes: { Gavetas: "4", Portas: "1" } },
+  { id: "ventilador-domina", cod: "9635", nome: "Ventilador de Coluna Dômina", marca: "Dômina", cat: "Ventilação", avista: 549.00,
+    imgs: ["ventiladores.jpg", "ventilador-branco.jpg"], desc: "Ventilador de coluna com altura ajustável.", detalhes: { Tipo: "Coluna" } },
+  { id: "bicicleta-collina", cod: "1490", nome: "Bicicleta Collina", marca: "Colli", cat: "Bicicletas", avista: 1799.00,
+    imgs: ["bicicleta-collina.jpg"],
+    cores: [["Verde Militar", "bicicleta-collina.jpg"], ["Amarelo Neon", "bicicleta-collina-amarelo.jpg"], ["Laranja Neon", "bicicleta-collina-laranja.jpg"]],
+    desc: "Bicicleta com freio a disco e câmbio.", detalhes: {} },
+  { id: "notavel-nt6020-capelinha", cod: "9999", nome: "Guarda-Roupa Notável NT 6020 Capelinha", marca: "Notável", cat: "Guarda-roupas", parcela: 89.00, avista: 699.00,
+    imgs: ["notavel-nt6020.jpg", "notavel-nt6020-aberto.jpg", "notavel-nt6020-aberto-2.jpg"],
+    desc: "Guarda-roupa com 2 portas, nicho com espelho estilo penteadeira e 3 gavetas.",
+    detalhes: { Modelo: "NT 6020", Espelho: "Sim", Gavetas: "3" } },
+  { id: "notavel-nt6015", cod: "6088", nome: "Guarda-Roupa Notável NT 6015 6 Portas", marca: "Notável", cat: "Guarda-roupas", parcela: 99.00, avista: 799.00,
+    imgs: ["v6088-madeirado-11.jpg", "v6088-madeirado-12.jpg", "v6088-madeirado-off-white-11.jpg", "v6088-madeirado-off-white-12.jpg", "v6088-branco-11.jpg", "v6088-branco-rosa-11.jpg"],
+    cores: [["Madeirado", "v6088-madeirado-11.jpg"], ["Madeirado e Off White", "v6088-madeirado-off-white-11.jpg"], ["Branco", "v6088-branco-11.jpg"], ["Branco e Rosa", "v6088-branco-rosa-11.jpg"]],
+    desc: "Guarda-roupa casal de 6 portas e 2 gavetas, com cabideiros e prateleiras.",
+    detalhes: { Modelo: "NT 6015", Portas: "6", Gavetas: "2" } },
+  { id: "itatiaia-pratika-4-portas", cod: "672", nome: "Armário de Cozinha Itatiaia Pratika 4 Portas", marca: "Itatiaia", cat: "Móveis", parcela: 99.00,
+    imgs: ["pratika-4p.jpg", "pratika-4p-aberto.jpg", "pratika-4p-ambiente.jpg"],
+    desc: "Armário de cozinha em aço com portas, gaveta, tampo e nichos abertos.",
+    detalhes: { Portas: "4", Material: "Aço" } },
+  { id: "cozinha-mgm-brilhante", cod: "4208", nome: "Cozinha MGM Brilhante 5 Peças MDF", marca: "MGM", cat: "Móveis", parcela: 339.00,
+    imgs: ["mgm-brilhante.jpg", "mgm-brilhante-ambiente.jpg", "mgm-brilhante-despensa.jpg"],
+    desc: "Cozinha completa de 5 peças em MDF, com aéreos de vidro, balcões com portas e gavetas e paneleiro.",
+    detalhes: { Peças: "5", Material: "MDF" } },
+  { id: "cozinha-telasul-diamante", nome: "Cozinha Telasul Diamante 4 Peças", marca: "Telasul", cat: "Móveis", parcela: 249.00,
+    imgs: ["telasul-diamante.jpg", "telasul-diamante-ambiente.jpg", "telasul-diamante-aberto.jpg", "telasul-diamante-medidas.jpg"],
+    desc: "Cozinha completa de 4 peças em aço, com portas de vidro, balcão com tampo e puxadores dourados. Medidas totais: 245 cm de largura e 180 cm de altura.",
+    detalhes: { Peças: "4", Material: "Aço", Largura: "245 cm", Altura: "180 cm" } },
+  { id: "sofa-ortonorte-icaro", cod: "8855", nome: "Sofá Ortonorte Ícaro 3 Lugares 2,20 m", marca: "Ortonorte", cat: "Estofados", parcela: 349.00,
+    imgs: ["sofa-icaro.jpg", "sofa-icaro-reclinado.jpg"],
+    desc: "Sofá retrátil e reclinável de 3 lugares, com assento e encosto em pillow top.",
+    detalhes: { Lugares: "3", Largura: "2,20 m", Tipo: "Retrátil e reclinável" } },
+  { id: "p4837-fogao-clarice-delicato-plus-glass-4-bocas-preto", cod: "4837", nome: "Fogão Clarice Delicato Plus Glass 4 Bocas Preto", marca: "Clarice", cat: "Eletrodomésticos", avista: 1399.00,
+    imgs: ["p4837-1.jpg", "p4837-2.jpg"],
+    desc: "Fogão Clarice Delicato Plus Glass 4 Bocas Preto.", detalhes: { Código: "4837" } },
+  { id: "p4944-fogao-mueller-decorato-vetro-5-bocas-preto-fosco", cod: "4944", nome: "Fogão Mueller Decorato Vetro 5 Bocas Preto Fosco", marca: "Mueller", cat: "Eletrodomésticos", avista: 2799.00,
+    imgs: ["p4944-1.jpg", "p4944-11.jpg", "p4944-2.jpg", "p4944-3.jpg", "p4944-4.jpg"],
+    desc: "Fogão Mueller Decorato Vetro 5 Bocas Preto Fosco.", detalhes: { Código: "4944" } },
+  { id: "p4966-fogao-mueller-mfv5bf-5-bocas-titanio-mesa-de-vidro", cod: "4966", nome: "Fogão Mueller MFV5BF 5 Bocas Titânio Mesa de Vidro", marca: "Mueller", cat: "Eletrodomésticos", avista: 2399.00,
+    imgs: ["p4966-1.jpg", "p4966-2.jpg", "p4966-3.jpg"],
+    desc: "Fogão Mueller MFV5BF 5 Bocas Titânio Mesa de Vidro.", detalhes: { Código: "4966" } },
+  { id: "p4967-fogao-mueller-mfv5bf-5-bocas-preto-mesa-de-vidro", cod: "4967", nome: "Fogão Mueller MFV5BF 5 Bocas Preto Mesa de Vidro", marca: "Mueller", cat: "Eletrodomésticos", avista: 2399.00,
+    imgs: ["p4967-1.jpg", "p4967-2.jpg", "p4967-3.jpg", "p4967-4.jpg"],
+    desc: "Fogão Mueller MFV5BF 5 Bocas Preto Mesa de Vidro.", detalhes: { Código: "4967" } },
+  { id: "p4968-fogao-mueller-mfv5bf-5-bocas-branco-mesa-de-vidro", cod: "4968", nome: "Fogão Mueller MFV5BF 5 Bocas Branco Mesa de Vidro", marca: "Mueller", cat: "Eletrodomésticos", avista: 2399.00,
+    imgs: ["p4968-1.jpg", "p4968-2.jpg", "p4968-3.jpg", "p4968-4.jpg"],
+    desc: "Fogão Mueller MFV5BF 5 Bocas Branco Mesa de Vidro.", detalhes: { Código: "4968" } },
+  { id: "p4969-fogao-mueller-mfv5bb-5-bocas-titanio-mesa-de-vidro", cod: "4969", nome: "Fogão Mueller MFV5BB 5 Bocas Titânio Mesa de Vidro", marca: "Mueller", cat: "Eletrodomésticos", avista: 1999.00,
+    imgs: ["p4969-1.jpg", "p4969-2.jpg", "p4969-3.jpg"],
+    desc: "Fogão Mueller MFV5BB 5 Bocas Titânio Mesa de Vidro.", detalhes: { Código: "4969" } },
+  { id: "p4970-fogao-mueller-mfv5bb-5-bocas-branco-mesa-de-vidro", cod: "4970", nome: "Fogão Mueller MFV5BB 5 Bocas Branco Mesa de Vidro", marca: "Mueller", cat: "Eletrodomésticos", avista: 1999.00,
+    imgs: ["p4970-1.jpg", "p4970-11.jpg", "p4970-2.jpg", "p4970-3.jpg", "p4970-4.jpg"],
+    desc: "Fogão Mueller MFV5BB 5 Bocas Branco Mesa de Vidro.", detalhes: { Código: "4970" } },
+  { id: "p5043-fogao-realce-ares-4-bocas-branco", cod: "5043", nome: "Fogão Realce Ares 4 Bocas Branco", marca: "Realce", cat: "Eletrodomésticos", avista: 899.00,
+    imgs: ["p5043-1.jpg", "p5043-2.jpg", "p5043-3.jpg"],
+    desc: "Fogão Realce Ares 4 Bocas Branco.", detalhes: { Código: "5043" } },
+  { id: "p5044-fogao-realce-ares-4-bocas-preto", cod: "5044", nome: "Fogão Realce Ares 4 Bocas Preto", marca: "Realce", cat: "Eletrodomésticos", avista: 899.00,
+    imgs: ["p5044-1.jpg", "p5044-2.jpg", "p5044-3.jpg"],
+    desc: "Fogão Realce Ares 4 Bocas Preto.", detalhes: { Código: "5044" } },
+  { id: "p5049-fogao-realce-smart-glass-4-bocas-branco", cod: "5049", nome: "Fogão Realce Smart Glass 4 Bocas Branco", marca: "Realce", cat: "Eletrodomésticos", avista: 1499.00,
+    imgs: ["p5049-1.jpg", "p5049-2.jpg", "p5049-3.jpg"],
+    desc: "Fogão Realce Smart Glass 4 Bocas Branco.", detalhes: { Código: "5049" } },
+  { id: "p6917-tanquinho-colormaq-lcs10-10-kg-branco", cod: "6917", nome: "Tanquinho Colormaq LCS10 10 kg Branco", marca: "Colormaq", cat: "Eletrodomésticos", avista: 899.00,
+    imgs: ["p6917-1.jpg", "p6917-2.jpg", "p6917-3.jpg", "p6917-4.jpg"],
+    desc: "Tanquinho Colormaq LCS10 10 kg Branco.", detalhes: { Código: "6917" } },
+  { id: "p6918-tanquinho-colormaq-lcs10-10-kg-prata", cod: "6918", nome: "Tanquinho Colormaq LCS10 10 kg Prata", marca: "Colormaq", cat: "Eletrodomésticos", avista: 899.00,
+    imgs: ["p6918-1.jpg", "p6918-2.jpg", "p6918-3.jpg", "p6918-4.jpg"],
+    desc: "Tanquinho Colormaq LCS10 10 kg Prata.", detalhes: { Código: "6918" } },
+  { id: "p6921-tanquinho-colormaq-lcs14-14-kg-branco", cod: "6921", nome: "Tanquinho Colormaq LCS14 14 kg Branco", marca: "Colormaq", cat: "Eletrodomésticos", avista: 1099.00,
+    imgs: ["p6921-1.jpg", "p6921-2.jpg"],
+    desc: "Tanquinho Colormaq LCS14 14 kg Branco.", detalhes: { Código: "6921" } },
+  { id: "p6926-tanquinho-colormaq-lcs20-20-kg-branco", cod: "6926", nome: "Tanquinho Colormaq LCS20 20 kg Branco", marca: "Colormaq", cat: "Eletrodomésticos", avista: 1099.00,
+    imgs: ["p6926-1.jpg", "p6926-2.jpg", "p6926-3.jpg", "p6926-4.jpg"],
+    desc: "Tanquinho Colormaq LCS20 20 kg Branco.", detalhes: { Código: "6926" } },
+  { id: "p6927-tanquinho-colormaq-lcs20-20-kg-prata", cod: "6927", nome: "Tanquinho Colormaq LCS20 20 kg Prata", marca: "Colormaq", cat: "Eletrodomésticos", avista: 1099.00,
+    imgs: ["p6927-1.jpg", "p6927-2.jpg", "p6927-3.jpg", "p6927-4.jpg"],
+    desc: "Tanquinho Colormaq LCS20 20 kg Prata.", detalhes: { Código: "6927" } },
+  { id: "p6956-maquina-de-lavar-electrolux-efficient-lda13-13-kg-branca-220-v", cod: "6956", nome: "Máquina de Lavar Electrolux Efficient LDA13 13 kg Branca 220V", marca: "Electrolux", cat: "Eletrodomésticos", avista: 3199.00,
+    imgs: ["p6956-1.jpg", "p6956-2.jpg", "p6956-3.jpg"],
+    desc: "Máquina de Lavar Electrolux Efficient LDA13 13 kg Branca 220V.", detalhes: { Código: "6956" } },
+  { id: "p6957-maquina-de-lavar-electrolux-essential-care-les11-11-kg-branca", cod: "6957", nome: "Máquina de Lavar Electrolux Essential Care LES11 11 kg Branca", marca: "Electrolux", cat: "Eletrodomésticos", avista: 2999.00,
+    imgs: ["p6957-1.jpg", "p6957-2.jpg"],
+    desc: "Máquina de Lavar Electrolux Essential Care LES11 11 kg Branca.", detalhes: { Código: "6957" } },
+  { id: "p7672-tanquinho-suggar-lavamatic-lc1622br-16-kg-branco-220-v", cod: "7672", nome: "Tanquinho Suggar Lavamatic LC1622BR 16 kg Branco 220V", marca: "Suggar", cat: "Eletrodomésticos", avista: 899.00,
+    imgs: ["p7672-1.jpg", "p7672-2.jpg"],
+    desc: "Tanquinho Suggar Lavamatic LC1622BR 16 kg Branco 220V.", detalhes: { Código: "7672" } },
+  { id: "p8491-geladeira-midea-cycle-defrost-duplex-rt554-410-l-branca", cod: "8491", nome: "Geladeira Midea Cycle Defrost Duplex RT554 410 L Branca", marca: "Midea", cat: "Eletrodomésticos", avista: 4499.00,
+    imgs: ["p8491-1.jpg", "p8491-2.jpg", "p8491-3.jpg", "p8491-4.jpg"],
+    desc: "Geladeira Midea Cycle Defrost Duplex RT554 410 L Branca.", detalhes: { Código: "8491" } },
+  { id: "p8493-geladeira-midea-frost-free-duplex-rt57-425-l-branca", cod: "8493", nome: "Geladeira Midea Frost Free Duplex RT57 425 L Branca", marca: "Midea", cat: "Eletrodomésticos", avista: 4399.00,
+    imgs: ["p8493-1.jpg", "p8493-2.jpg", "p8493-3.jpg"],
+    desc: "Geladeira Midea Frost Free Duplex RT57 425 L Branca.", detalhes: { Código: "8493" } },
+  { id: "p8502-geladeira-consul-cra30mb-degelo-seco-263-l-branca", cod: "8502", nome: "Geladeira Consul CRA30MB Degelo Seco 263 L Branca", marca: "Consul", cat: "Eletrodomésticos", avista: 3359.00,
+    imgs: ["p8502-1.jpg", "p8502-2.jpg"],
+    desc: "Geladeira Consul CRA30MB Degelo Seco 263 L Branca.", detalhes: { Código: "8502" } },
+  { id: "p8533-geladeira-consul-cycle-defrost-duplex-crd37eb-334-l-branca", cod: "8533", nome: "Geladeira Consul Cycle Defrost Duplex CRD37EB 334 L Branca", marca: "Consul", cat: "Eletrodomésticos", avista: 4199.00,
+    imgs: ["p8533-1.jpg", "p8533-2.jpg", "p8533-3.jpg", "p8533-4.jpg"],
+    desc: "Geladeira Consul Cycle Defrost Duplex CRD37EB 334 L Branca.", detalhes: { Código: "8533" } },
+  { id: "p8594-geladeira-consul-frost-free-duplex-crm50mk-412-l-inox", cod: "8594", nome: "Geladeira Consul Frost Free Duplex CRM50MK 412 L Inox", marca: "Consul", cat: "Eletrodomésticos", avista: 5799.00,
+    imgs: ["p8594-1.jpg", "p8594-2.jpg", "p8594-3.jpg", "p8594-4.jpg"],
+    desc: "Geladeira Consul Frost Free Duplex CRM50MK 412 L Inox.", detalhes: { Código: "8594" } },
+  { id: "p8673-geladeira-midea-frost-free-duplex-rt533-394-l-branca", cod: "8673", nome: "Geladeira Midea Frost Free Duplex RT533 394 L Branca", marca: "Midea", cat: "Eletrodomésticos", avista: 4599.00,
+    imgs: ["p8673-1.jpg", "p8673-2.jpg", "p8673-3.jpg", "p8673-4.jpg"],
+    desc: "Geladeira Midea Frost Free Duplex RT533 394 L Branca.", detalhes: { Código: "8673" } },
+  { id: "p8674-geladeira-midea-frost-free-duplex-rt533-394-l-inox", cod: "8674", nome: "Geladeira Midea Frost Free Duplex RT533 394 L Inox", marca: "Midea", cat: "Eletrodomésticos", avista: 4999.00,
+    imgs: ["p8674-1.jpg", "p8674-2.jpg", "p8674-3.jpg"],
+    desc: "Geladeira Midea Frost Free Duplex RT533 394 L Inox.", detalhes: { Código: "8674" } },
+  { id: "p9776-freezer-horizontal-midea-mdrc698fzd013-508-l-branco-bivolt", cod: "9776", nome: "Freezer Horizontal Midea MDRC698FZD013 508 L Branco Bivolt", marca: "Midea", cat: "Eletrodomésticos", avista: 5799.00,
+    imgs: ["p9776-1.jpg", "p9776-2.jpg"],
+    desc: "Freezer Horizontal Midea MDRC698FZD013 508 L Branco Bivolt.", detalhes: { Código: "9776" } },
+  { id: "p9874-forno-eletrico-suggar-fe5012pt-50-l-preto-220-v", cod: "9874", nome: "Forno Elétrico Suggar FE5012PT 50 L Preto 220V", marca: "Suggar", cat: "Eletrodomésticos", avista: 899.00,
+    imgs: ["p9874-1.jpg", "p9874-2.jpg", "p9874-3.jpg", "p9874-4.jpg"],
+    desc: "Forno Elétrico Suggar FE5012PT 50 L Preto 220V.", detalhes: { Código: "9874" } },
+  { id: "p9897-freezer-horizontal-midea-mdrc207sla012-145-l-branco-220-v", cod: "9897", nome: "Freezer Horizontal Midea MDRC207SLA012 145 L Branco 220V", marca: "Midea", cat: "Eletrodomésticos", avista: 2699.00,
+    imgs: ["p9897-1.jpg", "p9897-2.jpg", "p9897-3.jpg"],
+    desc: "Freezer Horizontal Midea MDRC207SLA012 145 L Branco 220V.", detalhes: { Código: "9897" } },
+  { id: "p9907-fogao-mueller-mfi5bb-5-bocas-preto-fosco-mesa-inox", cod: "9907", nome: "Fogão Mueller MFI5BB 5 Bocas Preto Fosco Mesa Inox", marca: "Mueller", cat: "Eletrodomésticos", avista: 1599.00,
+    imgs: ["p9907-1.jpg", "p9907-11.jpg", "p9907-2.jpg", "p9907-3.jpg", "p9907-4.jpg"],
+    desc: "Fogão Mueller MFI5BB 5 Bocas Preto Fosco Mesa Inox.", detalhes: { Código: "9907" } },
+  { id: "p9910-maquina-de-lavar-consul-cwn13ab-13-kg-branca", cod: "9910", nome: "Máquina de Lavar Consul CWN13AB 13 kg Branca", marca: "Consul", cat: "Eletrodomésticos", avista: 3199.00,
+    imgs: ["p9910-1.jpg", "p9910-2.jpg", "p9910-3.jpg"],
+    desc: "Máquina de Lavar Consul CWN13AB 13 kg Branca.", detalhes: { Código: "9910" } },
+  { id: "p9005-smart-tv-aoc-roku-32s5135-78g-hd-32-polegadas", cod: "9005", nome: "Smart TV AOC Roku 32S5135/78G HD 32 Polegadas", marca: "AOC", cat: "TVs e Eletrônicos", avista: 1799.00,
+    imgs: ["p9005-1.jpg", "p9005-2.jpg", "p9005-3.jpg", "p9005-4.jpg"],
+    desc: "Smart TV AOC Roku 32S5135/78G HD 32 Polegadas.", detalhes: { Código: "9005" } },
+  { id: "p9031-smart-tv-aoc-roku-32s5155-78g-32-polegadas", cod: "9031", nome: "Smart TV AOC Roku 32S5155/78G 32 Polegadas", marca: "AOC", cat: "TVs e Eletrônicos", avista: 1799.00,
+    imgs: ["p9031-1.jpg", "p9031-2.jpg", "p9031-3.jpg", "p9031-4.jpg"],
+    desc: "Smart TV AOC Roku 32S5155/78G 32 Polegadas.", detalhes: { Código: "9031" } },
+  { id: "p9357-smart-tv-samsung-un32t4300agxzd-hd-32-polegadas", cod: "9357", nome: "Smart TV Samsung UN32T4300AGXZD HD 32 Polegadas", marca: "Samsung", cat: "TVs e Eletrônicos", avista: 1999.00,
+    imgs: ["p9357-1.jpg"],
+    desc: "Smart TV Samsung UN32T4300AGXZD HD 32 Polegadas.", detalhes: { Código: "9357" } },
+  { id: "p9394-smart-tv-semp-32s42r-roku-32-polegadas-full-hd", cod: "9394", nome: "Smart TV Semp 32S42R Roku 32 Polegadas Full HD", marca: "Semp", cat: "TVs e Eletrônicos", avista: 1799.00,
+    imgs: ["p9394-1.jpg", "p9394-2.jpg"],
+    desc: "Smart TV Semp 32S42R Roku 32 Polegadas Full HD.", detalhes: { Código: "9394" } },
+  { id: "p9396-smart-tv-semp-roku-43s42r-full-hd-43-polegadas", cod: "9396", nome: "Smart TV Semp Roku 43S42R Full HD 43 Polegadas", marca: "Semp", cat: "TVs e Eletrônicos", avista: 2999.00,
+    imgs: ["p9396-1.jpg", "p9396-2.jpg"],
+    desc: "Smart TV Semp Roku 43S42R Full HD 43 Polegadas.", detalhes: { Código: "9396" } },
+  { id: "p9397-smart-tv-semp-roku-50s42r-full-hd-50-polegadas", cod: "9397", nome: "Smart TV Semp Roku 50S42R Full HD 50 Polegadas", marca: "Semp", cat: "TVs e Eletrônicos", avista: 3499.00,
+    imgs: ["p9397-1.jpg", "p9397-2.jpg"],
+    desc: "Smart TV Semp Roku 50S42R Full HD 50 Polegadas.", detalhes: { Código: "9397" } },
+  { id: "p9399-smart-tv-semp-roku-65s62r-4k-65-polegadas", cod: "9399", nome: "Smart TV Semp Roku 65S62R 4K 65 Polegadas", marca: "Semp", cat: "TVs e Eletrônicos", avista: 5899.00,
+    imgs: ["p9399-1.jpg"],
+    desc: "Smart TV Semp Roku 65S62R 4K 65 Polegadas.", detalhes: { Código: "9399" } },
+  { id: "p9501-smart-tv-toshiba-50c350ls-4k-50-polegadas", cod: "9501", nome: "Smart TV Toshiba 50C350LS 4K 50 Polegadas", marca: "Toshiba", cat: "TVs e Eletrônicos", avista: 3999.00,
+    imgs: ["p9501-1.jpg", "p9501-2.jpg"],
+    desc: "Smart TV Toshiba 50C350LS 4K 50 Polegadas.", detalhes: { Código: "9501" } },
+  { id: "p1083-batedeira-britania-perola-maxx-4-l-preta-220-v", cod: "1083", nome: "Batedeira Britânia Pérola Maxx 4 L Preta 220V", marca: "Britânia", cat: "Eletroportáteis", avista: 229.00,
+    imgs: ["p1083-1.jpg", "p1083-2.jpg"],
+    desc: "Batedeira Britânia Pérola Maxx 4 L Preta 220V.", detalhes: { Código: "1083" } },
+  { id: "p1085-batedeira-britania-perola-maxx-4-l-vermelha-220-v", cod: "1085", nome: "Batedeira Britânia Pérola Maxx 4 L Vermelha 220V", marca: "Britânia", cat: "Eletroportáteis", avista: 249.00,
+    imgs: ["p1085-1.jpg", "p1085-2.jpg", "p1085-3.jpg"],
+    desc: "Batedeira Britânia Pérola Maxx 4 L Vermelha 220V.", detalhes: { Código: "1085" } },
+  { id: "p1093-batedeira-mondial-pratica-b-44-w-400-w-branca", cod: "1093", nome: "Batedeira Mondial Prática B-44-W 400W Branca", marca: "Mondial", cat: "Eletroportáteis", avista: 249.00,
+    imgs: ["p1093-11.jpg", "p1093-12.jpg", "p1093-13.jpg"],
+    desc: "Batedeira Mondial Prática B-44-W 400W Branca.", detalhes: { Código: "1093" } },
+  { id: "p6628-liquidificador-mondial-power-black-l-29-550-w", cod: "6628", nome: "Liquidificador Mondial Power Black L-29 550W", marca: "Mondial", cat: "Eletroportáteis", avista: 199.00,
+    imgs: ["p6628-1.jpg", "p6628-2.jpg"],
+    desc: "Liquidificador Mondial Power Black L-29 550W.", detalhes: { Código: "6628" } },
+  { id: "p9835-modelador-de-cachos-mondial-spiral-infinity-em-05", cod: "9835", nome: "Modelador de Cachos Mondial Spiral Infinity EM-05", marca: "Mondial", cat: "Eletroportáteis", avista: 399.00,
+    imgs: ["p9835-1.jpg"],
+    desc: "Modelador de Cachos Mondial Spiral Infinity EM-05.", detalhes: { Código: "9835" } },
+  { id: "p8500-geladeira-consul-cra30fb-degelo-seco-261-l-branca", cod: "8500", nome: "Geladeira Consul CRA30FB Degelo Seco 261 L Branca", marca: "Consul", cat: "Eletrodomésticos", avista: 3359.00,
+    imgs: ["p8500-1.jpg", "p8500-2.jpg", "p8500-3.jpg"],
+    desc: "Geladeira Consul CRA30FB Degelo Seco 261 L Branca.", detalhes: { Código: "8500" } },
+  { id: "p8399-receptor-century-midiabox-hdtv-b3", cod: "8399", nome: "Receptor Century MidiaBox HDTV B3", marca: "Century", cat: "TVs", avista: 951.00,
+    imgs: ["p8399-1.jpg", "p8399-2.jpg", "p8399-3.jpg"],
+    desc: "Receptor Century MidiaBox HDTV B3.", detalhes: { Código: "8399" } },
+  { id: "p8403-receptor-century-midiabox-hdtv-b7", cod: "8403", nome: "Receptor Century MidiaBox HDTV B7", marca: "Century", cat: "TVs", avista: 570.00,
+    imgs: ["p8403-1.jpg", "p8403-2.jpg", "p8403-3.jpg", "p8403-4.jpg"],
+    desc: "Receptor Century MidiaBox HDTV B7.", detalhes: { Código: "8403" } },
+  { id: "p8681-roteador-tp-link-archer-c20-w-ac750", cod: "8681", nome: "Roteador TP-Link Archer C20 AC750", marca: "TP-Link", cat: "TVs", avista: 349.00,
+    imgs: ["p8681-1.jpg", "p8681-2.jpg", "p8681-3.jpg"],
+    desc: "Roteador TP-Link Archer C20 AC750.", detalhes: { Código: "8681" } },
+  { id: "p9998-guarda-roupa-avelan-sancho-6-portas-casal", cod: "9998", nome: "Guarda-Roupa Avelan Sancho 6 Portas Casal", marca: "Avelan", cat: "Guarda-roupas", avista: 2699.00,
+    imgs: ["v9998-freijo-off-white-11.jpg", "v9998-freijo-off-white-12.jpg"],
+    cores: [["Freijó e Off White", "v9998-freijo-off-white-11.jpg"]],
+    desc: "Guarda-Roupa Avelan Sancho 6 Portas Casal.", detalhes: { Código: "9998" } },
+  { id: "p6449-home-bechara-taurus", cod: "6449", nome: "Home Bechara Taurus", marca: "Bechara", cat: "Móveis", avista: 1099.00,
+    imgs: ["v6449-nogal-off-white-1.jpg"],
+    cores: [["Nogal e Off White", "v6449-nogal-off-white-1.jpg"]],
+    desc: "Home Bechara Taurus.", detalhes: { Código: "6449" } },
+  { id: "p7990-painel-bechara-ambar-tv", cod: "7990", nome: "Painel Bechara Ambar TV", marca: "Bechara", cat: "Móveis", avista: 699.00,
+    imgs: ["v7990-titanium-cinamomo-1.jpg", "v7990-titanium-cinamomo-2.jpg"],
+    cores: [["Titanium e Cinamomo", "v7990-titanium-cinamomo-1.jpg"]],
+    desc: "Painel Bechara Ambar TV.", detalhes: { Código: "7990" } },
+  { id: "p7991-painel-bechara-atlas-tv", cod: "7991", nome: "Painel Bechara Atlas TV", marca: "Bechara", cat: "Móveis", avista: 699.00,
+    imgs: ["v7991-nero-preto-fosco-1.jpg", "v7991-nero-preto-fosco-2.jpg", "v7991-off-white-naturalle-1.jpg", "v7991-off-white-naturalle-2.jpg"],
+    cores: [["Nero Preto Fosco", "v7991-nero-preto-fosco-1.jpg"], ["Off White e Naturalle", "v7991-off-white-naturalle-1.jpg"]],
+    desc: "Painel Bechara Atlas TV.", detalhes: { Código: "7991" } },
+  { id: "p7992-painel-bechara-denver-tv", cod: "7992", nome: "Painel Bechara Denver TV", marca: "Bechara", cat: "Móveis", avista: 959.00,
+    imgs: ["v7992-off-white-cinamomo-1.jpg"],
+    cores: [["Off White e Cinamomo", "v7992-off-white-cinamomo-1.jpg"]],
+    desc: "Painel Bechara Denver TV.", detalhes: { Código: "7992" } },
+  { id: "p8218-rack-bechara-elegant", cod: "8218", nome: "Rack Bechara Elegant", marca: "Bechara", cat: "Móveis", avista: 699.00,
+    imgs: ["v8218-cinamomo-titanium-1.jpg"],
+    cores: [["Cinamomo e Titanium", "v8218-cinamomo-titanium-1.jpg"]],
+    desc: "Rack Bechara Elegant.", detalhes: { Código: "8218" } },
+  { id: "p8227-rack-bechara-juquehy", cod: "8227", nome: "Rack Bechara Juquehy", marca: "Bechara", cat: "Móveis", avista: 1299.00,
+    imgs: ["v8227-off-white-naturalle-1.jpg"],
+    cores: [["Off White e Naturalle", "v8227-off-white-naturalle-1.jpg"]],
+    desc: "Rack Bechara Juquehy.", detalhes: { Código: "8227" } },
+  { id: "p8229-rack-bechara-guarapari", cod: "8229", nome: "Rack Bechara Guarapari", marca: "Bechara", cat: "Móveis", avista: 949.00,
+    imgs: ["v8229-off-white-naturalle-1.jpg"],
+    cores: [["Off White e Naturalle", "v8229-off-white-naturalle-1.jpg"]],
+    desc: "Rack Bechara Guarapari.", detalhes: { Código: "8229" } },
+  { id: "p1534-bicicleta-colli-jully-aro-20-feminina", cod: "1534", nome: "Bicicleta Colli Jully Aro 20 Feminina", marca: "Colli", cat: "Bicicletas", avista: 899.00,
+    imgs: ["v1534-azul-champanhe-1.jpg", "v1534-branco-neon-1.jpg", "v1534-rosa-1.jpg"],
+    cores: [["Azul e Champanhe", "v1534-azul-champanhe-1.jpg"], ["Branco Neon", "v1534-branco-neon-1.jpg"], ["Rosa", "v1534-rosa-1.jpg"]],
+    desc: "Bicicleta Colli Jully Aro 20 Feminina.", detalhes: { Código: "1534" } },
+  { id: "p1536-bicicleta-colli-max-boy-aro-20-masculino", cod: "1536", nome: "Bicicleta Colli Max Boy Aro 20 Masculino", marca: "Colli", cat: "Bicicletas", avista: 899.00,
+    imgs: ["v1536-azul-1.jpg", "v1536-laranja-neon-1.jpg", "v1536-preto-fosco-1.jpg", "v1536-vermelho-1.jpg"],
+    cores: [["Azul", "v1536-azul-1.jpg"], ["Laranja Neon", "v1536-laranja-neon-1.jpg"], ["Preto Fosco", "v1536-preto-fosco-1.jpg"], ["Vermelho", "v1536-vermelho-1.jpg"]],
+    desc: "Bicicleta Colli Max Boy Aro 20 Masculino.", detalhes: { Código: "1536" } },
+  { id: "p682-armario-itatiaia-rose-6-portas-1-gaveta-105-aco", cod: "682", nome: "Armário Itatiaia Rose 6 Portas 1 Gaveta 105 Aço", marca: "Itatiaia", cat: "Móveis", avista: 1099.00,
+    imgs: ["v682-branco-preto-1.jpg", "v682-branco-preto-2.jpg"],
+    cores: [["Branco e Preto", "v682-branco-preto-1.jpg"]],
+    desc: "Armário Itatiaia Rose 6 Portas 1 Gaveta 105 Aço.", detalhes: { Código: "682" } },
+  { id: "p9935-armario-itatiaia-pratika-6-portas-2-gavetas-120-aco", cod: "9935", nome: "Armário Itatiaia Pratika 6 Portas 2 Gavetas 120 Aço", marca: "Itatiaia", cat: "Móveis", avista: 1599.00,
+    imgs: ["v9935-branco-preto-1.jpg", "v9935-branco-1.jpg", "v9935-branco-2.jpg"],
+    cores: [["Branco e Preto", "v9935-branco-preto-1.jpg"], ["Branco", "v9935-branco-1.jpg"]],
+    desc: "Armário Itatiaia Pratika 6 Portas 2 Gavetas 120 Aço.", detalhes: { Código: "9935" } },
+  { id: "p9936-armario-itatiaia-florenca-8-portas-2-gavetas-140-aco", cod: "9936", nome: "Armário Itatiaia Florença 8 Portas 2 Gavetas 140 Aço", marca: "Itatiaia", cat: "Móveis", avista: 1899.00,
+    imgs: ["v9936-branco-1.jpg", "v9936-grafite-1.jpg", "v9936-grafite-2.jpg"],
+    cores: [["Branco", "v9936-branco-1.jpg"], ["Grafite", "v9936-grafite-1.jpg"]],
+    desc: "Armário Itatiaia Florença 8 Portas 2 Gavetas 140 Aço.", detalhes: { Código: "9936" } },
+  { id: "p4-adega-jb-bechara-4009-luxo-mdf", cod: "4", nome: "Adega JB Bechara 4009 Luxo MDF", marca: "JB Bechara", cat: "Móveis", avista: 499.00,
+    imgs: ["v4-preto-dourado-1.jpg"],
+    cores: [["Preto e Dourado", "v4-preto-dourado-1.jpg"]],
+    desc: "Adega JB Bechara 4009 Luxo MDF.", detalhes: { Código: "4" } },
+  { id: "p4519-escrivaninha-jb-bechara-6055-luxo-madeira", cod: "4519", nome: "Escrivaninha JB Bechara 6055 Luxo Madeira", marca: "JB Bechara", cat: "Móveis", avista: 499.00,
+    imgs: ["v4519-nature-1.jpg", "v4519-offwhite-nature-1.jpg"],
+    cores: [["Nature", "v4519-nature-1.jpg"], ["Off White/Nature", "v4519-offwhite-nature-1.jpg"]],
+    desc: "Escrivaninha JB Bechara 6055 Luxo Madeira.", detalhes: { Código: "4519" } },
+  { id: "p6465-home-madetec-theater-frizz-plus", cod: "6465", nome: "Home Madetec Theater Frizz Plus", marca: "Madetec", cat: "Móveis", avista: 1999.00,
+    imgs: ["v6465-cinamomo-off-white-1.jpg", "v6465-fendi-naturale-1.jpg", "v6465-off-white-savana-1.jpg"],
+    cores: [["Cinamomo e Off White", "v6465-cinamomo-off-white-1.jpg"], ["Fendi e Naturale", "v6465-fendi-naturale-1.jpg"], ["Off White e Savana", "v6465-off-white-savana-1.jpg"]],
+    desc: "Home Madetec Theater Frizz Plus.", detalhes: { Código: "6465" } },
+  { id: "p6620-liquidificador-mondial-easy-power-l-550-220v", cod: "6620", nome: "Liquidificador Mondial Easy Power L-550 220V", marca: "Mondial", cat: "Eletroportáteis", avista: 199.00,
+    imgs: ["v6620-branco-1.jpg", "v6620-preto-1.jpg", "v6620-preto-2.jpg", "v6620-vermelho-1.jpg"],
+    cores: [["Branco", "v6620-branco-1.jpg"], ["Preto", "v6620-preto-1.jpg"], ["Vermelho", "v6620-vermelho-1.jpg"]],
+    desc: "Liquidificador Mondial Easy Power L-550 220V.", detalhes: { Código: "6620" } },
+  { id: "p9728-ventilador-mondial-super-power-vsp30-30-cm-mesa-branco-preto", cod: "9728", nome: "Ventilador Mondial Super Power VSP30 30 cm Mesa", marca: "Mondial", cat: "Ventilação", avista: 199.00,
+    imgs: ["v9728-branco-1.jpg", "v9728-preto-1.jpg"],
+    cores: [["Branco", "v9728-branco-1.jpg"], ["Preto", "v9728-preto-1.jpg"]],
+    desc: "Ventilador Mondial Super Power VSP30 30 cm Mesa.", detalhes: { Código: "9728" } },
+  { id: "p9737-ventilador-mondial-super-power-vsp40-40-cm-mesa-branco-preto", cod: "9737", nome: "Ventilador Mondial Super Power VSP40 40 cm Mesa", marca: "Mondial", cat: "Ventilação", avista: 299.00,
+    imgs: ["v9737-branco-1.jpg", "v9737-preto-1.jpg"],
+    cores: [["Branco", "v9737-branco-1.jpg"], ["Preto", "v9737-preto-1.jpg"]],
+    desc: "Ventilador Mondial Super Power VSP40 40 cm Mesa.", detalhes: { Código: "9737" } },
+  { id: "p3549-comoda-moval-camarim-bella-penteadeira-com-espelho", cod: "3549", nome: "Cômoda Moval Camarim Bella Penteadeira com Espelho", marca: "Moval", cat: "Móveis", avista: 899.00,
+    imgs: ["v3549-branco-1.jpg"],
+    cores: [["Branco", "v3549-branco-1.jpg"]],
+    desc: "Cômoda Moval Camarim Bella Penteadeira com Espelho.", detalhes: { Código: "3549" } },
+  { id: "p3554-comoda-moval-lisboa-1-porta-5-gavetas-com-espelho", cod: "3554", nome: "Cômoda Moval Lisboa 1 Porta 5 Gavetas com Espelho", marca: "Moval", cat: "Móveis", avista: 859.00,
+    imgs: ["v3554-freijo-off-white-1.jpg"],
+    cores: [["Freijó e Off White", "v3554-freijo-off-white-1.jpg"]],
+    desc: "Cômoda Moval Lisboa 1 Porta 5 Gavetas com Espelho.", detalhes: { Código: "3554" } },
+  { id: "p3555-guarda-roupa-moval-7-portas-roma-casal", cod: "3555", nome: "Guarda-Roupa Moval 7 Portas Roma Casal", marca: "Moval", cat: "Guarda-roupas", avista: 1299.00,
+    imgs: ["v3555-carvalho-fendi-11.jpg", "v3555-carvalho-fendi-12.jpg", "v3555-freijo-off-white-1.jpg", "v3555-freijo-off-white-2.jpg"],
+    cores: [["Carvalho e Fendi", "v3555-carvalho-fendi-11.jpg"], ["Freijó e Off White", "v3555-freijo-off-white-1.jpg"]],
+    desc: "Guarda-Roupa Moval 7 Portas Roma Casal.", detalhes: { Código: "3555" } },
+  { id: "p5994-guarda-roupa-moval-6-portas-atacama-casal", cod: "5994", nome: "Guarda-Roupa Moval 6 Portas Atacama Casal", marca: "Moval", cat: "Guarda-roupas", avista: 3499.00,
+    imgs: ["v5994-carvalho-fendi-11.jpg", "v5994-freijo-off-white-11.jpg", "v5994-freijo-off-white-12.jpg"],
+    cores: [["Carvalho e Fendi", "v5994-carvalho-fendi-11.jpg"], ["Freijó e Off White", "v5994-freijo-off-white-11.jpg"]],
+    desc: "Guarda-Roupa Moval 6 Portas Atacama Casal.", detalhes: { Código: "5994" } },
+  { id: "p6003-guarda-roupa-moval-6-portas-araguaia-casal", cod: "6003", nome: "Guarda-Roupa Moval 6 Portas Araguaia Casal", marca: "Moval", cat: "Guarda-roupas", avista: 3299.00,
+    imgs: ["v6003-freijo-off-white-11.jpg", "v6003-freijo-off-white-12.jpg"],
+    cores: [["Freijó e Off White", "v6003-freijo-off-white-11.jpg"]],
+    desc: "Guarda-Roupa Moval 6 Portas Araguaia Casal.", detalhes: { Código: "6003" } },
+  { id: "p6020-guarda-roupa-moval-7-portas-mafra-casal", cod: "6020", nome: "Guarda-Roupa Moval 7 Portas Mafra Casal", marca: "Moval", cat: "Guarda-roupas", avista: 1299.00,
+    imgs: ["v6020-freijo-cinza-1.jpg"],
+    cores: [["Freijó e Cinza", "v6020-freijo-cinza-1.jpg"]],
+    desc: "Guarda-Roupa Moval 7 Portas Mafra Casal.", detalhes: { Código: "6020" } },
+  { id: "p6022-guarda-roupa-moval-8-portas-diplomata-casal", cod: "6022", nome: "Guarda-Roupa Moval 8 Portas Diplomata Casal", marca: "Moval", cat: "Guarda-roupas", avista: 2299.00,
+    imgs: ["v6022-branco-1.jpg", "v6022-branco-2.jpg", "v6022-freijo-cinza-1.jpg", "v6022-freijo-1.jpg"],
+    cores: [["Branco", "v6022-branco-1.jpg"], ["Freijó e Cinza", "v6022-freijo-cinza-1.jpg"], ["Freijó", "v6022-freijo-1.jpg"]],
+    desc: "Guarda-Roupa Moval 8 Portas Diplomata Casal.", detalhes: { Código: "6022" } },
+  { id: "p6025-guarda-roupa-moval-8-portas-san-lorenzo-casal", cod: "6025", nome: "Guarda-Roupa Moval 8 Portas San Lorenzo Casal", marca: "Moval", cat: "Guarda-roupas", avista: 2299.00,
+    imgs: ["v6025-carvalho-fendi-1.jpg", "v6025-carvalho-fendi-2.jpg", "v6025-castanho-wood-off-white-1.jpg", "v6025-freijo-off-white-1.jpg", "v6025-freijo-off-white-2.jpg"],
+    cores: [["Carvalho e Fendi", "v6025-carvalho-fendi-1.jpg"], ["Castanho Wood e Off White", "v6025-castanho-wood-off-white-1.jpg"], ["Freijó e Off White", "v6025-freijo-off-white-1.jpg"]],
+    desc: "Guarda-Roupa Moval 8 Portas San Lorenzo Casal.", detalhes: { Código: "6025" } },
+  { id: "p9951-guarda-roupa-moval-6-portas-san-francisco-casal", cod: "9951", nome: "Guarda-Roupa Moval 6 Portas San Francisco Casal", marca: "Moval", cat: "Guarda-roupas", avista: 2099.00,
+    imgs: ["v9951-carvalho-fendi-11.jpg", "v9951-carvalho-fendi-12.jpg", "v9951-cinamomo-11.jpg", "v9951-freijo-off-white-1.jpg", "v9951-freijo-off-white-2.jpg"],
+    cores: [["Carvalho e Fendi", "v9951-carvalho-fendi-11.jpg"], ["Cinamomo", "v9951-cinamomo-11.jpg"], ["Freijó e Off White", "v9951-freijo-off-white-1.jpg"]],
+    desc: "Guarda-Roupa Moval 6 Portas San Francisco Casal.", detalhes: { Código: "9951" } },
+  { id: "p9953-guarda-roupa-moval-7-portas-malta-casal", cod: "9953", nome: "Guarda-Roupa Moval 7 Portas Malta Casal", marca: "Moval", cat: "Guarda-roupas", avista: 1399.00,
+    imgs: ["v9953-carvalho-fendi-1.jpg"],
+    cores: [["Carvalho e Fendi", "v9953-carvalho-fendi-1.jpg"]],
+    desc: "Guarda-Roupa Moval 7 Portas Malta Casal.", detalhes: { Código: "9953" } },
+  { id: "p9954-guarda-roupa-moval-3-portas-bolivia-deslizante-solteiro", cod: "9954", nome: "Guarda-Roupa Moval 3 Portas Bolívia Deslizante Solteiro", marca: "Moval", cat: "Guarda-roupas", avista: 1599.00,
+    imgs: ["v9954-freijo-cinza-11.jpg", "v9954-freijo-cinza-12.jpg", "v9954-freijo-off-white-11.jpg"],
+    cores: [["Freijó e Cinza", "v9954-freijo-cinza-11.jpg"], ["Freijó e Off White", "v9954-freijo-off-white-11.jpg"]],
+    desc: "Guarda-Roupa Moval 3 Portas Bolívia Deslizante Solteiro.", detalhes: { Código: "9954" } },
+  { id: "p3575-comoda-notavel-2-portas-3-gavetas-nt-5165-com-espelho", cod: "3575", nome: "Cômoda Notável 2 Portas 3 Gavetas NT 5165 com Espelho", marca: "Notável", cat: "Móveis", avista: 799.00,
+    imgs: ["v3575-madeirado-off-white-11.jpg", "v3575-madeirado-off-white-12.jpg", "v3575-madeirado-off-white-13.jpg", "v3575-madeirado-off-white-14.jpg", "v3575-branco-11.jpg", "v3575-branco-rosa-11.jpg", "v3575-madeirado-1.jpg", "v3575-madeirado-2.jpg"],
+    cores: [["Madeirado e Off White", "v3575-madeirado-off-white-11.jpg"], ["Branco", "v3575-branco-11.jpg"], ["Branco e Rosa", "v3575-branco-rosa-11.jpg"], ["Madeirado", "v3575-madeirado-1.jpg"]],
+    desc: "Cômoda Notável 2 Portas 3 Gavetas NT 5165 com Espelho.", detalhes: { Código: "3575" } },
+  { id: "p6081-guarda-roupa-notavel-3-portas-nt-5000", cod: "6081", nome: "Guarda-Roupa Notável 3 Portas NT 5000", marca: "Notável", cat: "Guarda-roupas", avista: 699.00,
+    imgs: ["v6081-branco-rosa-11.jpg", "v6081-branco-rosa-12.jpg", "v6081-branco-11.jpg", "v6081-branco-12.jpg", "v6081-madeirado-off-white-11.jpg", "v6081-madeirado-off-white-12.jpg", "v6081-madeirado-11.jpg"],
+    cores: [["Branco e Rosa", "v6081-branco-rosa-11.jpg"], ["Branco", "v6081-branco-11.jpg"], ["Madeirado e Off White", "v6081-madeirado-off-white-11.jpg"], ["Madeirado", "v6081-madeirado-11.jpg"]],
+    desc: "Guarda-Roupa Notável 3 Portas NT 5000.", detalhes: { Código: "6081" } },
+  { id: "p6090-guarda-roupa-notavel-6-portas-nt-6035", cod: "6090", nome: "Guarda-Roupa Notável 6 Portas NT 6035", marca: "Notável", cat: "Guarda-roupas", avista: 2399.00,
+    imgs: ["v6090-madeirado-off-white-11.jpg", "v6090-madeirado-off-white-12.jpg", "v6090-madeirado-claro-11.jpg", "v6090-madeirado-claro-12.jpg", "v6090-madeirado-escuro-11.jpg"],
+    cores: [["Madeirado e Off White", "v6090-madeirado-off-white-11.jpg"], ["Madeirado Claro", "v6090-madeirado-claro-11.jpg"], ["Madeirado Escuro", "v6090-madeirado-escuro-11.jpg"]],
+    desc: "Guarda-Roupa Notável 6 Portas NT 6035.", detalhes: { Código: "6090" } },
+  { id: "p6091-home-notavel-nt-1400-tv", cod: "6091", nome: "Home Notável NT 1400 TV", marca: "Notável", cat: "Móveis", avista: 1599.00,
+    imgs: ["v6091-madeirado-off-white-11.jpg", "v6091-madeirado-off-white-12.jpg", "v6091-madeirado-off-white-13.jpg", "v6091-madeirado-preto-11.jpg", "v6091-madeirado-preto-12.jpg"],
+    cores: [["Madeirado e Off White", "v6091-madeirado-off-white-11.jpg"], ["Madeirado e Preto", "v6091-madeirado-preto-11.jpg"]],
+    desc: "Home Notável NT 1400 TV.", detalhes: { Código: "6091" } },
+  { id: "p6092-guarda-roupa-notavel-4-portas-nt-6055", cod: "6092", nome: "Guarda-Roupa Notável 4 Portas NT 6055", marca: "Notável", cat: "Guarda-roupas", avista: 999.00,
+    imgs: ["v6092-madeirado-off-white-11.jpg", "v6092-madeirado-off-white-12.jpg", "v6092-madeirado-off-white-13.jpg", "v6092-madeirado-off-white-14.jpg", "v6092-madeirado-off-white-15.jpg", "v6092-madeirado-11.jpg", "v6092-madeirado-12.jpg", "v6092-madeirado-13.jpg", "v6092-branco-rosa-11.jpg", "v6092-branco-11.jpg"],
+    cores: [["Madeirado e Off White", "v6092-madeirado-off-white-11.jpg"], ["Madeirado", "v6092-madeirado-11.jpg"], ["Branco e Rosa", "v6092-branco-rosa-11.jpg"], ["Branco", "v6092-branco-11.jpg"]],
+    desc: "Guarda-Roupa Notável 4 Portas NT 6055.", detalhes: { Código: "6092" } },
+  { id: "p9879-home-notavel-nt-1340-tv", cod: "9879", nome: "Home Notável NT 1340 TV", marca: "Notável", cat: "Móveis", avista: 1299.00,
+    imgs: ["v9879-madeirado-off-white-11.jpg", "v9879-madeirado-off-white-12.jpg", "v9879-madeirado-off-white-13.jpg", "v9879-madeirado-preto-11.jpg", "v9879-madeirado-preto-12.jpg"],
+    cores: [["Madeirado e Off White", "v9879-madeirado-off-white-11.jpg"], ["Madeirado e Preto", "v9879-madeirado-preto-11.jpg"]],
+    desc: "Home Notável NT 1340 TV.", detalhes: { Código: "9879" } },
+  { id: "p9881-mesa-escrivaninha-notavel-nt-2010", cod: "9881", nome: "Mesa Escrivaninha Notável NT 2010", marca: "Notável", cat: "Móveis", avista: 499.00,
+    imgs: ["v9881-branco-11.jpg", "v9881-branco-rosa-11.jpg", "v9881-branco-rosa-12.jpg", "v9881-freijo-11.jpg", "v9881-freijo-12.jpg", "v9881-nogal-11.jpg", "v9881-nogal-12.jpg"],
+    cores: [["Branco", "v9881-branco-11.jpg"], ["Branco e Rosa", "v9881-branco-rosa-11.jpg"], ["Freijó", "v9881-freijo-11.jpg"], ["Nogal", "v9881-nogal-11.jpg"]],
+    desc: "Mesa Escrivaninha Notável NT 2010.", detalhes: { Código: "9881" } },
+  { id: "p1919-cadeira-de-plastico-pisani-giorgia-com-braco-br-am-az-vm", cod: "1919", nome: "Cadeira de Plástico Pisani Giorgia com Braço", marca: "Pisani", cat: "Móveis", avista: 119.00,
+    imgs: ["v1919-azul-1.jpg", "v1919-branco-1.jpg", "v1919-vermelho-1.jpg"],
+    cores: [["Azul", "v1919-azul-1.jpg"], ["Branco", "v1919-branco-1.jpg"], ["Vermelho", "v1919-vermelho-1.jpg"]],
+    desc: "Cadeira de Plástico Pisani Giorgia com Braço.", detalhes: { Código: "1919" } },
+];
+
+// Ficha de cada produto (descrição, principais características e especificações técnicas), pelo código do sistema.
+const FICHAS = {
+  "1093": {"texto": "A Batedeira Mondial Prática B-44 tem 400 W, 3 velocidades e tigela de 3,6 litros.", "destaques": ["Potência: 400 W", "3 velocidades", "Tigela de 3,6 litros", "2 batedores"], "detalhes": {"Modelo": "Prática B-44", "Tipo": "Batedeira fixa", "Capacidade da tigela": "3,6 L", "Velocidades": "3", "Batedores": "2", "Potência": "400 W", "Cor": "Branca", "Voltagem": "127 V ou 220 V (consulte a voltagem disponível)"}},
+  "1534": {"texto": "A Bicicleta Jully da Colli é feminina, com aro 20, quadro de aço e freio V-Brake. Tem suspensão dianteira.", "destaques": ["Aro 20", "Quadro de aço", "Freio V-Brake", "Suspensão dianteira"], "detalhes": {"Modelo": "Jully", "Tipo": "Bicicleta passeio", "Aro": "20", "Gênero": "Infantil", "Quadro": "Aço", "Marchas": "Sem marchas", "Suspensão": "Suspensão dianteira", "Freio": "V-Brake"}},
+  "1536": {"texto": "A Bicicleta Max Boy 106 da Colli é masculina, com aro 20, quadro de aço carbono e freio V-Brake.", "destaques": ["Aro 20", "Quadro de aço carbono", "Freio V-Brake"], "detalhes": {"Modelo": "Max Boy 106", "Tipo": "Bicicleta passeio", "Aro": "20", "Gênero": "Masculina", "Quadro": "Aço carbono", "Marchas": "Sem marchas", "Suspensão": "Não", "Freio": "V-Brake"}},
+  "4944": {"texto": "O Fogão Mueller Decorato Vetro Fosco tem 5 bocas, mesa de vidro temperado e acendimento superautomático. O forno tem 98 litros, com luz interna, revestimento antiaderente e vidro duplo.", "destaques": ["5 bocas", "Mesa de vidro temperado", "Acendimento superautomático", "Forno de 98 litros", "Queimador de tripla chama", "Selo Conpet A"], "detalhes": {"Modelo": "Decorato Vetro Fosco", "Tipo": "Fogão de piso a gás", "Bocas": "5", "Mesa": "Vidro temperado", "Acendimento": "Superautomático", "Recursos da mesa": "Queimadores de tamanhos diferentes, botões removíveis, queimador com tripla chama", "Grades": "Individual", "Capacidade do forno": "98 L", "Prateleiras do forno": "2 reguláveis", "Recursos do forno": "Luz interna, revestimento antiaderente, vidro duplo", "Eficiência": "Selo Conpet A", "Cor": "Preto fosco", "Dimensões (A x L x P)": "95 x 75 x 62 cm", "Peso": "35,9 kg", "Voltagem": "Bivolt"}},
+  "4966": {"texto": "O Fogão Mueller MFV5BF tem 5 bocas, mesa de vidro temperado e acendimento automático. O forno tem 81,6 litros, com luz interna e revestimento antiaderente.", "destaques": ["5 bocas", "Mesa de vidro temperado", "Acendimento automático", "Forno de 81,6 litros", "Queimador de tripla chama", "Selo Conpet A"], "detalhes": {"Modelo": "MFV5BF", "Tipo": "Fogão de piso a gás", "Bocas": "5", "Mesa": "Vidro temperado", "Acendimento": "Automático", "Recursos da mesa": "Botões removíveis, queimador com tripla chama, queimadores de tamanhos diferentes", "Grades": "Individual", "Capacidade do forno": "81,6 L", "Prateleiras do forno": "2 deslizantes", "Recursos do forno": "Luz interna, revestimento antiaderente", "Eficiência": "Selo Conpet A", "Cor": "Titânio", "Dimensões (A x L x P)": "91 x 75 x 62,5 cm", "Peso": "31,8 kg", "Voltagem": "Bivolt"}},
+  "4967": {"texto": "O Fogão Mueller MFV5BF tem 5 bocas, mesa de vidro temperado e acendimento automático. O forno tem 81,6 litros, com luz interna e revestimento antiaderente.", "destaques": ["5 bocas", "Mesa de vidro temperado", "Acendimento automático", "Forno de 81,6 litros", "Queimador de tripla chama", "Selo Conpet A"], "detalhes": {"Modelo": "MFV5BF", "Tipo": "Fogão de piso a gás", "Bocas": "5", "Mesa": "Vidro temperado", "Acendimento": "Automático", "Recursos da mesa": "Botões removíveis, queimador com tripla chama, queimadores de tamanhos diferentes", "Grades": "Individual", "Capacidade do forno": "81,6 L", "Prateleiras do forno": "2 deslizantes", "Recursos do forno": "Luz interna, revestimento antiaderente", "Eficiência": "Selo Conpet A", "Cor": "Preto", "Dimensões (A x L x P)": "91 x 75 x 62,5 cm", "Peso": "31,8 kg", "Voltagem": "Bivolt"}},
+  "4968": {"texto": "O Fogão Mueller MFV5BF tem 5 bocas, mesa de vidro temperado e acendimento automático. O forno tem 81,6 litros, com luz interna e revestimento antiaderente.", "destaques": ["5 bocas", "Mesa de vidro temperado", "Acendimento automático", "Forno de 81,6 litros", "Queimador de tripla chama", "Selo Conpet A"], "detalhes": {"Modelo": "MFV5BF", "Tipo": "Fogão de piso a gás", "Bocas": "5", "Mesa": "Vidro temperado", "Acendimento": "Automático", "Recursos da mesa": "Botões removíveis, queimador com tripla chama, queimadores de tamanhos diferentes", "Grades": "Individual", "Capacidade do forno": "81,6 L", "Prateleiras do forno": "2 deslizantes", "Recursos do forno": "Luz interna, revestimento antiaderente", "Eficiência": "Selo Conpet A", "Cor": "Branco", "Dimensões (A x L x P)": "91 x 75 x 62,5 cm", "Peso": "31,8 kg", "Voltagem": "Bivolt"}},
+  "4969": {"texto": "O Fogão Mueller MFV5BB tem 5 bocas, mesa de vidro temperado e acendimento automático. O forno tem 82 litros.", "destaques": ["5 bocas", "Mesa de vidro temperado", "Acendimento automático", "Forno de 82 litros"], "detalhes": {"Modelo": "MFV5BB", "Tipo": "Fogão de piso a gás", "Bocas": "5", "Mesa": "Vidro temperado", "Acendimento": "Automático", "Recursos da mesa": "Botões removíveis", "Grades": "Individual", "Capacidade do forno": "82 L", "Prateleiras do forno": "1 deslizante", "Cor": "Titânio", "Dimensões (A x L x P)": "87 x 75 x 61 cm", "Peso": "27,55 kg", "Voltagem": "Bivolt"}},
+  "4970": {"texto": "O Fogão Mueller MFV5BB tem 5 bocas, mesa de vidro temperado e acendimento automático. O forno tem 82 litros.", "destaques": ["5 bocas", "Mesa de vidro temperado", "Acendimento automático", "Forno de 82 litros"], "detalhes": {"Modelo": "MFV5BB", "Tipo": "Fogão de piso a gás", "Bocas": "5", "Mesa": "Vidro temperado", "Acendimento": "Automático", "Recursos da mesa": "Botões removíveis", "Grades": "Individual", "Capacidade do forno": "82 L", "Cor": "Branco", "Dimensões (A x L x P)": "87 x 75 x 61 cm", "Peso": "27,55 kg", "Voltagem": "Bivolt"}},
+  "6620": {"texto": "O Liquidificador Mondial Easy Power L-550 tem 550 W, 2 velocidades mais pulsar e copo de 1,9 litros. Tem auto-limpeza, base antiderrapante, porta-fio e função para triturar gelo.", "destaques": ["Potência: 550 W", "Velocidades: 2 + pulsar", "Copo de 1,9 L (1,5 L úteis)"], "detalhes": {"Modelo": "Easy Power L-550", "Tipo": "Liquidificador", "Potência": "550 W", "Velocidades": "2 + pulsar", "Capacidade do copo": "1,9 L (1,5 L úteis)", "Recursos": "Auto-limpeza, base antiderrapante, porta-fio, triturar gelo", "Voltagem": "220 V"}},
+  "6917": {"texto": "O tanquinho Colormaq LCS10 lava até 10 kg de roupa, com 5 programas de lavagem. Tem filtro para fiapos.", "destaques": ["Capacidade: 10 kg", "5 programas de lavagem", "Cesto em plástico", "Selo Procel A"], "detalhes": {"Modelo": "LCS10", "Tipo": "Tanquinho (lavadora semiautomática)", "Capacidade de lavagem": "10 kg", "Abertura": "Superior", "Controle": "Eletromecânico", "Programas de lavagem": "5", "Funções": "Enxágue, lava encardidas, lava roupas básicas, lava roupas delicadas, molho, lavagem pesada", "Dispenser": "Sabão", "Cesto": "Plástico", "Recursos": "Filtro para fiapos", "Reaproveitamento de água": "Sim", "Eficiência": "Selo Procel A", "Consumo": "0,11 kWh por ciclo", "Cor": "Branco", "Dimensões (A x L x P)": "96 x 48,5 x 55,5 cm", "Peso": "10,75 kg", "Voltagem": "127 V ou 220 V (consulte a voltagem disponível)"}},
+  "6918": {"texto": "O tanquinho Colormaq LCS10 lava até 10 kg de roupa, com 5 programas de lavagem. Tem filtro para fiapos.", "destaques": ["Capacidade: 10 kg", "5 programas de lavagem", "Cesto em plástico", "Selo Procel A"], "detalhes": {"Modelo": "LCS10", "Tipo": "Tanquinho (lavadora semiautomática)", "Capacidade de lavagem": "10 kg", "Abertura": "Superior", "Controle": "Eletromecânico", "Programas de lavagem": "5", "Funções": "Enxágue, lava encardidas, lava roupas básicas, lava roupas delicadas, molho, lavagem pesada", "Dispenser": "Sabão", "Cesto": "Plástico", "Recursos": "Filtro para fiapos", "Reaproveitamento de água": "Sim", "Eficiência": "Selo Procel A", "Consumo": "0,11 kWh por ciclo", "Cor": "Prata", "Dimensões (A x L x P)": "96 x 48,5 x 55,5 cm", "Peso": "10,75 kg", "Voltagem": "127 V ou 220 V (consulte a voltagem disponível)"}},
+  "6926": {"texto": "O tanquinho Colormaq LCS20 lava até 20 kg de roupa, com 6 programas de lavagem. Tem filtro para fiapos e controle de níveis de água.", "destaques": ["Capacidade: 20 kg", "6 programas de lavagem", "Cesto em plástico", "Selo Procel A"], "detalhes": {"Modelo": "LCS20", "Tipo": "Tanquinho (lavadora semiautomática)", "Capacidade de lavagem": "20 kg", "Abertura": "Superior", "Controle": "Eletromecânico", "Programas de lavagem": "6", "Funções": "Ciclo rápido de lavagem, lava roupas delicadas, molho, lava encardidas, enxágue manual, lava roupas básicas", "Dispenser": "Amaciante, sabão", "Cesto": "Plástico", "Recursos": "Filtro para fiapos, controle de níveis de água", "Eficiência": "Selo Procel A", "Consumo": "0,11 kWh por ciclo", "Cor": "Branco", "Dimensões (A x L x P)": "97 x 56 x 61 cm", "Peso": "11,2 kg", "Voltagem": "127 V ou 220 V (consulte a voltagem disponível)"}},
+  "6927": {"texto": "O tanquinho Colormaq LCS20 lava até 20 kg de roupa, com 6 programas de lavagem. Tem filtro para fiapos e controle de níveis de água.", "destaques": ["Capacidade: 20 kg", "6 programas de lavagem", "Cesto em plástico", "Selo Procel A"], "detalhes": {"Modelo": "LCS20", "Tipo": "Tanquinho (lavadora semiautomática)", "Capacidade de lavagem": "20 kg", "Abertura": "Superior", "Controle": "Eletromecânico", "Programas de lavagem": "6", "Funções": "Ciclo rápido de lavagem, lava roupas delicadas, molho, lava encardidas, enxágue manual, lava roupas básicas", "Dispenser": "Amaciante, sabão", "Cesto": "Plástico", "Recursos": "Filtro para fiapos, controle de níveis de água", "Eficiência": "Selo Procel A", "Consumo": "0,11 kWh por ciclo", "Cor": "Prata", "Dimensões (A x L x P)": "97 x 56 x 61 cm", "Peso": "11,2 kg", "Voltagem": "127 V ou 220 V (consulte a voltagem disponível)"}},
+  "6956": {"texto": "A máquina de lavar Electrolux Efficient LDA13 lava até 13 kg de roupa, com 10 programas de lavagem. Tem filtro para fiapos, pés antiderrapantes e pés reguláveis.", "destaques": ["Capacidade: 13 kg", "10 programas de lavagem", "Cesto em aço Inox", "Centrifugação de até 630 rpm", "Selo Procel A"], "detalhes": {"Modelo": "Efficient LDA13", "Tipo": "Máquina de lavar automática", "Capacidade de lavagem": "13 kg", "Abertura": "Superior", "Controle": "Eletrônico", "Programas de lavagem": "10", "Funções": "Centrifugação, centrifugação turbo, ciclo rápido de lavagem, enxágue, lava edredom, lavagem turbo, lava roupas básicas, lava roupas delicadas", "Centrifugação": "630 rpm", "Dispenser": "Amaciante, sabão", "Cesto": "Aço Inox", "Recursos": "Filtro para fiapos, pés antiderrapante, pés reguláveis", "Reaproveitamento de água": "Sim", "Eficiência": "Selo Procel A", "Cor": "Branca", "Dimensões (A x L x P)": "104 x 59 x 66,7 cm", "Peso": "37,3 kg", "Voltagem": "220 V"}},
+  "6957": {"texto": "A máquina de lavar Electrolux LES11 lava até 11 kg de roupa, com 10 programas de lavagem. Tem controle de níveis de água, filtro para fiapos e pés reguláveis.", "destaques": ["Capacidade: 11 kg", "10 programas de lavagem", "Cesto em plástico", "Centrifugação de até 680 rpm", "Selo Procel A"], "detalhes": {"Modelo": "LES11", "Tipo": "Máquina de lavar automática", "Capacidade de lavagem": "11 kg", "Abertura": "Superior", "Controle": "Eletromecânico", "Programas de lavagem": "10", "Funções": "Centrifugação, ciclo rápido de lavagem, enxágue, lava edredom, lava roupas básicas, lava roupas delicadas, lavagem pesada", "Centrifugação": "680 rpm", "Dispenser": "Alvejante, amaciante, sabão", "Cesto": "Plástico", "Recursos": "Controle de níveis de água, filtro para fiapos, pés reguláveis", "Reaproveitamento de água": "Sim", "Eficiência": "Selo Procel A", "Consumo": "0,34 kWh por ciclo", "Cor": "Branca", "Dimensões (A x L x P)": "103 x 59,5 x 67 cm", "Peso": "37 kg", "Voltagem": "127 V ou 220 V (consulte a voltagem disponível)"}},
+  "8491": {"texto": "A Geladeira Midea MDRT554EV é duplex, com 410 litros no total e degelo Cycle Defrost. São 293 litros no refrigerador e 117 litros no freezer.", "destaques": ["Capacidade total: 410 litros", "Duplex", "Cycle Defrost", "Tecnologia Inverter", "Selo Procel A"], "detalhes": {"Modelo": "MDRT554EV", "Tipo": "Geladeira duplex", "Capacidade total": "410 L", "Refrigerador": "293 L", "Congelador / freezer": "117 L", "Degelo": "Cycle Defrost", "Controle": "Painel touch", "Recursos": "Tecnologia Inverter", "Recursos internos": "Controle de temperatura, gavetas para vegetais e frutas", "Eficiência": "Selo Procel A", "Consumo": "24,2 kWh/mês", "Cor": "Branca", "Dimensões (A x L x P)": "172 x 59,5 x 70,4 cm", "Peso": "51 kg", "Voltagem": "127 V ou 220 V (consulte a voltagem disponível)"}},
+  "8493": {"texto": "A Geladeira Midea MD-RT572EVD01 é duplex, com 425 litros no total e degelo Frost Free. São 305 litros no refrigerador e 120 litros no freezer.", "destaques": ["Capacidade total: 425 litros", "Duplex", "Frost Free", "Alerta de porta aberta", "compartimento extra-frio", "Selo Procel A"], "detalhes": {"Modelo": "MD-RT572EVD01", "Tipo": "Geladeira duplex", "Capacidade total": "425 L", "Refrigerador": "305 L", "Congelador / freezer": "120 L", "Degelo": "Frost Free", "Controle": "Painel touch", "Recursos": "Alerta de porta aberta, compartimento extra-frio, iluminação interna LED, resfriamento rápido", "Recursos internos": "Controle de temperatura, gavetas para vegetais e frutas, porta-garrafas, porta-ovos, prateleira removível, prateleiras ajustáveis, prateleiras da porta ajustáveis, pés com rodízio, pés niveladores", "Prateleiras": "Vidro temperado", "Eficiência": "Selo Procel A", "Cor": "Branca", "Dimensões (A x L x P)": "185 x 59,5 x 71,4 cm", "Peso": "57 kg", "Voltagem": "127 V ou 220 V (consulte a voltagem disponível)"}},
+  "8500": {"texto": "A Geladeira Consul CRA30FB é de 1 porta, com 261 litros no total e degelo Degelo semiautomático/seco. São 236 litros no refrigerador e 25 litros no congelador.", "destaques": ["Capacidade total: 261 litros", "1 porta", "Degelo semiautomático/seco", "Compartimento extra-frio", "Selo Procel A"], "detalhes": {"Modelo": "CRA30FB", "Tipo": "Geladeira 1 porta", "Capacidade total": "261 L", "Refrigerador": "236 L", "Congelador / freezer": "25 L", "Degelo": "Degelo semiautomático/seco", "Controle": "Painel eletrônico", "Recursos": "Compartimento extra-frio", "Recursos internos": "Compartimento para laticínios, gavetas para vegetais e frutas, porta-ovos, prateleira removível, pés niveladores", "Prateleiras": "Metal", "Eficiência": "Selo Procel A", "Consumo": "24,3 kWh/mês", "Cor": "Branca", "Dimensões (A x L x P)": "144 x 55 x 63,1 cm", "Peso": "42 kg", "Voltagem": "127 V ou 220 V (consulte a voltagem disponível)"}},
+  "8502": {"texto": "A Geladeira Consul CRA30MB é de 1 porta, com 263 litros no total e degelo Degelo semiautomático/seco. São 239 litros no refrigerador e 24 litros no congelador.", "destaques": ["Capacidade total: 263 litros", "1 porta", "Degelo semiautomático/seco", "Compartimento extra-frio", "iluminação interna LED", "Selo Procel B"], "detalhes": {"Modelo": "CRA30MB", "Tipo": "Geladeira 1 porta", "Capacidade total": "263 L", "Refrigerador": "239 L", "Congelador / freezer": "24 L", "Degelo": "Degelo semiautomático/seco", "Controle": "Painel eletrônico", "Recursos": "Compartimento extra-frio, iluminação interna LED", "Recursos internos": "Controle de temperatura, gavetas para vegetais e frutas, porta-garrafas, porta-ovos, prateleira removível, prateleiras ajustáveis, pés niveladores", "Prateleiras": "Metal", "Eficiência": "Selo Procel B", "Consumo": "16,7 kWh/mês", "Cor": "Branca", "Dimensões (A x L x P)": "142 x 55 x 63 cm", "Peso": "40 kg", "Voltagem": "127 V ou 220 V (consulte a voltagem disponível)"}},
+  "8533": {"texto": "A Geladeira Consul CRD37 é duplex, com 334 litros no total e degelo Cycle Defrost. São 258 litros no refrigerador e 76 litros no freezer.", "destaques": ["Capacidade total: 334 litros", "Duplex", "Cycle Defrost", "Selo Procel A"], "detalhes": {"Modelo": "CRD37", "Tipo": "Geladeira duplex", "Capacidade total": "334 L", "Refrigerador": "258 L", "Congelador / freezer": "76 L", "Degelo": "Cycle Defrost", "Controle": "Painel eletrônico", "Recursos internos": "Compartimento para laticínios, gavetas para vegetais e frutas, porta-ovos, prateleira removível, pés niveladores, prateleiras ajustáveis, porta-garrafas, controle de temperatura", "Prateleiras": "Metal", "Eficiência": "Selo Procel A", "Consumo": "43,5 kWh/mês", "Cor": "Branca", "Dimensões (A x L x P)": "166,9 x 60,3 x 63,4 cm", "Peso": "47 kg", "Voltagem": "127 V ou 220 V (consulte a voltagem disponível)"}},
+  "8594": {"texto": "A Geladeira Consul CRM50MK é duplex, com 412 litros no total e degelo Frost Free. São 311 litros no refrigerador e 101 litros no freezer.", "destaques": ["Capacidade total: 412 litros", "Duplex", "Frost Free", "Filtro anti-odor", "compartimento extra-frio", "Selo Procel B"], "detalhes": {"Modelo": "CRM50MK", "Tipo": "Geladeira duplex", "Capacidade total": "412 L", "Refrigerador": "311 L", "Congelador / freezer": "101 L", "Degelo": "Frost Free", "Recursos": "Filtro anti-odor, compartimento extra-frio", "Recursos internos": "Porta-ovos, controle de temperatura, prateleira removível, prateleiras ajustáveis, prateleiras da porta ajustáveis", "Eficiência": "Selo Procel B", "Cor": "Inox", "Dimensões (A x L x P)": "174,5 x 75,8 x 75,5 cm", "Peso": "71 kg", "Voltagem": "127 V ou 220 V (consulte a voltagem disponível)"}},
+  "8673": {"texto": "A Geladeira Midea MDRT533EVD é duplex, com 394 litros no total e degelo Frost Free. São 295 litros no refrigerador e 99 litros no freezer.", "destaques": ["Capacidade total: 394 litros", "Duplex", "Frost Free", "Compartimento extra-frio", "iluminação interna LED"], "detalhes": {"Modelo": "MDRT533EVD", "Tipo": "Geladeira duplex", "Capacidade total": "394 L", "Refrigerador": "295 L", "Congelador / freezer": "99 L", "Degelo": "Frost Free", "Recursos": "Compartimento extra-frio, iluminação interna LED", "Prateleiras": "Vidro temperado", "Cor": "Branca", "Dimensões (A x L x P)": "172 x 59,5 x 71,8 cm", "Peso": "51 kg", "Voltagem": "127 V ou 220 V (consulte a voltagem disponível)"}},
+  "8674": {"texto": "A Geladeira Midea MDRT533EVD é duplex, com 394 litros no total e degelo Frost Free. São 295 litros no refrigerador e 99 litros no freezer.", "destaques": ["Capacidade total: 394 litros", "Duplex", "Frost Free", "Compartimento extra-frio", "iluminação interna LED"], "detalhes": {"Modelo": "MDRT533EVD", "Tipo": "Geladeira duplex", "Capacidade total": "394 L", "Refrigerador": "295 L", "Congelador / freezer": "99 L", "Degelo": "Frost Free", "Recursos": "Compartimento extra-frio, iluminação interna LED", "Prateleiras": "Vidro temperado", "Cor": "Inox", "Dimensões (A x L x P)": "172 x 59,5 x 71,8 cm", "Peso": "51 kg", "Voltagem": "127 V ou 220 V (consulte a voltagem disponível)"}},
+  "8681": {"texto": "O Roteador Archer C20 da TP-Link é dual band: usa as redes de 2,4 GHz e 5 GHz ao mesmo tempo, somando até 733 Mbps. Tem 3 antenas externas e 4 portas de rede.", "destaques": ["Dual band (2,4 GHz e 5 GHz)", "Até 733 Mbps", "3 antenas externas", "4 portas LAN"], "detalhes": {"Modelo": "Archer C20 (AC750)", "Tipo": "Roteador Wi-Fi dual band", "Frequências": "2,4 GHz e 5 GHz", "Velocidade": "300 Mbps (2,4 ghz) + 433 Mbps (5 ghz)", "Portas": "1 WAN e 4 LAN 10/100", "Antenas": "3 externas", "Padrões": "IEEE 802.11 a/b/g/n/ac"}},
+  "9005": {"texto": "A Smart TV AOC de 32 polegadas tem resolução HD e o sistema Roku, com acesso a Netflix, YouTube, Prime Video e outros aplicativos.", "destaques": ["Tela: 32 polegadas DLED", "Resolução: HD", "Sistema: Roku", "Wi-Fi integrado", "3 entradas HDMI"], "detalhes": {"Modelo": "32S5135/78G", "Tela": "32 polegadas DLED", "Resolução": "HD", "Sistema": "Roku", "Aplicativos": "Amazon Prime Video, Disney+, Netflix, YouTube", "Áudio": "10 W RMS", "Entradas HDMI": "3", "Conexões": "HDMI, USB, fone de ouvido P2, LAN (rede), Wi-Fi integrado, AirPlay, espelhamento de tela", "Dimensões com base (L x A x P)": "71,6 x 46,6 x 16,4 cm", "Dimensões sem base (L x A x P)": "71,6 x 43,2 x 7,5 cm", "Voltagem": "Bivolt"}},
+  "9031": {"texto": "A Smart TV AOC de 32 polegadas tem resolução HD e o sistema Roku, com acesso a Netflix, YouTube, Prime Video e outros aplicativos.", "destaques": ["Tela: 32 polegadas DLED", "Resolução: HD", "Sistema: Roku", "Wi-Fi integrado", "3 entradas HDMI"], "detalhes": {"Modelo": "32S5155", "Tela": "32 polegadas DLED", "Resolução": "HD", "Sistema": "Roku", "Aplicativos": "Disney+, Netflix, Apple TV, Globoplay, Amazon Prime Video, Star+, YouTube", "Áudio": "10 W RMS", "Entradas HDMI": "3", "Conexões": "HDMI, LAN (rede), USB, Wi-Fi integrado", "Dimensões com base (L x A x P)": "71,93 x 47,42 x 20,2 cm", "Dimensões sem base (L x A x P)": "71,93 x 42,86 x 7,26 cm", "Voltagem": "Bivolt"}},
+  "9635": {"texto": "O ventilador Dômina Neo tem hélice de 50 cm, 6 pás e 3 velocidades, com oscilação horizontal e altura regulável.", "destaques": ["50 cm de diâmetro", "6 pás", "3 velocidades", "Potência: 200 W", "Oscilação horizontal"], "detalhes": {"Modelo": "Neo", "Tipo": "Ventilador de coluna", "Diâmetro": "50 cm", "Pás": "6", "Velocidades": "3", "Potência": "200 W", "Recursos": "Oscilação horizontal, altura regulável", "Voltagem": "127 V ou 220 V (consulte a voltagem disponível)"}},
+  "9728": {"texto": "O ventilador Mondial VSP-30 tem hélice de 30 cm, 6 pás e 3 velocidades, com alça para transporte, oscilação horizontal e inclinação ajustável.", "destaques": ["30 cm de diâmetro", "6 pás", "3 velocidades", "Potência: 60 W", "Oscilação horizontal"], "detalhes": {"Modelo": "VSP-30", "Tipo": "Ventilador de mesa", "Diâmetro": "30 cm", "Pás": "6", "Velocidades": "3", "Potência": "60 W", "Recursos": "Alça para transporte, oscilação horizontal, inclinação ajustável", "Voltagem": "127 V ou 220 V (consulte a voltagem disponível)", "Peso": "1,6 kg"}},
+  "9737": {"texto": "O ventilador Mondial VSP-40 tem hélice de 40 cm, 6 pás e 3 velocidades, com inclinação ajustável e oscilação horizontal.", "destaques": ["40 cm de diâmetro", "6 pás", "3 velocidades", "Potência: 140 W", "Oscilação horizontal"], "detalhes": {"Modelo": "VSP-40", "Tipo": "Ventilador de mesa", "Diâmetro": "40 cm", "Pás": "6", "Velocidades": "3", "Potência": "140 W", "Recursos": "Inclinação ajustável, oscilação horizontal", "Voltagem": "127 V ou 220 V (consulte a voltagem disponível)"}},
+  "9835": {"texto": "O Modelador Spiral Infinity da Mondial tem revestimento de cerâmica, que distribui melhor o calor, e cabo giratório. Serve para cachear e ondular os fios.", "destaques": ["Revestimento de cerâmica", "Cacheia e ondula", "Cabo giratório", "Luz indicadora", "Bivolt"], "detalhes": {"Modelo": "Spiral Infinity EM-05", "Tipo": "Modelador de cachos", "Revestimento": "Cerâmica", "Modelagem": "Cacheia, ondula", "Recursos": "Cabo giratório, luz indicadora", "Voltagem": "Bivolt"}},
+  "9897": {"texto": "O Freezer Horizontal Midea tem 145 litros, 1 porta e congelamento rápido, com baixo nível de ruído.", "destaques": ["Capacidade: 145 litros", "1 porta", "Congelamento rápido", "Selo Procel A"], "detalhes": {"Modelo": "MDRC207SLA012", "Tipo": "Freezer horizontal", "Capacidade total": "145 L", "Recursos": "Baixo nível de ruído, congelamento rápido, preservação de alimentos", "Eficiência": "Selo Procel A", "Cor": "Branco", "Dimensões (A x L x P)": "85 x 63,2 x 55 cm", "Peso": "23 kg", "Voltagem": "220 V"}},
+  "9907": {"texto": "O Fogão Mueller MFI5BB tem 5 bocas, mesa de inox e acendimento automático. O forno tem 81,6 litros, com revestimento antiaderente e sensor corta gás.", "destaques": ["5 bocas", "Mesa de inox", "Acendimento automático", "Forno de 81,6 litros", "Selo Conpet A"], "detalhes": {"Modelo": "MFI5BB", "Tipo": "Fogão de piso a gás", "Bocas": "5", "Mesa": "Inox", "Acendimento": "Automático", "Recursos da mesa": "Botões removíveis, queimadores de tamanhos diferentes", "Grades": "Inteiriça", "Capacidade do forno": "81,6 L", "Prateleiras do forno": "1 regulável", "Recursos do forno": "Revestimento antiaderente, sensor corta gás", "Eficiência": "Selo Conpet A", "Cor": "Preto fosco", "Dimensões (A x L x P)": "87 x 75 x 55 cm", "Peso": "23,1 kg", "Voltagem": "Bivolt"}},
+  "9910": {"texto": "A máquina de lavar Consul CWN13AB lava até 13 kg de roupa, com 12 programas de lavagem. Tem controle de níveis de água e filtro para fiapos.", "destaques": ["Capacidade: 13 kg", "12 programas de lavagem", "Cesto em aço Inox", "Selo Procel A"], "detalhes": {"Modelo": "CWN13AB", "Tipo": "Máquina de lavar automática", "Capacidade de lavagem": "13 kg", "Abertura": "Superior", "Controle": "Eletrônico, eletromecânico", "Programas de lavagem": "12", "Funções": "Centrifugação, enxágue, molho, lava tênis, lava edredom, ciclo rápido de lavagem, lavagem pesada, lava roupas básicas, lava roupas delicadas", "Dispenser": "Sabão, amaciante", "Cesto": "Aço Inox", "Recursos": "Controle de níveis de água, filtro para fiapos", "Reaproveitamento de água": "Sim", "Eficiência": "Selo Procel A", "Consumo": "0,39 kWh por ciclo", "Cor": "Branca", "Dimensões (A x L x P)": "97 x 57,5 x 61,5 cm", "Peso": "31,4 kg", "Voltagem": "127 V ou 220 V (consulte a voltagem disponível)"}},
+  "9952": {"texto": "O Guarda-Roupa Aruba combina design moderno com ótimo aproveitamento interno. Possui 4 gavetas com corrediças metálicas, cabideiros e calceiro em alumínio, além de puxadores em MDF que valorizam o acabamento. As portas em MDF com frisos decorativos reforçam o visual elegante. Os pés em PVC garantem praticidade na limpeza, e os espelhos opcionais completam o conjunto com charme e funcionalidade.", "destaques": ["4 gavetas com corrediças metálicas", "Cabideiros e calceiro em alumínio", "Puxadores em MDF", "Portas em MDF com detalhes frisados", "Espelhos opcionais", "Pés em PVC para facilitar a limpeza", "Excelente espaço interno para organização"], "detalhes": {"Modelo": "Aruba", "Tipo": "Guarda-roupa casal", "Linha": "Clean", "Portas": "6", "Gavetas": "4", "Espelho": "Opcional", "Material": "MDP com detalhes em MDF", "Dimensões (A x L x P)": "204 x 165 x 47 cm", "Peso": "95,98 kg (com espelho)", "Montagem": "Grátis pela Lojas Tropical"}},
+  "9950": {"texto": "O Guarda-Roupa Alasca une funcionalidade e sofisticação com 10 portas, 4 gavetas com corrediças telescópicas, cabideiros e calceiros em alumínio. As portas em MDF possuem detalhes frisados e espelhos inclusos. Oferece maleiros espaçosos e excelente distribuição interna, ideal para otimizar e organizar seu espaço.", "destaques": ["4 gavetas com corrediças telescópicas", "Portas centrais com puxador de MDF", "Cabideiros e calceiro em alumínio", "Espelhos inclusos", "Portas inferiores em MDF com detalhes frisados", "Maleiros espaçosos", "Excelente distribuição interna"], "detalhes": {"Modelo": "Alasca", "Tipo": "Guarda-roupa casal", "Linha": "Crystal", "Gavetas": "4", "Espelho": "Sim", "Material": "MDP com detalhes em MDF", "Dimensões (A x L x P)": "222 x 216 x 47 cm", "Peso": "155,82 kg", "Montagem": "Grátis pela Lojas Tropical"}},
+  "9967": {"texto": "Com visual contemporâneo, a Cômoda Texas oferece 4 gavetas com corrediças telescópicas, portas com detalhes ripados e dobradiças com amortecedor de 35mm. Os puxadores usinados e os pés em PVC completam o design sofisticado e funcional, ideal para complementar o ambiente com organização e estilo.", "destaques": ["4 gavetas com corrediças telescópicas", "Dobradiças 35mm com amortecedor", "Portas com detalhes ripados", "Puxadores usinados", "Pés em PVC para facilitar a limpeza"], "detalhes": {"Modelo": "Cômoda Texas", "Tipo": "Cômoda", "Portas": "2", "Gavetas": "4", "Material": "MDP com detalhes em MDF", "Dimensões (A x L x P)": "105 x 147 x 47 cm", "Peso": "60,11 kg", "Montagem": "Grátis pela Lojas Tropical"}},
+  "9913": {"texto": "Com estilo e funcionalidade, a Cômoda Vênus oferece 4 gavetas com corrediças telescópicas e portas em MDF com detalhes frisados. Os puxadores em MDF e os pés em PVC complementam seu design refinado, ideal para compor dormitórios modernos com organização.", "destaques": ["4 gavetas com corrediças telescópicas", "Portas em MDF com detalhes frisados", "Puxadores em MDF", "Pés em PVC para facilitar a limpeza"], "detalhes": {"Modelo": "Cômoda Vênus", "Tipo": "Cômoda", "Portas": "1", "Gavetas": "4", "Material": "MDP com detalhes em MDF", "Dimensões (A x L x P)": "100 x 98 x 47 cm", "Peso": "38,85 kg (com pés)", "Montagem": "Grátis pela Lojas Tropical"}},
+  "3549": {"texto": "Compacto e sofisticado, o Camarim Bella é perfeito para quem busca beleza e praticidade. Possui 2 gavetas com corrediças telescópicas e uma gaveta com colmeia que facilita a organização de itens pequenos. O painel com espelho e a iluminação em LED tornam o espaço ainda mais aconchegante e funcional.", "destaques": ["Painel com espelho", "2 gavetas com corrediças telescópicas", "Gaveta com colmeia para melhor organização", "Iluminação em LED"], "detalhes": {"Modelo": "Camarim Bella", "Tipo": "Camarim (penteadeira)", "Gavetas": "2", "Espelho": "Sim, com iluminação LED", "Material": "MDP com detalhes em MDF", "Dimensões (A x L x P)": "137 x 110 x 47 cm", "Peso": "37,78 kg", "Montagem": "Grátis pela Lojas Tropical"}},
+  "3554": {"texto": "Elegante e prática, a Cômoda Lisboa traz 5 gavetas com corrediças telescópicas, puxadores em MDF e um painel com espelho que agrega ainda mais funcionalidade ao móvel. Os pés em PVC facilitam a limpeza, tornando-a uma opção completa para o quarto.", "destaques": ["5 gavetas com corrediças telescópicas", "Puxadores em MDF", "Painel com espelho", "Pés em PVC para facilitar a limpeza"], "detalhes": {"Modelo": "Cômoda Lisboa", "Tipo": "Cômoda", "Portas": "1", "Gavetas": "5", "Espelho": "Sim", "Material": "MDP com detalhes em MDF", "Dimensões (A x L x P)": "170 x 104 x 45 cm", "Peso": "44,8 kg", "Montagem": "Grátis pela Lojas Tropical"}},
+  "3555": {"texto": "O Guarda-Roupa Roma alia design moderno, durabilidade e máxima otimização de espaço para o seu dia a dia. Projetado para oferecer uma organização inteligente, o móvel conta com uma excelente distribuição interna de 8 compartimentos para acomodar roupas, sapatos e acessórios. Seu visual sofisticado ganha destaque pelas portas de 15mm com detalhes frisados e elegantes puxadores em MDF, enquanto a estrutura funcional entrega cabideiros resistentes e uma gaveta com deslizamento suave para garantir total praticidade na sua rotina.", "destaques": ["Portas com detalhes frisados", "Puxadores em MDF", "Sapateira", "Gaveta com corrediças metálicas", "Espelhos opcionais", "Excelente distribuição interna", "Cabideiros e calceiro em alumínio"], "detalhes": {"Modelo": "Roma", "Tipo": "Guarda-roupa casal", "Linha": "Smart", "Portas": "7", "Espelho": "Opcional", "Material": "MDP com detalhes em MDF", "Dimensões (A x L x P)": "204 x 165 x 47 cm", "Peso": "93,87 kg (com espelho)", "Montagem": "Grátis pela Lojas Tropical"}},
+  "5994": {"texto": "O Guarda-Roupa Atacama combina sofisticação e funcionalidade para transformar seu ambiente. Possui 4 gavetas com corrediças telescópicas, garantindo abertura suave e melhor aproveitamento interno. Conta com 2 portas com vidros reflecta, cabideiros em alumínio e dobradiças de 35mm com amortecedor para fechamento silencioso. Seus puxadores em MDF e alumínio, aliados às molduras de 25mm, reforçam a resistência e o acabamento moderno do produto.", "destaques": ["4 gavetas com corrediças telescópicas", "2 portas com vidros reflecta", "Cabideiros em alumínio", "Puxadores em MDF", "Dobradiças 35mm com amortecedor", "2 portas com puxadores em alumínio", "Molduras em 25mm"], "detalhes": {"Modelo": "Atacama", "Tipo": "Guarda-roupa casal", "Linha": "Inspiração", "Portas": "6", "Gavetas": "4", "Material": "MDP com detalhes em MDF", "Dimensões (A x L x P)": "233 x 240 x 53 cm", "Peso": "173,73 kg", "Portas de vidro": "2, com vidro reflecta", "Montagem": "Grátis pela Lojas Tropical"}},
+  "6003": {"texto": "O Guarda-Roupa Araguaia oferece 3 opções de montagem, proporcionando flexibilidade para diferentes ambientes. Conta com 4 gavetas com corrediças telescópicas, 2 portas com detalhes ripados em MDF e puxadores em MDF. Possui cabideiros em alumínio e molduras laterais de 25mm, garantindo resistência. As dobradiças de 35mm com amortecedor oferecem um fechamento suave. Espelhos opcionais podem ser adicionados, proporcionando um toque moderno e funcional.", "destaques": ["Portas com 3 opções de montagem", "4 gavetas com corrediças telescópicas", "Espelhos inclusos e puxadores em MDF", "2 portas com detalhes ripados em MDF", "Cabideiros em alumínio", "Molduras laterais em 25mm", "Dobradiças 35mm com amortecedor"], "detalhes": {"Modelo": "Araguaia", "Tipo": "Guarda-roupa casal", "Linha": "Inspiração", "Portas": "6", "Gavetas": "4", "Espelho": "Sim", "Material": "MDP com detalhes em MDF", "Dimensões (A x L x P)": "230 x 260 x 52 cm", "Peso": "205,74 kg", "Montagem": "Grátis pela Lojas Tropical"}},
+  "6022": {"texto": "Com oito portas de giro e quatro gavetas espaçosas, o Guarda-Roupa Diplomata une beleza e funcionalidade. Os cabideiros em alumínio e os puxadores em MDF garantem praticidade no dia a dia. As portas em MDF com detalhes frisados opcionais e espelhos agregam sofisticação ao ambiente.", "destaques": ["Cabideiros em alumínio", "8 portas de giro com dobradiças metálicas", "Puxadores em MDF", "4 gavetas com corrediças metálicas", "Portas em MDF com detalhes frisados opcionais", "Espelhos opcionais", "Excelente distribuição interna"], "detalhes": {"Modelo": "Diplomata", "Tipo": "Guarda-roupa casal", "Linha": "Crystal Light", "Portas": "8", "Gavetas": "4", "Espelho": "Opcional", "Material": "MDP com detalhes em MDF", "Dimensões (A x L x P)": "212 x 236 x 47 cm", "Peso": "149,15 kg (com espelho)", "Montagem": "Grátis pela Lojas Tropical"}},
+  "6025": {"texto": "Elegância e amplitude se encontram no Guarda-Roupa San Lorenzo. Com oito portas e quatro gavetas, conta com cabideiros e calceiro em alumínio, além de puxadores em MDF. As portas laterais avançadas e os maleiros espaçosos otimizam a organização. Espelhos opcionais e excelente distribuição interna garantem praticidade.", "destaques": ["4 gavetas com corrediças telescópicas", "8 portas com puxadores de MDF", "Cabideiros e calceiro em alumínio", "Espelhos opcionais", "Maleiros espaçosos", "Portas laterais avançadas", "Excelente distribuição interna"], "detalhes": {"Modelo": "San Lorenzo", "Tipo": "Guarda-roupa casal", "Linha": "Crystal", "Portas": "8", "Gavetas": "4", "Espelho": "Opcional", "Material": "MDP com detalhes em MDF", "Dimensões (A x L x P)": "222 x 237 x 47 cm", "Peso": "149,24 kg (com espelho)", "Montagem": "Grátis pela Lojas Tropical"}},
+  "9951": {"texto": "Com seis portas e seis gavetas com corrediças telescópicas, o Guarda-Roupa San Francisco é sinônimo de espaço e organização. Cabideiros e calceiro em alumínio, maleiros espaçosos e puxadores usinados completam seu design robusto e prático. Espelhos opcionais e excelente distribuição interna agregam ainda mais funcionalidade ao quarto.", "destaques": ["6 gavetas com corrediças telescópicas", "6 portas com puxadores de MDF", "Cabideiros e calceiro em alumínio", "Espelhos opcionais", "Maleiros espaçosos", "Gavetas com puxadores usinados", "Excelente distribuição interna"], "detalhes": {"Modelo": "San Francisco", "Tipo": "Guarda-roupa casal", "Linha": "Crystal", "Portas": "6", "Gavetas": "6", "Espelho": "Opcional", "Material": "MDP com detalhes em MDF", "Dimensões (A x L x P)": "222 x 216 x 47 cm", "Peso": "155,37 kg", "Montagem": "Grátis pela Lojas Tropical"}},
+  "9953": {"texto": "Com linhas marcantes e estrutura funcional, o Guarda-Roupa Malta é ideal para ambientes que prezam pela organização e estilo. Suas 2 gavetas com corrediças metálicas, cabideiros e calceiro em alumínio atendem às necessidades do dia a dia. Os puxadores em MDF e portas com frisos trazem um toque contemporâneo ao visual. Disponível com espelhos opcionais e pés em PVC que facilitam a limpeza.", "destaques": ["2 gavetas com corrediças metálicas", "Cabideiros e calceiro em alumínio", "Puxadores em MDF", "Portas em MDF com detalhes frisados", "Espelhos opcionais", "Pés em PVC para facilitar a limpeza", "Excelente espaço interno para organização"], "detalhes": {"Modelo": "Malta", "Tipo": "Guarda-roupa casal", "Linha": "Clean", "Portas": "7", "Gavetas": "2", "Espelho": "Opcional", "Material": "MDP com detalhes em MDF", "Dimensões (A x L x P)": "204 x 165 x 47 cm", "Peso": "94,58 kg (com espelho)", "Montagem": "Grátis pela Lojas Tropical"}},
+  "9954": {"texto": "Com visual moderno e funcionalidade elevada, o Guarda-Roupa Bolívia se destaca pelas portas deslizantes em MDF com frisos em baixo relevo e trilhos em alumínio, que otimizam o espaço. As 2 gavetas internas, cabideiros e calceiro em alumínio facilitam a organização, enquanto os puxadores em MDF e espelhos inclusos elevam a elegância do móvel. Pés em PVC completam a praticidade.", "destaques": ["2 gavetas com corrediças metálicas", "2 portas em MDF com frisos em baixo relevo", "Cabideiros e calceiro em alumínio", "Portas deslizantes com trilho de alumínio", "Puxadores em MDF", "Espelhos inclusos", "Pés em PVC para facilitar a limpeza"], "detalhes": {"Modelo": "Bolívia", "Tipo": "Guarda-roupa solteiro", "Linha": "Clean", "Portas": "3", "Gavetas": "2", "Espelho": "Sim", "Material": "MDP com detalhes em MDF", "Dimensões (A x L x P)": "211 x 164 x 53 cm", "Peso": "100,07 kg", "Tipo de porta": "Deslizante, com trilho de alumínio", "Montagem": "Grátis pela Lojas Tropical"}},
+  "9978": {"texto": "O Guarda-Roupa Itatiba da Moval tem 6 portas, 3 gavetas e espelho, com acabamento freijó e cinza. Os cabideiros e as prateleiras internas deixam espaço para roupas de cabide e roupas dobradas.", "destaques": ["6 portas e 3 gavetas", "Espelho na porta", "Cabideiros internos", "Prateleiras para roupas dobradas"], "detalhes": {"Modelo": "Itatiba", "Tipo": "Guarda-roupa casal", "Portas": "6", "Gavetas": "3", "Espelho": "Sim", "Material": "MDP", "Dimensões (A x L x P)": "204 x 165 x 47 cm", "Peso": "96,4 kg", "Montagem": "Grátis pela Lojas Tropical"}},
+  "6020": {"texto": "O Guarda-Roupa Mafra da Moval tem 7 portas, 2 gavetas com corrediças metálicas e 2 espelhos. Por dentro, tem cabideiros e 3 prateleiras para organizar o quarto do casal.", "destaques": ["7 portas e 2 gavetas", "2 espelhos", "Gavetas com corrediças metálicas", "3 prateleiras internas", "Cabideiros"], "detalhes": {"Modelo": "Mafra", "Tipo": "Guarda-roupa casal", "Portas": "7", "Gavetas": "2", "Espelho": "2 espelhos", "Material": "MDP com acabamento em impressão UV", "Dimensões (A x L x P)": "204 x 177 x 47 cm", "Montagem": "Grátis pela Lojas Tropical"}},
+  "6088": {"texto": "O Guarda-Roupa NT 6015 da Notável tem 6 portas e 2 gavetas, com cabideiro e prateleiras internas. É um modelo compacto, com pés, que cabe bem em quartos menores.", "destaques": ["6 portas e 2 gavetas", "Gavetas com corrediças metálicas", "Cabideiro interno", "Prateleiras internas", "Pés de 5 cm"], "detalhes": {"Modelo": "NT 6015", "Tipo": "Guarda-roupa", "Portas": "6", "Gavetas": "2", "Material": "MDP", "Dimensões (A x L x P)": "187 x 138,5 x 39,7 cm", "Peso": "64,9 kg", "Montagem": "Grátis pela Lojas Tropical"}},
+  "9999": {"texto": "O Guarda-Roupa NT 6020 Capelinha da Notável tem 2 portas, 3 gavetas e um nicho com espelho no estilo capelinha, que funciona como penteadeira. Ideal para quarto de solteiro.", "destaques": ["2 portas e 3 gavetas", "Nicho capelinha com espelho", "Gavetas com corrediças metálicas", "Cabideiro e 2 prateleiras internas", "4 pés"], "detalhes": {"Modelo": "NT 6020 Capelinha", "Tipo": "Guarda-roupa solteiro", "Portas": "2", "Gavetas": "3", "Espelho": "Sim", "Material": "MDP 12 mm", "Dimensões (A x L x P)": "187 x 108 x 39,5 cm", "Peso": "44,5 kg", "Montagem": "Grátis pela Lojas Tropical"}},
+  "6081": {"texto": "O Guarda-Roupa NT 5000 da Notável tem 3 portas, com cabideiro e prateleiras internas. Compacto, é uma boa opção para quarto de solteiro ou infantil.", "destaques": ["3 portas", "Cabideiro interno", "Prateleiras internas", "Disponível em 4 cores"], "detalhes": {"Modelo": "NT 5000", "Tipo": "Guarda-roupa solteiro", "Portas": "3", "Material": "MDP", "Montagem": "Grátis pela Lojas Tropical"}},
+  "6090": {"texto": "O Guarda-Roupa NT 6035 da Notável tem 6 portas e 3 gavetas, com pés e espaço interno para cabides e roupas dobradas.", "destaques": ["6 portas e 3 gavetas", "Com pés", "Cabideiro interno", "Prateleiras internas"], "detalhes": {"Modelo": "NT 6035", "Tipo": "Guarda-roupa casal", "Portas": "6", "Gavetas": "3", "Material": "MDP", "Montagem": "Grátis pela Lojas Tropical"}},
+  "6092": {"texto": "O Guarda-Roupa NT 6055 da Notável tem 4 portas, 2 gavetas e espelho, com puxadores em MDF e cabideiro interno.", "destaques": ["4 portas e 2 gavetas", "Espelho", "Puxadores em MDF", "Cabideiro interno"], "detalhes": {"Modelo": "NT 6055", "Tipo": "Guarda-roupa", "Portas": "4", "Gavetas": "2", "Espelho": "Sim", "Material": "MDP", "Montagem": "Grátis pela Lojas Tropical"}},
+  "3575": {"texto": "A Cômoda NT 5165 da Notável tem 2 portas, 3 gavetas e espelho inclinado. Por dentro, tem prateleira e cabideiro, e as gavetas correm em corrediças metálicas.", "destaques": ["2 portas e 3 gavetas", "Espelho inclinado", "Prateleira e cabideiro internos", "Gavetas com corrediças metálicas"], "detalhes": {"Modelo": "NT 5165", "Tipo": "Cômoda", "Portas": "2", "Gavetas": "3", "Espelho": "Sim", "Material": "MDP", "Montagem": "Grátis pela Lojas Tropical"}},
+  "6091": {"texto": "O Home NT 1400 da Notável tem detalhe ripado, 2 portas basculantes, pés de madeira e fita de LED. Comporta TV de até 60 polegadas.", "destaques": ["TV de até 60 polegadas", "2 portas basculantes", "Detalhe ripado", "Fita de LED", "Pés de madeira"], "detalhes": {"Modelo": "NT 1400", "Tipo": "Estante home", "TV suportada": "Até 60 polegadas", "Portas": "2 basculantes", "Iluminação": "Fita de LED", "Material": "MDP", "Montagem": "Grátis pela Lojas Tropical"}},
+  "9879": {"texto": "O Home NT 1340 da Notável tem 2 portas e detalhe ripado de 6 mm sobre o painel. Comporta TV de até 65 polegadas.", "destaques": ["TV de até 65 polegadas", "2 portas", "Ripado de 6 mm", "Espaço para TV de 162 x 90 cm"], "detalhes": {"Modelo": "NT 1340", "Tipo": "Estante home", "TV suportada": "Até 65 polegadas", "Portas": "2", "Espaço para a TV (L x A)": "162 x 90 cm", "Peso suportado": "70 kg (15 kg por prateleira)", "Material": "MDP", "Montagem": "Grátis pela Lojas Tropical"}},
+  "9881": {"texto": "A Escrivaninha Office NT 2010 da Notável tem estante acoplada, 2 gavetas com puxador em alumínio e nichos para livros e objetos. Boa para estudo e home office.", "destaques": ["2 gavetas com puxador em alumínio", "Estante com nichos", "Chapa de 15 mm"], "detalhes": {"Modelo": "NT 2010 Office", "Tipo": "Escrivaninha com estante", "Gavetas": "2", "Material": "MDP 15 mm", "Dimensões (A x L x P)": "136,5 x 131,5 x 37,5 cm", "Montagem": "Grátis pela Lojas Tropical"}},
+  "6449": {"texto": "A Estante Home Taurus da Móveis Bechara tem 1 porta basculante, nichos e acabamento ripado. Comporta TV de até 47 polegadas.", "destaques": ["TV de até 47 polegadas", "1 porta basculante", "2 nichos", "Prateleiras para até 5 kg cada"], "detalhes": {"Modelo": "Taurus", "Tipo": "Estante home", "TV suportada": "Até 47 polegadas", "Portas": "1 basculante", "Dimensões (A x L x P)": "175 x 160 x 38,5 cm", "Material": "MDP", "Montagem": "Grátis pela Lojas Tropical"}},
+  "7990": {"texto": "O Painel Âmbar da Móveis Bechara tem 2 portas e detalhe ripado. Comporta TV de até 65 polegadas.", "destaques": ["TV de até 65 polegadas", "2 portas", "Detalhe ripado"], "detalhes": {"Modelo": "Âmbar", "Tipo": "Painel com bancada", "TV suportada": "Até 65 polegadas", "Portas": "2", "Dimensões (A x L x P)": "136 x 160 x 34,5 cm", "Peso": "38,9 kg", "Material": "MDP", "Montagem": "Grátis pela Lojas Tropical"}},
+  "7991": {"texto": "O Painel Atlas da Móveis Bechara é suspenso, com prateleiras e acabamento ripado. Comporta TV de até 55 polegadas.", "destaques": ["TV de até 55 polegadas", "Painel suspenso", "Prateleiras laterais", "Detalhe ripado"], "detalhes": {"Modelo": "Atlas", "Tipo": "Painel suspenso", "TV suportada": "Até 55 polegadas", "Dimensões (A x L x P)": "136 x 163,2 x 29,6 cm", "Material": "MDP", "Montagem": "Grátis pela Lojas Tropical"}},
+  "7992": {"texto": "O Painel Denver da Móveis Bechara tem 1 porta com espelho, prateleira de vidro e iluminação de LED. Comporta TV de até 55 polegadas.", "destaques": ["TV de até 55 polegadas", "1 porta com espelho", "Prateleira de vidro", "Iluminação de LED"], "detalhes": {"Modelo": "Denver", "Tipo": "Painel com bancada", "TV suportada": "Até 55 polegadas", "Portas": "1", "Dimensões (A x L x P)": "136 x 160 x 29 cm", "Peso": "42,5 kg", "Peso por prateleira": "Até 5 kg", "Material": "MDP", "Montagem": "Grátis pela Lojas Tropical"}},
+  "8218": {"texto": "O Rack Elegant da Móveis Bechara tem portas, prateleira e divisórias em MDP de 15 mm. Comporta TV de até 65 polegadas.", "destaques": ["TV de até 65 polegadas", "180 cm de largura", "Estrutura em MDP de 15 mm"], "detalhes": {"Modelo": "Elegant", "Tipo": "Rack", "TV suportada": "Até 65 polegadas", "Dimensões (A x L x P)": "61,5 x 180 x 38 cm", "Material": "MDP 15 mm, fundo em HDF 3 mm", "Montagem": "Grátis pela Lojas Tropical"}},
+  "8227": {"texto": "O Rack Juquehy da Móveis Bechara tem bordas arredondadas e iluminação de LED. Comporta TV de até 75 polegadas.", "destaques": ["TV de até 75 polegadas", "Iluminação de LED", "Bordas arredondadas", "180 cm de largura"], "detalhes": {"Modelo": "Juquehy", "Tipo": "Rack", "TV suportada": "Até 75 polegadas", "Iluminação": "LED", "Dimensões (A x L x P)": "57 x 180 x 38,5 cm", "Material": "MDP", "Montagem": "Grátis pela Lojas Tropical"}},
+  "8229": {"texto": "O Rack Guarapari da Móveis Bechara tem 3 portas e comporta TV de até 75 polegadas.", "destaques": ["TV de até 75 polegadas", "3 portas", "180 cm de largura"], "detalhes": {"Modelo": "Guarapari", "Tipo": "Rack", "TV suportada": "Até 75 polegadas", "Portas": "3", "Dimensões (A x L x P)": "57 x 180 x 38,5 cm", "Material": "MDP", "Montagem": "Grátis pela Lojas Tropical"}},
+  "6465": {"texto": "O Home Theater Frizz Plus da Madetec tem 3 espelhos no painel, luminária de LED e 3 prateleiras, sendo 2 de vidro. Comporta TV de até 60 polegadas.", "destaques": ["TV de até 60 polegadas", "3 espelhos no painel", "Luminária de LED", "3 prateleiras (2 de vidro de 5 mm)", "Suporta até 150 kg distribuídos"], "detalhes": {"Modelo": "Frizz Plus", "Tipo": "Estante home theater", "TV suportada": "Até 60 polegadas", "Dimensões (A x L x P)": "178,5 x 200 x 45,5 cm", "Peso suportado": "150 kg distribuídos", "Montagem": "Grátis pela Lojas Tropical"}},
+  "4519": {"texto": "A Escrivaninha 6055 Luxo da JB Bechara tem 1 gaveta com corrediças telescópicas, entrada USB embutida no tampo e pés de madeira maciça.", "destaques": ["1 gaveta com corrediças telescópicas", "Entrada USB no tampo", "Pés de madeira maciça", "Puxador de madeira maciça"], "detalhes": {"Modelo": "6055 Luxo", "Tipo": "Escrivaninha", "Gavetas": "1", "Material": "MDF com pés de madeira maciça", "Dimensões (A x L x P)": "82 x 130 x 36 cm", "Medidas internas da gaveta": "59,5 x 36 x 10 cm (L x P x A)", "Peso suportado": "10 kg distribuídos", "Montagem": "Grátis pela Lojas Tropical"}},
+  "4": {"texto": "A Adega 4009 Luxo da JB Bechara é um móvel em MDF com acabamento preto e dourado, para deixar as bebidas organizadas e à mostra.", "destaques": ["Estrutura em MDF", "Acabamento preto e dourado"], "detalhes": {"Modelo": "4009 Luxo", "Tipo": "Adega (móvel)", "Material": "MDF", "Montagem": "Grátis pela Lojas Tropical"}},
+  "9998": {"texto": "O Guarda-Roupa Sancho da Avelan tem 6 portas e é um modelo casal, em acabamento freijó e off white.", "destaques": ["6 portas", "Modelo casal"], "detalhes": {"Modelo": "Sancho", "Tipo": "Guarda-roupa casal", "Portas": "6", "Montagem": "Grátis pela Lojas Tropical"}},
+  "672": {"texto": "A Cozinha Compacta Pratika da Itatiaia tem 4 portas, 1 gaveta e 5 prateleiras, com estrutura em aço e tampo em MDP. A pintura eletrostática a pó não descasca e protege contra ferrugem.", "destaques": ["4 portas e 1 gaveta", "5 prateleiras", "Estrutura em aço", "Pintura eletrostática a pó"], "detalhes": {"Modelo": "Pratika", "Tipo": "Cozinha compacta", "Portas": "4", "Gavetas": "1", "Largura": "80 cm", "Material": "Aço com tampo em MDP", "Montagem": "Grátis pela Lojas Tropical"}},
+  "682": {"texto": "O Kit Cozinha Rose da Itatiaia tem 6 portas, 1 gaveta, tampo e nicho, com estrutura em aço e pintura eletrostática.", "destaques": ["6 portas e 1 gaveta", "Tampo e nicho", "Estrutura em aço", "Pés de 16 cm"], "detalhes": {"Modelo": "Rose I3G1-105", "Tipo": "Cozinha compacta", "Portas": "6", "Gavetas": "1", "Material": "Aço", "Dimensões (A x L x P)": "182 x 105 x 45 cm", "Peso": "32 kg", "Montagem": "Grátis pela Lojas Tropical"}},
+  "9935": {"texto": "A Cozinha Compacta Pratika de 120 cm da Itatiaia tem 6 portas e 2 gavetas, com estrutura em aço e pintura eletrostática.", "destaques": ["6 portas e 2 gavetas", "120 cm de largura", "Estrutura em aço"], "detalhes": {"Modelo": "Pratika 120", "Tipo": "Cozinha compacta", "Portas": "6", "Gavetas": "2", "Material": "Aço", "Dimensões (A x L x P)": "196 x 120 x 52 cm", "Montagem": "Grátis pela Lojas Tropical"}},
+  "9936": {"texto": "A Cozinha Compacta Florença de 140 cm da Itatiaia tem 8 portas, 2 gavetas com corrediças telescópicas e nicho, com estrutura em aço.", "destaques": ["8 portas e 2 gavetas", "Gavetas com corrediças telescópicas", "Nicho", "Estrutura em aço"], "detalhes": {"Modelo": "Florença 140", "Tipo": "Cozinha compacta", "Portas": "8", "Gavetas": "2", "Material": "Aço", "Dimensões (A x L x P)": "195 x 140 x 45 cm", "Montagem": "Grátis pela Lojas Tropical"}},
+  "1919": {"texto": "A Cadeira Giorgia da Pisani é de plástico, com braços, e pode ser empilhada. Serve para área, varanda, festas e uso diário.", "destaques": ["Com braços", "Empilhável", "Suporta até 182 kg", "Certificada pelo Inmetro"], "detalhes": {"Modelo": "Giorgia", "Tipo": "Cadeira com braço", "Material": "Plástico (polipropileno)", "Largura": "56 cm", "Altura do assento": "42 cm", "Altura do braço": "59,5 cm", "Peso suportado": "182 kg", "Peso": "2,4 kg", "Garantia": "36 meses (fabricante)"}},
+  "2396": {"texto": "A Cama Box Conjugada Guarujá da Gazin é um conjunto unibox (base e colchão juntos) no tamanho casal.", "destaques": ["Tamanho casal (138 x 188 cm)", "Base e colchão conjugados"], "detalhes": {"Modelo": "Guarujá", "Tipo": "Cama box conjugada (unibox)", "Tamanho": "Casal", "Medidas": "138 x 188 x 54 cm"}},
+  "2529": {"texto": "A Cama Box Mirador da Onix é um conjunto unibox (base e colchão juntos) no tamanho casal.", "destaques": ["Tamanho casal (138 x 188 cm)", "Base e colchão conjugados"], "detalhes": {"Modelo": "Mirador", "Tipo": "Cama box conjugada (unibox)", "Tamanho": "Casal", "Medidas": "138 x 188 cm"}},
+  "3268": {"texto": "O Colchão Vegas da Onix é de molas, no tamanho casal.", "destaques": ["Tamanho casal (138 x 188 cm)", "Colchão de molas"], "detalhes": {"Modelo": "Vegas", "Tipo": "Colchão de molas", "Tamanho": "Casal", "Medidas": "138 x 188 cm"}},
+  "4585": {"texto": "O Colchão Diamond Blue da Gazin tem molas ensacadas, que trabalham de forma individual e diminuem a transferência de movimento entre quem dorme junto. Tamanho queen.", "destaques": ["Molas ensacadas", "Tamanho queen (158 x 198 cm)", "32 cm de altura"], "detalhes": {"Modelo": "Diamond Blue", "Tipo": "Colchão de molas ensacadas", "Tamanho": "Queen", "Medidas": "158 x 198 x 32 cm"}},
+  "2021": {"texto": "A Caixa Amplificada ACA 221 Gigante II da Amvox tem 220 W RMS, woofer de 8\" e tweeter de 4\". Funciona na bateria por até 4 horas e tem Bluetooth, rádio FM, USB e iluminação de LED.", "destaques": ["Potência: 220 W RMS", "Woofer de 8\" e tweeter de 4\"", "Bateria: até 4 horas", "Bluetooth, rádio FM, USB e entrada auxiliar", "Função Power X (liga 2 caixas)"], "detalhes": {"Modelo": "ACA 221 Gigante II", "Potência": "220 W RMS", "Alto-falantes": "Woofer de 8\" e tweeter de 4\"", "Bateria": "Até 4 horas", "Conexões": "Bluetooth, USB, cartão, auxiliar e rádio FM", "Iluminação": "LED decorativo"}},
+  "2023": {"texto": "A Caixa de Som ACA 1200 Party Vox Elite da Amvox tem 1200 W de potência, dois woofers de 6,5\" e show de LED. Tem Bluetooth, entrada para microfone e bateria recarregável.", "destaques": ["Potência: 1200 W", "2 woofers de 6,5\" e tweeters de 2,5\"", "Show de LED", "Bluetooth e entrada para microfone", "Bateria recarregável"], "detalhes": {"Modelo": "ACA 1200 Party Vox Elite", "Potência": "1200 W", "Alto-falantes": "2 woofers de 6,5\" e tweeters de 2,5\"", "Tecnologia": "Double Coil e chip AX1", "Conexões": "Bluetooth e entrada para microfone", "Iluminação": "Show de LED"}},
+  "2027": {"texto": "A Caixa Amplificada ACA 410 da Amvox tem 410 W RMS em formato de cubo, woofer de 8\" e luzes de LED. A bateria dura até 4 horas, e a função TWS liga duas caixas para som estéreo.", "destaques": ["Potência: 410 W RMS", "Woofer de 8\" e tweeter de 1,5\"", "Bateria: até 4 horas", "Bluetooth com função TWS", "Equalizador e luzes de LED"], "detalhes": {"Modelo": "ACA 410", "Potência": "410 W RMS", "Alto-falantes": "Woofer de 8\" e tweeter de 1,5\"", "Bateria": "Até 4 horas", "Conexões": "Bluetooth (TWS)", "Iluminação": "LED"}},
+  "2031": {"texto": "A Caixa Amplificada ACA 855 Pancadão II da Amvox tem rodinhas e alça retrátil para levar para qualquer lugar.", "destaques": ["Rodinhas e alça retrátil"], "detalhes": {"Modelo": "ACA 855 Pancadão II", "Transporte": "Rodinhas e alça retrátil"}},
+  "2224": {"texto": "A Caixa de Som Duo X da Amvox é portátil e se conecta por Bluetooth.", "destaques": ["Portátil", "Bluetooth"], "detalhes": {"Modelo": "Duo X", "Conexões": "Bluetooth"}},
+  "8399": {"texto": "O Receptor MidiaBox HDTV B3 da Century sintoniza os canais digitais abertos via satélite e também tem entrada de antena UHF para os canais digitais terrestres. Reproduz vídeos, fotos e músicas pelo USB.", "destaques": ["Canais abertos via satélite (SATHD Regional)", "Entrada de antena UHF", "Reprodução de mídia pelo USB", "Saída HDMI"], "detalhes": {"Modelo": "MidiaBox HDTV B3", "Tipo": "Receptor digital de satélite", "Recepção": "Satélite e antena UHF", "Conexões": "HDMI, AV e USB"}},
+  "8403": {"texto": "O Receptor MidiaBox HDTV B7 da Century recebe os canais abertos digitais via satélite, com saída HDMI e atualização de canais pelo próprio satélite ou pelo USB.", "destaques": ["Canais abertos via satélite", "Saída HDMI e AV", "Atualização por satélite ou USB", "Compatível com H.265"], "detalhes": {"Modelo": "MidiaBox HDTV B7", "Tipo": "Receptor digital de satélite", "Entrada": "LNB (antena parabólica)", "Saídas": "HDMI e AV", "Certificação": "Anatel"}},
+  "9394": {"texto": "A Smart TV Semp S42R de 32 polegadas tem resolução Full HD e o sistema Roku TV, com acesso a milhares de aplicativos. O som tem Dolby Audio.", "destaques": ["Tela: 32\" Full HD (1920 x 1080)", "Sistema: Roku TV", "Áudio: 16 W RMS com Dolby Audio", "Wi-Fi integrado", "Bivolt"], "detalhes": {"Modelo": "32S42R", "Tela": "32 polegadas LED", "Resolução": "Full HD (1920 x 1080)", "Sistema": "Roku TV", "Áudio": "16 W RMS (2 x 8 W), Dolby Audio", "Conexões": "HDMI (com ARC), USB e Wi-Fi", "Dimensões com base (L x A x P)": "71,6 x 47 x 18,2 cm", "Dimensões sem base (L x A x P)": "71,6 x 42,3 x 7,6 cm", "Peso": "3,4 kg", "Voltagem": "Bivolt (100 a 240 V)", "Consumo máximo": "65 W", "Garantia": "12 meses (fabricante)"}},
+  "9396": {"texto": "A Smart TV Semp S42R de 43 polegadas tem resolução Full HD e o sistema Roku TV. O som tem 20 W com Dolby Audio.", "destaques": ["Tela: 43\" Full HD (1920 x 1080)", "Sistema: Roku TV", "Áudio: 20 W com Dolby Audio", "2 hDMI, USB e Wi-Fi"], "detalhes": {"Modelo": "43S42R", "Tela": "43 polegadas LED", "Resolução": "Full HD (1920 x 1080)", "Sistema": "Roku TV", "Áudio": "20 W (2 x 10 W), Dolby Audio", "Conexões": "2 HDMI (com ARC), USB, rede e Wi-Fi", "Dimensões com base (L x A x P)": "95,5 x 60,7 x 18,5 cm", "Dimensões sem base (L x A x P)": "95,5 x 55,5 x 9 cm", "Peso sem base": "6 kg", "Padrão VESA": "100 x 100 mm", "Voltagem": "Bivolt"}},
+  "9397": {"texto": "A Smart TV Semp S42R de 50 polegadas tem resolução Full HD, brilho de até 240 nits e o sistema Roku TV.", "destaques": ["Tela: 50\" Full HD (1920 x 1080)", "Sistema: Roku TV", "Dolby Audio", "Wi-Fi integrado"], "detalhes": {"Modelo": "50S42R", "Tela": "50 polegadas LED", "Resolução": "Full HD (1920 x 1080)", "Sistema": "Roku TV", "Áudio": "Dolby Audio", "Conexões": "HDMI, USB e Wi-Fi", "Dimensões com base (L x A x P)": "111,1 x 69,2 x 25,2 cm", "Dimensões sem base (L x A x P)": "111,1 x 64,6 x 7,2 cm", "Consumo máximo": "90 W", "Voltagem": "Bivolt"}},
+  "9399": {"texto": "A Smart TV Semp S62R de 65 polegadas tem resolução 4K com HDR10 e o sistema Roku TV. Tem 3 entradas HDMI.", "destaques": ["Tela: 65\" 4K Ultra HD", "HDR10", "Sistema: Roku TV", "3 entradas HDMI", "Dolby Audio"], "detalhes": {"Modelo": "65S62R", "Tela": "65 polegadas LED", "Resolução": "4K Ultra HD (3840 x 2160)", "HDR": "HDR10", "Sistema": "Roku TV", "Conexões": "3 HDMI, USB e Wi-Fi", "Dimensões com base (L x A x P)": "144,5 x 88,5 x 30,5 cm", "Dimensões sem base (L x A x P)": "144,5 x 83,3 x 7,3 cm", "Peso": "12,6 kg", "Padrão VESA": "200 x 200 mm", "Consumo máximo": "145 W", "Voltagem": "Bivolt", "Garantia": "12 meses (fabricante)"}},
+  "9357": {"texto": "A Smart TV Samsung T4300 de 32 polegadas tem resolução HD e o sistema Tizen, com os principais aplicativos de vídeo. Tem HDR e Wi-Fi.", "destaques": ["Tela: 32\" HD (1366 x 768)", "Sistema: Tizen", "HDR", "2 hDMI e 1 USB", "Wi-Fi"], "detalhes": {"Modelo": "UN32T4300AGXZD", "Tela": "32 polegadas LED", "Resolução": "HD (1366 x 768)", "Sistema": "Tizen", "Conexões": "2 HDMI, 1 USB e Wi-Fi", "Dimensões com base (L x A x P)": "73,7 x 46,5 x 15 cm", "Dimensões sem base (L x A x P)": "73,7 x 43,8 x 7,4 cm", "Voltagem": "Bivolt"}},
+  "9501": {"texto": "A Smart TV Toshiba C350 de 50 polegadas tem resolução 4K, tela DLED e o sistema VIDAA, com Netflix, YouTube, Prime Video, Disney+ e Globoplay.", "destaques": ["Tela: 50\" 4K DLED", "Sistema: VIDAA", "3 entradas HDMI", "Wi-Fi e Bluetooth", "Áudio: 16 W RMS"], "detalhes": {"Modelo": "50C350LS", "Tela": "50 polegadas DLED", "Resolução": "4K Ultra HD", "Sistema": "VIDAA", "Áudio": "16 W RMS", "Conexões": "3 HDMI, USB, Wi-Fi, Bluetooth e espelhamento de tela", "Frequência": "60 Hz"}},
+  "4837": {"texto": "O Fogão Delicato Plus Glass da Clarice tem 4 bocas, mesa de vidro, acendimento automático e forno de 52 litros com revestimento antiaderente. Uma das bocas é de chama rápida.", "destaques": ["4 bocas, sendo 1 de chama rápida", "Mesa de vidro", "Acendimento automático", "Forno de 52 litros"], "detalhes": {"Modelo": "Delicato Plus Glass", "Tipo": "Fogão de piso a gás", "Bocas": "4", "Mesa": "Vidro temperado", "Acendimento": "Automático", "Capacidade do forno": "52 L", "Cor": "Preto", "Dimensões (A x L x P)": "89 x 49 x 59 cm"}},
+  "5043": {"texto": "O Fogão Ares da Realce tem 4 bocas, acendimento automático e forno com revestimento antiaderente. É compacto, ideal para cozinhas pequenas.", "destaques": ["4 bocas", "Acendimento automático", "Forno com revestimento antiaderente"], "detalhes": {"Modelo": "Ares", "Tipo": "Fogão de piso a gás", "Bocas": "4", "Acendimento": "Automático", "Cor": "Branco"}},
+  "5044": {"texto": "O Fogão Ares da Realce tem 4 bocas, acendimento automático e forno com revestimento antiaderente. É compacto, ideal para cozinhas pequenas.", "destaques": ["4 bocas", "Acendimento automático", "Forno com revestimento antiaderente"], "detalhes": {"Modelo": "Ares", "Tipo": "Fogão de piso a gás", "Bocas": "4", "Acendimento": "Automático", "Cor": "Preto"}},
+  "5049": {"texto": "O Fogão Smart Glass da Realce tem 4 bocas, mesa de vidro e acendimento automático.", "destaques": ["4 bocas", "Mesa de vidro", "Acendimento automático"], "detalhes": {"Modelo": "Smart Glass", "Tipo": "Fogão de piso a gás", "Bocas": "4", "Mesa": "Vidro temperado", "Acendimento": "Automático", "Cor": "Branco"}},
+  "6921": {"texto": "O Tanquinho LCS14 da Colormaq lava até 14 kg de roupa, com timer, filtro de fiapos e controle eletromecânico simples de usar.", "destaques": ["Capacidade: 14 kg", "Timer", "Filtro de fiapos", "Selo Procel A", "Consumo: 0,13 kWh por ciclo"], "detalhes": {"Modelo": "LCS14", "Tipo": "Tanquinho (lavadora semiautomática)", "Capacidade de lavagem": "14 kg", "Abertura": "Superior", "Controle": "Eletromecânico", "Eficiência": "Selo Procel A", "Consumo": "0,13 kWh por ciclo", "Dimensões (A x L x P)": "96 x 55 x 59,5 cm", "Voltagem": "127 V ou 220 V (consulte a voltagem disponível)", "Cor": "Branco"}},
+  "7672": {"texto": "O Tanquinho Lavamatic da Suggar lava até 16 kg de roupa, com 6 programas, função molho e filtro de fiapos.", "destaques": ["Capacidade: 16 kg", "6 programas de lavagem", "Função molho", "Filtro de fiapos", "Potência: 530 W"], "detalhes": {"Modelo": "Lavamatic LC1622BR", "Tipo": "Tanquinho (lavadora semiautomática)", "Capacidade de lavagem": "16 kg", "Programas": "6", "Abertura": "Superior", "Potência": "530 W", "Dimensões (A x L x P)": "96,1 x 51,3 x 56,7 cm", "Peso": "10,55 kg", "Voltagem": "220 V", "Cor": "Branco"}},
+  "9874": {"texto": "O Forno Elétrico de bancada da Suggar tem 50 litros, função grill e timer de 60 minutos com alarme. A temperatura vai de 100 °C a 250 °C.", "destaques": ["Capacidade: 50 litros", "Função grill", "Timer de 60 minutos", "Temperatura: 100 °C a 250 °C"], "detalhes": {"Modelo": "FE5012PT", "Tipo": "Forno elétrico de bancada", "Capacidade": "50 L", "Temperatura": "100 °C a 250 °C", "Timer": "60 minutos com alarme", "Funções": "Grill", "Voltagem": "220 V", "Cor": "Preto"}},
+  "9776": {"texto": "O Freezer Horizontal da Midea tem 508 litros, 2 portas e compressor Inverter, que economiza energia. Funciona como freezer ou refrigerador e é bivolt.", "destaques": ["Capacidade: 508 litros", "2 portas", "Compressor Inverter", "Freezer ou refrigerador", "Bivolt"], "detalhes": {"Modelo": "MDRC698FZD013", "Tipo": "Freezer horizontal", "Capacidade": "508 L", "Portas": "2", "Compressor": "Inverter", "Temperatura": "-28 °C a 10 °C", "Funções": "Freezer, conservar e refrigerar", "Degelo": "Manual, com dreno frontal", "Acessórios": "2 cestos", "Dimensões (A x L x P)": "83 x 153 x 73,5 cm", "Peso": "58,9 kg", "Voltagem": "Bivolt", "Cor": "Branco", "Garantia": "12 meses (fabricante)"}},
+  "1083": {"texto": "A Batedeira Pérola Maxx da Britânia tem tigela de 4 litros, 4 velocidades mais turbo e pode ser usada fixa ou como batedeira de mão.", "destaques": ["Tigela de 4 litros", "4 velocidades + turbo", "Uso fixo ou portátil", "2 batedores"], "detalhes": {"Modelo": "Pérola Maxx", "Tipo": "Batedeira", "Capacidade da tigela": "4 L", "Velocidades": "4 + turbo", "Cor": "Preta", "Voltagem": "220 V"}},
+  "1085": {"texto": "A Batedeira Pérola Maxx da Britânia tem tigela de 4 litros, 4 velocidades mais turbo e pode ser usada fixa ou como batedeira de mão.", "destaques": ["Tigela de 4 litros", "4 velocidades + turbo", "Uso fixo ou portátil", "2 batedores"], "detalhes": {"Modelo": "Pérola Maxx", "Tipo": "Batedeira", "Capacidade da tigela": "4 L", "Velocidades": "4 + turbo", "Cor": "Vermelha", "Voltagem": "220 V"}},
+  "6628": {"texto": "O Liquidificador Power Black L-29 da Mondial tem 550 W, 2 velocidades e função pulsar. O copo tem 2 litros.", "destaques": ["Potência: 550 W", "2 velocidades + pulsar", "Copo de 2 litros (1,5 L úteis)"], "detalhes": {"Modelo": "Power Black L-29", "Tipo": "Liquidificador", "Potência": "550 W", "Velocidades": "2 + pulsar", "Capacidade do copo": "2 L (1,5 L úteis)", "Material do copo": "Polipropileno", "Cor": "Preto", "Voltagem": "127 V ou 220 V (consulte a voltagem disponível)"}},
+  "1490": {"texto": "A Bicicleta Collina da Colli tem freio a disco e câmbio de marchas.", "destaques": ["Freio a disco", "Câmbio de marchas"], "detalhes": {"Modelo": "Collina", "Tipo": "Bicicleta", "Freio": "A disco", "Marchas": "Sim"}},
+  "4208": {"texto": "A Cozinha Brilhante da MGM tem 5 peças em MDF, com aéreos de vidro, balcões com portas e gavetas e paneleiro.", "destaques": ["5 peças", "Aéreos com portas de vidro", "Balcões com portas e gavetas", "Paneleiro"], "detalhes": {"Modelo": "Brilhante", "Tipo": "Cozinha modulada", "Peças": "5", "Material": "MDF", "Montagem": "Grátis pela Lojas Tropical"}},
+  "cozinha-telasul-diamante": {"texto": "A Cozinha Diamante da Telasul tem 4 peças em aço, com portas de vidro, balcão com tampo e puxadores dourados.", "destaques": ["4 peças em aço", "Portas de vidro", "Balcão com tampo", "Puxadores dourados"], "detalhes": {"Modelo": "Diamante", "Tipo": "Cozinha em aço", "Peças": "4", "Material": "Aço", "Largura total": "245 cm", "Altura": "180 cm", "Montagem": "Grátis pela Lojas Tropical"}},
+  "8855": {"texto": "O Sofá Ícaro da Ortonorte tem 3 lugares e 2,20 m de largura. O assento é retrátil e o encosto é reclinável, os dois com pillow top.", "destaques": ["3 lugares", "2,20 m de largura", "Assento retrátil", "Encosto reclinável", "Pillow top no assento e no encosto"], "detalhes": {"Modelo": "Ícaro", "Tipo": "Sofá retrátil e reclinável", "Lugares": "3", "Largura": "2,20 m"}}
+};
+
+
+// ===== Integração com o estoque da loja =====
+// O arquivo estoque.js é gerado pela página atualizar-estoque.html a partir do
+// "Relatório Posição de Estoque" do sistema. Ligação pelo campo cod (código do produto).
+// Preço: o que foi digitado no produto (parcela/avista) vale; se não tiver, usa o preço do relatório.
+// Quantidade 0 no relatório = produto aparece como "Esgotado" no fim da lista.
+const EST = (typeof ESTOQUE !== "undefined" && ESTOQUE.produtos) || {};
+PRODUTOS.forEach(p => {
+  if (!p.cod || !Object.keys(EST).length) return;
+  const e = EST[p.cod];
+  if (!e) { p.qtd = 0; return; } // fora do relatório de estoque = esgotado
+  if (!p.parcela && !p.avista && e.preco) p.avista = e.preco;
+  p.qtd = e.qtd;
+});
+const esgotado = p => p.qtd !== undefined && p.qtd <= 0;
+
+// =====================================
+
+const brl = v => v.toLocaleString("pt-BR", { style: "currency", currency: "BRL" });
+const waLink = msg => `https://wa.me/${WHATSAPP}${msg ? "?text=" + encodeURIComponent(msg) : ""}`;
+const $ = id => document.getElementById(id);
+const porId = id => PRODUTOS.find(p => p.id === id);
+const fotoCapa = p => p.imgs[0];
+
+let filtroCat = "Todos";
+let busca = "";
+
+function precoCard(p) {
+  if (p.parcela) return `<span class="price"><small>12x</small>${brl(p.parcela)}</span><span class="inst">${p.avista ? `ou ${brl(p.avista)} à vista` : "no crediário ou cartão"}</span>`;
+  if (p.avista) return `<span class="price">${brl(p.avista)}</span><span class="inst">à vista</span>`;
+  return `<span class="price ask">Consulte o preço</span><span class="inst">Responderemos no WhatsApp</span>`;
+}
+function precoTexto(p) {
+  return p.parcela ? `12x de ${brl(p.parcela)}${p.avista ? ` ou ${brl(p.avista)} à vista` : ""}` : p.avista ? `${brl(p.avista)} à vista` : "preço a consultar";
+}
+
+function cardHTML(p) {
+  return `
+    <article class="card" data-id="${p.id}">
+      <a class="pic${p.capa ? " cover" : ""}" href="#produto-${p.id}" aria-label="Ver ${p.nome}">
+        ${esgotado(p) ? `<span class="tag" style="background:#6e6360">Esgotado</span>` : p.parcela || p.avista ? `<span class="tag">Oferta</span>` : ""}
+        <img src="img/${fotoCapa(p)}" alt="${p.nome}" loading="lazy">
+      </a>
+      <div class="body">
+        <span class="cat">${p.cat}</span>
+        <h3><a href="#produto-${p.id}">${p.nome}</a></h3>
+        ${p.cores && p.cores.length > 1 ? `<span class="colors">${p.cores.length} cores: toque para escolher</span><div class="dots">${p.cores.map((c, i) => `<button type="button" class="dot" data-card-cor="${i}" aria-pressed="${i === 0}" title="${c[0]}" aria-label="Cor ${c[0]}" style="background:${corCss(c[0])}"></button>`).join("")}</div>` : ""}
+        ${precoCard(p)}
+        <div class="order">
+          <a class="see" href="#produto-${p.id}">Ver produto</a>
+          <a class="wa" href="${waLink((esgotado(p) ? "Olá! Vim pelo site e quero saber quando chega: " : "Olá! Vim pelo site e quero comprar: ") + p.nome)}" target="_blank" rel="noopener"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M21 12a8 8 0 0 1-12 7l-5 1 1-4.5A8 8 0 1 1 21 12z"/></svg>${esgotado(p) ? "Avise quando chegar" : "Comprar pelo WhatsApp"}</a>
+        </div>
+      </div>
+    </article>`;
+}
+
+// Cores das bolinhas de seleção (nomes compostos "A e B" viram bolinha meio a meio)
+const COR_HEX = { "Branco": "#ffffff", "Preto": "#1d1d1d", "Preto Fosco": "#2b2b2b", "Nero Preto Fosco": "#262626", "Off White": "#efe9dc", "Freijó": "#b8895a", "Carvalho": "#a5774a", "Fendi": "#c8baa6", "Cinza": "#8b8f93", "Grafite": "#4a4d52", "Rosa": "#ec8fb0", "Azul": "#2f6fd0", "Vermelho": "#d42a2a", "Laranja Neon": "#ff7a1a", "Amarelo Neon": "#e8f21a", "Verde Militar": "#59613a", "Branco Neon": "#f3f7e8", "Champanhe": "#e6d3a8", "Lilás": "#b39ad8", "Castanho": "#6b4a32", "Castanho Wood": "#6b4a32", "Avelã Wood": "#a07a55", "Madeira": "#b5793f", "Madeirado": "#b07a45", "Madeirado Claro": "#c99a62", "Madeirado Escuro": "#7a5232", "Cinamomo": "#9b6a43", "Titanium": "#7c7f84", "Naturalle": "#d2b48a", "Naturale": "#d2b48a", "Nature": "#c49a66", "Nogal": "#6e4b33", "Savana": "#cdb48e", "Dourado": "#c9a13b" };
+function corCss(nome) {
+  const h = nome.split(/ e |\//).map(n => COR_HEX[n] || "#cccccc");
+  return h.length > 1 ? `linear-gradient(135deg, ${h[0]} 50%, ${h[1]} 50%)` : h[0];
+}
+// Clique numa bolinha de cor no card: troca a foto do card e o link já abre o produto nessa cor
+document.addEventListener("click", e => {
+  const b = e.target.closest("[data-card-cor]"); if (!b) return;
+  const card = b.closest(".card"); const id = card.dataset.id; const p = porId(id); const i = +b.dataset.cardCor;
+  card.querySelector(".pic img").src = "img/" + p.cores[i][1];
+  card.querySelectorAll("[data-card-cor]").forEach(x => x.setAttribute("aria-pressed", x === b));
+  card.querySelectorAll('a[href^="#produto-"]').forEach(a => a.href = `#produto-${id}~${i}`);
+});
+
+function renderNav() {
+  $("catNav").innerHTML = ["Todos", ...CATEGORIAS].map(c =>
+    `<li><button type="button" data-cat="${c}" aria-pressed="${c === filtroCat}">${c === "Todos" ? "Todos os departamentos" : c}</button></li>`
+  ).join("");
+}
+
+function renderGrid() {
+  const termo = busca.trim().toLowerCase();
+  const lista = PRODUTOS.filter(p =>
+    (filtroCat === "Todos" || p.cat === filtroCat) &&
+    (!termo || [p.nome, p.cat, p.marca, p.cod || ""].join(" ").toLowerCase().includes(termo))
+  ).sort((a, b) => esgotado(a) - esgotado(b));
+  $("catTitle").textContent = termo ? `Resultados para “${busca.trim()}”` : (filtroCat === "Todos" ? "Todos os produtos" : filtroCat);
+  $("count").textContent = `${lista.length} ${lista.length === 1 ? "produto" : "produtos"}`;
+  $("grid").innerHTML = lista.length ? lista.map(cardHTML).join("") :
+    `<div class="empty">Nenhum produto encontrado. Tente outra palavra ou <a href="${waLink("Olá! Estou procurando: " + busca)}" target="_blank" rel="noopener">pergunte no WhatsApp</a>.</div>`;
+}
+
+// ===== Página do produto =====
+let atual = null, fotoAtual = 0, corAtual = null, qtd = 1;
+
+function abrirProduto(rota) {
+  const [id, corRota] = rota.split("~");
+  const p = porId(id);
+  if (!p) { mostrarInicio(); return; }
+  atual = p; fotoAtual = 0; qtd = 1; corAtual = p.cores ? Math.min(+corRota || 0, p.cores.length - 1) : null;
+  $("home").hidden = true; $("produto").hidden = false; document.body.classList.add("no-produto");
+  document.title = `${p.nome} | Lojas Tropical`;
+  $("crumbs").innerHTML = `<a href="#inicio">Início</a> › <a href="#catalogo" data-cat-link="${p.cat}">${p.cat}</a> › <b>${p.nome}</b>`;
+  $("pCat").textContent = p.cat;
+  $("pName").textContent = p.nome;
+  $("pMeta").innerHTML = `<span>Marca: <b>${p.marca}</b></span><span>Entrega e montagem grátis</span>${p.qtd === undefined ? "" : esgotado(p) ? `<span style="color:#b3261e"><b>Esgotado</b> no momento</span>` : `<span style="color:#1b7a3a"><b>Em estoque</b></span>`}`;
+  $("buyNowTxt").textContent = esgotado(p) ? "Avise quando chegar" : "Comprar pelo WhatsApp";
+  if (p.parcela) {
+    $("pPrice").innerHTML = `<span class="price"><small>12x de</small>${brl(p.parcela)}</span><span class="inst">no crediário próprio ou no cartão de crédito</span><span class="inst">${p.avista ? `ou <b>${brl(p.avista)}</b> à vista` : "Confirme o valor à vista e no Pix pelo WhatsApp."}</span>`;
+  } else if (p.avista) {
+    $("pPrice").innerHTML = `<span class="price">${brl(p.avista)}</span><span class="inst">à vista</span><span class="inst">Também parcelamos em até 12x. Consulte as condições pelo WhatsApp.</span>`;
+  } else {
+    $("pPrice").innerHTML = `<span class="price ask">Consulte o preço</span><span class="inst">Mande uma mensagem e o vendedor responde com o preço e as condições de pagamento.</span>`;
+  }
+  const ficha = FICHAS[p.cod || p.id] || {};
+  const destaques = ficha.destaques || p.destaques;
+  const carac = destaques && destaques.length ? `<p class="carac-t">Principais características</p><ul class="carac">${destaques.map(d => `<li>${d.includes(":") ? `<b>${d.slice(0, d.indexOf(":") + 1)}</b>${d.slice(d.indexOf(":") + 1)}` : d}</li>`).join("")}</ul>` : "";
+  $("pDesc").innerHTML = `${(ficha.texto || p.texto || p.desc).split("\n").map(t => `<p>${t}</p>`).join("")}${carac}<p>Na Lojas Tropical, a entrega e a montagem são grátis. Você pode pagar no crediário próprio ou parcelar em até 12x.</p>`;
+  const { Código: codigo, ...resto } = p.detalhes || {};
+  const det = { Marca: p.marca, ...(ficha.detalhes || resto) };
+  if (p.cores && !det["Cor"] && !det["Cores"]) det["Cores disponíveis"] = p.cores.map(c => c[0]).join(", ");
+  if (p.cod) det["Código do produto"] = p.cod;
+  $("pSpecs").innerHTML = Object.entries(det).map(([k, v]) => `<tr><th scope="row">${k}</th><td>${v}</td></tr>`).join("");
+  const rel = PRODUTOS.filter(x => x.cat === p.cat && x.id !== p.id);
+  const extra = PRODUTOS.filter(x => x.cat !== p.cat && (x.parcela || x.avista));
+  $("related").innerHTML = [...rel, ...extra].slice(0, 4).map(cardHTML).join("");
+  $("added").textContent = "";
+  renderCores(); renderGaleria(); renderQtd();
+  window.scrollTo(0, 0);
+}
+
+function fotosDoProduto() {
+  const p = atual;
+  if (corAtual === null) return p.imgs;
+  const daCor = p.cores[corAtual][1];
+  if (daCor.startsWith("v")) { // fotos separadas por cor: v<código>-<cor>-<n>.jpg
+    const base = daCor.replace(/-\d+\.jpg$/, "");
+    return [daCor, ...p.imgs.filter(f => f !== daCor && new RegExp("^" + base + "-\\d+\\.jpg$").test(f))];
+  }
+  return [daCor, ...p.imgs.filter(f => f !== daCor && !p.cores.some(c => c[1] === f))];
+}
+
+function renderGaleria() {
+  const fotos = fotosDoProduto();
+  if (fotoAtual >= fotos.length) fotoAtual = 0;
+  const desconto = atual.parcela || atual.avista ? `<span class="off">Oferta</span>` : "";
+  const f = fotos[fotoAtual];
+  const cobre = (atual.capa && fotoAtual === 0 && corAtual === null);
+  $("stage").innerHTML = `${desconto}<img src="img/${f}" alt="${atual.nome}, foto ${fotoAtual + 1}" style="object-fit:${cobre ? "cover" : "contain"}">`;
+  $("thumbs").innerHTML = fotos.length < 2 ? "" : fotos.map((x, i) =>
+    `<button type="button" data-foto="${i}" aria-current="${i === fotoAtual}" aria-label="Ver foto ${i + 1}"><img src="img/${x}" alt=""></button>`).join("");
+}
+
+function renderCores() {
+  const p = atual;
+  if (!p.cores) { $("pColors").innerHTML = ""; return; }
+  $("pColors").innerHTML = `<div style="display:grid;gap:8px"><span class="field-label">Cor: <span>${p.cores[corAtual][0]}</span></span>
+    <div class="swatches">${p.cores.map((c, i) => `<button type="button" data-cor="${i}" aria-pressed="${i === corAtual}"><span class="sw" style="background:${corCss(c[0])}"></span>${c[0]}</button>`).join("")}</div></div>`;
+}
+
+function textoPedido() {
+  const cor = corAtual !== null && atual.cores.length > 1 ? `, cor ${atual.cores[corAtual][0]}` : "";
+  const q = qtd > 1 ? ` (quantidade: ${qtd})` : "";
+  if (esgotado(atual)) return `Olá! Vim pelo site e quero saber quando chega: ${atual.nome}${cor}`;
+  return `Olá! Vim pelo site e quero comprar: ${atual.nome}${cor}${q}`;
+}
+
+function renderQtd() {
+  $("qVal").textContent = qtd;
+  $("buyNow").href = waLink(textoPedido());
+  const cidade = $("shipCity").value;
+  $("shipAsk").href = waLink(`Olá! Vocês entregam o produto ${atual.nome} em ${cidade}?`);
+}
+
+$("thumbs").addEventListener("click", e => {
+  const b = e.target.closest("[data-foto]"); if (!b) return;
+  fotoAtual = +b.dataset.foto; renderGaleria();
+});
+$("pColors").addEventListener("click", e => {
+  const b = e.target.closest("[data-cor]"); if (!b) return;
+  corAtual = +b.dataset.cor; fotoAtual = 0; renderCores(); renderGaleria(); renderQtd();
+});
+$("qMinus").addEventListener("click", () => { qtd = Math.max(1, qtd - 1); renderQtd(); });
+$("qPlus").addEventListener("click", () => { qtd = Math.min(20, qtd + 1); renderQtd(); });
+$("shipCity").addEventListener("change", renderQtd);
+$("crumbs").addEventListener("click", e => {
+  const a = e.target.closest("[data-cat-link]"); if (a) { filtroCat = a.dataset.catLink; renderNav(); renderGrid(); }
+});
+
+// ===== Carrinho (fica salvo neste navegador) =====
+let carrinho = [];
+try { carrinho = JSON.parse(localStorage.getItem("tropical-carrinho") || "[]"); } catch (_) { carrinho = []; }
+carrinho = carrinho.filter(i => porId(i.id));
+function salvarCarrinho() { try { localStorage.setItem("tropical-carrinho", JSON.stringify(carrinho)); } catch (_) {} }
+
+function renderCarrinho() {
+  const total = carrinho.reduce((s, i) => s + i.qtd, 0);
+  $("cartCount").textContent = total;
+  if (!carrinho.length) {
+    $("cartItems").innerHTML = `<p class="cart-empty">Seu carrinho está vazio.<br>Abra um produto e toque em “Adicionar ao carrinho”.</p>`;
+    $("sendCart").hidden = true;
+    return;
+  }
+  $("sendCart").hidden = false;
+  $("cartItems").innerHTML = carrinho.map((i, n) => {
+    const p = porId(i.id);
+    return `<div class="cart-item">
+      <img src="img/${i.foto}" alt="">
+      <div><b>${p.nome}</b>
+        <span class="sub">${i.cor ? `Cor: ${i.cor} · ` : ""}${precoTexto(p)}</span>
+        <div class="ctl"><button type="button" data-menos="${n}" aria-label="Diminuir">−</button><span>${i.qtd}</span><button type="button" data-mais="${n}" aria-label="Aumentar">+</button><button type="button" class="rm" data-rm="${n}">Remover</button></div>
+      </div></div>`;
+  }).join("");
+  const linhas = carrinho.map(i => { const p = porId(i.id); return `• ${i.qtd}x ${p.nome}${i.cor ? ` (cor ${i.cor})` : ""}: ${precoTexto(p)}`; });
+  $("sendCart").href = waLink(`Olá! Quero fazer este pedido pelo site:\n${linhas.join("\n")}\n\nMinha cidade: `);
+}
+
+$("addCart").addEventListener("click", () => {
+  const cor = corAtual !== null ? atual.cores[corAtual][0] : null;
+  const foto = corAtual !== null ? atual.cores[corAtual][1] : fotoCapa(atual);
+  const ja = carrinho.find(i => i.id === atual.id && i.cor === cor);
+  if (ja) ja.qtd = Math.min(20, ja.qtd + qtd); else carrinho.push({ id: atual.id, cor, foto, qtd });
+  salvarCarrinho(); renderCarrinho();
+  $("added").innerHTML = `Adicionado ao carrinho. <a href="#" id="seeCart">Ver carrinho</a>`;
+});
+$("added").addEventListener("click", e => { if (e.target.id === "seeCart") { e.preventDefault(); abrirCarrinho(); } });
+$("cartItems").addEventListener("click", e => {
+  const b = e.target.closest("button"); if (!b) return;
+  if (b.dataset.mais) carrinho[+b.dataset.mais].qtd = Math.min(20, carrinho[+b.dataset.mais].qtd + 1);
+  if (b.dataset.menos) { const i = carrinho[+b.dataset.menos]; i.qtd--; if (i.qtd < 1) carrinho.splice(+b.dataset.menos, 1); }
+  if (b.dataset.rm) carrinho.splice(+b.dataset.rm, 1);
+  salvarCarrinho(); renderCarrinho();
+});
+function abrirCarrinho() { renderCarrinho(); $("drawer").hidden = false; $("scrim").hidden = false; $("closeCart").focus(); }
+function fecharCarrinho() { $("drawer").hidden = true; $("scrim").hidden = true; }
+$("openCart").addEventListener("click", abrirCarrinho);
+$("closeCart").addEventListener("click", fecharCarrinho);
+$("scrim").addEventListener("click", fecharCarrinho);
+document.addEventListener("keydown", e => { if (e.key === "Escape") fecharCarrinho(); });
+
+// ===== Navegação entre página inicial e página do produto =====
+function mostrarInicio(ancora) {
+  $("produto").hidden = true; $("home").hidden = false; document.body.classList.remove("no-produto");
+  document.title = "Lojas Tropical";
+  const alvo = ancora && document.getElementById(ancora);
+  if (alvo && ancora !== "inicio") alvo.scrollIntoView(); else window.scrollTo(0, 0);
+}
+function rotear() {
+  const h = location.hash.slice(1);
+  if (h.startsWith("produto-")) abrirProduto(h.slice(8)); else mostrarInicio(h);
+}
+window.addEventListener("hashchange", rotear);
+
+$("catNav").addEventListener("click", e => {
+  const b = e.target.closest("button[data-cat]");
+  if (!b) return;
+  filtroCat = b.dataset.cat;
+  busca = ""; $("q").value = "";
+  renderNav(); renderGrid();
+  if (location.hash !== "#catalogo") location.hash = "catalogo"; else mostrarInicio("catalogo");
+});
+$("searchForm").addEventListener("submit", e => {
+  e.preventDefault();
+  busca = $("q").value;
+  filtroCat = "Todos"; renderNav(); renderGrid();
+  if (location.hash !== "#catalogo") location.hash = "catalogo"; else mostrarInicio("catalogo");
+});
+// ===== Barra de departamentos rolável =====
+(() => {
+  const ul = $("catNav"), esq = $("catEsq"), dir = $("catDir");
+  const atualizar = () => {
+    const max = ul.scrollWidth - ul.clientWidth;
+    esq.hidden = ul.scrollLeft <= 2; dir.hidden = ul.scrollLeft >= max - 2 || max <= 2;
+  };
+  esq.addEventListener("click", () => ul.scrollBy({ left: -300 }));
+  dir.addEventListener("click", () => ul.scrollBy({ left: 300 }));
+  ul.addEventListener("scroll", atualizar); window.addEventListener("resize", atualizar);
+  ul.addEventListener("wheel", e => { if (ul.scrollWidth > ul.clientWidth && Math.abs(e.deltaY) > Math.abs(e.deltaX)) { e.preventDefault(); ul.scrollLeft += e.deltaY; } }, { passive: false });
+  let x0 = null, s0 = 0, moveu = false;
+  ul.addEventListener("pointerdown", e => { if (e.pointerType !== "mouse") return; x0 = e.clientX; s0 = ul.scrollLeft; moveu = false; });
+  window.addEventListener("pointermove", e => { if (x0 === null) return; const d = e.clientX - x0; if (Math.abs(d) > 5) { moveu = true; ul.classList.add("arrastando"); ul.scrollLeft = s0 - d; } });
+  window.addEventListener("pointerup", () => { x0 = null; ul.classList.remove("arrastando"); });
+  ul.addEventListener("click", e => { if (moveu) { e.stopPropagation(); e.preventDefault(); moveu = false; } }, true);
+  setTimeout(atualizar, 0); window.addEventListener("load", atualizar);
+})();
+$("q").addEventListener("input", e => { busca = e.target.value; renderGrid(); });
+
+$("cities").innerHTML = CIDADES.map(c => `<span>${c}</span>`).join("") + `<span>e mais cidades do MA</span>`;
+$("shipCity").innerHTML = CIDADES.map(c => `<option>${c}</option>`).join("") + `<option>Outra cidade</option>`;
+document.querySelectorAll(".wa-text").forEach(el => el.textContent = WHATSAPP_TEXTO);
+document.querySelectorAll(".wa-link").forEach(a => a.href = waLink("Olá! Vim pelo site."));
+
+renderNav(); renderGrid(); renderCarrinho(); rotear();
+</script>
+</body>
+</html>
