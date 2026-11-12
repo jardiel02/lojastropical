@@ -50,8 +50,6 @@ button { font: inherit; }
 h1, h2, h3 { font-family: var(--font-display); text-wrap: balance; margin: 0; line-height: 1.05; }
 .wrap { max-width: 1200px; margin: 0 auto; padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); }
 
-.demo { background: var(--sun); color: #2b2200; font-size: 13px; font-weight: 600; text-align: center; }
-.demo .wrap { padding-block: 6px; }
 
 .topbar { background: var(--red-deep); color: #ffe3e1; font-size: 14px; }
 .topbar .wrap { display: flex; flex-wrap: wrap; gap: 6px 24px; justify-content: space-between; padding-block: 8px; }
@@ -145,8 +143,14 @@ section { padding-block: 44px; }
 .empty { padding: 40px; text-align: center; color: var(--muted); border: 1px dashed var(--line); border-radius: var(--radius); grid-column: 1 / -1; }
 
 
-.cities { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 18px; }
-.cities span { background: var(--chip); color: var(--fg); font-weight: 700; padding: 8px 16px; border-radius: 999px; }
+.stores { display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 16px; }
+.store { background: var(--surface); border: 1px solid var(--line); border-radius: 16px; padding: 18px 20px; display: flex; flex-direction: column; gap: 6px; }
+.store h3 { margin: 0; font-size: 17px; display: flex; align-items: center; gap: 8px; }
+.store h3 svg { color: var(--red); flex: none; }
+.store .city { color: var(--red); font-weight: 700; font-size: 13px; text-transform: uppercase; letter-spacing: .04em; }
+.store address { font-style: normal; color: var(--muted); font-size: 14px; line-height: 1.5; flex: 1; }
+.store a { color: var(--red); font-weight: 700; font-size: 14px; text-decoration: none; margin-top: 4px; }
+.store a:hover { text-decoration: underline; }
 .note { color: var(--muted); font-size: 14px; max-width: 65ch; }
 
 .social { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 16px; }
@@ -270,7 +274,6 @@ footer img { height: 48px; width: auto; }
 </head>
 <body>
 
-<div class="demo"><div class="wrap">Versão de teste. Confirme preços e condições pelo WhatsApp. Os endereços das lojas ainda são exemplos.</div></div>
 
 <div class="topbar"><div class="wrap">
   <span>Crediário próprio · Parcelamos em até 12x · Entrega e montagem grátis</span>
@@ -336,8 +339,7 @@ footer img { height: 48px; width: auto; }
   <section id="lojas">
     <div class="wrap">
       <div class="sec-head"><div><span class="eyebrow">Onde estamos</span><h2>Nossas lojas</h2></div></div>
-      <div class="cities" id="cities"></div>
-      <p class="note">Endereços, telefones e horários de cada loja entram aqui assim que forem enviados.</p>
+      <div class="stores" id="stores"></div>
     </div>
   </section>
 
@@ -444,7 +446,18 @@ footer img { height: 48px; width: auto; }
 const WHATSAPP = "559981771035";           // DDI 55 + DDD + número, só dígitos
 const WHATSAPP_TEXTO = "(99) 98177-1035";  // como o número aparece no site
 
-const CIDADES = ["Codó", "Timbiras", "Coroatá", "Dom Pedro"]; // completar com as demais
+// Lojas físicas: nome, rua e número, bairro, cidade, CEP
+const LOJAS = [
+  ["Loja Matriz", "Rua Francisco Bernadino, nº 1371-A", "São Sebastião", "Codó", "65400-000"],
+  ["Loja Avenida", "Avenida Santos Dumont, nº 3104", "São Sebastião", "Codó", "65400-000"],
+  ["Loja Timbiras", "Rua Urbano Santos, nº 43", "Centro", "Timbiras", "65420-000"],
+  ["Loja Pio XII", "Rua Doutor Ribamar Galiza, nº 110", "Centro", "Pio XII", "65707-000"],
+  ["Loja Dom Pedro", "Rua Engenheiro Rui Mesquita, nº 338", "Centro", "Dom Pedro", "65765-000"],
+  ["Loja Gonçalves Dias", "Praça João Afonso Cardoso, s/n", "Centro", "Gonçalves Dias", "65775-000"],
+  ["Loja Coroatá", "Travessa Gomes de Sousa, nº 1978", "Centro", "Coroatá", "65415-000"],
+  ["Loja Alto Alegre", "Avenida Rodoviária, s/n", "Centro", "Alto Alegre do Maranhão", "65413-970"],
+];
+const CIDADES = [...new Set(LOJAS.map(l => l[3]))];
 
 const CATEGORIAS = ["Guarda-roupas", "Móveis", "Eletrodomésticos", "TVs e Eletrônicos", "Eletroportáteis", "Estofados", "Colchões", "Som", "Ventilação", "Bicicletas"];
 
@@ -1233,7 +1246,10 @@ $("searchForm").addEventListener("submit", e => {
 })();
 $("q").addEventListener("input", e => { busca = e.target.value; renderGrid(); });
 
-$("cities").innerHTML = CIDADES.map(c => `<span>${c}</span>`).join("") + `<span>e mais cidades do MA</span>`;
+$("stores").innerHTML = LOJAS.map(([nome, rua, bairro, cidade, cep]) => {
+  const end = `${rua}, ${bairro}, ${cidade} - MA, ${cep}`;
+  return `<div class="store"><span class="city">${cidade}</span><h3><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M12 21s-7-6.2-7-11a7 7 0 0 1 14 0c0 4.8-7 11-7 11z"/><circle cx="12" cy="10" r="2.5"/></svg>${nome}</h3><address>${rua}<br>${bairro}, ${cidade} - MA<br>CEP ${cep}</address><a href="https://www.google.com/maps/search/?api=1&query=${encodeURIComponent("Lojas Tropical, " + end)}" target="_blank" rel="noopener">Ver no mapa →</a></div>`;
+}).join("");
 $("shipCity").innerHTML = CIDADES.map(c => `<option>${c}</option>`).join("") + `<option>Outra cidade</option>`;
 document.querySelectorAll(".wa-text").forEach(el => el.textContent = WHATSAPP_TEXTO);
 document.querySelectorAll(".wa-link").forEach(a => a.href = waLink("Olá! Vim pelo site."));
