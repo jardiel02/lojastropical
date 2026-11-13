@@ -98,21 +98,16 @@ nav.cats button { border: 0; background: transparent; color: #ffe9e7; font-weigh
 nav.cats button:hover, nav.cats button[aria-pressed="true"] { background: var(--sun); color: #2b2200; }
 
 .hero { background: radial-gradient(120% 140% at 80% 0%, #ff3a3f 0%, var(--red) 40%, var(--red-deep) 100%); color: #fff; overflow: hidden; }
-.hero .wrap { display: grid; grid-template-columns: 1.15fr 1fr; gap: 24px; align-items: center; padding-block: 40px; }
+.hero .wrap { padding-block: 24px; }
 .badge20 { display: inline-flex; align-items: baseline; gap: 6px; background: var(--sun); color: var(--red-deep); font-family: var(--font-display); font-weight: 800; padding: 2px 14px 0; border-radius: 999px; font-size: 18px; margin-bottom: 14px; }
 .badge20 b { font-size: 26px; }
-.hero h1 { font-size: clamp(38px, 6vw, 72px); font-weight: 800; letter-spacing: -.01em; }
+.hero h1 { font-size: clamp(32px, 4.5vw, 52px); font-weight: 800; letter-spacing: -.01em; }
 .hero h1 em { font-style: normal; color: var(--sun); }
-.hero p { font-size: 18px; max-width: 44ch; color: #ffe3e1; margin: 14px 0 22px; }
+.hero p { font-size: 18px; max-width: 76ch; color: #ffe3e1; margin: 10px 0 16px; }
 .hero .ctas { display: flex; flex-wrap: wrap; gap: 12px; }
 .btn { display: inline-flex; align-items: center; justify-content: center; gap: 8px; padding: 12px 20px; border-radius: 999px; text-decoration: none; border: 2px solid transparent; cursor: pointer; font-weight: 700; }
 .btn.sun { background: var(--sun); color: #2b2200; }
 .btn.ghost { border-color: rgb(255 255 255 / .6); color: #fff; background: transparent; }
-.hero-shelf { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; align-items: end; }
-.hero-shelf a { display: block; background: #fff; border-radius: 14px; padding: 8px; box-shadow: 0 10px 24px rgb(0 0 0 / .25); text-decoration: none; }
-.hero-shelf a:nth-child(2) { transform: translateY(-18px); }
-.hero-shelf img { display: block; width: 100%; aspect-ratio: 1; object-fit: contain; }
-.hero-shelf span { display: block; font-size: 12px; font-weight: 700; color: var(--red-deep); text-align: center; font-variant-numeric: tabular-nums; }
 
 .perks { background: var(--surface); border-bottom: 1px solid var(--line); }
 .perks ul { list-style: none; margin: 0 auto; display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; padding-block: 18px; }
@@ -278,7 +273,7 @@ section { padding-block: 44px; }
   /* Botão flutuante do WhatsApp: menor, e some na página do produto (que já tem o botão de comprar) */
   .float-wa { width: 50px; height: 50px; }
   body.no-produto .float-wa { display: none; }
-  .hero .wrap { grid-template-columns: 1fr; padding-block: 28px; }
+  .hero .wrap { padding-block: 20px; }
   .perks ul { grid-template-columns: repeat(2, 1fr); }
   header.main .wa-btn { display: none; }
   .logo img { height: 52px; }
@@ -334,17 +329,12 @@ body:has(.lt-cookies:not([hidden])) .float-wa { bottom: calc(150px + env(safe-ar
     <div class="wrap">
       <div>
         <span class="badge20"><b>20</b> anos</span>
-        <h1>Mania de <em>preços baixos</em> no Maranhão.</h1>
+        <h1>Mania de <em>preços baixos</em></h1>
         <p>Móveis e eletrodomésticos com crediário próprio, parcelamento em até 12x e entrega e montagem grátis. Escolha no catálogo e fale com a gente pelo WhatsApp.</p>
         <div class="ctas">
           <a class="btn sun" href="#catalogo">Ver catálogo</a>
           <a class="btn ghost wa-link" href="#" target="_blank" rel="noopener">Chamar no WhatsApp</a>
         </div>
-      </div>
-      <div class="hero-shelf">
-        <a href="#produto-notavel-nt6020-capelinha"><img src="img/notavel-nt6020.jpg" alt="Guarda-Roupa Notável NT 6020 Capelinha"><span>12x R$ 89,00</span></a>
-        <a href="#produto-moval-aruba"><img src="img/moval-aruba.jpg" alt="Guarda-Roupa Moval Aruba"><span>12x R$ 129,90</span></a>
-        <a href="#produto-amvox-aca-1200"><img src="img/amvox-aca-1200.jpg" alt="Caixa de Som Amvox ACA 1200"><span>12x R$ 199,90</span></a>
       </div>
     </div>
   </div>
