@@ -97,14 +97,22 @@ nav.cats ul { list-style: none; margin: 0 auto; display: flex; gap: 4px; overflo
 nav.cats button { border: 0; background: transparent; color: #ffe9e7; font-weight: 600; padding: 8px 14px; border-radius: 999px; cursor: pointer; white-space: nowrap; }
 nav.cats button:hover, nav.cats button[aria-pressed="true"] { background: var(--sun); color: #2b2200; }
 
-.hero { background: radial-gradient(120% 140% at 80% 0%, #ff3a3f 0%, var(--red) 40%, var(--red-deep) 100%); color: #fff; overflow: hidden; }
-.hero .wrap { padding-block: 24px; }
-.badge20 { display: inline-flex; align-items: baseline; gap: 6px; background: var(--sun); color: var(--red-deep); font-family: var(--font-display); font-weight: 800; padding: 2px 14px 0; border-radius: 999px; font-size: 18px; margin-bottom: 14px; }
-.badge20 b { font-size: 26px; }
-.hero h1 { font-size: clamp(32px, 4.5vw, 52px); font-weight: 800; letter-spacing: -.01em; }
-.hero h1 em { font-style: normal; color: var(--sun); }
-.hero p { font-size: 18px; max-width: 76ch; color: #ffe3e1; margin: 10px 0 16px; }
-.hero .ctas { display: flex; flex-wrap: wrap; gap: 12px; }
+.hero { background: #050101; color: #fff; overflow: hidden; }
+.hero-link { display: block; position: relative; max-width: 1920px; margin: 0 auto; text-decoration: none; }
+.hero-link:focus-visible { outline-offset: -4px; }
+.hero picture { display: block; }
+.hero-banner { display: block; width: 100%; height: auto; aspect-ratio: 4 / 1; }
+.hero-copy { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+.hero h1 { font-family: Arial, Helvetica, sans-serif; font-size: clamp(27px, 7vw, 42px); font-weight: 800; letter-spacing: -.035em; text-wrap: initial; }
+.hero h1 span, .hero h1 em { display: block; }
+.hero h1 em { font-style: normal; color: #ffd400; }
+.hero p { font-size: 16px; color: #f1eeee; margin: 14px 0 20px; }
+.hero-cta { display: inline-flex; align-items: center; justify-content: center; background: #e00000; color: #fff; padding: 13px 24px; border-radius: 10px; font-size: 19px; font-weight: 700; }
+@media (max-width: 860px) {
+  .hero-banner { aspect-ratio: 960 / 543; }
+  .hero picture { max-width: 620px; margin: 0 auto; }
+  .hero-copy { position: static; width: auto; height: auto; padding: 4px 24px 32px; margin: 0; overflow: visible; clip: auto; white-space: normal; text-align: center; }
+}
 .btn { display: inline-flex; align-items: center; justify-content: center; gap: 8px; padding: 12px 20px; border-radius: 999px; text-decoration: none; border: 2px solid transparent; cursor: pointer; font-weight: 700; }
 .btn.sun { background: var(--sun); color: #2b2200; }
 .btn.ghost { border-color: rgb(255 255 255 / .6); color: #fff; background: transparent; }
@@ -273,7 +281,6 @@ section { padding-block: 44px; }
   /* Botão flutuante do WhatsApp: menor, e some na página do produto (que já tem o botão de comprar) */
   .float-wa { width: 50px; height: 50px; }
   body.no-produto .float-wa { display: none; }
-  .hero .wrap { padding-block: 20px; }
   .perks ul { grid-template-columns: repeat(2, 1fr); }
   header.main .wa-btn { display: none; }
   .logo img { height: 52px; }
@@ -326,17 +333,17 @@ body:has(.lt-cookies:not([hidden])) .float-wa { bottom: calc(150px + env(safe-ar
 
 <main id="home" tabindex="-1">
   <div class="hero" id="inicio">
-    <div class="wrap">
-      <div>
-        <span class="badge20"><b>20</b> anos</span>
-        <h1>Mania de <em>preços baixos</em></h1>
-        <p>Móveis e eletrodomésticos com crediário próprio, parcelamento em até 12x e entrega e montagem grátis. Escolha no catálogo e fale com a gente pelo WhatsApp.</p>
-        <div class="ctas">
-          <a class="btn sun" href="#catalogo">Ver catálogo</a>
-          <a class="btn ghost wa-link" href="#" target="_blank" rel="noopener">Chamar no WhatsApp</a>
-        </div>
+    <a class="hero-link" id="heroAudioVideo" href="#catalogo">
+      <picture>
+        <source media="(max-width: 860px)" srcset="img/banner-imagem-e-som-produtos-mobile.jpg" width="960" height="543">
+        <img class="hero-banner" src="img/banner-imagem-e-som-1920x480.jpg" alt="Smart TV Semp Roku de 50 polegadas e caixa de som Amvox ACA 1200 sobre um pedestal com iluminação vermelha" width="1920" height="480" fetchpriority="high">
+      </picture>
+      <div class="hero-copy">
+        <h1><span>IMAGEM E SOM</span><em>PARA CURTIR MAIS</em></h1>
+        <p>TVs e caixas de som na Lojas Tropical</p>
+        <span class="hero-cta">Confira os modelos</span>
       </div>
-    </div>
+    </a>
   </div>
 
   <div class="perks"><ul class="wrap">
@@ -1353,6 +1360,11 @@ function escolherCat(cat) {
 $("catNav").addEventListener("click", e => {
   const b = e.target.closest("button[data-cat]");
   if (b) escolherCat(b.dataset.cat);
+});
+$("heroAudioVideo").addEventListener("click", e => {
+  if (e.ctrlKey || e.metaKey || e.shiftKey || e.altKey) return;
+  e.preventDefault();
+  escolherCat("Áudio e Vídeo");
 });
 // "Ver todos" / "Ver mais" de cada departamento, e "voltar a todos os departamentos"
 $("catalogo").addEventListener("click", e => {
