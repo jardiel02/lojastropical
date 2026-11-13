@@ -103,9 +103,9 @@ nav.cats button:hover, nav.cats button[aria-pressed="true"] { background: var(--
 .hero picture { display: block; }
 .hero-banner { display: block; width: 100%; height: auto; aspect-ratio: 4 / 1; }
 .hero-copy { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
-.hero h1 { font-family: Arial, Helvetica, sans-serif; font-size: clamp(27px, 7vw, 42px); font-weight: 800; letter-spacing: -.035em; text-wrap: initial; }
-.hero h1 span, .hero h1 em { display: block; }
-.hero h1 em { font-style: normal; color: #ffd400; }
+.hero-audio h2 { font-family: Arial, Helvetica, sans-serif; font-size: clamp(27px, 7vw, 42px); font-weight: 800; letter-spacing: -.035em; text-wrap: initial; }
+.hero-audio h2 span, .hero-audio h2 em { display: block; }
+.hero-audio h2 em { font-style: normal; color: #ffd400; }
 .hero p { font-size: 16px; color: #f1eeee; margin: 14px 0 20px; }
 .hero-cta { display: inline-flex; align-items: center; justify-content: center; background: #e00000; color: #fff; padding: 13px 24px; border-radius: 10px; font-size: 19px; font-weight: 700; }
 .hero-praticidade { background: #f6e9db; color: #55241d; }
@@ -118,6 +118,22 @@ nav.cats button:hover, nav.cats button[aria-pressed="true"] { background: var(--
 .hero-casa h2 span { display: block; }
 .hero-casa h2 em { color: #ffd400; font-style: normal; }
 .hero-casa .hero-cta { background: #ffd400; color: #b40013; font-size: 17px; padding: 13px 16px; max-width: 100%; }
+.banner-carousel { --focus-ring: #b40013; }
+.banner-stage { position: relative; display: grid; isolation: isolate; }
+.banner-slide { grid-area: 1 / 1; min-width: 0; opacity: 0; visibility: hidden; pointer-events: none; transition: opacity .35s ease, visibility .35s; }
+.banner-slide.is-active { opacity: 1; visibility: visible; pointer-events: auto; z-index: 1; }
+.banner-arrow { position: absolute; z-index: 2; top: 50%; transform: translateY(-50%); width: 44px; height: 44px; display: grid; place-items: center; padding: 0; border: 2px solid #fff; border-radius: 50%; background: #bd0013; color: #fff; box-shadow: 0 2px 10px rgb(0 0 0 / .22); cursor: pointer; }
+.banner-arrow:hover { background: #8c0010; }
+.banner-arrow-prev { left: 12px; }
+.banner-arrow-next { right: 12px; }
+.banner-controls { display: flex; align-items: center; justify-content: center; gap: 8px; background: var(--surface); border-bottom: 1px solid var(--line); padding: 4px 12px; }
+.banner-dots { display: flex; }
+.banner-dot { display: grid; place-items: center; width: 44px; height: 44px; border: 0; background: transparent; cursor: pointer; border-radius: 50%; }
+.banner-dot::after { content: ""; width: 10px; height: 10px; border-radius: 50%; background: #b4aaa9; transition: background .2s, width .2s; }
+.banner-dot[aria-pressed="true"]::after { width: 26px; border-radius: 999px; background: #c90012; }
+.banner-pause { display: inline-flex; gap: 6px; align-items: center; justify-content: center; min-height: 44px; padding: 0 12px; border: 0; border-radius: 999px; background: transparent; color: var(--fg); font: inherit; font-size: 13px; cursor: pointer; }
+.banner-pause:hover { background: var(--chip); }
+@media (prefers-reduced-motion: reduce) { .banner-slide, .banner-dot::after { transition: none; } }
 @media (max-width: 860px) {
   .hero-banner { aspect-ratio: 960 / 543; }
   .hero picture { max-width: 620px; margin: 0 auto; }
@@ -126,6 +142,11 @@ nav.cats button:hover, nav.cats button[aria-pressed="true"] { background: var(--
   .hero-praticidade h2 { background: #cf0011; color: #fff; padding: 18px 12px; border-radius: 18px; }
   .hero-casa .hero-banner { aspect-ratio: 720 / 543; }
   .hero-casa .hero-copy { background: #c90012; border-radius: 24px; margin: 0 24px 24px; padding: 24px 16px; }
+  .banner-slide picture { aspect-ratio: 960 / 543; }
+  .banner-slide .hero-banner { height: 100%; aspect-ratio: auto; object-fit: contain; }
+  .banner-arrow { top: min(28.28vw, 175px); }
+  .banner-arrow-prev { left: 8px; }
+  .banner-arrow-next { right: 8px; }
 }
 .btn { display: inline-flex; align-items: center; justify-content: center; gap: 8px; padding: 12px 20px; border-radius: 999px; text-decoration: none; border: 2px solid transparent; cursor: pointer; font-weight: 700; }
 .btn.sun { background: var(--sun); color: #2b2200; }
@@ -346,32 +367,28 @@ body:has(.lt-cookies:not([hidden])) .float-wa { bottom: calc(150px + env(safe-ar
 </header>
 
 <main id="home" tabindex="-1">
-  <div class="hero" id="inicio">
+  <h1 class="sr-only">Lojas Tropical — móveis e eletrodomésticos</h1>
+  <div class="banner-carousel" id="inicio" role="region" aria-roledescription="carrossel" aria-label="Destaques da Lojas Tropical">
+  <div class="banner-stage" id="bannerStage">
+  <div class="hero hero-audio banner-slide is-active" id="imagem-e-som" role="group" aria-roledescription="slide" aria-label="1 de 3: Imagem e som">
     <a class="hero-link" id="heroAudioVideo" href="#catalogo">
       <picture>
         <source media="(max-width: 860px)" srcset="img/banner-imagem-e-som-produtos-mobile.jpg" width="960" height="543">
         <img class="hero-banner" src="img/banner-imagem-e-som-1920x480.jpg" alt="Smart TV Semp Roku de 50 polegadas e caixa de som Amvox ACA 1200 sobre um pedestal com iluminação vermelha" width="1920" height="480" fetchpriority="high">
       </picture>
       <div class="hero-copy">
-        <h1><span>IMAGEM E SOM</span><em>PARA CURTIR MAIS</em></h1>
+        <h2><span>IMAGEM E SOM</span><em>PARA CURTIR MAIS</em></h2>
         <p>TVs e caixas de som na Lojas Tropical</p>
         <span class="hero-cta">Confira os modelos</span>
       </div>
     </a>
   </div>
 
-  <div class="perks"><ul class="wrap">
-    <li><span class="ic"><svg aria-hidden="true" focusable="false" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 7h16v10H4z"/><path d="M8 12h.01M12 12h4"/></svg></span><div><b>Crediário próprio</b><span>Compre no carnê da loja</span></div></li>
-    <li><span class="ic"><svg aria-hidden="true" focusable="false" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="6" width="18" height="12" rx="2"/><path d="M3 10h18"/></svg></span><div><b>Até 12x</b><span>Parcelamos sua compra</span></div></li>
-    <li><span class="ic"><svg aria-hidden="true" focusable="false" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 7h11v9H3zM14 10h4l3 3v3h-7"/><circle cx="7" cy="17" r="2"/><circle cx="17" cy="17" r="2"/></svg></span><div><b>Entrega grátis</b><span>Na região das lojas</span></div></li>
-    <li><span class="ic"><svg aria-hidden="true" focusable="false" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 4l6 6-9 9H5v-6z"/></svg></span><div><b>Montagem grátis</b><span>A gente monta pra você</span></div></li>
-  </ul></div>
-
-  <div class="hero hero-praticidade" id="praticidade">
+  <div class="hero hero-praticidade banner-slide" id="praticidade" role="group" aria-roledescription="slide" aria-label="2 de 3: Mais praticidade" aria-hidden="true" inert>
     <a class="hero-link" id="bannerPraticidade" href="#catalogo">
       <picture>
         <source media="(max-width: 860px)" srcset="img/banner-praticidade-produtos-mobile.jpg" width="900" height="543">
-        <img class="hero-banner" src="img/banner-praticidade-1920x480.jpg" alt="Forno Elétrico Suggar de 50 litros preto, Liquidificador Britânia Diamante Vermelho e Ventilador Mondial Super Power VSP40 sobre bancada de madeira clara" width="1920" height="480" loading="lazy">
+        <img class="hero-banner" src="img/banner-praticidade-1920x480.jpg" alt="Forno Elétrico Suggar de 50 litros preto, Liquidificador Britânia Diamante Vermelho e Ventilador Mondial Super Power VSP40 sobre bancada de madeira clara" width="1920" height="480" loading="eager">
       </picture>
       <div class="hero-copy">
         <h2><span>MAIS <em>PRATICIDADE</em></span><span>NO SEU DIA A DIA</span></h2>
@@ -381,11 +398,11 @@ body:has(.lt-cookies:not([hidden])) .float-wa { bottom: calc(150px + env(safe-ar
     </a>
   </div>
 
-  <div class="hero hero-casa" id="casa-completa">
+  <div class="hero hero-casa banner-slide" id="casa-completa" role="group" aria-roledescription="slide" aria-label="3 de 3: Sua casa mais completa" aria-hidden="true" inert>
     <a class="hero-link" id="bannerCasaCompleta" href="#catalogo">
       <picture>
         <source media="(max-width: 860px)" srcset="img/banner-casa-completa-produtos-mobile.jpg" width="720" height="543">
-        <img class="hero-banner" src="img/banner-casa-completa-1920x480.jpg" alt="Geladeira Consul CRM50MK inox, lavadora Electrolux LES11 branca com abertura superior e fogão Mueller Decorato Vetro de cinco bocas preto fosco" width="1920" height="480" loading="lazy">
+        <img class="hero-banner" src="img/banner-casa-completa-1920x480.jpg" alt="Geladeira Consul CRM50MK inox, lavadora Electrolux LES11 branca com abertura superior e fogão Mueller Decorato Vetro de cinco bocas preto fosco" width="1920" height="480" loading="eager">
       </picture>
       <div class="hero-copy">
         <h2><span>SUA CASA</span><span>MAIS <em>COMPLETA</em></span></h2>
@@ -394,6 +411,31 @@ body:has(.lt-cookies:not([hidden])) .float-wa { bottom: calc(150px + env(safe-ar
       </div>
     </a>
   </div>
+
+    <button class="banner-arrow banner-arrow-prev" id="bannerPrev" type="button" aria-label="Banner anterior" aria-controls="bannerStage"><svg aria-hidden="true" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="m15 5-7 7 7 7"/></svg></button>
+    <button class="banner-arrow banner-arrow-next" id="bannerNext" type="button" aria-label="Próximo banner" aria-controls="bannerStage"><svg aria-hidden="true" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="m9 5 7 7-7 7"/></svg></button>
+  </div>
+  <div class="banner-controls">
+    <div class="banner-dots" role="group" aria-label="Escolher banner">
+      <button class="banner-dot" type="button" aria-label="Mostrar banner 1: Imagem e som" aria-controls="imagem-e-som" aria-pressed="true"></button>
+      <button class="banner-dot" type="button" aria-label="Mostrar banner 2: Mais praticidade" aria-controls="praticidade" aria-pressed="false"></button>
+      <button class="banner-dot" type="button" aria-label="Mostrar banner 3: Sua casa mais completa" aria-controls="casa-completa" aria-pressed="false"></button>
+    </div>
+    <button class="banner-pause" id="bannerPause" type="button" aria-label="Pausar troca automática">
+      <svg id="bannerPauseIcon" aria-hidden="true" width="16" height="16" viewBox="0 0 16 16" fill="currentColor"><path d="M4 3h3v10H4zm5 0h3v10H9z"/></svg>
+      <svg id="bannerPlayIcon" aria-hidden="true" width="16" height="16" viewBox="0 0 16 16" fill="currentColor" hidden><path d="m4 2 10 6-10 6z"/></svg>
+      <span id="bannerPauseText">Pausar</span>
+    </button>
+  </div>
+  <span class="sr-only" id="bannerStatus" role="status" aria-live="polite"></span>
+  </div>
+
+  <div class="perks"><ul class="wrap">
+    <li><span class="ic"><svg aria-hidden="true" focusable="false" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 7h16v10H4z"/><path d="M8 12h.01M12 12h4"/></svg></span><div><b>Crediário próprio</b><span>Compre no carnê da loja</span></div></li>
+    <li><span class="ic"><svg aria-hidden="true" focusable="false" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="6" width="18" height="12" rx="2"/><path d="M3 10h18"/></svg></span><div><b>Até 12x</b><span>Parcelamos sua compra</span></div></li>
+    <li><span class="ic"><svg aria-hidden="true" focusable="false" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 7h11v9H3zM14 10h4l3 3v3h-7"/><circle cx="7" cy="17" r="2"/><circle cx="17" cy="17" r="2"/></svg></span><div><b>Entrega grátis</b><span>Na região das lojas</span></div></li>
+    <li><span class="ic"><svg aria-hidden="true" focusable="false" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 4l6 6-9 9H5v-6z"/></svg></span><div><b>Montagem grátis</b><span>A gente monta pra você</span></div></li>
+  </ul></div>
 
   <section id="catalogo">
     <div class="wrap">
@@ -539,6 +581,7 @@ body:has(.lt-cookies:not([hidden])) .float-wa { bottom: calc(150px + env(safe-ar
 
 <script src="estoque.js"></script>
 <script src="legal.js"></script>
+<script src="banner-carousel.js" defer></script>
 <script>
 // ===== Dados da loja: edite aqui =====
 const WHATSAPP = "559981771035";           // DDI 55 + DDD + número, só dígitos
