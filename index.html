@@ -113,12 +113,19 @@ nav.cats button:hover, nav.cats button[aria-pressed="true"] { background: var(--
 .hero-praticidade h2 span { display: block; }
 .hero-praticidade h2 em { color: #ffd400; font-style: normal; }
 .hero-praticidade p { color: #55241d; }
+.hero-casa { background: #f5f5f5; color: #fff; }
+.hero-casa h2 { font-family: Arial, Helvetica, sans-serif; font-size: clamp(25px, 6vw, 38px); font-weight: 800; line-height: 1.1; letter-spacing: -.035em; text-wrap: initial; }
+.hero-casa h2 span { display: block; }
+.hero-casa h2 em { color: #ffd400; font-style: normal; }
+.hero-casa .hero-cta { background: #ffd400; color: #b40013; font-size: 17px; padding: 13px 16px; max-width: 100%; }
 @media (max-width: 860px) {
   .hero-banner { aspect-ratio: 960 / 543; }
   .hero picture { max-width: 620px; margin: 0 auto; }
   .hero-copy { position: static; width: auto; height: auto; padding: 4px 24px 32px; margin: 0; overflow: visible; clip: auto; white-space: normal; text-align: center; }
   .hero-praticidade .hero-banner { aspect-ratio: 900 / 543; }
   .hero-praticidade h2 { background: #cf0011; color: #fff; padding: 18px 12px; border-radius: 18px; }
+  .hero-casa .hero-banner { aspect-ratio: 720 / 543; }
+  .hero-casa .hero-copy { background: #c90012; border-radius: 24px; margin: 0 24px 24px; padding: 24px 16px; }
 }
 .btn { display: inline-flex; align-items: center; justify-content: center; gap: 8px; padding: 12px 20px; border-radius: 999px; text-decoration: none; border: 2px solid transparent; cursor: pointer; font-weight: 700; }
 .btn.sun { background: var(--sun); color: #2b2200; }
@@ -370,6 +377,20 @@ body:has(.lt-cookies:not([hidden])) .float-wa { bottom: calc(150px + env(safe-ar
         <h2><span>MAIS <em>PRATICIDADE</em></span><span>NO SEU DIA A DIA</span></h2>
         <p>Facilite sua rotina<br>com a Lojas Tropical</p>
         <span class="hero-cta">Confira os produtos</span>
+      </div>
+    </a>
+  </div>
+
+  <div class="hero hero-casa" id="casa-completa">
+    <a class="hero-link" id="bannerCasaCompleta" href="#catalogo">
+      <picture>
+        <source media="(max-width: 860px)" srcset="img/banner-casa-completa-produtos-mobile.jpg" width="720" height="543">
+        <img class="hero-banner" src="img/banner-casa-completa-1920x480.jpg" alt="Geladeira Consul CRM50MK inox, lavadora Electrolux LES11 branca com abertura superior e fogão Mueller Decorato Vetro de cinco bocas preto fosco" width="1920" height="480" loading="lazy">
+      </picture>
+      <div class="hero-copy">
+        <h2><span>SUA CASA</span><span>MAIS <em>COMPLETA</em></span></h2>
+        <p>Eletrodomésticos para sua casa<br>você encontra na Lojas Tropical</p>
+        <span class="hero-cta">Ver eletrodomésticos</span>
       </div>
     </a>
   </div>
@@ -1392,6 +1413,11 @@ $("bannerPraticidade").addEventListener("click", e => {
   if (e.ctrlKey || e.metaKey || e.shiftKey || e.altKey) return;
   e.preventDefault();
   escolherCat("Mais praticidade");
+});
+$("bannerCasaCompleta").addEventListener("click", e => {
+  if (e.ctrlKey || e.metaKey || e.shiftKey || e.altKey) return;
+  e.preventDefault();
+  escolherCat("Eletrodomésticos");
 });
 // "Ver todos" / "Ver mais" de cada departamento, e "voltar a todos os departamentos"
 $("catalogo").addEventListener("click", e => {
