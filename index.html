@@ -4,17 +4,23 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Lojas Tropical</title>
+<meta name="description" content="Lojas Tropical: móveis e eletrodomésticos no Maranhão com crediário próprio, parcelamento em até 12x e entrega e montagem grátis.">
+<link rel="stylesheet" href="legal.css">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;700;800&family=Figtree:wght@400;500;600;700&display=swap">
 <style>
 /* Layout: cabeçalho vermelho da marca com logo, busca e carrinho; página inicial (vitrine, catálogo, lojas) e página de produto no mesmo arquivo */
 :root {
+  /* Cores revisadas para contraste mínimo WCAG AA (4,5:1 em texto) */
   --red: #d8121b;
   --red-deep: #9c0a10;
-  --green: #3aa52a;
-  --buy: #1f9d3a;
+  --red-text: #c3101a;
+  --green: #2a7a1e;
+  --buy: #187a2e;
+  --buy-text: #187a2e;
   --sun: #ffd400;
+  --focus-ring: #231a18;
   --bg: #fbf7f4;
   --surface: #ffffff;
   --fg: #231a18;
@@ -28,16 +34,16 @@
 }
 @media (prefers-color-scheme: dark) {
   :root:not([data-theme="light"]) {
-    --red: #e3242c; --red-deep: #7a0a0e; --green: #5cc94a; --buy: #27b347; --sun: #ffd84d;
-    --bg: #141010; --surface: #1e1817; --fg: #f4ece9; --muted: #b3a6a2;
-    --line: #352b29; --chip: #2c1d1c; --price: #ff6b6b;
+    --red: #c8141c; --red-deep: #7a0a0e; --red-text: #ff8a8a; --green: #5cc94a; --buy: #187a2e; --buy-text: #5cc94a; --sun: #ffd84d;
+    --bg: #141010; --surface: #1e1817; --fg: #f4ece9; --muted: #c2b6b2;
+    --line: #352b29; --chip: #2c1d1c; --price: #ff6b6b; --focus-ring: #ffd84d;
     color-scheme: dark;
   }
 }
 :root[data-theme="dark"] {
-  --red: #e3242c; --red-deep: #7a0a0e; --green: #5cc94a; --buy: #27b347; --sun: #ffd84d;
-  --bg: #141010; --surface: #1e1817; --fg: #f4ece9; --muted: #b3a6a2;
-  --line: #352b29; --chip: #2c1d1c; --price: #ff6b6b;
+  --red: #c8141c; --red-deep: #7a0a0e; --red-text: #ff8a8a; --green: #5cc94a; --buy: #187a2e; --buy-text: #5cc94a; --sun: #ffd84d;
+  --bg: #141010; --surface: #1e1817; --fg: #f4ece9; --muted: #c2b6b2;
+  --line: #352b29; --chip: #2c1d1c; --price: #ff6b6b; --focus-ring: #ffd84d;
   color-scheme: dark;
 }
 * { box-sizing: border-box; }
@@ -46,7 +52,13 @@ body { background: var(--bg); color: var(--fg); font-family: var(--font-body); f
 body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-area-inset-top, 0px); z-index: 10; background: var(--red-deep); }
 a { color: inherit; }
 button { font: inherit; }
-:focus-visible { outline: 3px solid var(--sun); outline-offset: 2px; }
+/* Foco visível: escuro sobre fundos claros, amarelo sobre as faixas vermelhas */
+:focus-visible { outline: 3px solid var(--focus-ring); outline-offset: 2px; }
+.topbar, header.main, .hero, nav.cats { --focus-ring: #ffd400; }
+.skip { position: absolute; left: 12px; top: -80px; z-index: 50; background: var(--sun); color: #2b2200; padding: 10px 16px; border-radius: 10px; font-weight: 700; text-decoration: none; }
+.skip:focus { top: 12px; }
+main:focus, h1:focus, h2:focus { outline: none; }
+.sr-only { position: absolute !important; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0; }
 h1, h2, h3 { font-family: var(--font-display); text-wrap: balance; margin: 0; line-height: 1.05; }
 .wrap { max-width: 1200px; margin: 0 auto; padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); }
 
@@ -117,11 +129,11 @@ section { padding-block: 44px; }
 
 .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(230px, 1fr)); gap: 18px; }
 .card { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); display: flex; flex-direction: column; overflow: hidden; transition: transform .15s, box-shadow .15s; position: relative; }
-.card:hover { transform: translateY(-2px); box-shadow: 0 10px 24px rgb(156 10 16 / .14); }
+.card:hover, .card:focus-within { transform: translateY(-2px); box-shadow: 0 10px 24px rgb(156 10 16 / .14); }
 .card .pic { aspect-ratio: 1; max-width: 100%; background: #fff; position: relative; display: block; }
 .card .pic img { width: 100%; height: 100%; object-fit: contain; display: block; }
 .card .pic.cover img { object-fit: cover; }
-.tag { position: absolute; top: 10px; left: 10px; background: var(--green); color: #fff; font-size: 11px; font-weight: 700; padding: 3px 9px; border-radius: 999px; text-transform: uppercase; letter-spacing: .04em; z-index: 1; }
+.tag { position: absolute; top: 10px; left: 10px; background: var(--buy); color: #fff; font-size: 11px; font-weight: 700; padding: 3px 9px; border-radius: 999px; text-transform: uppercase; letter-spacing: .04em; z-index: 1; }
 .card .body { padding: 14px 16px 16px; display: flex; flex-direction: column; gap: 4px; flex: 1; min-width: 0; }
 .cat { font-size: 12px; color: var(--muted); text-transform: uppercase; letter-spacing: .08em; font-weight: 600; }
 .card h3 { font-family: var(--font-body); font-size: 16px; font-weight: 600; line-height: 1.3; }
@@ -146,25 +158,27 @@ section { padding-block: 44px; }
 .stores { display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 16px; }
 .store { background: var(--surface); border: 1px solid var(--line); border-radius: 16px; padding: 18px 20px; display: flex; flex-direction: column; gap: 6px; }
 .store h3 { margin: 0; font-size: 17px; display: flex; align-items: center; gap: 8px; }
-.store h3 svg { color: var(--red); flex: none; }
-.store .city { color: var(--red); font-weight: 700; font-size: 13px; text-transform: uppercase; letter-spacing: .04em; }
+.store h3 svg { color: var(--red-text); flex: none; }
+.store .city { color: var(--red-text); font-weight: 700; font-size: 13px; text-transform: uppercase; letter-spacing: .04em; }
 .store address { font-style: normal; color: var(--muted); font-size: 14px; line-height: 1.5; flex: 1; }
-.store a { color: var(--red); font-weight: 700; font-size: 14px; text-decoration: none; margin-top: 4px; }
+.store a { color: var(--red-text); font-weight: 700; font-size: 14px; text-decoration: none; margin-top: 4px; }
 .store a:hover { text-decoration: underline; }
 .note { color: var(--muted); font-size: 14px; max-width: 65ch; }
 
 .social { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 16px; }
 .social a { display: flex; align-items: center; gap: 14px; padding: 18px; border-radius: var(--radius); text-decoration: none; color: #fff; font-weight: 700; }
 .social a span { display: block; font-weight: 500; font-size: 14px; opacity: .92; }
-.s-ig { background: linear-gradient(135deg, #f58529, #dd2a7b 55%, #8134af); }
-.s-lk { background: #2f8a22; }
-.s-wa { background: #128c4a; }
+.s-ig { background: linear-gradient(135deg, #c1356f, #a02f8f 55%, #6a2fa8); }
+.s-lk { background: #26731b; }
+.s-wa { background: #0b7a3e; }
 
 /* ===== Página do produto ===== */
 .crumbs { font-size: 14px; color: var(--muted); padding-block: 16px; display: flex; flex-wrap: wrap; gap: 6px; }
 .crumbs a { text-decoration: none; }
 .crumbs a:hover { text-decoration: underline; color: var(--fg); }
-.crumbs b { color: var(--red); font-weight: 700; }
+.crumbs b { color: var(--red-text); font-weight: 700; }
+.estoque-ok { color: var(--buy-text); }
+.estoque-fim { color: var(--red-text); }
 .pdp { display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr); gap: 32px; align-items: start; padding-bottom: 40px; }
 .gallery { display: grid; grid-template-columns: 84px minmax(0, 1fr); gap: 14px; align-items: start; }
 .thumbs { display: flex; flex-direction: column; gap: 10px; max-height: 560px; overflow-y: auto; }
@@ -187,13 +201,13 @@ section { padding-block: 44px; }
 .swatches button { border: 2px solid var(--line); background: var(--surface); color: var(--fg); border-radius: 999px; padding: 6px 14px; cursor: pointer; font-size: 14px; font-weight: 600; }
 .swatches button[aria-pressed="true"] { border-color: var(--red); background: var(--chip); }
 .qty { display: inline-flex; align-items: center; border: 2px solid var(--red); border-radius: 10px; overflow: hidden; align-self: start; justify-self: start; }
-.qty button { border: 0; background: transparent; color: var(--red); width: 44px; height: 44px; font-size: 22px; font-weight: 700; cursor: pointer; }
+.qty button { border: 0; background: transparent; color: var(--red-text); width: 44px; height: 44px; font-size: 22px; font-weight: 700; cursor: pointer; }
 .qty output { min-width: 40px; text-align: center; font-weight: 700; font-size: 18px; font-variant-numeric: tabular-nums; }
 .buy-now { background: var(--buy); color: #fff; border: 0; border-radius: 12px; padding: 16px; font-weight: 800; font-size: 17px; letter-spacing: .08em; text-transform: uppercase; text-decoration: none; display: flex; justify-content: center; align-items: center; gap: 10px; cursor: pointer; }
 .buy-now:hover { filter: brightness(1.06); }
-.add-cart { background: transparent; color: var(--buy); border: 2px solid var(--buy); border-radius: 12px; padding: 14px; font-weight: 800; font-size: 16px; letter-spacing: .08em; text-transform: uppercase; display: flex; justify-content: center; align-items: center; gap: 10px; cursor: pointer; }
+.add-cart { background: transparent; color: var(--buy-text); border: 2px solid var(--buy-text); border-radius: 12px; padding: 14px; font-weight: 800; font-size: 16px; letter-spacing: .08em; text-transform: uppercase; display: flex; justify-content: center; align-items: center; gap: 10px; cursor: pointer; }
 .add-cart:hover { background: color-mix(in srgb, var(--buy) 10%, transparent); }
-.added { color: var(--buy); font-weight: 700; font-size: 14px; min-height: 1.5em; }
+.added { color: var(--buy-text); font-weight: 700; font-size: 14px; min-height: 1.5em; }
 .added a { color: inherit; }
 .benefits { background: var(--chip); border-radius: var(--radius); padding: 16px 18px; display: grid; gap: 12px; }
 .benefits ul { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: 1fr 1fr; gap: 10px 16px; }
@@ -227,14 +241,12 @@ section { padding-block: 44px; }
 .cart-item .sub { font-size: 13px; color: var(--muted); }
 .cart-item .ctl { display: flex; gap: 10px; align-items: center; margin-top: 6px; }
 .cart-item .ctl button { border: 1px solid var(--line); background: var(--surface); color: var(--fg); width: 30px; height: 30px; border-radius: 8px; cursor: pointer; font-weight: 700; }
-.cart-item .ctl .rm { width: auto; padding: 0 10px; font-size: 13px; font-weight: 600; color: var(--red); }
+.cart-item .ctl .rm { width: auto; padding: 0 10px; font-size: 13px; font-weight: 600; color: var(--red-text); }
 .cart-foot { padding: 16px 20px 20px; border-top: 1px solid var(--line); display: grid; gap: 10px; }
 .cart-foot p { margin: 0; font-size: 13px; color: var(--muted); }
+.cart-foot a:not(.buy-now) { color: var(--fg); }
 .cart-empty { color: var(--muted); padding: 30px 0; text-align: center; }
 
-footer { background: var(--red-deep); color: #ffd9d6; font-size: 14px; }
-footer .wrap { padding-block: 28px; display: flex; flex-wrap: wrap; gap: 12px 32px; justify-content: space-between; align-items: center; }
-footer img { height: 48px; width: auto; }
 
 .float-wa { position: fixed; right: calc(18px + env(safe-area-inset-right, 0px)); bottom: calc(18px + env(safe-area-inset-bottom, 0px)); width: 58px; height: 58px; border-radius: 50%; background: #25d366; display: grid; place-items: center; box-shadow: 0 6px 18px rgb(0 0 0 / .25); z-index: 6; }
 
@@ -249,7 +261,6 @@ footer img { height: 48px; width: auto; }
   /* Botão flutuante do WhatsApp: menor, e some na página do produto (que já tem o botão de comprar) */
   .float-wa { width: 50px; height: 50px; }
   body.no-produto .float-wa { display: none; }
-  footer .wrap { padding-bottom: 84px; }
   .hero .wrap { grid-template-columns: 1fr; padding-block: 28px; }
   .perks ul { grid-template-columns: repeat(2, 1fr); }
   header.main .wa-btn { display: none; }
@@ -269,15 +280,18 @@ footer img { height: 48px; width: auto; }
   .benefits ul { grid-template-columns: 1fr; }
   .cart-btn .lbl { display: none; }
 }
-@media (prefers-reduced-motion: reduce) { .card { transition: none; } .card:hover { transform: none; } }
+@media (prefers-reduced-motion: reduce) { .card { transition: none; } .card:hover, .card:focus-within { transform: none; } nav.cats ul { scroll-behavior: auto; } }
+/* Com o aviso de cookies aberto, o botão do WhatsApp sobe para não ficar por baixo */
+body:has(.lt-cookies:not([hidden])) .float-wa { bottom: calc(150px + env(safe-area-inset-bottom, 0px)); }
+@media (max-width: 560px) { body:has(.lt-cookies:not([hidden])) .float-wa { display: none; } }
 </style>
 </head>
 <body>
-
+<a class="skip" href="#conteudo" id="skipLink">Pular para o conteúdo</a>
 
 <div class="topbar"><div class="wrap">
   <span>Crediário próprio · Parcelamos em até 12x · Entrega e montagem grátis</span>
-  <a href="https://instagram.com/lojastropicaloficial" target="_blank" rel="noopener">@lojastropicaloficial</a>
+  <a href="https://instagram.com/lojastropicaloficial" target="_blank" rel="noopener">@lojastropicaloficial<span class="sr-only"> no Instagram (abre em nova aba)</span></a>
 </div></div>
 
 <header class="main">
@@ -290,7 +304,7 @@ footer img { height: 48px; width: auto; }
     <div class="head-actions">
       <a class="wa-btn wa-link" href="#" target="_blank" rel="noopener">Compre pelo WhatsApp</a>
       <button class="cart-btn" type="button" id="openCart" aria-label="Abrir carrinho">
-        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 4h2l2.4 11h11l2-8H6.2"/><circle cx="9" cy="19.5" r="1.5"/><circle cx="17" cy="19.5" r="1.5"/></svg>
+        <svg aria-hidden="true" focusable="false" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 4h2l2.4 11h11l2-8H6.2"/><circle cx="9" cy="19.5" r="1.5"/><circle cx="17" cy="19.5" r="1.5"/></svg>
         <span class="lbl">Carrinho</span><span class="cart-count" id="cartCount">0</span>
       </button>
     </div>
@@ -298,7 +312,7 @@ footer img { height: 48px; width: auto; }
   <nav class="cats" aria-label="Departamentos"><button type="button" class="cat-arrow esq" id="catEsq" aria-label="Ver departamentos anteriores" hidden>‹</button><ul class="wrap" id="catNav"></ul><button type="button" class="cat-arrow dir" id="catDir" aria-label="Ver mais departamentos" hidden>›</button></nav>
 </header>
 
-<main id="home">
+<main id="home" tabindex="-1">
   <div class="hero" id="inicio">
     <div class="wrap">
       <div>
@@ -319,17 +333,17 @@ footer img { height: 48px; width: auto; }
   </div>
 
   <div class="perks"><ul class="wrap">
-    <li><span class="ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 7h16v10H4z"/><path d="M8 12h.01M12 12h4"/></svg></span><div><b>Crediário próprio</b><span>Compre no carnê da loja</span></div></li>
-    <li><span class="ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="6" width="18" height="12" rx="2"/><path d="M3 10h18"/></svg></span><div><b>Até 12x</b><span>Parcelamos sua compra</span></div></li>
-    <li><span class="ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 7h11v9H3zM14 10h4l3 3v3h-7"/><circle cx="7" cy="17" r="2"/><circle cx="17" cy="17" r="2"/></svg></span><div><b>Entrega grátis</b><span>Na região das lojas</span></div></li>
-    <li><span class="ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 4l6 6-9 9H5v-6z"/></svg></span><div><b>Montagem grátis</b><span>A gente monta pra você</span></div></li>
+    <li><span class="ic"><svg aria-hidden="true" focusable="false" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 7h16v10H4z"/><path d="M8 12h.01M12 12h4"/></svg></span><div><b>Crediário próprio</b><span>Compre no carnê da loja</span></div></li>
+    <li><span class="ic"><svg aria-hidden="true" focusable="false" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="6" width="18" height="12" rx="2"/><path d="M3 10h18"/></svg></span><div><b>Até 12x</b><span>Parcelamos sua compra</span></div></li>
+    <li><span class="ic"><svg aria-hidden="true" focusable="false" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 7h11v9H3zM14 10h4l3 3v3h-7"/><circle cx="7" cy="17" r="2"/><circle cx="17" cy="17" r="2"/></svg></span><div><b>Entrega grátis</b><span>Na região das lojas</span></div></li>
+    <li><span class="ic"><svg aria-hidden="true" focusable="false" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 4l6 6-9 9H5v-6z"/></svg></span><div><b>Montagem grátis</b><span>A gente monta pra você</span></div></li>
   </ul></div>
 
   <section id="catalogo">
     <div class="wrap">
       <div class="sec-head">
         <div><span class="eyebrow">Catálogo</span><h2 id="catTitle">Todos os produtos</h2></div>
-        <span class="count" id="count"></span>
+        <span class="count" id="count" role="status"></span>
       </div>
       <div class="grid" id="grid"></div>
     </div>
@@ -347,15 +361,15 @@ footer img { height: 48px; width: auto; }
     <div class="wrap">
       <div class="sec-head"><div><span class="eyebrow">Redes sociais</span><h2>Siga a Tropical</h2></div></div>
       <div class="social">
-        <a class="s-ig" href="https://instagram.com/lojastropicaloficial" target="_blank" rel="noopener"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="#fff"/></svg><div>Instagram<span>@lojastropicaloficial</span></div></a>
-        <a class="s-lk" href="https://linkme.bio/LojasTropical" target="_blank" rel="noopener"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2"><path d="M10 14a4 4 0 0 0 6 0l3-3a4 4 0 0 0-6-6l-1 1M14 10a4 4 0 0 0-6 0l-3 3a4 4 0 0 0 6 6l1-1"/></svg><div>Todos os links<span>linkme.bio/LojasTropical</span></div></a>
-        <a class="s-wa wa-link" href="#" target="_blank" rel="noopener"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2"><path d="M21 12a8 8 0 0 1-12 7l-5 1 1-4.5A8 8 0 1 1 21 12z"/></svg><div>WhatsApp<span class="wa-text"></span></div></a>
+        <a class="s-ig" href="https://instagram.com/lojastropicaloficial" target="_blank" rel="noopener"><svg aria-hidden="true" focusable="false" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="#fff"/></svg><div>Instagram<span>@lojastropicaloficial</span></div></a>
+        <a class="s-lk" href="https://linkme.bio/LojasTropical" target="_blank" rel="noopener"><svg aria-hidden="true" focusable="false" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2"><path d="M10 14a4 4 0 0 0 6 0l3-3a4 4 0 0 0-6-6l-1 1M14 10a4 4 0 0 0-6 0l-3 3a4 4 0 0 0 6 6l1-1"/></svg><div>Todos os links<span>linkme.bio/LojasTropical</span></div></a>
+        <a class="s-wa wa-link" href="#" target="_blank" rel="noopener"><svg aria-hidden="true" focusable="false" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2"><path d="M21 12a8 8 0 0 1-12 7l-5 1 1-4.5A8 8 0 1 1 21 12z"/></svg><div>WhatsApp<span class="wa-text"></span></div></a>
       </div>
     </div>
   </section>
 </main>
 
-<main id="produto" hidden>
+<main id="produto" hidden tabindex="-1">
   <div class="wrap">
     <nav class="crumbs" id="crumbs" aria-label="Você está em"></nav>
     <div class="pdp">
@@ -366,7 +380,7 @@ footer img { height: 48px; width: auto; }
       <div class="buy">
         <div>
           <span class="cat" id="pCat"></span>
-          <h1 id="pName"></h1>
+          <h1 id="pName" tabindex="-1"></h1>
         </div>
         <div class="meta" id="pMeta"></div>
         <div class="pricebox" id="pPrice"></div>
@@ -380,20 +394,20 @@ footer img { height: 48px; width: auto; }
           </div>
         </div>
         <a class="buy-now" id="buyNow" href="#" target="_blank" rel="noopener">
-          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M21 12a8 8 0 0 1-12 7l-5 1 1-4.5A8 8 0 1 1 21 12z"/></svg>
+          <svg aria-hidden="true" focusable="false" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M21 12a8 8 0 0 1-12 7l-5 1 1-4.5A8 8 0 1 1 21 12z"/></svg>
           <span id="buyNowTxt">Comprar pelo WhatsApp</span>
         </a>
         <button class="add-cart" type="button" id="addCart">
-          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 4h2l2.4 11h11l2-8H6.2"/><circle cx="9" cy="19.5" r="1.5"/><circle cx="17" cy="19.5" r="1.5"/></svg>
+          <svg aria-hidden="true" focusable="false" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 4h2l2.4 11h11l2-8H6.2"/><circle cx="9" cy="19.5" r="1.5"/><circle cx="17" cy="19.5" r="1.5"/></svg>
           Adicionar ao carrinho
         </button>
         <div class="added" id="added" aria-live="polite"></div>
         <div class="benefits">
           <ul>
-            <li><span class="ic"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 7h11v9H3zM14 10h4l3 3v3h-7"/><circle cx="7" cy="17" r="2"/><circle cx="17" cy="17" r="2"/></svg></span>Entrega grátis</li>
-            <li><span class="ic"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 4l6 6-9 9H5v-6z"/></svg></span>Montagem grátis</li>
-            <li><span class="ic"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 7h16v10H4z"/><path d="M8 12h.01M12 12h4"/></svg></span>Crediário próprio</li>
-            <li><span class="ic"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="6" width="18" height="12" rx="2"/><path d="M3 10h18"/></svg></span>Até 12x no cartão</li>
+            <li><span class="ic"><svg aria-hidden="true" focusable="false" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 7h11v9H3zM14 10h4l3 3v3h-7"/><circle cx="7" cy="17" r="2"/><circle cx="17" cy="17" r="2"/></svg></span>Entrega grátis</li>
+            <li><span class="ic"><svg aria-hidden="true" focusable="false" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 4l6 6-9 9H5v-6z"/></svg></span>Montagem grátis</li>
+            <li><span class="ic"><svg aria-hidden="true" focusable="false" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 7h16v10H4z"/><path d="M8 12h.01M12 12h4"/></svg></span>Crediário próprio</li>
+            <li><span class="ic"><svg aria-hidden="true" focusable="false" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="6" width="18" height="12" rx="2"/><path d="M3 10h18"/></svg></span>Até 12x no cartão</li>
           </ul>
           <span class="field-label">Consulte a entrega na sua cidade</span>
           <div class="ship">
@@ -421,26 +435,54 @@ footer img { height: 48px; width: auto; }
 </main>
 
 <div class="scrim" id="scrim" hidden></div>
-<aside class="drawer" id="drawer" hidden aria-label="Carrinho">
-  <header><h2>Seu carrinho</h2><button class="close" type="button" id="closeCart" aria-label="Fechar carrinho">×</button></header>
+<div class="drawer" id="drawer" hidden role="dialog" aria-modal="true" aria-labelledby="cartTitle">
+  <header><h2 id="cartTitle">Seu carrinho</h2><button class="close" type="button" id="closeCart" aria-label="Fechar carrinho">×</button></header>
   <div class="cart-items" id="cartItems"></div>
   <div class="cart-foot">
     <a class="buy-now" id="sendCart" href="#" target="_blank" rel="noopener">Enviar pedido pelo WhatsApp</a>
     <p>Você combina a forma de pagamento (crediário, cartão em até 12x ou Pix) e a entrega com o vendedor.</p>
+    <p>A conversa acontece no WhatsApp. Usamos seus dados só para atender e entregar o pedido, conforme a <a href="politica-de-privacidade.html">Política de Privacidade</a>. Compras pelo WhatsApp podem ser canceladas em até 7 dias após o recebimento (<a href="politica-de-trocas-e-reembolso.html">ver trocas e reembolso</a>).</p>
   </div>
-</aside>
+</div>
 
-<footer><div class="wrap">
-  <img src="img/logo.png" alt="Lojas Tropical" width="520" height="223">
-  <span>© 2026 Lojas Tropical · Móveis e eletrodomésticos · Maranhão</span>
-  <span>Em breve: compre online.</span>
-</div></footer>
+<footer class="lt-rodape">
+  <div class="lt-rodape-in">
+    <div>
+      <img src="img/logo.png" alt="Lojas Tropical" width="520" height="223">
+      <p>Móveis e eletrodomésticos com crediário próprio, há 20 anos no Maranhão. Em breve: compre online.</p>
+    </div>
+    <nav aria-labelledby="rod-inst">
+      <h2 id="rod-inst">Institucional</h2>
+      <ul>
+        <li><a href="politica-de-privacidade.html">Política de Privacidade</a></li>
+        <li><a href="termos-de-uso.html">Termos de Uso</a></li>
+        <li><a href="politica-de-trocas-e-reembolso.html">Trocas, Devoluções e Reembolso</a></li>
+        <li><a href="politica-de-cookies.html">Política de Cookies</a></li>
+        <li><button type="button" class="lt-link-btn" data-lt-preferencias>Preferências de cookies</button></li>
+        <li><a href="politica-de-privacidade.html#direitos">Seus direitos (LGPD)</a></li>
+      </ul>
+    </nav>
+    <div>
+      <h2>Dados da empresa</h2>
+      <address>
+        <p data-empresa="razaoSocial">R N SAMPAIO PIMENTA LTDA</p>
+        <p>CNPJ: <span data-empresa="cnpj">10.665.286/0001-88</span> · IE: <span data-empresa="inscricaoEstadual">123121671</span></p>
+        <p data-empresa="endereco">Rua Francisco Bernadino, nº 1371-A, São Sebastião, Codó - MA, CEP 65400-000</p>
+        <p>Telefone e WhatsApp: <a data-empresa-wa href="https://wa.me/559981771035"><span data-empresa="telefone">(99) 98177-1035</span></a></p>
+        <p>E-mail: <a data-empresa-mail="email" href="#">contato@lojastropical.com.br</a></p>
+        <p>Atendimento: <span data-empresa="atendimento">segunda a sábado, das 8h às 18h</span></p>
+      </address>
+    </div>
+  </div>
+  <div class="lt-rodape-fim"><p>© 2026 Lojas Tropical. Preços e condições podem mudar sem aviso; vale o valor confirmado pelo vendedor no momento da compra. Imagens meramente ilustrativas.</p></div>
+</footer>
 
 <a class="float-wa wa-link" href="#" target="_blank" rel="noopener" aria-label="Conversar no WhatsApp">
-  <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="#06301a" stroke-width="2.2"><path d="M21 12a8 8 0 0 1-12 7l-5 1 1-4.5A8 8 0 1 1 21 12z"/></svg>
+  <svg aria-hidden="true" focusable="false" width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="#06301a" stroke-width="2.2"><path d="M21 12a8 8 0 0 1-12 7l-5 1 1-4.5A8 8 0 1 1 21 12z"/></svg>
 </a>
 
 <script src="estoque.js"></script>
+<script src="legal.js"></script>
 <script>
 // ===== Dados da loja: edite aqui =====
 const WHATSAPP = "559981771035";           // DDI 55 + DDD + número, só dígitos
@@ -1012,7 +1054,7 @@ function cardHTML(p) {
         ${precoCard(p)}
         <div class="order">
           <a class="see" href="#produto-${p.id}">Ver produto</a>
-          <a class="wa" href="${waLink((esgotado(p) ? "Olá! Vim pelo site e quero saber quando chega: " : "Olá! Vim pelo site e quero comprar: ") + p.nome)}" target="_blank" rel="noopener"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M21 12a8 8 0 0 1-12 7l-5 1 1-4.5A8 8 0 1 1 21 12z"/></svg>${esgotado(p) ? "Avise quando chegar" : "Comprar pelo WhatsApp"}</a>
+          <a class="wa" href="${waLink((esgotado(p) ? "Olá! Vim pelo site e quero saber quando chega: " : "Olá! Vim pelo site e quero comprar: ") + p.nome)}" target="_blank" rel="noopener"><svg aria-hidden="true" focusable="false" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M21 12a8 8 0 0 1-12 7l-5 1 1-4.5A8 8 0 1 1 21 12z"/></svg>${esgotado(p) ? "Avise quando chegar" : "Comprar pelo WhatsApp"}</a>
         </div>
       </div>
     </article>`;
@@ -1064,7 +1106,7 @@ function abrirProduto(rota) {
   $("crumbs").innerHTML = `<a href="#inicio">Início</a> › <a href="#catalogo" data-cat-link="${p.cat}">${p.cat}</a> › <b>${p.nome}</b>`;
   $("pCat").textContent = p.cat;
   $("pName").textContent = p.nome;
-  $("pMeta").innerHTML = `<span>Marca: <b>${p.marca}</b></span><span>Entrega e montagem grátis</span>${p.qtd === undefined ? "" : esgotado(p) ? `<span style="color:#b3261e"><b>Esgotado</b> no momento</span>` : `<span style="color:#1b7a3a"><b>Em estoque</b></span>`}`;
+  $("pMeta").innerHTML = `<span>Marca: <b>${p.marca}</b></span><span>Entrega e montagem grátis</span>${p.qtd === undefined ? "" : esgotado(p) ? `<span class="estoque-fim"><b>Esgotado</b> no momento</span>` : `<span class="estoque-ok"><b>Em estoque</b></span>`}`;
   $("buyNowTxt").textContent = esgotado(p) ? "Avise quando chegar" : "Comprar pelo WhatsApp";
   if (p.parcela) {
     $("pPrice").innerHTML = `<span class="price"><small>12x de</small>${brl(p.parcela)}</span><span class="inst">no crediário próprio ou no cartão de crédito</span><span class="inst">${p.avista ? `ou <b>${brl(p.avista)}</b> à vista` : "Confirme o valor à vista e no Pix pelo WhatsApp."}</span>`;
@@ -1169,7 +1211,7 @@ function renderCarrinho() {
       <img src="img/${i.foto}" alt="">
       <div><b>${p.nome}</b>
         <span class="sub">${i.cor ? `Cor: ${i.cor} · ` : ""}${precoTexto(p)}</span>
-        <div class="ctl"><button type="button" data-menos="${n}" aria-label="Diminuir">−</button><span>${i.qtd}</span><button type="button" data-mais="${n}" aria-label="Aumentar">+</button><button type="button" class="rm" data-rm="${n}">Remover</button></div>
+        <div class="ctl"><button type="button" data-menos="${n}" aria-label="Diminuir quantidade de ${p.nome}">−</button><span aria-label="Quantidade: ${i.qtd}">${i.qtd}</span><button type="button" data-mais="${n}" aria-label="Aumentar quantidade de ${p.nome}">+</button><button type="button" class="rm" data-rm="${n}" aria-label="Remover ${p.nome} do carrinho">Remover</button></div>
       </div></div>`;
   }).join("");
   const linhas = carrinho.map(i => { const p = porId(i.id); return `• ${i.qtd}x ${p.nome}${i.cor ? ` (cor ${i.cor})` : ""}: ${precoTexto(p)}`; });
@@ -1190,14 +1232,50 @@ $("cartItems").addEventListener("click", e => {
   if (b.dataset.mais) carrinho[+b.dataset.mais].qtd = Math.min(20, carrinho[+b.dataset.mais].qtd + 1);
   if (b.dataset.menos) { const i = carrinho[+b.dataset.menos]; i.qtd--; if (i.qtd < 1) carrinho.splice(+b.dataset.menos, 1); }
   if (b.dataset.rm) carrinho.splice(+b.dataset.rm, 1);
+  // Mantém o foco do teclado no carrinho depois que a lista é redesenhada
+  const sel = b.dataset.mais ? `[data-mais="${b.dataset.mais}"]` : b.dataset.menos && carrinho[+b.dataset.menos] ? `[data-menos="${b.dataset.menos}"]` : null;
   salvarCarrinho(); renderCarrinho();
+  const alvo = (sel && $("cartItems").querySelector(sel)) || $("cartItems").querySelector("button") || $("closeCart");
+  alvo.focus();
 });
-function abrirCarrinho() { renderCarrinho(); $("drawer").hidden = false; $("scrim").hidden = false; $("closeCart").focus(); }
-function fecharCarrinho() { $("drawer").hidden = true; $("scrim").hidden = true; }
+// Carrinho como janela (diálogo): foco entra nele, fica preso dentro dele (Tab) e volta ao botão de origem ao fechar
+let focoAntesDoCarrinho = null;
+const PARTES_FORA = () => [document.querySelector(".topbar"), document.querySelector("header.main"), $("home"), $("produto"), document.querySelector("footer"), document.querySelector(".float-wa"), $("skipLink")];
+function abrirCarrinho() {
+  focoAntesDoCarrinho = document.activeElement;
+  renderCarrinho(); $("drawer").hidden = false; $("scrim").hidden = false;
+  PARTES_FORA().forEach(el => el && el.setAttribute("inert", ""));
+  $("closeCart").focus();
+}
+function fecharCarrinho() {
+  if ($("drawer").hidden) return;
+  $("drawer").hidden = true; $("scrim").hidden = true;
+  PARTES_FORA().forEach(el => el && el.removeAttribute("inert"));
+  if (focoAntesDoCarrinho && document.contains(focoAntesDoCarrinho)) focoAntesDoCarrinho.focus();
+}
+$("drawer").addEventListener("keydown", e => {
+  if (e.key !== "Tab") return;
+  const f = [...$("drawer").querySelectorAll("a[href], button:not([disabled])")].filter(el => !el.hidden && el.offsetParent !== null);
+  if (!f.length) return;
+  const primeiro = f[0], ultimo = f[f.length - 1];
+  if (e.shiftKey && document.activeElement === primeiro) { e.preventDefault(); ultimo.focus(); }
+  else if (!e.shiftKey && document.activeElement === ultimo) { e.preventDefault(); primeiro.focus(); }
+});
 $("openCart").addEventListener("click", abrirCarrinho);
 $("closeCart").addEventListener("click", fecharCarrinho);
 $("scrim").addEventListener("click", fecharCarrinho);
-document.addEventListener("keydown", e => { if (e.key === "Escape") fecharCarrinho(); });
+document.addEventListener("keydown", e => { if (e.key === "Escape" && !document.querySelector("dialog[open]")) fecharCarrinho(); });
+
+// "Pular para o conteúdo": leva o foco para a página visível (início ou produto)
+$("skipLink").addEventListener("click", e => {
+  e.preventDefault();
+  const alvo = $("produto").hidden ? $("home") : $("pName");
+  alvo.focus();
+});
+// Conta cliques no WhatsApp, só se o visitante autorizou estatísticas/marketing
+document.addEventListener("click", e => {
+  if (e.target.closest('a[href^="https://wa.me/"]') && window.LT_rastrear) window.LT_rastrear("contato_whatsapp");
+});
 
 // ===== Navegação entre página inicial e página do produto =====
 function mostrarInicio(ancora) {
@@ -1206,9 +1284,17 @@ function mostrarInicio(ancora) {
   const alvo = ancora && document.getElementById(ancora);
   if (alvo && ancora !== "inicio") alvo.scrollIntoView(); else window.scrollTo(0, 0);
 }
-function rotear() {
+function rotear(evento) {
   const h = location.hash.slice(1);
   if (h.startsWith("produto-")) abrirProduto(h.slice(8)); else mostrarInicio(h);
+  // Ao navegar (não no carregamento), o foco do teclado/leitor de tela acompanha a nova página
+  if (!evento) return;
+  fecharCarrinho();
+  if (h.startsWith("produto-") && !$("produto").hidden) { $("pName").focus({ preventScroll: true }); return; }
+  const secao = h && h !== "inicio" && document.getElementById(h);
+  const titulo = secao && secao.querySelector("h2");
+  if (titulo) { titulo.setAttribute("tabindex", "-1"); titulo.focus({ preventScroll: true }); }
+  else $("home").focus({ preventScroll: true });
 }
 window.addEventListener("hashchange", rotear);
 
@@ -1248,7 +1334,7 @@ $("q").addEventListener("input", e => { busca = e.target.value; renderGrid(); })
 
 $("stores").innerHTML = LOJAS.map(([nome, rua, bairro, cidade, cep]) => {
   const end = `${rua}, ${bairro}, ${cidade} - MA, ${cep}`;
-  return `<div class="store"><span class="city">${cidade}</span><h3><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M12 21s-7-6.2-7-11a7 7 0 0 1 14 0c0 4.8-7 11-7 11z"/><circle cx="12" cy="10" r="2.5"/></svg>${nome}</h3><address>${rua}<br>${bairro}, ${cidade} - MA<br>CEP ${cep}</address><a href="https://www.google.com/maps/search/?api=1&query=${encodeURIComponent("Lojas Tropical, " + end)}" target="_blank" rel="noopener">Ver no mapa →</a></div>`;
+  return `<div class="store"><span class="city">${cidade}</span><h3><svg aria-hidden="true" focusable="false" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M12 21s-7-6.2-7-11a7 7 0 0 1 14 0c0 4.8-7 11-7 11z"/><circle cx="12" cy="10" r="2.5"/></svg>${nome}</h3><address>${rua}<br>${bairro}, ${cidade} - MA<br>CEP ${cep}</address><a href="https://www.google.com/maps/search/?api=1&query=${encodeURIComponent("Lojas Tropical, " + end)}" target="_blank" rel="noopener">Ver no mapa →</a></div>`;
 }).join("");
 $("shipCity").innerHTML = CIDADES.map(c => `<option>${c}</option>`).join("") + `<option>Outra cidade</option>`;
 document.querySelectorAll(".wa-text").forEach(el => el.textContent = WHATSAPP_TEXTO);

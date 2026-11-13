@@ -1,0 +1,112 @@
+/* Lojas Tropical: aviso de cookies, preferências e páginas legais.
+   Usado pelo index.html e pelas páginas de política. */
+:root {
+  --lt-red: #d8121b; --lt-red-deep: #9c0a10; --lt-sun: #ffd400;
+  --lt-bg: #fbf7f4; --lt-surface: #ffffff; --lt-fg: #231a18; --lt-muted: #5f5552;
+  --lt-line: #e3d4cd; --lt-chip: #fde9e7; --lt-link: #b00f17; --lt-focus: #231a18;
+  --lt-err: #a8151c;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --lt-red: #c8141c; --lt-red-deep: #7a0a0e; --lt-sun: #ffd84d;
+    --lt-bg: #141010; --lt-surface: #1e1817; --lt-fg: #f4ece9; --lt-muted: #c2b6b2;
+    --lt-line: #3d3230; --lt-chip: #2c1d1c; --lt-link: #ff8a8a; --lt-focus: #ffd84d; --lt-err: #ff8a8a;
+  }
+}
+:root[data-theme="dark"] {
+  --lt-red: #c8141c; --lt-red-deep: #7a0a0e; --lt-sun: #ffd84d;
+  --lt-bg: #141010; --lt-surface: #1e1817; --lt-fg: #f4ece9; --lt-muted: #c2b6b2;
+  --lt-line: #3d3230; --lt-chip: #2c1d1c; --lt-link: #ff8a8a; --lt-focus: #ffd84d; --lt-err: #ff8a8a;
+}
+
+.lt-vh { position: absolute !important; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0; }
+
+/* ===== Aviso de cookies ===== */
+.lt-cookies { position: fixed; left: 0; right: 0; bottom: 0; z-index: 40; padding: 12px max(16px, env(safe-area-inset-right, 0px)) calc(12px + env(safe-area-inset-bottom, 0px)) max(16px, env(safe-area-inset-left, 0px)); pointer-events: none; }
+.lt-cookies-in { pointer-events: auto; max-width: 980px; margin: 0 auto; background: var(--lt-surface); color: var(--lt-fg); border: 1px solid var(--lt-line); border-radius: 16px; box-shadow: 0 10px 40px rgb(0 0 0 / .28); padding: 16px 18px; display: flex; flex-wrap: wrap; gap: 12px 20px; align-items: center; font-family: var(--font-body, system-ui, sans-serif); font-size: 14px; line-height: 1.5; }
+.lt-cookies-in p { margin: 0; flex: 1 1 380px; }
+.lt-cookies a, .lt-dialog a { color: var(--lt-link); font-weight: 600; }
+.lt-cookies-acoes { display: flex; flex-wrap: wrap; gap: 8px; }
+.lt-btn { font: inherit; font-weight: 700; font-size: 14px; border-radius: 999px; padding: 10px 18px; cursor: pointer; border: 2px solid var(--lt-fg); min-height: 44px; }
+/* "Aceitar" e "Recusar" com o mesmo peso visual, como recomenda a ANPD */
+.lt-btn-pri { background: var(--lt-fg); color: var(--lt-surface); }
+.lt-btn-sec { background: transparent; color: var(--lt-fg); }
+.lt-btn:focus-visible, .lt-cat input:focus-visible { outline: 3px solid var(--lt-focus); outline-offset: 3px; }
+@media (max-width: 560px) { .lt-cookies-acoes { width: 100%; } .lt-btn { flex: 1 1 auto; } }
+
+.lt-dialog { border: 0; border-radius: 18px; padding: 0; width: min(520px, calc(100% - 32px)); background: var(--lt-surface); color: var(--lt-fg); box-shadow: 0 20px 60px rgb(0 0 0 / .4); font-family: var(--font-body, system-ui, sans-serif); }
+.lt-dialog::backdrop { background: rgb(0 0 0 / .5); }
+.lt-dialog-in { padding: 22px; display: grid; gap: 14px; }
+.lt-dialog h2 { margin: 0; font-size: 24px; }
+.lt-dialog p { margin: 0; font-size: 14px; color: var(--lt-muted); }
+.lt-dialog fieldset { border: 0; padding: 0; margin: 0; display: grid; gap: 10px; }
+.lt-cat { display: grid; grid-template-columns: 24px 1fr; gap: 2px 10px; padding: 12px; border: 1px solid var(--lt-line); border-radius: 12px; }
+.lt-cat input { width: 22px; height: 22px; margin: 1px 0 0; accent-color: var(--lt-red); }
+.lt-cat p { grid-column: 2; }
+.lt-sempre { font-weight: 500; color: var(--lt-muted); font-size: 13px; }
+
+/* ===== Páginas legais ===== */
+.lt-page { margin: 0; background: var(--lt-bg); color: var(--lt-fg); font-family: "Figtree", system-ui, -apple-system, "Segoe UI", sans-serif; font-size: 17px; line-height: 1.65; }
+.lt-page *, .lt-page *::before, .lt-page *::after { box-sizing: border-box; }
+.lt-page :focus-visible { outline: 3px solid var(--lt-focus); outline-offset: 2px; }
+.lt-skip { position: absolute; left: 12px; top: -60px; z-index: 50; background: var(--lt-sun); color: #2b2200; padding: 10px 16px; border-radius: 10px; font-weight: 700; text-decoration: none; }
+.lt-skip:focus { top: 12px; }
+.lt-top { background: var(--lt-red); color: #fff; --lt-focus: #ffd400; }
+.lt-top .lt-wrap { display: flex; align-items: center; justify-content: space-between; gap: 12px 24px; flex-wrap: wrap; padding-block: 10px; }
+.lt-top img { height: 56px; width: auto; display: block; }
+.lt-top a.lt-voltar { color: #fff; font-weight: 700; text-decoration: none; border: 2px solid rgb(255 255 255 / .7); border-radius: 999px; padding: 8px 16px; }
+.lt-top a.lt-voltar:hover { background: rgb(255 255 255 / .14); }
+.lt-wrap { max-width: 860px; margin: 0 auto; padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); }
+.lt-main { padding-block: 32px 56px; }
+.lt-main h1 { font-family: "Baloo 2", system-ui, sans-serif; font-size: clamp(32px, 5vw, 44px); line-height: 1.1; margin: 0 0 6px; }
+.lt-main h2 { font-family: "Baloo 2", system-ui, sans-serif; font-size: 26px; line-height: 1.2; margin: 36px 0 8px; scroll-margin-top: 16px; }
+.lt-main h3 { font-size: 18px; margin: 20px 0 4px; }
+.lt-main p, .lt-main li { max-width: 72ch; }
+.lt-main a { color: var(--lt-link); font-weight: 600; }
+.lt-meta { color: var(--lt-muted); font-size: 15px; margin: 0 0 20px; }
+.lt-aviso { background: var(--lt-chip); border-left: 4px solid var(--lt-red); border-radius: 10px; padding: 12px 16px; font-size: 15px; }
+.lt-toc { background: var(--lt-surface); border: 1px solid var(--lt-line); border-radius: 14px; padding: 14px 20px; margin: 20px 0; }
+.lt-toc h2 { font-size: 18px; margin: 0 0 6px; font-family: inherit; }
+.lt-toc ol { margin: 0; padding-left: 22px; columns: 2 260px; column-gap: 32px; font-size: 15px; }
+.lt-tabela-wrap { overflow-x: auto; margin: 12px 0; border: 1px solid var(--lt-line); border-radius: 12px; }
+.lt-tabela { width: 100%; border-collapse: collapse; font-size: 15px; background: var(--lt-surface); }
+.lt-tabela th, .lt-tabela td { text-align: left; vertical-align: top; padding: 10px 12px; border-bottom: 1px solid var(--lt-line); }
+.lt-tabela thead th { background: var(--lt-chip); }
+.lt-tabela tr:last-child td { border-bottom: 0; }
+.lt-dados { background: var(--lt-surface); border: 1px solid var(--lt-line); border-radius: 14px; padding: 14px 20px; margin: 12px 0; }
+.lt-dados dl { display: grid; grid-template-columns: max-content 1fr; gap: 4px 16px; margin: 0; }
+.lt-dados dt { font-weight: 700; }
+.lt-dados dd { margin: 0; overflow-wrap: anywhere; }
+@media (max-width: 560px) { .lt-dados dl { grid-template-columns: 1fr; } .lt-dados dd { margin-bottom: 8px; } }
+
+/* Formulário de direitos do titular */
+.lt-form { background: var(--lt-surface); border: 1px solid var(--lt-line); border-radius: 16px; padding: 20px; display: grid; gap: 16px; margin-top: 12px; }
+.lt-campo { display: grid; gap: 6px; }
+.lt-campo label, .lt-campo legend { font-weight: 700; font-size: 16px; padding: 0; }
+.lt-campo .lt-dica { font-size: 14px; color: var(--lt-muted); margin: 0; }
+.lt-campo input[type=text], .lt-campo input[type=email], .lt-campo input[type=tel], .lt-campo select, .lt-campo textarea { font: inherit; font-size: 16px; color: var(--lt-fg); background: var(--lt-bg); border: 2px solid var(--lt-muted); border-radius: 10px; padding: 10px 12px; width: 100%; min-height: 46px; }
+.lt-campo textarea { min-height: 110px; resize: vertical; }
+.lt-campo input:focus-visible, .lt-campo select:focus-visible, .lt-campo textarea:focus-visible { outline: 3px solid var(--lt-focus); outline-offset: 1px; }
+.lt-campo [aria-invalid="true"] { border-color: var(--lt-err); }
+.lt-erro { color: var(--lt-err); font-size: 14px; font-weight: 700; margin: 0; }
+.lt-erro:empty { display: none; }
+.lt-radios { border: 0; margin: 0; padding: 0; display: grid; gap: 6px; }
+.lt-radios div, .lt-check { display: flex; gap: 10px; align-items: flex-start; }
+.lt-radios input, .lt-check input { width: 22px; height: 22px; margin: 2px 0 0; flex: none; accent-color: var(--lt-red); }
+.lt-check label { font-weight: 500; font-size: 15px; }
+.lt-enviar { justify-self: start; background: var(--lt-fg); color: var(--lt-surface); border: 0; border-radius: 999px; padding: 12px 22px; font: inherit; font-weight: 700; cursor: pointer; min-height: 46px; }
+.lt-status { font-weight: 600; margin: 0; }
+
+/* ===== Rodapé com dados legais (site e políticas) ===== */
+.lt-rodape { background: var(--lt-red-deep); color: #ffe3e1; font-size: 14px; line-height: 1.6; --lt-focus: #ffd400; --focus-ring: #ffd400; }
+.lt-rodape-in { max-width: 1200px; margin: 0 auto; padding: 32px max(16px, env(safe-area-inset-right, 0px)) 28px max(16px, env(safe-area-inset-left, 0px)); display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr) minmax(0, 1.3fr); gap: 24px 40px; }
+.lt-rodape img { height: 48px; width: auto; display: block; margin-bottom: 10px; }
+.lt-rodape h2 { font-family: inherit; font-size: 13px; letter-spacing: .1em; text-transform: uppercase; color: #fff; margin: 0 0 8px; }
+.lt-rodape ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 4px; }
+.lt-rodape a, .lt-rodape .lt-link-btn { color: #fff; text-decoration: underline; text-underline-offset: 3px; }
+.lt-rodape .lt-link-btn { background: none; border: 0; padding: 0; font: inherit; cursor: pointer; text-align: left; }
+.lt-rodape address { font-style: normal; }
+.lt-rodape p { margin: 0 0 4px; }
+.lt-rodape-fim { border-top: 1px solid rgb(255 255 255 / .2); }
+.lt-rodape-fim p { max-width: 1200px; margin: 0 auto; padding: 14px max(16px, env(safe-area-inset-right, 0px)) 18px max(16px, env(safe-area-inset-left, 0px)); font-size: 13px; }
+@media (max-width: 860px) { .lt-rodape-in { grid-template-columns: 1fr; } .lt-rodape-fim p { padding-bottom: 90px; } }
