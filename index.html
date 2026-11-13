@@ -152,6 +152,23 @@ section { padding-block: 44px; }
 .card .order a { justify-content: center; text-decoration: none; display: flex; gap: 8px; align-items: center; padding: 10px; border-radius: 10px; font-weight: 700; font-size: 14px; }
 .card .order .see { background: var(--red); color: #fff; }
 .card .order .wa { background: #25d366; color: #06301a; }
+/* Página inicial: uma linha por departamento */
+.segs { display: grid; grid-template-columns: minmax(0, 1fr); gap: 34px; }
+.seg { min-width: 0; }
+.seg-head { display: flex; flex-wrap: wrap; align-items: baseline; gap: 4px 12px; margin-bottom: 12px; }
+.seg-head h3 { font-size: clamp(20px, 2.4vw, 26px); font-weight: 800; }
+.seg-all, .seg-back { margin-left: auto; background: none; border: 0; padding: 6px 0; color: var(--red); font: inherit; font-weight: 700; font-size: 15px; cursor: pointer; }
+.seg-back { margin-left: 0; color: var(--fg); background: var(--chip); padding: 8px 16px; border-radius: 999px; }
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) .seg-all { color: var(--red-text); } }
+:root[data-theme="dark"] .seg-all { color: var(--red-text); }
+.seg-all:hover { text-decoration: underline; }
+.seg-row { display: grid; grid-auto-flow: column; grid-auto-columns: 230px; gap: 18px; overflow-x: auto; scroll-snap-type: x mandatory; padding: 4px 2px 14px; overscroll-behavior-x: contain; }
+.seg-row > * { scroll-snap-align: start; }
+.seg-more { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 6px; border: 2px dashed var(--line); border-radius: var(--radius); background: var(--surface); color: var(--fg); font: inherit; font-weight: 700; font-size: 16px; cursor: pointer; padding: 16px; text-align: center; }
+.seg-more b { font-size: 34px; color: var(--price); }
+.seg-more:hover { border-color: var(--red); }
+.sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0; }
+@media (max-width: 480px) { .seg-row { grid-auto-columns: 46%; gap: 12px; } .segs { gap: 26px; } }
 .empty { padding: 40px; text-align: center; color: var(--muted); border: 1px dashed var(--line); border-radius: var(--radius); grid-column: 1 / -1; }
 
 
@@ -344,6 +361,7 @@ body:has(.lt-cookies:not([hidden])) .float-wa { bottom: calc(150px + env(safe-ar
       <div class="sec-head">
         <div><span class="eyebrow">Catálogo</span><h2 id="catTitle">Todos os produtos</h2></div>
         <span class="count" id="count" role="status"></span>
+        <button type="button" class="seg-back" id="verTodosDeps" data-ver-cat="Todos" hidden>← Todos os departamentos</button>
       </div>
       <div class="grid" id="grid"></div>
     </div>
@@ -1068,14 +1086,39 @@ function renderNav() {
   ).join("");
 }
 
+const POR_LINHA = 10; // quantos produtos aparecem na linha de cada departamento na página inicial
+const qtdTexto = n => `${n} ${n === 1 ? "produto" : "produtos"}`;
+
 function renderGrid() {
   const termo = busca.trim().toLowerCase();
   const lista = PRODUTOS.filter(p =>
     (filtroCat === "Todos" || p.cat === filtroCat) &&
     (!termo || [p.nome, p.cat, p.marca, p.cod || ""].join(" ").toLowerCase().includes(termo))
   ).sort((a, b) => esgotado(a) - esgotado(b));
-  $("catTitle").textContent = termo ? `Resultados para “${busca.trim()}”` : (filtroCat === "Todos" ? "Todos os produtos" : filtroCat);
-  $("count").textContent = `${lista.length} ${lista.length === 1 ? "produto" : "produtos"}`;
+  $("catTitle").textContent = termo ? `Resultados para “${busca.trim()}”` : (filtroCat === "Todos" ? "Nossos departamentos" : filtroCat);
+  $("count").textContent = qtdTexto(lista.length);
+  $("verTodosDeps").hidden = filtroCat === "Todos" && !termo;
+
+  // Página inicial sem busca: uma linha por departamento, com "Ver todos"
+  if (filtroCat === "Todos" && !termo) {
+    $("grid").className = "segs";
+    $("grid").innerHTML = CATEGORIAS.map(c => {
+      const daCat = lista.filter(p => p.cat === c);
+      if (!daCat.length) return "";
+      const mostra = daCat.slice(0, POR_LINHA), resto = daCat.length - mostra.length;
+      return `
+      <div class="seg">
+        <div class="seg-head">
+          <h3>${c}</h3><span class="count">${qtdTexto(daCat.length)}</span>
+          <button type="button" class="seg-all" data-ver-cat="${c}">Ver todos<span class="sr-only"> os produtos de ${c}</span> →</button>
+        </div>
+        <div class="seg-row">${mostra.map(cardHTML).join("")}${resto > 0 ? `
+          <button type="button" class="seg-more" data-ver-cat="${c}"><b>+${resto}</b>Ver mais ${c}</button>` : ""}</div>
+      </div>`;
+    }).join("");
+    return;
+  }
+  $("grid").className = "grid";
   $("grid").innerHTML = lista.length ? lista.map(cardHTML).join("") :
     `<div class="empty">Nenhum produto encontrado. Tente outra palavra ou <a href="${waLink("Olá! Estou procurando: " + busca)}" target="_blank" rel="noopener">pergunte no WhatsApp</a>.</div>`;
 }
@@ -1285,13 +1328,20 @@ function rotear(evento) {
 }
 window.addEventListener("hashchange", rotear);
 
-$("catNav").addEventListener("click", e => {
-  const b = e.target.closest("button[data-cat]");
-  if (!b) return;
-  filtroCat = b.dataset.cat;
+function escolherCat(cat) {
+  filtroCat = cat;
   busca = ""; $("q").value = "";
   renderNav(); renderGrid();
   if (location.hash !== "#catalogo") location.hash = "catalogo"; else mostrarInicio("catalogo");
+}
+$("catNav").addEventListener("click", e => {
+  const b = e.target.closest("button[data-cat]");
+  if (b) escolherCat(b.dataset.cat);
+});
+// "Ver todos" / "Ver mais" de cada departamento, e "voltar a todos os departamentos"
+$("catalogo").addEventListener("click", e => {
+  const b = e.target.closest("[data-ver-cat]");
+  if (b) escolherCat(b.dataset.verCat);
 });
 $("searchForm").addEventListener("submit", e => {
   e.preventDefault();
