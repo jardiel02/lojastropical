@@ -2,7 +2,7 @@ name: Atualizar estoque
 
 on:
   schedule:
-    - cron: "17 */2 * * *"   # a cada 2 horas
+    - cron: "17 * * * *"   # pedido a cada hora (o GitHub costuma atrasar ou pular execuções agendadas)
   workflow_dispatch:          # botao "Run workflow" para rodar na hora
 
 permissions:
