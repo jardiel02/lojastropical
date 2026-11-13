@@ -122,17 +122,15 @@ nav.cats button:hover, nav.cats button[aria-pressed="true"] { background: var(--
 .banner-stage { position: relative; display: grid; isolation: isolate; }
 .banner-slide { grid-area: 1 / 1; min-width: 0; opacity: 0; visibility: hidden; pointer-events: none; transition: opacity .35s ease, visibility .35s; }
 .banner-slide.is-active { opacity: 1; visibility: visible; pointer-events: auto; z-index: 1; }
-.banner-arrow { position: absolute; z-index: 2; top: 50%; transform: translateY(-50%); width: 44px; height: 44px; display: grid; place-items: center; padding: 0; border: 2px solid #fff; border-radius: 50%; background: #bd0013; color: #fff; box-shadow: 0 2px 10px rgb(0 0 0 / .22); cursor: pointer; }
-.banner-arrow:hover { background: #8c0010; }
+.banner-arrow { position: absolute; z-index: 2; top: 50%; transform: translateY(-50%); width: 44px; height: 44px; display: grid; place-items: center; padding: 0; border: 2px solid #fff; border-radius: 50%; background: #bd0013; color: #fff; opacity: .65; box-shadow: 0 2px 10px rgb(0 0 0 / .16); cursor: pointer; }
+.banner-arrow:hover, .banner-arrow:focus-visible { background: #8c0010; opacity: .9; }
 .banner-arrow-prev { left: 12px; }
 .banner-arrow-next { right: 12px; }
-.banner-controls { display: flex; align-items: center; justify-content: center; gap: 8px; background: var(--surface); border-bottom: 1px solid var(--line); padding: 4px 12px; }
+.banner-controls { display: flex; align-items: center; justify-content: center; background: var(--surface); border-bottom: 1px solid var(--line); padding: 0 12px; }
 .banner-dots { display: flex; }
-.banner-dot { display: grid; place-items: center; width: 44px; height: 44px; border: 0; background: transparent; cursor: pointer; border-radius: 50%; }
-.banner-dot::after { content: ""; width: 10px; height: 10px; border-radius: 50%; background: #b4aaa9; transition: background .2s, width .2s; }
-.banner-dot[aria-pressed="true"]::after { width: 26px; border-radius: 999px; background: #c90012; }
-.banner-pause { display: inline-flex; gap: 6px; align-items: center; justify-content: center; min-height: 44px; padding: 0 12px; border: 0; border-radius: 999px; background: transparent; color: var(--fg); font: inherit; font-size: 13px; cursor: pointer; }
-.banner-pause:hover { background: var(--chip); }
+.banner-dot { display: grid; place-items: center; width: 36px; height: 24px; border: 0; background: transparent; cursor: pointer; border-radius: 50%; }
+.banner-dot::after { content: ""; width: 8px; height: 8px; border-radius: 50%; background: #b4aaa9; transition: background .2s, width .2s; }
+.banner-dot[aria-pressed="true"]::after { width: 22px; border-radius: 999px; background: #c90012; }
 @media (prefers-reduced-motion: reduce) { .banner-slide, .banner-dot::after { transition: none; } }
 @media (max-width: 860px) {
   .hero-banner { aspect-ratio: 960 / 543; }
@@ -421,11 +419,6 @@ body:has(.lt-cookies:not([hidden])) .float-wa { bottom: calc(150px + env(safe-ar
       <button class="banner-dot" type="button" aria-label="Mostrar banner 2: Mais praticidade" aria-controls="praticidade" aria-pressed="false"></button>
       <button class="banner-dot" type="button" aria-label="Mostrar banner 3: Sua casa mais completa" aria-controls="casa-completa" aria-pressed="false"></button>
     </div>
-    <button class="banner-pause" id="bannerPause" type="button" aria-label="Pausar troca automática">
-      <svg id="bannerPauseIcon" aria-hidden="true" width="16" height="16" viewBox="0 0 16 16" fill="currentColor"><path d="M4 3h3v10H4zm5 0h3v10H9z"/></svg>
-      <svg id="bannerPlayIcon" aria-hidden="true" width="16" height="16" viewBox="0 0 16 16" fill="currentColor" hidden><path d="m4 2 10 6-10 6z"/></svg>
-      <span id="bannerPauseText">Pausar</span>
-    </button>
   </div>
   <span class="sr-only" id="bannerStatus" role="status" aria-live="polite"></span>
   </div>
@@ -581,7 +574,7 @@ body:has(.lt-cookies:not([hidden])) .float-wa { bottom: calc(150px + env(safe-ar
 
 <script src="estoque.js"></script>
 <script src="legal.js"></script>
-<script src="banner-carousel.js" defer></script>
+<script src="banner-carousel.js?v=2" defer></script>
 <script>
 // ===== Dados da loja: edite aqui =====
 const WHATSAPP = "559981771035";           // DDI 55 + DDD + número, só dígitos

@@ -2,19 +2,17 @@
   const carousel = document.getElementById("inicio");
   const slides = Array.from(carousel.querySelectorAll(".banner-slide"));
   const dots = Array.from(carousel.querySelectorAll(".banner-dot"));
-  const pauseButton = document.getElementById("bannerPause");
   const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
   const interval = 6000;
   let current = 0;
   let timer;
-  let paused = reducedMotion.matches;
   let hovered = false;
   let keyboardFocus = false;
   let inView = true;
 
   function schedule() {
     clearTimeout(timer);
-    if (paused || hovered || keyboardFocus || document.hidden || !inView) return;
+    if (reducedMotion.matches || hovered || keyboardFocus || document.hidden || !inView) return;
     timer = setTimeout(() => show(current + 1), interval);
   }
 
@@ -33,21 +31,9 @@
     schedule();
   }
 
-  function updatePauseButton() {
-    pauseButton.setAttribute("aria-label", paused ? "Retomar troca automática" : "Pausar troca automática");
-    document.getElementById("bannerPauseText").textContent = paused ? "Retomar" : "Pausar";
-    document.getElementById("bannerPauseIcon").toggleAttribute("hidden", paused);
-    document.getElementById("bannerPlayIcon").toggleAttribute("hidden", !paused);
-    schedule();
-  }
-
   document.getElementById("bannerPrev").addEventListener("click", () => show(current - 1, true));
   document.getElementById("bannerNext").addEventListener("click", () => show(current + 1, true));
   dots.forEach((dot, i) => dot.addEventListener("click", () => show(i, true)));
-  pauseButton.addEventListener("click", () => {
-    paused = !paused;
-    updatePauseButton();
-  });
 
   // Give visitors time to read while using a mouse or keyboard.
   carousel.addEventListener("pointerenter", event => {
@@ -78,10 +64,7 @@
       schedule();
     }).observe(carousel);
   }
-  reducedMotion.addEventListener("change", event => {
-    paused = event.matches;
-    updatePauseButton();
-  });
+  reducedMotion.addEventListener("change", schedule);
 
   function showLinkedSlide() {
     const linked = slides.findIndex(slide => location.hash === "#" + slide.id);
@@ -89,5 +72,5 @@
   }
   window.addEventListener("hashchange", showLinkedSlide);
   showLinkedSlide();
-  updatePauseButton();
+  schedule();
 })();
