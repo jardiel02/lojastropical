@@ -13,10 +13,8 @@ const EMPRESA = {
   endereco: "Rua Francisco Bernadino, nº 1371-A, São Sebastião, Codó - MA, CEP 65400-000",
   telefone: "(99) 98177-1035",
   whatsapp: "559981771035",                       // DDI 55 + DDD + número, só dígitos
-  email: "contato@lojastropical.com.br",
   atendimento: "segunda a sábado, das 8h às 18h",
   encarregado: "Jardiel Lima Pimenta",
-  emailPrivacidade: "privacidade@lojastropical.com.br",
   atualizacao: "12/11/2026"                        // data da última revisão das políticas
 };
 

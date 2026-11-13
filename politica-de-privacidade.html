@@ -50,7 +50,6 @@
     <dt>CNPJ</dt><dd data-empresa="cnpj">10.665.286/0001-88</dd>
     <dt>Endereço</dt><dd data-empresa="endereco">Rua Francisco Bernadino, nº 1371-A, São Sebastião, Codó - MA, CEP 65400-000</dd>
     <dt>Telefone / WhatsApp</dt><dd data-empresa="telefone">(99) 98177-1035</dd>
-    <dt>E-mail</dt><dd><a data-empresa-mail="email" href="#">contato@lojastropical.com.br</a></dd>
   </dl></div>
 
   <h2 id="dados">2. Quais dados usamos</h2>
@@ -145,7 +144,7 @@
   <p>Respondemos em até <b>15 dias</b>. Para sua segurança, podemos pedir uma confirmação de identidade antes de entregar ou alterar dados, mas <b>nunca pela internet com envio de documentos por este site</b>. Se não ficar satisfeito, você também pode reclamar à <a href="https://www.gov.br/anpd" target="_blank" rel="noopener">ANPD<span class="lt-vh"> (abre em nova aba)</span></a>.</p>
 
   <h3 id="form-t">Formulário de solicitação</h3>
-  <p>Pedimos só o necessário para localizar seus dados e responder. Ao enviar, abriremos o WhatsApp ou o seu e-mail com a mensagem pronta; nada fica gravado neste site. Campos com <span aria-hidden="true">*</span><span class="lt-vh">asterisco</span> são obrigatórios.</p>
+  <p>Pedimos só o necessário para localizar seus dados e responder. Ao enviar, abriremos o WhatsApp da loja com a mensagem pronta; nada fica gravado neste site. Campos com <span aria-hidden="true">*</span><span class="lt-vh">asterisco</span> são obrigatórios.</p>
   <form class="lt-form" id="formDireitos" novalidate aria-labelledby="form-t">
     <div class="lt-campo">
       <label for="fNome">Nome completo <span aria-hidden="true">*</span></label>
@@ -154,7 +153,7 @@
     </div>
     <fieldset class="lt-campo lt-radios" aria-describedby="fCanal-d">
       <legend>Como prefere receber a resposta? <span aria-hidden="true">*</span></legend>
-      <p class="lt-dica" id="fCanal-d">Usaremos o mesmo canal para enviar sua solicitação.</p>
+      <p class="lt-dica" id="fCanal-d">Sua solicitação é enviada pelo WhatsApp da loja; a resposta vem pelo canal que você escolher.</p>
       <div><input type="radio" id="fCanalWa" name="canal" value="whatsapp" checked><label for="fCanalWa">WhatsApp</label></div>
       <div><input type="radio" id="fCanalEm" name="canal" value="email"><label for="fCanalEm">E-mail</label></div>
     </fieldset>
@@ -198,7 +197,7 @@
   <p>O encarregado é a pessoa que recebe suas solicitações e fala com a ANPD em nome da empresa.</p>
   <div class="lt-dados"><dl>
     <dt>Encarregado</dt><dd data-empresa="encarregado">Jardiel Lima Pimenta</dd>
-    <dt>E-mail</dt><dd><a data-empresa-mail="emailPrivacidade" href="#">privacidade@lojastropical.com.br</a></dd>
+    <dt>WhatsApp</dt><dd><a data-empresa-wa href="https://wa.me/559981771035"><span data-empresa="telefone">(99) 98177-1035</span></a></dd>
     <dt>Endereço</dt><dd data-empresa="endereco">Rua Francisco Bernadino, nº 1371-A, São Sebastião, Codó - MA, CEP 65400-000</dd>
   </dl></div>
 
@@ -231,7 +230,6 @@
         <p>CNPJ: <span data-empresa="cnpj">10.665.286/0001-88</span> · IE: <span data-empresa="inscricaoEstadual">123121671</span></p>
         <p data-empresa="endereco">Rua Francisco Bernadino, nº 1371-A, São Sebastião, Codó - MA, CEP 65400-000</p>
         <p>Telefone e WhatsApp: <a data-empresa-wa href="https://wa.me/559981771035"><span data-empresa="telefone">(99) 98177-1035</span></a></p>
-        <p>E-mail: <a data-empresa-mail="email" href="#">contato@lojastropical.com.br</a></p>
         <p>Atendimento: <span data-empresa="atendimento">segunda a sábado, das 8h às 18h</span></p>
       </address>
     </div>
@@ -284,14 +282,8 @@
     const texto = `Solicitação LGPD (direitos do titular)\nNome: ${nome.value.trim()}\nResposta por: ${canal() === "email" ? "e-mail" : "WhatsApp"} ${v}\nPedido: ${tipo.value}` +
       (document.getElementById("fDetalhe").value.trim() ? `\nDetalhes: ${document.getElementById("fDetalhe").value.trim()}` : "");
     const status = document.getElementById("fStatus");
-    if (canal() === "email") {
-      const para = EMPRESA.emailPrivacidade.replace(/[\[\]]/g, "");
-      location.href = `mailto:${para}?subject=${encodeURIComponent("Solicitação LGPD - " + tipo.value)}&body=${encodeURIComponent(texto)}`;
-      status.textContent = "Abrimos o seu aplicativo de e-mail com a mensagem pronta. É só enviar.";
-    } else {
-      window.open(`https://wa.me/${EMPRESA.whatsapp}?text=${encodeURIComponent(texto)}`, "_blank", "noopener");
-      status.textContent = "Abrimos o WhatsApp com a mensagem pronta. É só enviar.";
-    }
+    window.open(`https://wa.me/${EMPRESA.whatsapp}?text=${encodeURIComponent(texto)}`, "_blank", "noopener");
+    status.textContent = "Abrimos o WhatsApp com a mensagem pronta. É só enviar.";
   });
 })();
 </script>
