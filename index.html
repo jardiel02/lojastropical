@@ -54,7 +54,7 @@ a { color: inherit; }
 button { font: inherit; }
 /* Foco visível: escuro sobre fundos claros, amarelo sobre as faixas vermelhas */
 :focus-visible { outline: 3px solid var(--focus-ring); outline-offset: 2px; }
-.topbar, header.main, .hero, nav.cats { --focus-ring: #ffd400; }
+header.main, .hero, nav.cats { --focus-ring: #ffd400; }
 .skip { position: absolute; left: 12px; top: -80px; z-index: 50; background: var(--sun); color: #2b2200; padding: 10px 16px; border-radius: 10px; font-weight: 700; text-decoration: none; }
 .skip:focus { top: 12px; }
 main:focus, h1:focus, h2:focus { outline: none; }
@@ -62,11 +62,6 @@ main:focus, h1:focus, h2:focus { outline: none; }
 h1, h2, h3 { font-family: var(--font-display); text-wrap: balance; margin: 0; line-height: 1.05; }
 .wrap { max-width: 1200px; margin: 0 auto; padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); }
 
-
-.topbar { background: var(--red-deep); color: #ffe3e1; font-size: 14px; }
-.topbar .wrap { display: flex; flex-wrap: wrap; gap: 6px 24px; justify-content: space-between; padding-block: 8px; }
-.topbar a { text-decoration: none; }
-.topbar a:hover { color: #fff; text-decoration: underline; }
 
 header.main { position: sticky; top: env(safe-area-inset-top, 0px); z-index: 5; background: var(--red); color: #fff; box-shadow: 0 2px 12px rgb(0 0 0 / .18); }
 header.main .row { display: flex; align-items: center; gap: 12px 24px; padding-block: 10px; flex-wrap: wrap; }
@@ -340,11 +335,6 @@ body:has(.lt-cookies:not([hidden])) .float-wa { bottom: calc(150px + env(safe-ar
 </head>
 <body>
 <a class="skip" href="#conteudo" id="skipLink">Pular para o conteúdo</a>
-
-<div class="topbar"><div class="wrap">
-  <span>Crediário próprio · Parcelamos em até 12x · Entrega e montagem grátis</span>
-  <a href="https://instagram.com/lojastropicaloficial" target="_blank" rel="noopener">@lojastropicaloficial<span class="sr-only"> no Instagram (abre em nova aba)</span></a>
-</div></div>
 
 <header class="main">
   <div class="wrap row">
@@ -1372,7 +1362,7 @@ $("cartItems").addEventListener("click", e => {
 });
 // Carrinho como janela (diálogo): foco entra nele, fica preso dentro dele (Tab) e volta ao botão de origem ao fechar
 let focoAntesDoCarrinho = null;
-const PARTES_FORA = () => [document.querySelector(".topbar"), document.querySelector("header.main"), $("home"), $("produto"), document.querySelector("footer"), document.querySelector(".float-wa"), $("skipLink")];
+const PARTES_FORA = () => [document.querySelector("header.main"), $("home"), $("produto"), document.querySelector("footer"), document.querySelector(".float-wa"), $("skipLink")];
 function abrirCarrinho() {
   focoAntesDoCarrinho = document.activeElement;
   renderCarrinho(); $("drawer").hidden = false; $("scrim").hidden = false;
