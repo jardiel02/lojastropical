@@ -188,9 +188,11 @@ section { padding-block: 44px; }
 .seg { min-width: 0; }
 .seg-head { display: flex; flex-wrap: wrap; align-items: center; gap: 4px 12px; margin-bottom: 12px; }
 .seg-head h3 { font-size: clamp(20px, 2.4vw, 26px); font-weight: 800; }
-.seg-actions { display: flex; align-items: center; gap: 14px; margin-left: auto; }
-.seg-arrows { display: flex; gap: 6px; }
-.seg-arrow { display: grid; place-items: center; width: 40px; height: 40px; padding: 0; border: 1px solid var(--line); border-radius: 50%; background: var(--surface); color: var(--price); cursor: pointer; }
+.seg-carousel { position: relative; }
+.seg-arrows { position: absolute; inset: 0; pointer-events: none; }
+.seg-arrow { position: absolute; top: var(--seg-arrow-top, 119px); transform: translateY(-50%); z-index: 2; display: grid; place-items: center; width: 44px; height: 44px; padding: 0; border: 1px solid var(--line); border-radius: 50%; background: var(--surface); color: var(--price); box-shadow: 0 2px 8px rgb(0 0 0 / .15); cursor: pointer; pointer-events: auto; }
+.seg-arrow[data-passar-produtos="-1"] { left: -12px; }
+.seg-arrow[data-passar-produtos="1"] { right: -12px; }
 .seg-arrow:hover:not(:disabled) { background: var(--red); border-color: var(--red); color: #fff; }
 .seg-arrow:disabled { opacity: .3; cursor: default; }
 .seg-all, .seg-back { margin-left: auto; background: none; border: 0; padding: 6px 0; color: var(--red); font: inherit; font-weight: 700; font-size: 15px; cursor: pointer; }
@@ -1189,6 +1191,8 @@ const qtdTexto = n => `${n} ${n === 1 ? "produto" : "produtos"}`;
 function atualizarSetasProdutos(linha) {
   const setas = linha.closest(".seg").querySelector(".seg-arrows");
   const limite = linha.scrollWidth - linha.clientWidth;
+  const foto = linha.querySelector(".pic");
+  if (foto) setas.style.setProperty("--seg-arrow-top", `${4 + foto.getBoundingClientRect().height / 2}px`);
   setas.hidden = limite <= 4;
   setas.querySelector('[data-passar-produtos="-1"]').disabled = linha.scrollLeft <= 4;
   setas.querySelector('[data-passar-produtos="1"]').disabled = linha.scrollLeft >= limite - 4;
@@ -1220,16 +1224,16 @@ function renderGrid() {
       <div class="seg">
         <div class="seg-head">
           <h3>${c}</h3><span class="count">${qtdTexto(daCat.length)}</span>
-          <div class="seg-actions">
-            <button type="button" class="seg-all" data-ver-cat="${c}">Ver todos<span class="sr-only"> os produtos de ${c}</span> →</button>
+          <button type="button" class="seg-all" data-ver-cat="${c}">Ver todos<span class="sr-only"> os produtos de ${c}</span> →</button>
+        </div>
+        <div class="seg-carousel">
+          <div class="seg-row" id="produtos-linha-${indice}">${mostra.map(cardHTML).join("")}${resto > 0 ? `
+            <button type="button" class="seg-more" data-ver-cat="${c}"><b>+${resto}</b>Ver mais ${c}</button>` : ""}</div>
             <div class="seg-arrows" role="group" aria-label="Navegar pelos produtos de ${c}" hidden>
               <button type="button" class="seg-arrow" data-passar-produtos="-1" aria-label="Produtos anteriores de ${c}" aria-controls="produtos-linha-${indice}" disabled><svg aria-hidden="true" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="m15 5-7 7 7 7"/></svg></button>
               <button type="button" class="seg-arrow" data-passar-produtos="1" aria-label="Próximos produtos de ${c}" aria-controls="produtos-linha-${indice}"><svg aria-hidden="true" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="m9 5 7 7-7 7"/></svg></button>
             </div>
-          </div>
         </div>
-        <div class="seg-row" id="produtos-linha-${indice}">${mostra.map(cardHTML).join("")}${resto > 0 ? `
-          <button type="button" class="seg-more" data-ver-cat="${c}"><b>+${resto}</b>Ver mais ${c}</button>` : ""}</div>
       </div>`;
     }).join("");
     $("grid").querySelectorAll(".seg-row").forEach(linha => {
