@@ -1,0 +1,35 @@
+name: Atualizar Instagram
+
+on:
+  schedule:
+    - cron: "40 11 * * *"   # 1x por dia (08:40 em Codo); poupa as visualizacoes do plano gratis do Behold
+  workflow_dispatch:          # botao "Run workflow" para rodar na hora
+
+permissions:
+  contents: write
+
+concurrency:
+  group: instagram
+  cancel-in-progress: false
+
+jobs:
+  atualizar:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+      - name: Buscar posts no Behold
+        run: node scripts/atualizar_instagram.mjs
+      - name: Salvar se mudou
+        run: |
+          git add -N instagram.js
+          git diff --quiet instagram.js && { echo "Sem mudancas"; exit 0; }
+          git config user.name "atualizacao-instagram"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add instagram.js
+          git commit -m "Atualiza posts do Instagram"
+          for i in 1 2 3; do git pull --rebase && git push && exit 0; sleep 5; done
+          exit 1
