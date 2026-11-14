@@ -1587,8 +1587,7 @@ function escolherMarca(m) {
 $("marcasGrid").innerHTML = MARCAS.map(m => {
   const n = PRODUTOS.filter(p => p.marca === m).length;
   const logo = LOGO_MARCA[m] ? `<img src="img/${LOGO_MARCA[m]}" alt="" onload="this.parentNode.classList.add('tem-logo')" onerror="this.remove()">` : "";
-  const conteudo = `<span class="mc-logo">${logo}<b>${m}</b></span>
-    <small>${n ? qtdTexto(n) : "Consulte no WhatsApp"}</small>`;
+  const conteudo = `<span class="mc-logo">${logo}<b>${m}</b></span>`;
   return `<li>${n
     ? `<button type="button" class="marca" data-marca="${m}" aria-label="Ver produtos ${m}">${conteudo}</button>`
     : `<a class="marca" href="${waLink("Olá! Vim pelo site e quero ver os produtos " + m + ".")}" target="_blank" rel="noopener" aria-label="Perguntar no WhatsApp sobre produtos ${m}">${conteudo}</a>`}</li>`;
