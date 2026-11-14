@@ -186,14 +186,20 @@ section { padding-block: 44px; }
 /* Página inicial: uma linha por departamento */
 .segs { display: grid; grid-template-columns: minmax(0, 1fr); gap: 34px; }
 .seg { min-width: 0; }
-.seg-head { display: flex; flex-wrap: wrap; align-items: baseline; gap: 4px 12px; margin-bottom: 12px; }
+.seg-head { display: flex; flex-wrap: wrap; align-items: center; gap: 4px 12px; margin-bottom: 12px; }
 .seg-head h3 { font-size: clamp(20px, 2.4vw, 26px); font-weight: 800; }
+.seg-actions { display: flex; align-items: center; gap: 14px; margin-left: auto; }
+.seg-arrows { display: flex; gap: 6px; }
+.seg-arrow { display: grid; place-items: center; width: 40px; height: 40px; padding: 0; border: 1px solid var(--line); border-radius: 50%; background: var(--surface); color: var(--price); cursor: pointer; }
+.seg-arrow:hover:not(:disabled) { background: var(--red); border-color: var(--red); color: #fff; }
+.seg-arrow:disabled { opacity: .3; cursor: default; }
 .seg-all, .seg-back { margin-left: auto; background: none; border: 0; padding: 6px 0; color: var(--red); font: inherit; font-weight: 700; font-size: 15px; cursor: pointer; }
 .seg-back { margin-left: 0; color: var(--fg); background: var(--chip); padding: 8px 16px; border-radius: 999px; }
 @media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) .seg-all { color: var(--red-text); } }
 :root[data-theme="dark"] .seg-all { color: var(--red-text); }
 .seg-all:hover { text-decoration: underline; }
-.seg-row { display: grid; grid-auto-flow: column; grid-auto-columns: 230px; gap: 18px; overflow-x: auto; scroll-snap-type: x mandatory; padding: 4px 2px 14px; overscroll-behavior-x: contain; }
+.seg-row { display: grid; grid-auto-flow: column; grid-auto-columns: 230px; gap: 18px; overflow-x: auto; scroll-snap-type: x mandatory; padding: 4px 2px; overscroll-behavior-x: contain; scrollbar-width: none; }
+.seg-row::-webkit-scrollbar { display: none; }
 .seg-row > * { scroll-snap-align: start; }
 .seg-more { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 6px; border: 2px dashed var(--line); border-radius: var(--radius); background: var(--surface); color: var(--fg); font: inherit; font-weight: 700; font-size: 16px; cursor: pointer; padding: 16px; text-align: center; }
 .seg-more b { font-size: 34px; color: var(--price); }
@@ -1180,7 +1186,19 @@ function renderNav() {
 const POR_LINHA = 10; // quantos produtos aparecem na linha de cada departamento na página inicial
 const qtdTexto = n => `${n} ${n === 1 ? "produto" : "produtos"}`;
 
+function atualizarSetasProdutos(linha) {
+  const setas = linha.closest(".seg").querySelector(".seg-arrows");
+  const limite = linha.scrollWidth - linha.clientWidth;
+  setas.hidden = limite <= 4;
+  setas.querySelector('[data-passar-produtos="-1"]').disabled = linha.scrollLeft <= 4;
+  setas.querySelector('[data-passar-produtos="1"]').disabled = linha.scrollLeft >= limite - 4;
+}
+const observarLinhasProdutos = new ResizeObserver(entries => {
+  entries.forEach(({ target }) => atualizarSetasProdutos(target));
+});
+
 function renderGrid() {
+  observarLinhasProdutos.disconnect();
   const termo = busca.trim().toLowerCase();
   const codigosCampanha = filtroCat === "Mais praticidade" ? ["9874", "6596", "9737"] : null;
   const lista = PRODUTOS.filter(p =>
@@ -1194,7 +1212,7 @@ function renderGrid() {
   // Página inicial sem busca: uma linha por departamento, com "Ver todos"
   if (filtroCat === "Todos" && !termo) {
     $("grid").className = "segs";
-    $("grid").innerHTML = CATEGORIAS.map(c => {
+    $("grid").innerHTML = CATEGORIAS.map((c, indice) => {
       const daCat = lista.filter(p => p.cat === c);
       if (!daCat.length) return "";
       const mostra = daCat.slice(0, POR_LINHA), resto = daCat.length - mostra.length;
@@ -1202,12 +1220,23 @@ function renderGrid() {
       <div class="seg">
         <div class="seg-head">
           <h3>${c}</h3><span class="count">${qtdTexto(daCat.length)}</span>
-          <button type="button" class="seg-all" data-ver-cat="${c}">Ver todos<span class="sr-only"> os produtos de ${c}</span> →</button>
+          <div class="seg-actions">
+            <button type="button" class="seg-all" data-ver-cat="${c}">Ver todos<span class="sr-only"> os produtos de ${c}</span> →</button>
+            <div class="seg-arrows" role="group" aria-label="Navegar pelos produtos de ${c}" hidden>
+              <button type="button" class="seg-arrow" data-passar-produtos="-1" aria-label="Produtos anteriores de ${c}" aria-controls="produtos-linha-${indice}" disabled><svg aria-hidden="true" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="m15 5-7 7 7 7"/></svg></button>
+              <button type="button" class="seg-arrow" data-passar-produtos="1" aria-label="Próximos produtos de ${c}" aria-controls="produtos-linha-${indice}"><svg aria-hidden="true" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="m9 5 7 7-7 7"/></svg></button>
+            </div>
+          </div>
         </div>
-        <div class="seg-row">${mostra.map(cardHTML).join("")}${resto > 0 ? `
+        <div class="seg-row" id="produtos-linha-${indice}">${mostra.map(cardHTML).join("")}${resto > 0 ? `
           <button type="button" class="seg-more" data-ver-cat="${c}"><b>+${resto}</b>Ver mais ${c}</button>` : ""}</div>
       </div>`;
     }).join("");
+    $("grid").querySelectorAll(".seg-row").forEach(linha => {
+      linha.addEventListener("scroll", () => atualizarSetasProdutos(linha), { passive: true });
+      observarLinhasProdutos.observe(linha);
+      atualizarSetasProdutos(linha);
+    });
     return;
   }
   $("grid").className = "grid";
@@ -1447,6 +1476,14 @@ $("bannerCasaCompleta").addEventListener("click", e => {
 });
 // "Ver todos" / "Ver mais" de cada departamento, e "voltar a todos os departamentos"
 $("catalogo").addEventListener("click", e => {
+  const seta = e.target.closest("[data-passar-produtos]");
+  if (seta) {
+    const linha = document.getElementById(seta.getAttribute("aria-controls"));
+    const passo = linha.firstElementChild.getBoundingClientRect().width + parseFloat(getComputedStyle(linha).columnGap);
+    const quantidade = Math.max(1, Math.floor(linha.clientWidth / passo));
+    linha.scrollBy({ left: Number(seta.dataset.passarProdutos) * passo * quantidade, behavior: window.matchMedia("(prefers-reduced-motion: reduce)").matches ? "instant" : "smooth" });
+    return;
+  }
   const b = e.target.closest("[data-ver-cat]");
   if (b) escolherCat(b.dataset.verCat);
 });
