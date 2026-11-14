@@ -221,6 +221,21 @@ section { padding-block: 44px; }
 .store a:hover { text-decoration: underline; }
 .note { color: var(--muted); font-size: 14px; max-width: 65ch; }
 
+/* Navegue por marcas */
+.marcas { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 16px; }
+.marca { width: 100%; height: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 8px; padding: 22px 12px; border: 1px solid var(--line); border-radius: var(--radius); background: var(--surface); color: var(--fg); font: inherit; text-decoration: none; cursor: pointer; transition: transform .15s, box-shadow .15s, border-color .15s; }
+.marca:hover, .marca:focus-visible { transform: translateY(-2px); border-color: var(--red); box-shadow: 0 10px 24px rgb(156 10 16 / .14); }
+.mc-logo { height: 64px; display: flex; align-items: center; justify-content: center; }
+.mc-logo img { max-height: 64px; max-width: 100%; object-fit: contain; display: none; }
+.mc-logo.tem-logo img { display: block; }
+.mc-logo.tem-logo b { display: none; }
+.mc-logo b { font-family: var(--font-display, inherit); font-size: clamp(22px, 2.6vw, 30px); font-weight: 800; letter-spacing: -.01em; color: var(--red); }
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) .mc-logo b { color: var(--red-text); } }
+:root[data-theme="dark"] .mc-logo b { color: var(--red-text); }
+.marca small { color: var(--muted); font-size: 13px; }
+@media (max-width: 860px) { .marcas { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 10px; } .marca { padding: 16px 8px; } }
+@media (max-width: 480px) { .marcas { grid-template-columns: repeat(2, minmax(0, 1fr)); } .marcas li:last-child:nth-child(odd) { grid-column: 1 / -1; } }
+@media (prefers-reduced-motion: reduce) { .marca { transition: none; } .marca:hover { transform: none; } }
 /* Faixa com os últimos posts do Instagram */
 .ig-sec { background: var(--surface); border-block: 1px solid var(--line); }
 .ig-head { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 14px 20px; margin-bottom: 20px; }
@@ -452,6 +467,13 @@ body:has(.lt-cookies:not([hidden])) .float-wa { bottom: calc(150px + env(safe-ar
         <button type="button" class="seg-back" id="verTodosDeps" data-ver-cat="Todos" hidden>← Todos os departamentos</button>
       </div>
       <div class="grid" id="grid"></div>
+    </div>
+  </section>
+
+  <section id="marcas" style="padding-top:8px">
+    <div class="wrap">
+      <div class="sec-head"><div><span class="eyebrow">Principais fornecedores</span><h2>Navegue por marcas</h2></div></div>
+      <ul class="marcas" id="marcasGrid"></ul>
     </div>
   </section>
 
@@ -1165,6 +1187,7 @@ const porId = id => PRODUTOS.find(p => p.id === id);
 const fotoCapa = p => p.imgs[0];
 
 let filtroCat = "Todos";
+let filtroMarca = null;
 let busca = "";
 
 function precoCard(p) {
@@ -1239,14 +1262,15 @@ function renderGrid() {
   const codigosCampanha = filtroCat === "Mais praticidade" ? ["9874", "6596", "9737"] : null;
   const lista = PRODUTOS.filter(p =>
     (filtroCat === "Todos" || (codigosCampanha ? codigosCampanha.includes(p.cod) : p.cat === filtroCat)) &&
+    (!filtroMarca || p.marca === filtroMarca) &&
     (!termo || [p.nome, p.cat, p.marca, p.cod || ""].join(" ").toLowerCase().includes(termo))
   ).sort((a, b) => esgotado(a) - esgotado(b));
-  $("catTitle").textContent = termo ? `Resultados para “${busca.trim()}”` : (filtroCat === "Todos" ? "Nossos departamentos" : filtroCat);
+  $("catTitle").textContent = termo ? `Resultados para “${busca.trim()}”` : filtroMarca ? `Produtos ${filtroMarca}` : (filtroCat === "Todos" ? "Nossos departamentos" : filtroCat);
   $("count").textContent = qtdTexto(lista.length);
-  $("verTodosDeps").hidden = filtroCat === "Todos" && !termo;
+  $("verTodosDeps").hidden = filtroCat === "Todos" && !termo && !filtroMarca;
 
   // Página inicial sem busca: uma linha por departamento, com "Ver todos"
-  if (filtroCat === "Todos" && !termo) {
+  if (filtroCat === "Todos" && !termo && !filtroMarca) {
     $("grid").className = "segs";
     $("grid").innerHTML = CATEGORIAS.map((c, indice) => {
       const daCat = lista.filter(p => p.cat === c);
@@ -1486,7 +1510,7 @@ function rotear(evento) {
 window.addEventListener("hashchange", rotear);
 
 function escolherCat(cat) {
-  filtroCat = cat;
+  filtroCat = cat; filtroMarca = null;
   busca = ""; $("q").value = "";
   renderNav(); renderGrid();
   if (location.hash !== "#catalogo") location.hash = "catalogo"; else mostrarInicio("catalogo");
@@ -1526,7 +1550,7 @@ $("catalogo").addEventListener("click", e => {
 $("searchForm").addEventListener("submit", e => {
   e.preventDefault();
   busca = $("q").value;
-  filtroCat = "Todos"; renderNav(); renderGrid();
+  filtroCat = "Todos"; filtroMarca = null; renderNav(); renderGrid();
   if (location.hash !== "#catalogo") location.hash = "catalogo"; else mostrarInicio("catalogo");
 });
 // ===== Barra de departamentos rolável =====
@@ -1547,7 +1571,31 @@ $("searchForm").addEventListener("submit", e => {
   ul.addEventListener("click", e => { if (moveu) { e.stopPropagation(); e.preventDefault(); moveu = false; } }, true);
   setTimeout(atualizar, 0); window.addEventListener("load", atualizar);
 })();
-$("q").addEventListener("input", e => { busca = e.target.value; renderGrid(); });
+$("q").addEventListener("input", e => { busca = e.target.value; filtroMarca = null; renderGrid(); });
+
+// ===== Navegue por marcas =====
+const MARCAS = ["Consul", "Notável", "Moval", "Onix", "Topázio"];
+// Logos (opcional): enquanto a marca não tiver logo aqui, aparece o nome escrito. Ex.: { "Consul": "marca-consul.png" } (arquivo em img/)
+const LOGO_MARCA = {};
+function escolherMarca(m) {
+  filtroCat = "Todos"; filtroMarca = m;
+  busca = ""; $("q").value = "";
+  renderNav(); renderGrid();
+  if (location.hash !== "#catalogo") location.hash = "catalogo"; else mostrarInicio("catalogo");
+}
+$("marcasGrid").innerHTML = MARCAS.map(m => {
+  const n = PRODUTOS.filter(p => p.marca === m).length;
+  const logo = LOGO_MARCA[m] ? `<img src="img/${LOGO_MARCA[m]}" alt="" onload="this.parentNode.classList.add('tem-logo')" onerror="this.remove()">` : "";
+  const conteudo = `<span class="mc-logo">${logo}<b>${m}</b></span>
+    <small>${n ? qtdTexto(n) : "Consulte no WhatsApp"}</small>`;
+  return `<li>${n
+    ? `<button type="button" class="marca" data-marca="${m}" aria-label="Ver produtos ${m}">${conteudo}</button>`
+    : `<a class="marca" href="${waLink("Olá! Vim pelo site e quero ver os produtos " + m + ".")}" target="_blank" rel="noopener" aria-label="Perguntar no WhatsApp sobre produtos ${m}">${conteudo}</a>`}</li>`;
+}).join("");
+$("marcas").addEventListener("click", e => {
+  const b = e.target.closest("button[data-marca]");
+  if (b) escolherMarca(b.dataset.marca);
+});
 
 $("stores").innerHTML = LOJAS.map(([nome, rua, bairro, cidade, cep]) => {
   const end = `${rua}, ${bairro}, ${cidade} - MA, ${cep}`;
