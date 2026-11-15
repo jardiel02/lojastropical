@@ -75,7 +75,23 @@ header.main .row { display: flex; align-items: center; gap: 12px 24px; padding-b
 .head-actions { display: flex; gap: 10px; align-items: center; margin-left: auto; order: 2; }
 @media (min-width: 861px) { .search { order: 2; } .head-actions { order: 3; margin-left: 0; } }
 /* Barra de departamentos: rola para o lado (setas, roda do mouse ou arrastar) */
-nav.cats { position: relative; }
+nav.cats { position: relative; z-index: 4; }
+/* Menu "Todos os departamentos" (abre ao passar o mouse) */
+.mega { position: absolute; left: 0; right: 0; top: 100%; z-index: 20; }
+nav.cats .mega-box { background: var(--surface); color: var(--fg); border: 1px solid var(--line); border-top: 4px solid var(--sun); border-radius: 0 0 var(--radius) var(--radius); box-shadow: 0 18px 40px rgb(0 0 0 / .22); padding: 22px 26px 18px; width: min(1040px, 100%); max-height: min(76vh, 660px); overflow-y: auto; overscroll-behavior: contain; }
+.mega-cols { columns: 4 190px; column-gap: 28px; }
+.mega-grupo { break-inside: avoid; margin-bottom: 18px; }
+nav.cats .mega-box button { font: inherit; color: var(--fg); border: 0; background: none; cursor: pointer; text-align: left; padding: 4px 0; border-radius: 6px; white-space: normal; }
+nav.cats .mega-box .mega-cat { color: var(--red); font-weight: 800; font-size: 17px; }
+nav.cats .mega-box ul { list-style: none; margin: 4px 0 0; padding: 0; display: block; overflow: visible; mask-image: none; -webkit-mask-image: none; cursor: auto; }
+nav.cats .mega-box ul button { color: var(--muted); font-size: 15px; font-weight: 500; }
+nav.cats .mega-box button:hover, nav.cats .mega-box button:focus-visible { color: var(--fg); text-decoration: underline; background: none; }
+.mega-topo { display: flex; justify-content: space-between; align-items: center; gap: 12px; margin-bottom: 14px; padding-bottom: 12px; border-bottom: 1px solid var(--line); }
+nav.cats .mega-box .mega-tudo { color: var(--fg); font-weight: 700; }
+nav.cats .mega-box .mega-fechar { font-size: 26px; line-height: 1; padding: 0 6px; color: var(--muted); }
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) nav.cats .mega-box .mega-cat { color: var(--red-text); } }
+:root[data-theme="dark"] nav.cats .mega-box .mega-cat { color: var(--red-text); }
+@media (max-width: 860px) { .mega .wrap { padding: 0; } nav.cats .mega-box { width: 100%; border-radius: 0 0 12px 12px; padding: 16px; max-height: 70vh; } .mega-cols { columns: 2 150px; column-gap: 18px; } }
 nav.cats ul { scroll-behavior: smooth; cursor: grab; }
 nav.cats ul.arrastando { cursor: grabbing; scroll-behavior: auto; }
 nav.cats .cat-arrow { padding: 0; position: absolute; top: 50%; transform: translateY(-50%); z-index: 2; width: 34px; height: 34px; border-radius: 50%; border: 0; background: var(--sun); color: #2b2200; font-size: 20px; font-weight: 800; line-height: 1; cursor: pointer; box-shadow: 0 2px 8px rgb(0 0 0 / .3); display: grid; place-items: center; }
@@ -397,7 +413,8 @@ body:has(.lt-cookies:not([hidden])) .float-wa { bottom: calc(150px + env(safe-ar
       </button>
     </div>
   </div>
-  <nav class="cats" aria-label="Departamentos"><button type="button" class="cat-arrow esq" id="catEsq" aria-label="Ver departamentos anteriores" hidden>‹</button><ul class="wrap" id="catNav"></ul><button type="button" class="cat-arrow dir" id="catDir" aria-label="Ver mais departamentos" hidden>›</button></nav>
+  <nav class="cats" aria-label="Departamentos"><button type="button" class="cat-arrow esq" id="catEsq" aria-label="Ver departamentos anteriores" hidden>‹</button><ul class="wrap" id="catNav"></ul><button type="button" class="cat-arrow dir" id="catDir" aria-label="Ver mais departamentos" hidden>›</button>
+    <div class="mega" id="mega" hidden><div class="wrap"><div class="mega-box" id="megaBox" role="region" aria-label="Todos os departamentos"></div></div></div></nav>
 </header>
 
 <main id="home" tabindex="-1">
@@ -1195,6 +1212,21 @@ const fotoCapa = p => p.imgs[0];
 
 let filtroCat = "Todos";
 let filtroMarca = null;
+let filtroSub = null; // subgrupo escolhido no menu "Todos os departamentos": { nome, re }
+
+// Subgrupos do menu "Todos os departamentos" (separados pelo nome do produto). Só aparecem os que têm produto.
+const SUBGRUPOS = {
+  "Guarda-roupas": [["Casal", "casal"], ["Solteiro", "solteiro"], ["3 e 4 portas", "\\b[34] portas"], ["6 portas ou mais", "\\b([6-9]|1\\d) portas"]],
+  "Móveis": [["Armários e cozinhas", "^(armário|cozinha)"], ["Cômodas e penteadeiras", "^cômoda"], ["Mesas e cadeiras", "^(mesa aço|cadeira)"], ["Escrivaninhas", "escrivaninha"], ["Racks, painéis e homes", "^(rack|painel|home)"], ["Adegas", "^adega"]],
+  "Eletrodomésticos": [["Fogões", "^fogão"], ["Geladeiras", "^geladeira"], ["Freezers", "^freezer"], ["Máquinas de lavar", "^máquina de lavar"], ["Tanquinhos", "^tanquinho"], ["Fornos elétricos", "^forno"]],
+  "Áudio e Vídeo": [["Smart TVs", "\\btv\\b"], ["Caixas de som", "^caixa"]],
+  "Eletroportáteis": [["Batedeiras", "^batedeira"], ["Liquidificadores", "^liquidificador"], ["Beleza e cuidados", "^(modelador|secador|prancha|chapinha)"], ["Fritadeiras", "fritadeira|air fryer"]],
+  "Estofados": [["Sofás", "^sofá"]],
+  "Colchões": [["Camas box", "^cama box"], ["Colchões", "^colchão"]],
+  "Ventilação": [["Ventiladores de mesa", "ventilador.*mesa"], ["Ventiladores de coluna", "ventilador.*coluna"]],
+  "Bicicletas": [["Infantis (aro 20)", "aro 20"]],
+};
+const subsDe = cat => (SUBGRUPOS[cat] || []).filter(([, re]) => PRODUTOS.some(p => p.cat === cat && new RegExp(re, "i").test(p.nome)));
 let busca = "";
 
 function precoCard(p) {
@@ -1243,7 +1275,9 @@ document.addEventListener("click", e => {
 
 function renderNav() {
   $("catNav").innerHTML = ["Todos", ...CATEGORIAS].map(c =>
-    `<li><button type="button" data-cat="${c}" aria-pressed="${c === filtroCat}">${c === "Todos" ? "Todos os departamentos" : c}</button></li>`
+    c === "Todos"
+      ? `<li><button type="button" data-cat="Todos" id="btnTodosDeps" aria-pressed="${filtroCat === "Todos"}" aria-expanded="${!$("mega").hidden}" aria-controls="mega"><svg aria-hidden="true" focusable="false" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" style="vertical-align:-3px;margin-right:6px"><path d="M4 6h16M4 12h16M4 18h16"/></svg>Todos os departamentos</button></li>`
+      : `<li><button type="button" data-cat="${c}" aria-pressed="${c === filtroCat}">${c}</button></li>`
   ).join("");
 }
 
@@ -1270,9 +1304,10 @@ function renderGrid() {
   const lista = PRODUTOS.filter(p =>
     (filtroCat === "Todos" || (codigosCampanha ? codigosCampanha.includes(p.cod) : p.cat === filtroCat)) &&
     (!filtroMarca || p.marca === filtroMarca) &&
+    (!filtroSub || new RegExp(filtroSub.re, "i").test(p.nome)) &&
     (!termo || [p.nome, p.cat, p.marca, p.cod || ""].join(" ").toLowerCase().includes(termo))
   ).sort((a, b) => esgotado(a) - esgotado(b));
-  $("catTitle").textContent = termo ? `Resultados para “${busca.trim()}”` : filtroMarca ? `Produtos ${filtroMarca}` : (filtroCat === "Todos" ? "Nossos departamentos" : filtroCat);
+  $("catTitle").textContent = termo ? `Resultados para “${busca.trim()}”` : filtroMarca ? `Produtos ${filtroMarca}` : filtroSub ? `${filtroCat}: ${filtroSub.nome}` : (filtroCat === "Todos" ? "Nossos departamentos" : filtroCat);
   $("count").textContent = qtdTexto(lista.length);
   $("verTodosDeps").hidden = filtroCat === "Todos" && !termo && !filtroMarca;
 
@@ -1517,7 +1552,7 @@ function rotear(evento) {
 window.addEventListener("hashchange", rotear);
 
 function escolherCat(cat) {
-  filtroCat = cat; filtroMarca = null;
+  filtroCat = cat; filtroMarca = null; filtroSub = null;
   busca = ""; $("q").value = "";
   renderNav(); renderGrid();
   if (location.hash !== "#catalogo") location.hash = "catalogo"; else mostrarInicio("catalogo");
@@ -1557,7 +1592,7 @@ $("catalogo").addEventListener("click", e => {
 $("searchForm").addEventListener("submit", e => {
   e.preventDefault();
   busca = $("q").value;
-  filtroCat = "Todos"; filtroMarca = null; renderNav(); renderGrid();
+  filtroCat = "Todos"; filtroMarca = null; filtroSub = null; renderNav(); renderGrid();
   if (location.hash !== "#catalogo") location.hash = "catalogo"; else mostrarInicio("catalogo");
 });
 // ===== Barra de departamentos rolável =====
@@ -1578,14 +1613,14 @@ $("searchForm").addEventListener("submit", e => {
   ul.addEventListener("click", e => { if (moveu) { e.stopPropagation(); e.preventDefault(); moveu = false; } }, true);
   setTimeout(atualizar, 0); window.addEventListener("load", atualizar);
 })();
-$("q").addEventListener("input", e => { busca = e.target.value; filtroMarca = null; renderGrid(); });
+$("q").addEventListener("input", e => { busca = e.target.value; filtroMarca = null; filtroSub = null; renderGrid(); });
 
 // ===== Navegue por marcas =====
 const MARCAS = ["Consul", "Notável", "Moval", "Onix", "Topázio"];
 // Logos (opcional): enquanto a marca não tiver logo aqui, aparece o nome escrito. Ex.: { "Consul": "marca-consul.png" } (arquivo em img/)
 const LOGO_MARCA = { "Consul": "marca-consul.png", "Notável": "marca-notavel.png", "Moval": "marca-moval.png", "Onix": "marca-onix.png", "Topázio": "marca-topazio.png" };
 function escolherMarca(m) {
-  filtroCat = "Todos"; filtroMarca = m;
+  filtroCat = "Todos"; filtroMarca = m; filtroSub = null;
   busca = ""; $("q").value = "";
   renderNav(); renderGrid();
   if (location.hash !== "#catalogo") location.hash = "catalogo"; else mostrarInicio("catalogo");
@@ -1598,6 +1633,47 @@ $("marcasGrid").innerHTML = MARCAS.map(m => {
     ? `<button type="button" class="marca" data-marca="${m}" aria-label="Ver produtos ${m}">${conteudo}</button>`
     : `<a class="marca" href="${waLink("Olá! Vim pelo site e quero ver os produtos " + m + ".")}" target="_blank" rel="noopener" aria-label="Perguntar no WhatsApp sobre produtos ${m}">${conteudo}</a>`}</li>`;
 }).join("");
+// ===== Menu "Todos os departamentos": abre ao passar o mouse (no celular, ao tocar) =====
+(() => {
+  const mega = $("mega"), box = $("megaBox");
+  const temHover = window.matchMedia("(hover: hover) and (pointer: fine)");
+  box.innerHTML = `
+    <div class="mega-topo"><button type="button" class="mega-tudo" data-mega-cat="Todos">Ver todos os departamentos →</button>
+      <button type="button" class="mega-fechar" data-mega-fechar aria-label="Fechar menu de departamentos">×</button></div>
+    <div class="mega-cols">${CATEGORIAS.filter(c => PRODUTOS.some(p => p.cat === c)).map(c => `
+      <div class="mega-grupo"><button type="button" class="mega-cat" data-mega-cat="${c}">${c}</button>
+        <ul>${subsDe(c).map(([nome]) => `<li><button type="button" data-mega-cat="${c}" data-mega-sub="${nome}">${nome}</button></li>`).join("")}</ul></div>`).join("")}</div>`;
+  let timer = null;
+  const abrir = () => { clearTimeout(timer); if (!mega.hidden) return; mega.hidden = false; const b = $("btnTodosDeps"); if (b) b.setAttribute("aria-expanded", "true"); };
+  const fechar = () => { clearTimeout(timer); mega.hidden = true; const b = $("btnTodosDeps"); if (b) b.setAttribute("aria-expanded", "false"); };
+  const fecharDepois = () => { clearTimeout(timer); timer = setTimeout(fechar, 250); };
+  window.fecharMegaMenu = fechar;
+  // Passar o mouse: abre pelo botão e continua aberto enquanto o mouse estiver no menu
+  $("catNav").addEventListener("pointerover", e => { if (temHover.matches && e.pointerType === "mouse" && e.target.closest("#btnTodosDeps")) abrir(); });
+  $("catNav").addEventListener("pointerout", e => { if (temHover.matches && e.pointerType === "mouse" && e.target.closest("#btnTodosDeps") && !mega.contains(e.relatedTarget)) fecharDepois(); });
+  mega.addEventListener("pointerenter", e => { if (e.pointerType === "mouse") clearTimeout(timer); });
+  mega.addEventListener("pointerleave", e => { if (e.pointerType === "mouse" && !(e.relatedTarget && e.relatedTarget.closest && e.relatedTarget.closest("#btnTodosDeps"))) fecharDepois(); });
+  // Clique no botão: no celular/teclado abre e fecha o menu; no computador mantém o comportamento de mostrar todos
+  $("catNav").addEventListener("click", e => {
+    if (!e.target.closest("#btnTodosDeps")) { fechar(); return; }
+    if (!temHover.matches || e.detail === 0) { e.stopImmediatePropagation(); mega.hidden ? (abrir(), box.querySelector("button").focus()) : fechar(); }
+    else fechar();
+  }, true);
+  box.addEventListener("click", e => {
+    if (e.target.closest("[data-mega-fechar]")) { fechar(); $("btnTodosDeps")?.focus(); return; }
+    const b = e.target.closest("[data-mega-cat]"); if (!b) return;
+    fechar();
+    escolherCat(b.dataset.megaCat);
+    if (b.dataset.megaSub) {
+      const sub = (SUBGRUPOS[b.dataset.megaCat] || []).find(([n]) => n === b.dataset.megaSub);
+      if (sub) { filtroSub = { nome: sub[0], re: sub[1] }; renderGrid(); }
+    }
+  });
+  document.addEventListener("keydown", e => { if (e.key === "Escape" && !mega.hidden) { fechar(); $("btnTodosDeps")?.focus(); } });
+  document.addEventListener("pointerdown", e => { if (!mega.hidden && !mega.contains(e.target) && !e.target.closest("#btnTodosDeps")) fechar(); });
+  window.addEventListener("hashchange", fechar);
+})();
+
 $("marcas").addEventListener("click", e => {
   const b = e.target.closest("button[data-marca]");
   if (b) escolherMarca(b.dataset.marca);
