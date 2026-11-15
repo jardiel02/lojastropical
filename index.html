@@ -162,12 +162,13 @@ nav.cats button:hover, nav.cats button[aria-pressed="true"] { background: var(--
 .btn.sun { background: var(--sun); color: #2b2200; }
 .btn.ghost { border-color: rgb(255 255 255 / .6); color: #fff; background: transparent; }
 
-.perks { background: var(--surface); border-bottom: 1px solid var(--line); }
-.perks ul { list-style: none; margin: 0 auto; display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; padding-block: 18px; }
+.perks { background: var(--red-deep); color: #fff; }
+.perks ul { list-style: none; margin: 0 auto; display: grid; grid-template-columns: repeat(4, max-content); justify-content: space-between; gap: 14px 24px; padding-block: 16px; }
 .perks li { display: flex; gap: 12px; align-items: center; min-width: 0; }
 .ic { flex: none; width: 44px; height: 44px; border-radius: 50%; display: grid; place-items: center; background: var(--chip); color: var(--red); }
-.perks b { display: block; font-size: 15px; }
-.perks span { color: var(--muted); font-size: 13px; }
+.perks svg { flex: none; color: #fff; }
+.perks b { display: block; font-family: var(--font-display); font-size: 18px; font-weight: 800; line-height: 1.1; letter-spacing: -.01em; }
+.perks span { color: rgb(255 255 255 / .88); font-size: 14px; }
 
 section { padding-block: 44px; }
 .sec-head { display: flex; flex-wrap: wrap; gap: 8px 24px; align-items: end; justify-content: space-between; margin-bottom: 20px; }
@@ -372,7 +373,7 @@ section { padding-block: 44px; }
   /* Botão flutuante do WhatsApp: menor, e some na página do produto (que já tem o botão de comprar) */
   .float-wa { width: 50px; height: 50px; }
   body.no-produto .float-wa { display: none; }
-  .perks ul { grid-template-columns: repeat(2, 1fr); }
+  .perks ul { grid-template-columns: repeat(2, minmax(0, 1fr)); justify-content: stretch; }
   header.main .wa-btn { display: none; }
   .logo img { height: 52px; }
   .pdp { grid-template-columns: 1fr; gap: 20px; }
@@ -382,7 +383,7 @@ section { padding-block: 44px; }
   .thumbs button { width: 68px; flex: none; }
 }
 @media (max-width: 480px) {
-  .perks ul { grid-template-columns: 1fr; }
+  .perks ul { grid-template-columns: 1fr; } .perks b { font-size: 16px; }
   .grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
   .card .price { font-size: 22px; }
   .card .body { padding: 12px; }
@@ -485,10 +486,10 @@ body:has(.lt-cookies:not([hidden])) .float-wa { bottom: calc(150px + env(safe-ar
   </div>
 
   <div class="perks"><ul class="wrap">
-    <li><span class="ic"><svg aria-hidden="true" focusable="false" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 7h16v10H4z"/><path d="M8 12h.01M12 12h4"/></svg></span><div><b>Crediário próprio</b><span>Compre no carnê da loja</span></div></li>
-    <li><span class="ic"><svg aria-hidden="true" focusable="false" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="6" width="18" height="12" rx="2"/><path d="M3 10h18"/></svg></span><div><b>Até 12x</b><span>Parcelamos sua compra</span></div></li>
-    <li><span class="ic"><svg aria-hidden="true" focusable="false" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 7h11v9H3zM14 10h4l3 3v3h-7"/><circle cx="7" cy="17" r="2"/><circle cx="17" cy="17" r="2"/></svg></span><div><b>Entrega grátis</b><span>Na região das lojas</span></div></li>
-    <li><span class="ic"><svg aria-hidden="true" focusable="false" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 4l6 6-9 9H5v-6z"/></svg></span><div><b>Montagem grátis</b><span>A gente monta pra você</span></div></li>
+    <li><svg aria-hidden="true" focusable="false" width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M2 6.5h11v9H2zM13 9.5h4.2l3.3 3.4v2.6H13"/><circle cx="6" cy="16.5" r="1.8"/><circle cx="16.5" cy="16.5" r="1.8"/><path d="M4.5 9.5h4M4.5 12h2.5"/></svg><div><b>Frete grátis pra você!</b><span>Na região das nossas lojas.</span></div></li>
+    <li><svg aria-hidden="true" focusable="false" width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a3.6 3.6 0 0 0 4.8 4.8L21 12.6 12.6 21l-1.5-1.5a3.6 3.6 0 0 0-4.8-4.8"/><path d="m3 3 3 1 6 6-2 2-6-6z"/><path d="M14 14l6 6"/></svg><div><b>Montagem sem custo!</b><span>A gente monta pra você.</span></div></li>
+    <li><svg aria-hidden="true" focusable="false" width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="3" width="16" height="18" rx="2"/><path d="M8 7.5h8M8 11h8M8 14.5h4"/><path d="M15.5 13.2v5M17 14.2c-.3-.5-.9-.8-1.5-.8-.9 0-1.5.5-1.5 1.1 0 1.5 3 .8 3 2.4 0 .6-.7 1.1-1.5 1.1-.7 0-1.3-.3-1.6-.8"/></svg><div><b>Crediário próprio</b><span>Compre no carnê da loja.</span></div></li>
+    <li><svg aria-hidden="true" focusable="false" width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="2.5" y="5.5" width="19" height="13" rx="2.5"/><path d="M2.5 9.5h19M6 15h4"/></svg><div><b>Parcele em até 12x</b><span>No cartão de crédito.</span></div></li>
   </ul></div>
 
   <section id="catalogo">
