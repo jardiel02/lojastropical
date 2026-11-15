@@ -15,7 +15,7 @@ const EMPRESA = {
   whatsapp: "559981771035",                       // DDI 55 + DDD + número, só dígitos
   atendimento: "segunda a sábado, das 8h às 18h",
   encarregado: "Jardiel Lima Pimenta",
-  atualizacao: "12/11/2026"                        // data da última revisão das políticas
+  atualizacao: "15/11/2026"                        // data da última revisão das políticas
 };
 
 // ===== 2) Ferramentas de medição (tracking): deixe "" para não usar =====
