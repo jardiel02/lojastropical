@@ -246,13 +246,19 @@ section { padding-block: 44px; }
 .ig-ava { width: 64px; height: 64px; border-radius: 50%; padding: 3px; flex: none; background: linear-gradient(45deg, #f9ce34, #ee2a7b, #6228d7); display: block; }
 .ig-ava img { width: 100%; height: 100%; border-radius: 50%; object-fit: cover; display: block; border: 3px solid var(--surface); background: var(--surface); }
 .ig-seguir { display: inline-flex; align-items: center; gap: 8px; padding: 11px 18px; border-radius: 999px; text-decoration: none; font-weight: 700; color: #fff; background: linear-gradient(45deg, #f09433, #dc2743 50%, #bc1888); }
-.ig-grid { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); gap: 10px; }
+/* Posts passando sozinhos da esquerda para a direita; para quando o mouse ou o foco está em cima */
+.ig-faixa { overflow: hidden; -webkit-mask-image: linear-gradient(90deg, transparent, #000 4%, #000 96%, transparent); mask-image: linear-gradient(90deg, transparent, #000 4%, #000 96%, transparent); }
+.ig-grid { list-style: none; margin: 0; padding: 0; display: flex; gap: 12px; width: max-content; animation: ig-passa var(--ig-tempo, 40s) linear infinite; }
+.ig-faixa:hover .ig-grid, .ig-faixa:focus-within .ig-grid, .ig-grid.parado { animation-play-state: paused; }
+@keyframes ig-passa { from { transform: translateX(calc(-50% - 6px)); } to { transform: translateX(0); } }
+.ig-grid li { flex: none; width: 220px; }
 .ig-grid a { display: block; position: relative; aspect-ratio: 4 / 5; border-radius: 10px; overflow: hidden; background: var(--chip); }
 .ig-grid img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform .25s; }
 .ig-grid a:hover img, .ig-grid a:focus-visible img { transform: scale(1.04); }
 .ig-grid .ig-tipo { position: absolute; top: 8px; right: 8px; color: #fff; filter: drop-shadow(0 1px 2px rgb(0 0 0 / .6)); }
-@media (max-width: 860px) { .ig-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px; } }
-@media (prefers-reduced-motion: reduce) { .ig-grid img { transition: none; } .ig-grid a:hover img { transform: none; } }
+@media (max-width: 860px) { .ig-grid li { width: 150px; } .ig-grid { gap: 8px; } @keyframes ig-passa { from { transform: translateX(calc(-50% - 4px)); } to { transform: translateX(0); } } }
+/* Quem pediu menos movimento no aparelho: sem animação, a fileira rola com o dedo */
+@media (prefers-reduced-motion: reduce) { .ig-faixa { overflow-x: auto; -webkit-mask-image: none; mask-image: none; } .ig-grid { animation: none; } .ig-grid li[aria-hidden] { display: none; } .ig-grid img { transition: none; } .ig-grid a:hover img { transform: none; } }
 .social { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 16px; }
 .social a { display: flex; align-items: center; gap: 14px; padding: 18px; border-radius: var(--radius); text-decoration: none; color: #fff; font-weight: 700; }
 .social a span { display: block; font-weight: 500; font-size: 14px; opacity: .92; }
@@ -489,7 +495,7 @@ body:has(.lt-cookies:not([hidden])) .float-wa { bottom: calc(150px + env(safe-ar
           <svg aria-hidden="true" focusable="false" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor"/></svg>Seguir no Instagram</a>
       </div>
       <h2 class="sr-only">Últimas postagens no Instagram</h2>
-      <ul class="ig-grid" id="igGrid"></ul>
+      <div class="ig-faixa"><ul class="ig-grid" id="igGrid"></ul></div>
     </div>
   </section>
 
@@ -1619,9 +1625,16 @@ document.querySelectorAll(".wa-link").forEach(a => a.href = waLink("Olá! Vim pe
     ? `<svg class="ig-tipo" aria-hidden="true" focusable="false" width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>`
     : t === "CAROUSEL_ALBUM"
     ? `<svg class="ig-tipo" aria-hidden="true" focusable="false" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="7" y="7" width="13" height="13" rx="2"/><path d="M4 16V6a2 2 0 0 1 2-2h10"/></svg>` : "";
-  $("igGrid").innerHTML = ig.posts.map(p => `
-    <li><a href="${esc(p.link)}" target="_blank" rel="noopener" aria-label="Abrir post no Instagram${p.legenda ? ": " + esc(p.legenda) : ""}">
-      <img src="${esc(p.img)}" alt="" loading="lazy" onerror="this.closest('li').remove()">${icone(p.tipo)}</a></li>`).join("");
+  const item = (p, copia) => `
+    <li${copia ? ' aria-hidden="true"' : ""}><a href="${esc(p.link)}" target="_blank" rel="noopener"${copia ? ' tabindex="-1"' : ""} aria-label="Abrir post no Instagram${p.legenda ? ": " + esc(p.legenda) : ""}">
+      <img src="${esc(p.img)}" alt="" loading="lazy" onerror="this.closest('li').remove()">${icone(p.tipo)}</a></li>`;
+  // A lista vai duas vezes para a fileira dar a volta sem emenda; a cópia fica escondida de leitores de tela
+  const grid = $("igGrid");
+  grid.innerHTML = ig.posts.map(p => item(p)).join("") + ig.posts.map(p => item(p, true)).join("");
+  grid.style.setProperty("--ig-tempo", `${Math.max(24, ig.posts.length * 7)}s`);
+  // No celular, tocar e segurar pausa a fileira
+  grid.addEventListener("touchstart", () => grid.classList.add("parado"), { passive: true });
+  grid.addEventListener("touchend", () => grid.classList.remove("parado"), { passive: true });
   $("instagram").hidden = false;
 })();
 
