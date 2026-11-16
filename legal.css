@@ -46,7 +46,7 @@
 .lt-sempre { font-weight: 500; color: var(--lt-muted); font-size: 13px; }
 
 /* ===== Páginas legais ===== */
-.lt-page { margin: 0; background: var(--lt-bg); color: var(--lt-fg); font-family: "Figtree", system-ui, -apple-system, "Segoe UI", sans-serif; font-size: 17px; line-height: 1.65; }
+.lt-page { margin: 0; background: var(--lt-bg); color: var(--lt-fg); font-family: "Inter", system-ui, -apple-system, "Segoe UI", sans-serif; font-size: 17px; line-height: 1.65; }
 .lt-page *, .lt-page *::before, .lt-page *::after { box-sizing: border-box; }
 .lt-page :focus-visible { outline: 3px solid var(--lt-focus); outline-offset: 2px; }
 .lt-skip { position: absolute; left: 12px; top: -60px; z-index: 50; background: var(--lt-sun); color: #2b2200; padding: 10px 16px; border-radius: 10px; font-weight: 700; text-decoration: none; }
@@ -58,8 +58,8 @@
 .lt-top a.lt-voltar:hover { background: rgb(255 255 255 / .14); }
 .lt-wrap { max-width: 860px; margin: 0 auto; padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); }
 .lt-main { padding-block: 32px 56px; }
-.lt-main h1 { font-family: "Baloo 2", system-ui, sans-serif; font-size: clamp(32px, 5vw, 44px); line-height: 1.1; margin: 0 0 6px; }
-.lt-main h2 { font-family: "Baloo 2", system-ui, sans-serif; font-size: 26px; line-height: 1.2; margin: 36px 0 8px; scroll-margin-top: 16px; }
+.lt-main h1 { font-family: "Poppins", system-ui, sans-serif; font-size: clamp(32px, 5vw, 44px); line-height: 1.1; margin: 0 0 6px; }
+.lt-main h2 { font-family: "Poppins", system-ui, sans-serif; font-size: 26px; line-height: 1.2; margin: 36px 0 8px; scroll-margin-top: 16px; }
 .lt-main h3 { font-size: 18px; margin: 20px 0 4px; }
 .lt-main p, .lt-main li { max-width: 72ch; }
 .lt-main a { color: var(--lt-link); font-weight: 600; }

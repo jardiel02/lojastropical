@@ -13,12 +13,12 @@
 .ct-campo input:focus-visible, .ct-campo select:focus-visible { outline: 3px solid var(--focus-ring, #ffd400); outline-offset: 1px; border-color: var(--fg); }
 .ct-campo input:disabled { opacity: .7; cursor: not-allowed; }
 .ct-grupo { border: 1px solid var(--line); border-radius: 12px; padding: 12px 14px 14px; margin: 0; display: grid; gap: 12px; min-width: 0; }
-.ct-grupo legend { font-weight: 800; padding: 0 6px; }
+.ct-grupo legend { font-weight: 700; padding: 0 6px; }
 .ct-duas { display: grid; grid-template-columns: 1fr 1.4fr; gap: 10px; }
 .ct-check { display: flex; gap: 10px; align-items: flex-start; font-size: 14px; line-height: 1.4; }
 .ct-check input { width: 20px; height: 20px; margin-top: 1px; flex: none; accent-color: var(--red); }
 .ct-prim, .ct-sec, .ct-link { font: inherit; cursor: pointer; border-radius: 12px; }
-.ct-prim { background: var(--buy); color: #fff; border: 0; padding: 14px; font-weight: 800; font-size: 16px; }
+.ct-prim { background: var(--buy); color: #fff; border: 0; padding: 14px; font-weight: 700; font-size: 16px; }
 .ct-prim:hover { filter: brightness(1.06); }
 .ct-prim:disabled, .ct-sec:disabled { opacity: .6; cursor: wait; }
 .ct-sec { background: transparent; color: var(--fg); border: 2px solid var(--fg); padding: 12px; font-weight: 700; }
@@ -47,7 +47,7 @@
 .conta-menu .cm-grupo a + a { border-top: 1px solid var(--line); }
 .conta-menu a:hover { background: color-mix(in srgb, var(--line) 60%, transparent); }
 .conta-menu svg { flex: none; color: var(--muted); }
-.conta-menu .cm-sair { font: inherit; font-weight: 800; border: 2px solid var(--red); color: var(--red); background: transparent; border-radius: 12px; padding: 11px; cursor: pointer; }
+.conta-menu .cm-sair { font: inherit; font-weight: 700; border: 2px solid var(--red); color: var(--red); background: transparent; border-radius: 12px; padding: 11px; cursor: pointer; }
 .conta-menu .cm-sair:hover { background: var(--red); color: #fff; }
 .conta-menu .cm-ola { margin: 0; font-size: 14px; color: var(--muted); }
 @media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) .conta-menu .cm-sair { border-color: var(--red-text); color: var(--red-text); } }
@@ -56,8 +56,8 @@
 /* Página "Sua conta" */
 .cp { padding-block: 28px 56px; }
 .cp-in { max-width: 820px; }
-.cp h1 { font-size: clamp(28px, 3.6vw, 38px); font-weight: 800; margin: 0 0 6px; }
-.cp > .cp-in > h2 { font-size: 20px; font-weight: 800; margin: 28px 0 10px; }
+.cp h1 { font-size: clamp(28px, 3.6vw, 38px); font-weight: 700; margin: 0 0 6px; }
+.cp > .cp-in > h2 { font-size: 20px; font-weight: 700; margin: 28px 0 10px; }
 .cp-sub { margin: 0 0 6px; color: var(--muted); }
 .cp-lista { background: var(--surface); border: 1px solid var(--line); border-radius: 14px; overflow: hidden; }
 .cp-lista a { display: flex; align-items: center; gap: 14px; padding: 17px 18px; text-decoration: none; color: var(--fg); font-size: 16px; }
