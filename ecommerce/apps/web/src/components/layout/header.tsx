@@ -2,7 +2,9 @@ import Image from "next/image";
 import Link from "next/link";
 import { AccountButton } from "@/components/account/account-button";
 import { CartButton } from "@/components/cart/cart-button";
+import { InteractiveHoverContent, interactiveHoverClasses } from "@/components/ui/interactive-hover-button";
 import { wa } from "@/lib/site";
+import { cn } from "@/lib/utils";
 import type { NavCategory } from "./category-nav";
 import { CategoryNav } from "./category-nav";
 import { SearchBar } from "./search-bar";
@@ -27,9 +29,9 @@ export function Header({ categories }: { categories: NavCategory[] }) {
             href={wa("Olá! Vim pelo site.")}
             target="_blank"
             rel="noopener"
-            className="inline-flex h-11 items-center gap-2 rounded-full bg-whatsapp px-4 font-bold whitespace-nowrap text-whatsapp-foreground max-[860px]:hidden"
+            className={cn(interactiveHoverClasses, "h-11 bg-whatsapp px-4 text-whatsapp-foreground max-[860px]:hidden")}
           >
-            Compre pelo WhatsApp
+            <InteractiveHoverContent text="Compre pelo WhatsApp" fillClassName="bg-[#0b7a3b]" hoverTextClassName="text-white" />
           </a>
           <AccountButton />
           <CartButton />

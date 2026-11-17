@@ -1,6 +1,8 @@
 "use client";
 import Link from "next/link";
 import { UserRound } from "lucide-react";
+import { InteractiveHoverContent, interactiveHoverClasses } from "@/components/ui/interactive-hover-button";
+import { cn } from "@/lib/utils";
 import { firstName, useAccount } from "@/modules/account/store";
 
 /** Botão da conta no topo: "Entrar" ou "Olá, Maria" quando o cliente está logado. */
@@ -11,11 +13,16 @@ export function AccountButton() {
   return (
     <Link
       href="/conta"
-      className="inline-flex h-11 items-center gap-2 rounded-full border-2 border-white/55 px-3.5 font-bold text-white hover:bg-white/12"
+      className={cn(interactiveHoverClasses, "h-11 border-2 border-white/55 px-3.5 text-white")}
       aria-label={account.user ? "Sua conta" : "Entrar ou criar conta"}
     >
-      <UserRound aria-hidden className="size-[22px]" />
-      <span className="max-w-[12ch] truncate max-[480px]:hidden">{label}</span>
+      <InteractiveHoverContent
+        text={label}
+        icon={<UserRound aria-hidden className="size-[22px]" />}
+        fillClassName="bg-sun"
+        hoverTextClassName="text-sun-foreground"
+        textClassName="max-w-[12ch] truncate max-[480px]:hidden"
+      />
     </Link>
   );
 }
