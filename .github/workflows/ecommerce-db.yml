@@ -57,4 +57,4 @@ jobs:
       - name: Conferir catálogo do banco com o retrato atual
         run: pnpm db:check
       - name: Cadastro de clientes (tabela public.clientes, RLS e gatilho do cadastro)
-        run: psql "${DATABASE_URL%%\?*}" -v ON_ERROR_STOP=1 -q -f supabase/clientes.sql
+        run: pnpm --filter @lojas-tropical/database exec tsx scripts/apply-sql.ts ../../supabase/clientes.sql
