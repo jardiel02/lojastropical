@@ -4,6 +4,6 @@ import nextTypescript from "eslint-config-next/typescript";
 const config = [
   ...nextCoreWebVitals,
   ...nextTypescript,
-  { ignores: [".next/**", "public/**", "scripts/**", "test-results/**", "playwright-report/**", "next-env.d.ts"] },
+  { ignores: [".next/**", "public/**", "scripts/**", "preview/out/**", "preview/.cache/**", "test-results/**", "playwright-report/**", "next-env.d.ts"] },
 ];
 export default config;

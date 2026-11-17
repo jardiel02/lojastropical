@@ -54,8 +54,10 @@ export function CartDrawer() {
             </dl>
             {quote.itemsWithoutPrice > 0 && (
               <p className="m-0 text-[13px] text-muted-foreground">
-                {quote.itemsWithoutPrice === 1 ? "1 item está" : `${quote.itemsWithoutPrice} itens estão`} com preço a consultar e
-                não entra(m) no subtotal.
+                {quote.itemsWithoutPrice === 1
+                  ? "1 item não tem preço à vista cadastrado e fica fora do subtotal."
+                  : `${quote.itemsWithoutPrice} itens não têm preço à vista cadastrado e ficam fora do subtotal.`}{" "}
+                O vendedor confirma o valor no WhatsApp.
               </p>
             )}
             <Button asChild variant="buy" size="lg" className="h-auto min-h-14 py-3 text-center whitespace-normal tracking-[.04em]">
