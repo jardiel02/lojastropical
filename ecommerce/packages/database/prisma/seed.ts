@@ -70,6 +70,8 @@ async function main() {
   }
 
   const capturedAt = new Date();
+  // Depois que a sincronização com o Sólidus rodou, preço e estoque vêm dela: o seed não volta ao retrato antigo
+  const erpSynced = (await prisma.syncJob.count({ where: { type: "STOCK", status: { in: ["SUCCEEDED", "PARTIAL"] } } })) > 0;
   for (const [productPosition, p] of snapshot.products.entries()) {
     await prisma.$transaction(async (tx) => {
       const data = {
@@ -107,7 +109,8 @@ async function main() {
           priceSource: p.cashPriceCents === null ? null : ("ERP" as const),
           priceUpdatedAt: p.cashPriceCents === null ? null : capturedAt,
         };
-        const variant = await tx.productVariant.upsert({ where: { sku }, update: v, create: { sku, ...v } });
+        const { priceCents: _p, priceSource: _s, priceUpdatedAt: _u, ...withoutPrice } = v;
+        const variant = await tx.productVariant.upsert({ where: { sku }, update: erpSynced ? withoutPrice : v, create: { sku, ...v } });
         variantIds.push(variant.id);
       }
 
@@ -127,7 +130,7 @@ async function main() {
 
       // Retrato do site original: substitui o anterior para o seed poder rodar várias vezes
       await tx.inventorySnapshot.deleteMany({ where: { productId: product.id, source: "legacy-estoque.js" } });
-      if (p.stockQuantity !== null) {
+      if (p.stockQuantity !== null && !erpSynced) {
         await tx.inventorySnapshot.create({
           data: { productId: product.id, quantity: p.stockQuantity, source: "legacy-estoque.js", capturedAt },
         });

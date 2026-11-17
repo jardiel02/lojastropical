@@ -110,6 +110,13 @@ describe("Sólidus somente leitura", () => {
     expect(await s.getStock("9967")).toEqual([{ erpCode: "9967", branchCode: null, available: 5 }]);
   });
 
+  it("com o token de uma loja, o saldo sai marcado com a filial", async () => {
+    const body = { estoques: [{ codigo: "9967", quantidade_disponivel: "4" }] };
+    const s = new SolidusReadOnlyAdapter({ baseUrl: "https://erp.invalid/consultas/", token: "t", branchCode: "MATRIZ", fetchImpl: fakeFetch(body) });
+    expect(s.capabilities.has("stock.readByBranch")).toBe(true);
+    expect(await s.getStock("9967")).toEqual([{ erpCode: "9967", branchCode: "MATRIZ", available: 4 }]);
+  });
+
   it("token recusado vira erro não temporário", async () => {
     const s = new SolidusReadOnlyAdapter({ baseUrl: "https://erp.invalid/consultas/", token: "t", fetchImpl: fakeFetch({}, 403) });
     await expect(s.getStock("9967")).rejects.toMatchObject({ code: "UNAUTHORIZED", retryable: false });

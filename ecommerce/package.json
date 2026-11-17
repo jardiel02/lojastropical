@@ -18,7 +18,8 @@
     "db:generate": "pnpm --filter @lojas-tropical/database db:generate",
     "db:migrate": "pnpm --filter @lojas-tropical/database db:migrate",
     "db:seed": "pnpm --filter @lojas-tropical/database db:seed",
-    "db:check": "pnpm --filter @lojas-tropical/database db:check"
+    "db:check": "pnpm --filter @lojas-tropical/database db:check",
+    "sync:stock": "pnpm --filter @lojas-tropical/sync sync:stock"
   },
   "devDependencies": {
     "typescript": "5.9.3",

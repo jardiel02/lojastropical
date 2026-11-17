@@ -24,6 +24,7 @@ Pacotes:
 | `packages/shared` | Dinheiro em centavos (`Cents`, `fromReais`, `splitInstallments`, `formatBRL`), `slugify`, esquemas Zod do catálogo. Sem dependência de framework. |
 | `packages/database` | `schema.prisma`, migrações versionadas, seed, cliente Prisma (`getPrisma()`), script de extração do site original. |
 | `packages/erp-adapter` | Contrato `ErpAdapter`, `MockErpAdapter` (desenvolvimento/testes) e `SolidusReadOnlyAdapter`. |
+| `packages/sync` | Sincronização com o ERP: `pnpm sync:stock` lê estoque de cada loja (um token do Sólidus por loja) e preços, e grava no banco só o que mudou (ver ERP_INTEGRATION.md). |
 | `apps/worker` *(etapa 6)* | Filas BullMQ: estoque/preço do ERP, expiração de reservas, envio de pedidos, reconciliação. |
 | `packages/payment-providers` *(etapa 8)* | Contrato de pagamento + Mercado Pago. |
 

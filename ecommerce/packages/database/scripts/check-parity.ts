@@ -7,7 +7,13 @@ import { createPrismaClient, loadCatalogFromDatabase } from "../src/index";
 const json = catalogSnapshotSchema.parse(JSON.parse(readFileSync(new URL("../data/legacy-catalog.json", import.meta.url), "utf8")));
 const prisma = createPrismaClient();
 const db = await loadCatalogFromDatabase(prisma, json.company);
+// Depois da sincronização com o Sólidus, preço e estoque do banco são mais novos que o retrato JSON
+const erpSynced = (await prisma.syncJob.count({ where: { type: "STOCK", status: { in: ["SUCCEEDED", "PARTIAL"] } } })) > 0;
 await prisma.$disconnect();
+if (erpSynced) {
+  console.log("Sincronização com o Sólidus já rodou: preço e estoque ficam fora da comparação");
+  for (const list of [db.products, json.products]) for (const p of list) Object.assign(p, { cashPriceCents: null, stockQuantity: null });
+}
 let diffs = 0;
 for (const key of ["categories", "brands", "branches", "products"] as const) {
   const same = isDeepStrictEqual(db[key], json[key]);

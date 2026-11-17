@@ -1,0 +1,60 @@
+name: E-commerce (estoque por loja)
+
+# Lê estoque de cada loja e preços no Sólidus (SOMENTE LEITURA) e grava no banco da nova loja
+# (Supabase São Paulo, esquema "loja"). Não mexe no site no ar nem no estoque.js.
+# O agendamento só passa a valer quando este arquivo estiver no branch principal;
+# até lá roda pelo botão "Run workflow".
+on:
+  schedule:
+    - cron: "37 * * * *"
+  workflow_dispatch:
+  push:
+    paths: [".github/workflows/ecommerce-estoque.yml"] # só registra o workflow; o job não roda em push
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ecommerce-estoque
+  cancel-in-progress: false
+
+jobs:
+  sincronizar:
+    if: github.event_name != 'push'
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    defaults:
+      run:
+        working-directory: ecommerce
+    env:
+      DATABASE_URL: ${{ secrets.SUPABASE_DATABASE_URL }}
+      SOLIDUS_TOKEN: ${{ secrets.SOLIDUS_TOKEN }}
+      SOLIDUS_TOKEN_MATRIZ: ${{ secrets.SOLIDUS_TOKEN_MATRIZ }}
+      SOLIDUS_TOKEN_AVENIDA: ${{ secrets.SOLIDUS_TOKEN_AVENIDA }}
+      SOLIDUS_TOKEN_TIMBIRAS: ${{ secrets.SOLIDUS_TOKEN_TIMBIRAS }}
+      SOLIDUS_TOKEN_PIO_XII: ${{ secrets.SOLIDUS_TOKEN_PIO_XII }}
+      SOLIDUS_TOKEN_DOM_PEDRO: ${{ secrets.SOLIDUS_TOKEN_DOM_PEDRO }}
+      SOLIDUS_TOKEN_GONCALVES_DIAS: ${{ secrets.SOLIDUS_TOKEN_GONCALVES_DIAS }}
+      SOLIDUS_TOKEN_COROATA: ${{ secrets.SOLIDUS_TOKEN_COROATA }}
+      SOLIDUS_TOKEN_ALTO_ALEGRE: ${{ secrets.SOLIDUS_TOKEN_ALTO_ALEGRE }}
+    steps:
+      - name: Conferir o segredo do banco
+        working-directory: . # roda antes do checkout
+        run: |
+          case "$DATABASE_URL" in
+            *schema=loja*) ;;
+            *) echo "::error::SUPABASE_DATABASE_URL ausente ou sem ?schema=loja (ver ecommerce/SUPABASE.md)"; exit 1 ;;
+          esac
+      - uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v4
+        with:
+          package_json_file: ecommerce/package.json
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+          cache: pnpm
+          cache-dependency-path: ecommerce/pnpm-lock.yaml
+      - run: pnpm install --frozen-lockfile
+      - run: pnpm db:generate
+      - name: Sincronizar estoque e preços
+        run: pnpm sync:stock

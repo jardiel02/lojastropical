@@ -44,6 +44,12 @@ const toCents = (v: string | number) => {
 export type SolidusConfig = {
   baseUrl: string; // ex.: https://smart.sgisistemas.com.br/api_produto/<empresa>/consultas/
   token: string;
+  /**
+   * No Sólidus cada loja tem o próprio token, e a consulta de estoque devolve só o saldo
+   * daquela loja (conferido em 17/11/2026). Informe aqui a filial do token para o saldo
+   * sair marcado com ela; sem isso o saldo é tratado como consolidado.
+   */
+  branchCode?: string;
   userAgent?: string;
   timeoutMs?: number;
   fetchImpl?: typeof fetch;
@@ -51,10 +57,13 @@ export type SolidusConfig = {
 
 export class SolidusReadOnlyAdapter implements ErpAdapter {
   readonly system = "solidus";
-  readonly capabilities: ReadonlySet<ErpCapability> = new Set<ErpCapability>(["products.read", "prices.read", "stock.read"]);
+  readonly capabilities: ReadonlySet<ErpCapability>;
 
   constructor(private readonly config: SolidusConfig) {
     if (!config.token) throw new Error("SOLIDUS_TOKEN não configurado");
+    const caps: ErpCapability[] = ["products.read", "prices.read", "stock.read"];
+    if (config.branchCode) caps.push("stock.readByBranch");
+    this.capabilities = new Set(caps);
   }
 
   private async call(route: string, erpCode: string): Promise<unknown> {
@@ -108,8 +117,8 @@ export class SolidusReadOnlyAdapter implements ErpAdapter {
     const available = data.estoques
       .filter((e) => String(e.codigo) === erpCode)
       .reduce((sum, e) => sum + Number(e.quantidade_disponivel), 0);
-    // A consulta atual devolve o saldo somado; saldo por filial depende da documentação da SGI.
-    return [{ erpCode, branchCode: null, available: Math.trunc(available) }];
+    // A resposta não diz de qual loja é o saldo: quem diz é o token (config.branchCode).
+    return [{ erpCode, branchCode: this.config.branchCode ?? null, available: Math.max(0, Math.trunc(available)) }];
   }
 
   private notSupported(what: string): never {

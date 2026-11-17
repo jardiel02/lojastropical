@@ -9,7 +9,7 @@ const fromImg = (url: string) => url.replace(/^\/img\//, "");
  * (vêm da configuração do site), por isso são recebidos de fora.
  */
 export async function loadCatalogFromDatabase(prisma: PrismaClient, company: CatalogSnapshot["company"]): Promise<CatalogSnapshot> {
-  const [categories, brands, branches, products, lastStock] = await Promise.all([
+  const [categories, brands, branches, products, lastStock, lastSync] = await Promise.all([
     prisma.category.findMany({
       where: { parentId: null, isActive: true },
       orderBy: { position: "asc" },
@@ -25,11 +25,17 @@ export async function loadCatalogFromDatabase(prisma: PrismaClient, company: Cat
         category: true,
         variants: { where: { isActive: true }, orderBy: { position: "asc" } },
         images: { orderBy: { position: "asc" } },
-        // Último retrato consolidado (sem filial): a API atual do Sólidus devolve só o total
+        // Último total das lojas (sem filial). O saldo de cada loja fica em branchId.
         inventorySnapshots: { where: { branchId: null }, orderBy: { capturedAt: "desc" }, take: 1 },
       },
     }),
     prisma.inventorySnapshot.findFirst({ orderBy: { capturedAt: "desc" }, select: { capturedAt: true } }),
+    // A sincronização só grava saldos que mudaram; a hora da última conferência vem dela
+    prisma.syncJob.findFirst({
+      where: { type: "STOCK", status: { in: ["SUCCEEDED", "PARTIAL"] } },
+      orderBy: { finishedAt: "desc" },
+      select: { finishedAt: true },
+    }),
   ]);
 
   const colorHex: Record<string, string> = {};
@@ -37,7 +43,7 @@ export async function loadCatalogFromDatabase(prisma: PrismaClient, company: Cat
 
   return catalogSnapshotSchema.parse({
     generatedAt: new Date().toISOString(),
-    stockUpdatedAt: lastStock?.capturedAt.toISOString() ?? null,
+    stockUpdatedAt: (lastSync?.finishedAt ?? lastStock?.capturedAt)?.toISOString() ?? null,
     source: "database",
     company,
     colorHex,
