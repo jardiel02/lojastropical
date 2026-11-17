@@ -1,0 +1,26 @@
+{
+  "name": "lojas-tropical",
+  "private": true,
+  "type": "module",
+  "packageManager": "pnpm@10.28.0",
+  "engines": {
+    "node": ">=22"
+  },
+  "scripts": {
+    "dev": "pnpm --filter @lojas-tropical/web dev",
+    "build": "pnpm --filter @lojas-tropical/web build",
+    "start": "pnpm --filter @lojas-tropical/web start",
+    "typecheck": "pnpm -r typecheck",
+    "lint": "pnpm -r lint",
+    "test": "vitest run",
+    "test:e2e": "pnpm --filter @lojas-tropical/web test:e2e",
+    "legacy:extract": "pnpm --filter @lojas-tropical/database legacy:extract",
+    "db:generate": "pnpm --filter @lojas-tropical/database db:generate",
+    "db:migrate": "pnpm --filter @lojas-tropical/database db:migrate",
+    "db:seed": "pnpm --filter @lojas-tropical/database db:seed"
+  },
+  "devDependencies": {
+    "typescript": "5.9.3",
+    "vitest": "4.1.12"
+  }
+}

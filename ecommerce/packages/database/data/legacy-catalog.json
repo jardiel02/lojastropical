@@ -1,0 +1,5061 @@
+{
+  "generatedAt": "2026-11-17T14:45:06.090Z",
+  "stockUpdatedAt": "17/11/2026 09:02",
+  "source": "legacy-site",
+  "categories": [
+    {
+      "slug": "guarda-roupas",
+      "name": "Guarda-roupas",
+      "subgroups": [
+        {
+          "name": "Casal",
+          "pattern": "casal"
+        },
+        {
+          "name": "Solteiro",
+          "pattern": "solteiro"
+        },
+        {
+          "name": "3 e 4 portas",
+          "pattern": "\\b[34] portas"
+        },
+        {
+          "name": "6 portas ou mais",
+          "pattern": "\\b([6-9]|1\\d) portas"
+        }
+      ]
+    },
+    {
+      "slug": "moveis",
+      "name": "Móveis",
+      "subgroups": [
+        {
+          "name": "Armários e cozinhas",
+          "pattern": "^(armário|cozinha)"
+        },
+        {
+          "name": "Cômodas e penteadeiras",
+          "pattern": "^cômoda"
+        },
+        {
+          "name": "Mesas e cadeiras",
+          "pattern": "^(mesa aço|cadeira)"
+        },
+        {
+          "name": "Escrivaninhas",
+          "pattern": "escrivaninha"
+        },
+        {
+          "name": "Racks, painéis e homes",
+          "pattern": "^(rack|painel|home)"
+        },
+        {
+          "name": "Adegas",
+          "pattern": "^adega"
+        }
+      ]
+    },
+    {
+      "slug": "eletrodomesticos",
+      "name": "Eletrodomésticos",
+      "subgroups": [
+        {
+          "name": "Fogões",
+          "pattern": "^fogão"
+        },
+        {
+          "name": "Geladeiras",
+          "pattern": "^geladeira"
+        },
+        {
+          "name": "Freezers",
+          "pattern": "^freezer"
+        },
+        {
+          "name": "Máquinas de lavar",
+          "pattern": "^máquina de lavar"
+        },
+        {
+          "name": "Tanquinhos",
+          "pattern": "^tanquinho"
+        },
+        {
+          "name": "Fornos elétricos",
+          "pattern": "^forno"
+        }
+      ]
+    },
+    {
+      "slug": "audio-e-video",
+      "name": "Áudio e Vídeo",
+      "subgroups": [
+        {
+          "name": "Smart TVs",
+          "pattern": "\\btv\\b"
+        },
+        {
+          "name": "Caixas de som",
+          "pattern": "^caixa"
+        }
+      ]
+    },
+    {
+      "slug": "eletroportateis",
+      "name": "Eletroportáteis",
+      "subgroups": [
+        {
+          "name": "Batedeiras",
+          "pattern": "^batedeira"
+        },
+        {
+          "name": "Liquidificadores",
+          "pattern": "^liquidificador"
+        },
+        {
+          "name": "Beleza e cuidados",
+          "pattern": "^(modelador|secador|prancha|chapinha)"
+        },
+        {
+          "name": "Fritadeiras",
+          "pattern": "fritadeira|air fryer"
+        }
+      ]
+    },
+    {
+      "slug": "estofados",
+      "name": "Estofados",
+      "subgroups": [
+        {
+          "name": "Sofás",
+          "pattern": "^sofá"
+        }
+      ]
+    },
+    {
+      "slug": "colchoes",
+      "name": "Colchões",
+      "subgroups": [
+        {
+          "name": "Camas box",
+          "pattern": "^cama box"
+        },
+        {
+          "name": "Colchões",
+          "pattern": "^colchão"
+        }
+      ]
+    },
+    {
+      "slug": "ventilacao",
+      "name": "Ventilação",
+      "subgroups": [
+        {
+          "name": "Ventiladores de mesa",
+          "pattern": "ventilador.*mesa"
+        },
+        {
+          "name": "Ventiladores de coluna",
+          "pattern": "ventilador.*coluna"
+        }
+      ]
+    },
+    {
+      "slug": "bicicletas",
+      "name": "Bicicletas",
+      "subgroups": [
+        {
+          "name": "Infantis (aro 20)",
+          "pattern": "aro 20"
+        }
+      ]
+    }
+  ],
+  "brands": [
+    {
+      "slug": "consul",
+      "name": "Consul",
+      "logo": "marca-consul.png",
+      "featured": true
+    },
+    {
+      "slug": "notavel",
+      "name": "Notável",
+      "logo": "marca-notavel.png",
+      "featured": true
+    },
+    {
+      "slug": "moval",
+      "name": "Moval",
+      "logo": "marca-moval.png",
+      "featured": true
+    },
+    {
+      "slug": "onix",
+      "name": "Onix",
+      "logo": "marca-onix.png",
+      "featured": true
+    },
+    {
+      "slug": "topazio",
+      "name": "Topázio",
+      "logo": "marca-topazio.png",
+      "featured": true
+    },
+    {
+      "slug": "britania",
+      "name": "Britânia",
+      "logo": null,
+      "featured": false
+    },
+    {
+      "slug": "amvox",
+      "name": "Amvox",
+      "logo": null,
+      "featured": false
+    },
+    {
+      "slug": "gazin",
+      "name": "Gazin",
+      "logo": null,
+      "featured": false
+    },
+    {
+      "slug": "domina",
+      "name": "Dômina",
+      "logo": null,
+      "featured": false
+    },
+    {
+      "slug": "colli",
+      "name": "Colli",
+      "logo": null,
+      "featured": false
+    },
+    {
+      "slug": "itatiaia",
+      "name": "Itatiaia",
+      "logo": null,
+      "featured": false
+    },
+    {
+      "slug": "mgm",
+      "name": "MGM",
+      "logo": null,
+      "featured": false
+    },
+    {
+      "slug": "telasul",
+      "name": "Telasul",
+      "logo": null,
+      "featured": false
+    },
+    {
+      "slug": "ortonorte",
+      "name": "Ortonorte",
+      "logo": null,
+      "featured": false
+    },
+    {
+      "slug": "clarice",
+      "name": "Clarice",
+      "logo": null,
+      "featured": false
+    },
+    {
+      "slug": "mueller",
+      "name": "Mueller",
+      "logo": null,
+      "featured": false
+    },
+    {
+      "slug": "realce",
+      "name": "Realce",
+      "logo": null,
+      "featured": false
+    },
+    {
+      "slug": "colormaq",
+      "name": "Colormaq",
+      "logo": null,
+      "featured": false
+    },
+    {
+      "slug": "electrolux",
+      "name": "Electrolux",
+      "logo": null,
+      "featured": false
+    },
+    {
+      "slug": "suggar",
+      "name": "Suggar",
+      "logo": null,
+      "featured": false
+    },
+    {
+      "slug": "midea",
+      "name": "Midea",
+      "logo": null,
+      "featured": false
+    },
+    {
+      "slug": "aoc",
+      "name": "AOC",
+      "logo": null,
+      "featured": false
+    },
+    {
+      "slug": "samsung",
+      "name": "Samsung",
+      "logo": null,
+      "featured": false
+    },
+    {
+      "slug": "semp",
+      "name": "Semp",
+      "logo": null,
+      "featured": false
+    },
+    {
+      "slug": "toshiba",
+      "name": "Toshiba",
+      "logo": null,
+      "featured": false
+    },
+    {
+      "slug": "mondial",
+      "name": "Mondial",
+      "logo": null,
+      "featured": false
+    },
+    {
+      "slug": "avelan",
+      "name": "Avelan",
+      "logo": null,
+      "featured": false
+    },
+    {
+      "slug": "bechara",
+      "name": "Bechara",
+      "logo": null,
+      "featured": false
+    },
+    {
+      "slug": "aco-nobre",
+      "name": "Aço Nobre",
+      "logo": null,
+      "featured": false
+    },
+    {
+      "slug": "jb-bechara",
+      "name": "JB Bechara",
+      "logo": null,
+      "featured": false
+    },
+    {
+      "slug": "madetec",
+      "name": "Madetec",
+      "logo": null,
+      "featured": false
+    },
+    {
+      "slug": "pisani",
+      "name": "Pisani",
+      "logo": null,
+      "featured": false
+    }
+  ],
+  "colorHex": {
+    "Branco": "#ffffff",
+    "Preto": "#1d1d1d",
+    "Preto Fosco": "#2b2b2b",
+    "Nero Preto Fosco": "#262626",
+    "Off White": "#efe9dc",
+    "Freijó": "#b8895a",
+    "Carvalho": "#a5774a",
+    "Fendi": "#c8baa6",
+    "Cinza": "#8b8f93",
+    "Grafite": "#4a4d52",
+    "Rosa": "#ec8fb0",
+    "Azul": "#2f6fd0",
+    "Vermelho": "#d42a2a",
+    "Laranja Neon": "#ff7a1a",
+    "Amarelo Neon": "#e8f21a",
+    "Verde Militar": "#59613a",
+    "Branco Neon": "#f3f7e8",
+    "Champanhe": "#e6d3a8",
+    "Lilás": "#b39ad8",
+    "Castanho": "#6b4a32",
+    "Castanho Wood": "#6b4a32",
+    "Avelã Wood": "#a07a55",
+    "Madeira": "#b5793f",
+    "Madeirado": "#b07a45",
+    "Madeirado Claro": "#c99a62",
+    "Madeirado Escuro": "#7a5232",
+    "Cinamomo": "#9b6a43",
+    "Titanium": "#7c7f84",
+    "Naturalle": "#d2b48a",
+    "Naturale": "#d2b48a",
+    "Nature": "#c49a66",
+    "Nogal": "#6e4b33",
+    "Savana": "#cdb48e",
+    "Pistache": "#a9b98f",
+    "Dourado": "#c9a13b"
+  },
+  "branches": [
+    {
+      "slug": "loja-matriz",
+      "name": "Loja Matriz",
+      "street": "Rua Francisco Bernadino, nº 1371-A",
+      "district": "São Sebastião",
+      "city": "Codó",
+      "state": "MA",
+      "zipCode": "65400-000"
+    },
+    {
+      "slug": "loja-avenida",
+      "name": "Loja Avenida",
+      "street": "Avenida Santos Dumont, nº 3104",
+      "district": "São Sebastião",
+      "city": "Codó",
+      "state": "MA",
+      "zipCode": "65400-000"
+    },
+    {
+      "slug": "loja-timbiras",
+      "name": "Loja Timbiras",
+      "street": "Rua Urbano Santos, nº 43",
+      "district": "Centro",
+      "city": "Timbiras",
+      "state": "MA",
+      "zipCode": "65420-000"
+    },
+    {
+      "slug": "loja-pio-xii",
+      "name": "Loja Pio XII",
+      "street": "Rua Doutor Ribamar Galiza, nº 110",
+      "district": "Centro",
+      "city": "Pio XII",
+      "state": "MA",
+      "zipCode": "65707-000"
+    },
+    {
+      "slug": "loja-dom-pedro",
+      "name": "Loja Dom Pedro",
+      "street": "Rua Engenheiro Rui Mesquita, nº 338",
+      "district": "Centro",
+      "city": "Dom Pedro",
+      "state": "MA",
+      "zipCode": "65765-000"
+    },
+    {
+      "slug": "loja-goncalves-dias",
+      "name": "Loja Gonçalves Dias",
+      "street": "Praça João Afonso Cardoso, s/n",
+      "district": "Centro",
+      "city": "Gonçalves Dias",
+      "state": "MA",
+      "zipCode": "65775-000"
+    },
+    {
+      "slug": "loja-coroata",
+      "name": "Loja Coroatá",
+      "street": "Travessa Gomes de Sousa, nº 1978",
+      "district": "Centro",
+      "city": "Coroatá",
+      "state": "MA",
+      "zipCode": "65415-000"
+    },
+    {
+      "slug": "loja-alto-alegre",
+      "name": "Loja Alto Alegre",
+      "street": "Avenida Rodoviária, s/n",
+      "district": "Centro",
+      "city": "Alto Alegre do Maranhão",
+      "state": "MA",
+      "zipCode": "65413-970"
+    }
+  ],
+  "products": [
+    {
+      "slug": "p6596-liquidificador-britania-diamante-vermelho",
+      "erpCode": "6596",
+      "name": "Liquidificador Britânia Diamante Vermelho 220V",
+      "brand": "Britânia",
+      "category": "Eletroportáteis",
+      "shortDescription": "Liquidificador Britânia Diamante na cor vermelha.",
+      "description": null,
+      "highlights": [],
+      "specs": {
+        "Cor": "Vermelho",
+        "Voltagem": "220 V"
+      },
+      "images": [
+        "v6596-vermelho-24.jpg",
+        "v6596-vermelho-21.jpg",
+        "v6596-vermelho-22.jpg",
+        "v6596-vermelho-23.jpg",
+        "v6596-vermelho-25.jpg"
+      ],
+      "coverFit": "contain",
+      "colors": [
+        {
+          "name": "Vermelho",
+          "image": "v6596-vermelho-24.jpg"
+        }
+      ],
+      "cashPriceCents": 25900,
+      "manualInstallmentCents": null,
+      "stockQuantity": 3
+    },
+    {
+      "slug": "p6603-liquidificador-britania-diamante-black",
+      "erpCode": "6603",
+      "name": "Liquidificador Britânia Diamante Black",
+      "brand": "Britânia",
+      "category": "Eletroportáteis",
+      "shortDescription": "Liquidificador Britânia Diamante Black na cor preta.",
+      "description": null,
+      "highlights": [],
+      "specs": {
+        "Cor": "Preto"
+      },
+      "images": [
+        "v6603-preto-21.jpg",
+        "v6603-preto-22.jpg",
+        "v6603-preto-23.jpg",
+        "v6603-preto-25.jpg",
+        "v6603-preto-26.jpg",
+        "v6603-preto-24.jpg"
+      ],
+      "coverFit": "contain",
+      "colors": [
+        {
+          "name": "Preto",
+          "image": "v6603-preto-21.jpg"
+        }
+      ],
+      "cashPriceCents": 19900,
+      "manualInstallmentCents": null,
+      "stockQuantity": 1
+    },
+    {
+      "slug": "moval-aruba",
+      "erpCode": "9952",
+      "name": "Guarda-Roupa Moval Aruba 6 Portas",
+      "brand": "Moval",
+      "category": "Guarda-roupas",
+      "shortDescription": "Guarda-roupa casal de 6 portas com espelho, gavetas e bastante espaço para roupas de cabide e dobradas.",
+      "description": "O Guarda-Roupa Aruba combina design moderno com ótimo aproveitamento interno. Possui 4 gavetas com corrediças metálicas, cabideiros e calceiro em alumínio, além de puxadores em MDF que valorizam o acabamento. As portas em MDF com frisos decorativos reforçam o visual elegante. Os pés em PVC garantem praticidade na limpeza, e os espelhos opcionais completam o conjunto com charme e funcionalidade.",
+      "highlights": [
+        "4 gavetas com corrediças metálicas",
+        "Cabideiros e calceiro em alumínio",
+        "Puxadores em MDF",
+        "Portas em MDF com detalhes frisados",
+        "Espelhos opcionais",
+        "Pés em PVC para facilitar a limpeza",
+        "Excelente espaço interno para organização"
+      ],
+      "specs": {
+        "Modelo": "Aruba",
+        "Tipo": "Guarda-roupa casal",
+        "Linha": "Clean",
+        "Portas": "6",
+        "Gavetas": "4",
+        "Espelho": "Opcional",
+        "Material": "MDP com detalhes em MDF",
+        "Dimensões (A x L x P)": "204 x 165 x 47 cm",
+        "Peso": "95,98 kg (com espelho)",
+        "Montagem": "Grátis pela Lojas Tropical"
+      },
+      "images": [
+        "moval-aruba.jpg",
+        "moval-aruba-aberto.jpg"
+      ],
+      "coverFit": "contain",
+      "colors": [
+        {
+          "name": "Carvalho e Fendi",
+          "image": "moval-aruba.jpg"
+        }
+      ],
+      "cashPriceCents": null,
+      "manualInstallmentCents": 12990,
+      "stockQuantity": 16
+    },
+    {
+      "slug": "moval-itatiba",
+      "erpCode": "9978",
+      "name": "Guarda-Roupa Moval Itatiba 6 Portas",
+      "brand": "Moval",
+      "category": "Guarda-roupas",
+      "shortDescription": "Guarda-roupa casal de 6 portas com espelho e gavetas, em acabamento freijó com cinza.",
+      "description": "O Guarda-Roupa Itatiba da Moval tem 6 portas, 3 gavetas e espelho, com acabamento freijó e cinza. Os cabideiros e as prateleiras internas deixam espaço para roupas de cabide e roupas dobradas.",
+      "highlights": [
+        "6 portas e 3 gavetas",
+        "Espelho na porta",
+        "Cabideiros internos",
+        "Prateleiras para roupas dobradas"
+      ],
+      "specs": {
+        "Modelo": "Itatiba",
+        "Tipo": "Guarda-roupa casal",
+        "Portas": "6",
+        "Gavetas": "3",
+        "Espelho": "Sim",
+        "Material": "MDP",
+        "Dimensões (A x L x P)": "204 x 165 x 47 cm",
+        "Peso": "96,4 kg",
+        "Montagem": "Grátis pela Lojas Tropical"
+      },
+      "images": [
+        "moval-itatiba.jpg",
+        "moval-itatiba-aberto.jpg"
+      ],
+      "coverFit": "contain",
+      "colors": [
+        {
+          "name": "Freijó e Cinza",
+          "image": "moval-itatiba.jpg"
+        }
+      ],
+      "cashPriceCents": null,
+      "manualInstallmentCents": 13990,
+      "stockQuantity": 1
+    },
+    {
+      "slug": "amvox-aca-1200",
+      "erpCode": "2023",
+      "name": "Caixa de Som Amvox ACA 1200",
+      "brand": "Amvox",
+      "category": "Áudio e Vídeo",
+      "shortDescription": "Caixa de som amplificada com iluminação de LED.",
+      "description": "A Caixa de Som ACA 1200 Party Vox Elite da Amvox tem 1200 W de potência, dois woofers de 6,5\" e show de LED. Tem Bluetooth, entrada para microfone e bateria recarregável.",
+      "highlights": [
+        "Potência: 1200 W",
+        "2 woofers de 6,5\" e tweeters de 2,5\"",
+        "Show de LED",
+        "Bluetooth e entrada para microfone",
+        "Bateria recarregável"
+      ],
+      "specs": {
+        "Modelo": "ACA 1200 Party Vox Elite",
+        "Potência": "1200 W",
+        "Alto-falantes": "2 woofers de 6,5\" e tweeters de 2,5\"",
+        "Tecnologia": "Double Coil e chip AX1",
+        "Conexões": "Bluetooth e entrada para microfone",
+        "Iluminação": "Show de LED"
+      },
+      "images": [
+        "v2023-preto-1.jpg",
+        "v2023-preto-2.jpg",
+        "v2023-preto-3.jpg"
+      ],
+      "coverFit": "contain",
+      "colors": [],
+      "cashPriceCents": null,
+      "manualInstallmentCents": 19990,
+      "stockQuantity": 5
+    },
+    {
+      "slug": "p2021-amvox-aca-221-gigante-ii",
+      "erpCode": "2021",
+      "name": "Caixa Amplificada Amvox ACA 221 Gigante II",
+      "brand": "Amvox",
+      "category": "Áudio e Vídeo",
+      "shortDescription": "Caixa amplificada Amvox ACA 221 Gigante II, com iluminação de LED e alça para transporte.",
+      "description": "A Caixa Amplificada ACA 221 Gigante II da Amvox tem 220 W RMS, woofer de 8\" e tweeter de 4\". Funciona na bateria por até 4 horas e tem Bluetooth, rádio FM, USB e iluminação de LED.",
+      "highlights": [
+        "Potência: 220 W RMS",
+        "Woofer de 8\" e tweeter de 4\"",
+        "Bateria: até 4 horas",
+        "Bluetooth, rádio FM, USB e entrada auxiliar",
+        "Função Power X (liga 2 caixas)"
+      ],
+      "specs": {
+        "Modelo": "ACA 221 Gigante II",
+        "Potência": "220 W RMS",
+        "Alto-falantes": "Woofer de 8\" e tweeter de 4\"",
+        "Bateria": "Até 4 horas",
+        "Conexões": "Bluetooth, USB, cartão, auxiliar e rádio FM",
+        "Iluminação": "LED decorativo"
+      },
+      "images": [
+        "v2021-preto-1.jpg",
+        "v2021-preto-2.jpg",
+        "v2021-preto-3.jpg",
+        "v2021-preto-4.jpg"
+      ],
+      "coverFit": "contain",
+      "colors": [],
+      "cashPriceCents": 69900,
+      "manualInstallmentCents": null,
+      "stockQuantity": 1
+    },
+    {
+      "slug": "p2027-amvox-aca-410-neo",
+      "erpCode": "2027",
+      "name": "Caixa Amplificada Amvox ACA 410 Neo",
+      "brand": "Amvox",
+      "category": "Áudio e Vídeo",
+      "shortDescription": "Caixa amplificada Amvox ACA 410 Neo, com painel de LED.",
+      "description": "A Caixa Amplificada ACA 410 da Amvox tem 410 W RMS em formato de cubo, woofer de 8\" e luzes de LED. A bateria dura até 4 horas, e a função TWS liga duas caixas para som estéreo.",
+      "highlights": [
+        "Potência: 410 W RMS",
+        "Woofer de 8\" e tweeter de 1,5\"",
+        "Bateria: até 4 horas",
+        "Bluetooth com função TWS",
+        "Equalizador e luzes de LED"
+      ],
+      "specs": {
+        "Modelo": "ACA 410",
+        "Potência": "410 W RMS",
+        "Alto-falantes": "Woofer de 8\" e tweeter de 1,5\"",
+        "Bateria": "Até 4 horas",
+        "Conexões": "Bluetooth (TWS)",
+        "Iluminação": "LED"
+      },
+      "images": [
+        "v2027-preto-3.jpg",
+        "v2027-preto-2.jpg",
+        "v2027-preto-1.jpg"
+      ],
+      "coverFit": "contain",
+      "colors": [],
+      "cashPriceCents": 169900,
+      "manualInstallmentCents": null,
+      "stockQuantity": 4
+    },
+    {
+      "slug": "p2031-amvox-aca-855-pancadao-ii",
+      "erpCode": "2031",
+      "name": "Caixa Amplificada Amvox ACA 855 Pancadão II",
+      "brand": "Amvox",
+      "category": "Áudio e Vídeo",
+      "shortDescription": "Caixa amplificada Amvox ACA 855 Pancadão II, com rodinhas e alça retrátil.",
+      "description": "A Caixa Amplificada ACA 855 Pancadão II da Amvox tem rodinhas e alça retrátil para levar para qualquer lugar.",
+      "highlights": [
+        "Rodinhas e alça retrátil"
+      ],
+      "specs": {
+        "Modelo": "ACA 855 Pancadão II",
+        "Transporte": "Rodinhas e alça retrátil"
+      },
+      "images": [
+        "v2031-preto-1.jpg",
+        "v2031-preto-2.jpg"
+      ],
+      "coverFit": "contain",
+      "colors": [],
+      "cashPriceCents": 159900,
+      "manualInstallmentCents": null,
+      "stockQuantity": 1
+    },
+    {
+      "slug": "p2224-amvox-duo-x",
+      "erpCode": "2224",
+      "name": "Caixa de Som Bluetooth Amvox Duo X",
+      "brand": "Amvox",
+      "category": "Áudio e Vídeo",
+      "shortDescription": "Caixa de som Bluetooth Amvox Duo X, portátil.",
+      "description": "A Caixa de Som Duo X da Amvox é portátil e se conecta por Bluetooth.",
+      "highlights": [
+        "Portátil",
+        "Bluetooth"
+      ],
+      "specs": {
+        "Modelo": "Duo X",
+        "Conexões": "Bluetooth"
+      },
+      "images": [
+        "v2224-preto-vermelho-1.jpg",
+        "v2224-preto-vermelho-2.jpg",
+        "v2224-preto-vermelho-3.jpg"
+      ],
+      "coverFit": "contain",
+      "colors": [
+        {
+          "name": "Preto e Vermelho",
+          "image": "v2224-preto-vermelho-1.jpg"
+        }
+      ],
+      "cashPriceCents": 58900,
+      "manualInstallmentCents": null,
+      "stockQuantity": 3
+    },
+    {
+      "slug": "p2396-cama-box-gazin-guaruja",
+      "erpCode": "2396",
+      "name": "Cama Box Conjugada Gazin Guarujá Casal 138x188x54 cm",
+      "brand": "Gazin",
+      "category": "Colchões",
+      "shortDescription": "Cama box conjugada (unibox) Gazin Guarujá, tamanho casal.",
+      "description": "A Cama Box Conjugada Guarujá da Gazin é um conjunto unibox (base e colchão juntos) no tamanho casal.",
+      "highlights": [
+        "Tamanho casal (138 x 188 cm)",
+        "Base e colchão conjugados"
+      ],
+      "specs": {
+        "Modelo": "Guarujá",
+        "Tipo": "Cama box conjugada (unibox)",
+        "Tamanho": "Casal",
+        "Medidas": "138 x 188 x 54 cm"
+      },
+      "images": [
+        "v2396-cinza-1.jpg"
+      ],
+      "coverFit": "contain",
+      "colors": [],
+      "cashPriceCents": 149900,
+      "manualInstallmentCents": null,
+      "stockQuantity": 5
+    },
+    {
+      "slug": "p2529-cama-box-onix-mirador",
+      "erpCode": "2529",
+      "name": "Cama Box Onix Mirador Casal 138x188",
+      "brand": "Onix",
+      "category": "Colchões",
+      "shortDescription": "Cama box unibox Onix Mirador, tamanho casal.",
+      "description": "A Cama Box Mirador da Onix é um conjunto unibox (base e colchão juntos) no tamanho casal.",
+      "highlights": [
+        "Tamanho casal (138 x 188 cm)",
+        "Base e colchão conjugados"
+      ],
+      "specs": {
+        "Modelo": "Mirador",
+        "Tipo": "Cama box conjugada (unibox)",
+        "Tamanho": "Casal",
+        "Medidas": "138 x 188 cm"
+      },
+      "images": [
+        "p2529-11.jpg",
+        "p2529-12.jpg",
+        "p2529-13.jpg",
+        "p2529-14.jpg",
+        "p2529-15.jpg"
+      ],
+      "coverFit": "contain",
+      "colors": [],
+      "cashPriceCents": 179900,
+      "manualInstallmentCents": null,
+      "stockQuantity": 0
+    },
+    {
+      "slug": "p2545-cama-box-onix-sintra",
+      "erpCode": "2545",
+      "name": "Cama Box Onix Sintra Sommier Casal 160x200",
+      "brand": "Onix",
+      "category": "Colchões",
+      "shortDescription": "Cama box sommier Onix Sintra, 160 x 200 cm.",
+      "description": "A Cama Box Sintra da Onix é um conjunto sommier (base box com colchão) de 160 x 200 cm, com base revestida em tecido azul-petróleo e colchão de acabamento acolchoado com cantos arredondados.",
+      "highlights": [
+        "160 x 200 cm",
+        "Base box com colchão (sommier)",
+        "Base azul-petróleo com pés de madeira"
+      ],
+      "specs": {
+        "Modelo": "Sintra",
+        "Tipo": "Cama box sommier",
+        "Medidas": "160 x 200 cm",
+        "Cor da base": "Azul-petróleo"
+      },
+      "images": [
+        "p2545-11.jpg",
+        "p2545-12.jpg",
+        "p2545-13.jpg",
+        "p2545-14.jpg"
+      ],
+      "coverFit": "contain",
+      "colors": [],
+      "cashPriceCents": 359900,
+      "manualInstallmentCents": null,
+      "stockQuantity": 0
+    },
+    {
+      "slug": "p3268-colchao-onix-vegas",
+      "erpCode": "3268",
+      "name": "Colchão Onix Vegas Casal 138x188 Molas",
+      "brand": "Onix",
+      "category": "Colchões",
+      "shortDescription": "Colchão Onix Vegas de molas, tamanho casal.",
+      "description": "O Colchão Vegas da Onix é de molas, no tamanho casal.",
+      "highlights": [
+        "Tamanho casal (138 x 188 cm)",
+        "Colchão de molas"
+      ],
+      "specs": {
+        "Modelo": "Vegas",
+        "Tipo": "Colchão de molas",
+        "Tamanho": "Casal",
+        "Medidas": "138 x 188 cm"
+      },
+      "images": [
+        "p3268-11.jpg",
+        "p3268-12.jpg",
+        "p3268-14.jpg",
+        "p3268-15.jpg"
+      ],
+      "coverFit": "contain",
+      "colors": [],
+      "cashPriceCents": 159900,
+      "manualInstallmentCents": null,
+      "stockQuantity": 4
+    },
+    {
+      "slug": "p4585-colchao-gazin-diamond-blue",
+      "erpCode": "4585",
+      "name": "Colchão Gazin Diamond Blue Molas Ensacadas 158x198x32 cm",
+      "brand": "Gazin",
+      "category": "Colchões",
+      "shortDescription": "Colchão Gazin Diamond Blue com molas ensacadas.",
+      "description": "O Colchão Diamond Blue da Gazin tem molas ensacadas, que trabalham de forma individual e diminuem a transferência de movimento entre quem dorme junto. Tamanho queen.",
+      "highlights": [
+        "Molas ensacadas",
+        "Tamanho queen (158 x 198 cm)",
+        "32 cm de altura"
+      ],
+      "specs": {
+        "Modelo": "Diamond Blue",
+        "Tipo": "Colchão de molas ensacadas",
+        "Tamanho": "Queen",
+        "Medidas": "158 x 198 x 32 cm"
+      },
+      "images": [
+        "v4585-branco-azul-1.jpg"
+      ],
+      "coverFit": "contain",
+      "colors": [],
+      "cashPriceCents": 199900,
+      "manualInstallmentCents": null,
+      "stockQuantity": 1
+    },
+    {
+      "slug": "moval-alasca",
+      "erpCode": "9950",
+      "name": "Guarda-Roupa Moval Alasca",
+      "brand": "Moval",
+      "category": "Guarda-roupas",
+      "shortDescription": "Guarda-roupa casal com espelho central, cabideiros e gavetas.",
+      "description": "O Guarda-Roupa Alasca une funcionalidade e sofisticação com 10 portas, 4 gavetas com corrediças telescópicas, cabideiros e calceiros em alumínio. As portas em MDF possuem detalhes frisados e espelhos inclusos. Oferece maleiros espaçosos e excelente distribuição interna, ideal para otimizar e organizar seu espaço.",
+      "highlights": [
+        "4 gavetas com corrediças telescópicas",
+        "Portas centrais com puxador de MDF",
+        "Cabideiros e calceiro em alumínio",
+        "Espelhos inclusos",
+        "Portas inferiores em MDF com detalhes frisados",
+        "Maleiros espaçosos",
+        "Excelente distribuição interna"
+      ],
+      "specs": {
+        "Modelo": "Alasca",
+        "Tipo": "Guarda-roupa casal",
+        "Linha": "Crystal",
+        "Gavetas": "4",
+        "Espelho": "Sim",
+        "Material": "MDP com detalhes em MDF",
+        "Dimensões (A x L x P)": "222 x 216 x 47 cm",
+        "Peso": "155,82 kg",
+        "Montagem": "Grátis pela Lojas Tropical"
+      },
+      "images": [
+        "moval-alasca.jpg",
+        "moval-alasca-aberto.jpg",
+        "moval-alasca-ambiente.jpg"
+      ],
+      "coverFit": "contain",
+      "colors": [
+        {
+          "name": "Carvalho e Fendi",
+          "image": "moval-alasca.jpg"
+        },
+        {
+          "name": "Freijó e Off White",
+          "image": "moval-alasca-freijo-offwhite.jpg"
+        }
+      ],
+      "cashPriceCents": 229900,
+      "manualInstallmentCents": null,
+      "stockQuantity": 9
+    },
+    {
+      "slug": "comoda-texas",
+      "erpCode": "9967",
+      "name": "Cômoda Moval Texas",
+      "brand": "Moval",
+      "category": "Móveis",
+      "shortDescription": "Cômoda com gavetas e porta ripada.",
+      "description": "Com visual contemporâneo, a Cômoda Texas oferece 4 gavetas com corrediças telescópicas, portas com detalhes ripados e dobradiças com amortecedor de 35mm. Os puxadores usinados e os pés em PVC completam o design sofisticado e funcional, ideal para complementar o ambiente com organização e estilo.",
+      "highlights": [
+        "4 gavetas com corrediças telescópicas",
+        "Dobradiças 35mm com amortecedor",
+        "Portas com detalhes ripados",
+        "Puxadores usinados",
+        "Pés em PVC para facilitar a limpeza"
+      ],
+      "specs": {
+        "Modelo": "Cômoda Texas",
+        "Tipo": "Cômoda",
+        "Portas": "2",
+        "Gavetas": "4",
+        "Material": "MDP com detalhes em MDF",
+        "Dimensões (A x L x P)": "105 x 147 x 47 cm",
+        "Peso": "60,11 kg",
+        "Montagem": "Grátis pela Lojas Tropical"
+      },
+      "images": [
+        "comoda-texas.jpg",
+        "comoda-texas-decor.jpg",
+        "comoda-texas-ambiente.jpg"
+      ],
+      "coverFit": "contain",
+      "colors": [
+        {
+          "name": "Freijó e Off White",
+          "image": "comoda-texas.jpg"
+        },
+        {
+          "name": "Branco",
+          "image": "comoda-texas-branco.jpg"
+        },
+        {
+          "name": "Carvalho e Fendi",
+          "image": "comoda-texas-carvalho-fendi.jpg"
+        },
+        {
+          "name": "Freijó",
+          "image": "comoda-texas-freijo.jpg"
+        },
+        {
+          "name": "Freijó e Cinza",
+          "image": "comoda-texas-freijo-cinza.jpg"
+        }
+      ],
+      "cashPriceCents": 109900,
+      "manualInstallmentCents": null,
+      "stockQuantity": 12
+    },
+    {
+      "slug": "comoda-venus",
+      "erpCode": "9913",
+      "name": "Cômoda Moval Vênus",
+      "brand": "Moval",
+      "category": "Móveis",
+      "shortDescription": "Cômoda com 4 gavetas, 1 porta e pés.",
+      "description": "Com estilo e funcionalidade, a Cômoda Vênus oferece 4 gavetas com corrediças telescópicas e portas em MDF com detalhes frisados. Os puxadores em MDF e os pés em PVC complementam seu design refinado, ideal para compor dormitórios modernos com organização.",
+      "highlights": [
+        "4 gavetas com corrediças telescópicas",
+        "Portas em MDF com detalhes frisados",
+        "Puxadores em MDF",
+        "Pés em PVC para facilitar a limpeza"
+      ],
+      "specs": {
+        "Modelo": "Cômoda Vênus",
+        "Tipo": "Cômoda",
+        "Portas": "1",
+        "Gavetas": "4",
+        "Material": "MDP com detalhes em MDF",
+        "Dimensões (A x L x P)": "100 x 98 x 47 cm",
+        "Peso": "38,85 kg (com pés)",
+        "Montagem": "Grátis pela Lojas Tropical"
+      },
+      "images": [
+        "comoda-venus.jpg",
+        "comoda-venus-ambiente.jpg"
+      ],
+      "coverFit": "contain",
+      "colors": [
+        {
+          "name": "Branco",
+          "image": "comoda-venus.jpg"
+        },
+        {
+          "name": "Branco e Azul",
+          "image": "comoda-venus-branco-azul.jpg"
+        },
+        {
+          "name": "Branco e Lilás",
+          "image": "comoda-venus-branco-lilas.jpg"
+        },
+        {
+          "name": "Branco e Rosa",
+          "image": "comoda-venus-branco-rosa.jpg"
+        },
+        {
+          "name": "Castanho Wood",
+          "image": "comoda-venus-castanho.jpg"
+        },
+        {
+          "name": "Castanho e Avelã Wood",
+          "image": "comoda-venus-castanho-avela.jpg"
+        },
+        {
+          "name": "Freijó e Off White",
+          "image": "comoda-venus-freijo-offwhite.jpg"
+        }
+      ],
+      "cashPriceCents": 69900,
+      "manualInstallmentCents": null,
+      "stockQuantity": 10
+    },
+    {
+      "slug": "ventilador-domina",
+      "erpCode": "9635",
+      "name": "Ventilador de Coluna Dômina",
+      "brand": "Dômina",
+      "category": "Ventilação",
+      "shortDescription": "Ventilador de coluna com altura ajustável.",
+      "description": "O ventilador Dômina Neo tem hélice de 50 cm, 6 pás e 3 velocidades, com oscilação horizontal e altura regulável.",
+      "highlights": [
+        "50 cm de diâmetro",
+        "6 pás",
+        "3 velocidades",
+        "Potência: 200 W",
+        "Oscilação horizontal"
+      ],
+      "specs": {
+        "Modelo": "Neo",
+        "Tipo": "Ventilador de coluna",
+        "Diâmetro": "50 cm",
+        "Pás": "6",
+        "Velocidades": "3",
+        "Potência": "200 W",
+        "Recursos": "Oscilação horizontal, altura regulável",
+        "Voltagem": "127 V ou 220 V (consulte a voltagem disponível)"
+      },
+      "images": [
+        "ventiladores.jpg",
+        "ventilador-branco.jpg"
+      ],
+      "coverFit": "contain",
+      "colors": [],
+      "cashPriceCents": 54900,
+      "manualInstallmentCents": null,
+      "stockQuantity": 51
+    },
+    {
+      "slug": "bicicleta-collina",
+      "erpCode": "1490",
+      "name": "Bicicleta Collina",
+      "brand": "Colli",
+      "category": "Bicicletas",
+      "shortDescription": "Bicicleta com freio a disco e câmbio.",
+      "description": "A Bicicleta Collina da Colli tem freio a disco e câmbio de marchas.",
+      "highlights": [
+        "Freio a disco",
+        "Câmbio de marchas"
+      ],
+      "specs": {
+        "Modelo": "Collina",
+        "Tipo": "Bicicleta",
+        "Freio": "A disco",
+        "Marchas": "Sim"
+      },
+      "images": [
+        "bicicleta-collina.jpg"
+      ],
+      "coverFit": "contain",
+      "colors": [
+        {
+          "name": "Verde Militar",
+          "image": "bicicleta-collina.jpg"
+        },
+        {
+          "name": "Amarelo Neon",
+          "image": "bicicleta-collina-amarelo.jpg"
+        },
+        {
+          "name": "Laranja Neon",
+          "image": "bicicleta-collina-laranja.jpg"
+        }
+      ],
+      "cashPriceCents": 179900,
+      "manualInstallmentCents": null,
+      "stockQuantity": 16
+    },
+    {
+      "slug": "notavel-nt6020-capelinha",
+      "erpCode": "9999",
+      "name": "Guarda-Roupa Notável NT 6020 Capelinha",
+      "brand": "Notável",
+      "category": "Guarda-roupas",
+      "shortDescription": "Guarda-roupa com 2 portas, nicho com espelho estilo penteadeira e 3 gavetas.",
+      "description": "O Guarda-Roupa NT 6020 Capelinha da Notável tem 2 portas, 3 gavetas e um nicho com espelho no estilo capelinha, que funciona como penteadeira. Ideal para quarto de solteiro.",
+      "highlights": [
+        "2 portas e 3 gavetas",
+        "Nicho capelinha com espelho",
+        "Gavetas com corrediças metálicas",
+        "Cabideiro e 2 prateleiras internas",
+        "4 pés"
+      ],
+      "specs": {
+        "Modelo": "NT 6020 Capelinha",
+        "Tipo": "Guarda-roupa solteiro",
+        "Portas": "2",
+        "Gavetas": "3",
+        "Espelho": "Sim",
+        "Material": "MDP 12 mm",
+        "Dimensões (A x L x P)": "187 x 108 x 39,5 cm",
+        "Peso": "44,5 kg",
+        "Montagem": "Grátis pela Lojas Tropical"
+      },
+      "images": [
+        "notavel-nt6020.jpg",
+        "notavel-nt6020-aberto.jpg",
+        "notavel-nt6020-aberto-2.jpg"
+      ],
+      "coverFit": "contain",
+      "colors": [],
+      "cashPriceCents": 69900,
+      "manualInstallmentCents": 8900,
+      "stockQuantity": 15
+    },
+    {
+      "slug": "notavel-nt6015",
+      "erpCode": "6088",
+      "name": "Guarda-Roupa Notável NT 6015 6 Portas",
+      "brand": "Notável",
+      "category": "Guarda-roupas",
+      "shortDescription": "Guarda-roupa casal de 6 portas e 2 gavetas, com cabideiros e prateleiras.",
+      "description": "O Guarda-Roupa NT 6015 da Notável tem 6 portas e 2 gavetas, com cabideiro e prateleiras internas. É um modelo compacto, com pés, que cabe bem em quartos menores.",
+      "highlights": [
+        "6 portas e 2 gavetas",
+        "Gavetas com corrediças metálicas",
+        "Cabideiro interno",
+        "Prateleiras internas",
+        "Pés de 5 cm"
+      ],
+      "specs": {
+        "Modelo": "NT 6015",
+        "Tipo": "Guarda-roupa",
+        "Portas": "6",
+        "Gavetas": "2",
+        "Material": "MDP",
+        "Dimensões (A x L x P)": "187 x 138,5 x 39,7 cm",
+        "Peso": "64,9 kg",
+        "Montagem": "Grátis pela Lojas Tropical"
+      },
+      "images": [
+        "v6088-madeirado-11.jpg",
+        "v6088-madeirado-12.jpg",
+        "v6088-madeirado-off-white-11.jpg",
+        "v6088-madeirado-off-white-12.jpg",
+        "v6088-branco-11.jpg",
+        "v6088-branco-rosa-11.jpg"
+      ],
+      "coverFit": "contain",
+      "colors": [
+        {
+          "name": "Madeirado",
+          "image": "v6088-madeirado-11.jpg"
+        },
+        {
+          "name": "Madeirado e Off White",
+          "image": "v6088-madeirado-off-white-11.jpg"
+        },
+        {
+          "name": "Branco",
+          "image": "v6088-branco-11.jpg"
+        },
+        {
+          "name": "Branco e Rosa",
+          "image": "v6088-branco-rosa-11.jpg"
+        }
+      ],
+      "cashPriceCents": 79900,
+      "manualInstallmentCents": 9900,
+      "stockQuantity": 15
+    },
+    {
+      "slug": "itatiaia-pratika-4-portas",
+      "erpCode": "672",
+      "name": "Armário de Cozinha Itatiaia Pratika 4 Portas",
+      "brand": "Itatiaia",
+      "category": "Móveis",
+      "shortDescription": "Armário de cozinha em aço com portas, gaveta, tampo e nichos abertos.",
+      "description": "A Cozinha Compacta Pratika da Itatiaia tem 4 portas, 1 gaveta e 5 prateleiras, com estrutura em aço e tampo em MDP. A pintura eletrostática a pó não descasca e protege contra ferrugem.",
+      "highlights": [
+        "4 portas e 1 gaveta",
+        "5 prateleiras",
+        "Estrutura em aço",
+        "Pintura eletrostática a pó"
+      ],
+      "specs": {
+        "Modelo": "Pratika",
+        "Tipo": "Cozinha compacta",
+        "Portas": "4",
+        "Gavetas": "1",
+        "Largura": "80 cm",
+        "Material": "Aço com tampo em MDP",
+        "Montagem": "Grátis pela Lojas Tropical"
+      },
+      "images": [
+        "pratika-4p.jpg",
+        "pratika-4p-aberto.jpg",
+        "pratika-4p-ambiente.jpg"
+      ],
+      "coverFit": "contain",
+      "colors": [],
+      "cashPriceCents": null,
+      "manualInstallmentCents": 9900,
+      "stockQuantity": 4
+    },
+    {
+      "slug": "cozinha-mgm-brilhante",
+      "erpCode": "4208",
+      "name": "Cozinha MGM Brilhante 5 Peças MDF",
+      "brand": "MGM",
+      "category": "Móveis",
+      "shortDescription": "Cozinha completa de 5 peças em MDF, com aéreos de vidro, balcões com portas e gavetas e paneleiro.",
+      "description": "A Cozinha Brilhante da MGM tem 5 peças em MDF, com aéreos de vidro, balcões com portas e gavetas e paneleiro.",
+      "highlights": [
+        "5 peças",
+        "Aéreos com portas de vidro",
+        "Balcões com portas e gavetas",
+        "Paneleiro"
+      ],
+      "specs": {
+        "Modelo": "Brilhante",
+        "Tipo": "Cozinha modulada",
+        "Peças": "5",
+        "Material": "MDF",
+        "Montagem": "Grátis pela Lojas Tropical"
+      },
+      "images": [
+        "mgm-brilhante.jpg",
+        "mgm-brilhante-ambiente.jpg",
+        "mgm-brilhante-despensa.jpg"
+      ],
+      "coverFit": "contain",
+      "colors": [],
+      "cashPriceCents": null,
+      "manualInstallmentCents": 33900,
+      "stockQuantity": 7
+    },
+    {
+      "slug": "cozinha-telasul-diamante",
+      "erpCode": null,
+      "name": "Cozinha Telasul Diamante 4 Peças",
+      "brand": "Telasul",
+      "category": "Móveis",
+      "shortDescription": "Cozinha completa de 4 peças em aço, com portas de vidro, balcão com tampo e puxadores dourados. Medidas totais: 245 cm de largura e 180 cm de altura.",
+      "description": "A Cozinha Diamante da Telasul tem 4 peças em aço, com portas de vidro, balcão com tampo e puxadores dourados.",
+      "highlights": [
+        "4 peças em aço",
+        "Portas de vidro",
+        "Balcão com tampo",
+        "Puxadores dourados"
+      ],
+      "specs": {
+        "Modelo": "Diamante",
+        "Tipo": "Cozinha em aço",
+        "Peças": "4",
+        "Material": "Aço",
+        "Largura total": "245 cm",
+        "Altura": "180 cm",
+        "Montagem": "Grátis pela Lojas Tropical"
+      },
+      "images": [
+        "telasul-diamante.jpg",
+        "telasul-diamante-ambiente.jpg",
+        "telasul-diamante-aberto.jpg",
+        "telasul-diamante-medidas.jpg"
+      ],
+      "coverFit": "contain",
+      "colors": [],
+      "cashPriceCents": null,
+      "manualInstallmentCents": 24900,
+      "stockQuantity": null
+    },
+    {
+      "slug": "sofa-ortonorte-icaro",
+      "erpCode": "8855",
+      "name": "Sofá Ortonorte Ícaro 3 Lugares 2,20 m",
+      "brand": "Ortonorte",
+      "category": "Estofados",
+      "shortDescription": "Sofá retrátil e reclinável de 3 lugares, com assento e encosto em pillow top.",
+      "description": "O Sofá Ícaro da Ortonorte tem 3 lugares e 2,20 m de largura. O assento é retrátil e o encosto é reclinável, os dois com pillow top.",
+      "highlights": [
+        "3 lugares",
+        "2,20 m de largura",
+        "Assento retrátil",
+        "Encosto reclinável",
+        "Pillow top no assento e no encosto"
+      ],
+      "specs": {
+        "Modelo": "Ícaro",
+        "Tipo": "Sofá retrátil e reclinável",
+        "Lugares": "3",
+        "Largura": "2,20 m"
+      },
+      "images": [
+        "sofa-icaro.jpg",
+        "sofa-icaro-reclinado.jpg"
+      ],
+      "coverFit": "contain",
+      "colors": [],
+      "cashPriceCents": null,
+      "manualInstallmentCents": 34900,
+      "stockQuantity": 1
+    },
+    {
+      "slug": "p2597-sofa-ortonorte-agnes-3-lugares-retratil-reclinavel",
+      "erpCode": "2597",
+      "name": "Sofá Ortonorte Agnes 3 Lugares Retrátil e Reclinável",
+      "brand": "Ortonorte",
+      "category": "Estofados",
+      "shortDescription": "Sofá Ortonorte Agnes de 3 lugares, com assento retrátil e encosto reclinável.",
+      "description": null,
+      "highlights": [],
+      "specs": {
+        "Lugares": "3",
+        "Tipo": "Retrátil e reclinável"
+      },
+      "images": [
+        "v2597-marrom-21.jpg",
+        "v2597-marrom-22.jpg"
+      ],
+      "coverFit": "contain",
+      "colors": [
+        {
+          "name": "Marrom",
+          "image": "v2597-marrom-21.jpg"
+        }
+      ],
+      "cashPriceCents": 259900,
+      "manualInstallmentCents": null,
+      "stockQuantity": 1
+    },
+    {
+      "slug": "p3957-sofa-ortonorte-genesis-250-4-lugares-retratil-reclinavel",
+      "erpCode": "3957",
+      "name": "Sofá Ortonorte Gênesis 250 4 Lugares Retrátil e Reclinável",
+      "brand": "Ortonorte",
+      "category": "Estofados",
+      "shortDescription": "Sofá Ortonorte Gênesis de 2,50 m, com assento retrátil e encosto reclinável. Consulte as cores disponíveis.",
+      "description": null,
+      "highlights": [],
+      "specs": {
+        "Lugares": "4",
+        "Largura": "2,50 m",
+        "Tipo": "Retrátil e reclinável"
+      },
+      "images": [
+        "v3957-marrom-21.jpg",
+        "v3957-marrom-22.jpg",
+        "v3957-nescau-21.jpg",
+        "v3957-nescau-22.jpg"
+      ],
+      "coverFit": "contain",
+      "colors": [
+        {
+          "name": "Marrom",
+          "image": "v3957-marrom-21.jpg"
+        },
+        {
+          "name": "Nescau",
+          "image": "v3957-nescau-21.jpg"
+        }
+      ],
+      "cashPriceCents": 439900,
+      "manualInstallmentCents": null,
+      "stockQuantity": 2
+    },
+    {
+      "slug": "p4837-fogao-clarice-delicato-plus-glass-4-bocas-preto",
+      "erpCode": "4837",
+      "name": "Fogão Clarice Delicato Plus Glass 4 Bocas Preto",
+      "brand": "Clarice",
+      "category": "Eletrodomésticos",
+      "shortDescription": "Fogão Clarice Delicato Plus Glass 4 Bocas Preto.",
+      "description": "O Fogão Delicato Plus Glass da Clarice tem 4 bocas, mesa de vidro, acendimento automático e forno de 52 litros com revestimento antiaderente. Uma das bocas é de chama rápida.",
+      "highlights": [
+        "4 bocas, sendo 1 de chama rápida",
+        "Mesa de vidro",
+        "Acendimento automático",
+        "Forno de 52 litros"
+      ],
+      "specs": {
+        "Modelo": "Delicato Plus Glass",
+        "Tipo": "Fogão de piso a gás",
+        "Bocas": "4",
+        "Mesa": "Vidro temperado",
+        "Acendimento": "Automático",
+        "Capacidade do forno": "52 L",
+        "Cor": "Preto",
+        "Dimensões (A x L x P)": "89 x 49 x 59 cm"
+      },
+      "images": [
+        "p4837-1.jpg",
+        "p4837-2.jpg"
+      ],
+      "coverFit": "contain",
+      "colors": [],
+      "cashPriceCents": 139900,
+      "manualInstallmentCents": null,
+      "stockQuantity": 1
+    },
+    {
+      "slug": "p4944-fogao-mueller-decorato-vetro-5-bocas-preto-fosco",
+      "erpCode": "4944",
+      "name": "Fogão Mueller Decorato Vetro 5 Bocas Preto Fosco",
+      "brand": "Mueller",
+      "category": "Eletrodomésticos",
+      "shortDescription": "Fogão Mueller Decorato Vetro 5 Bocas Preto Fosco.",
+      "description": "O Fogão Mueller Decorato Vetro Fosco tem 5 bocas, mesa de vidro temperado e acendimento superautomático. O forno tem 98 litros, com luz interna, revestimento antiaderente e vidro duplo.",
+      "highlights": [
+        "5 bocas",
+        "Mesa de vidro temperado",
+        "Acendimento superautomático",
+        "Forno de 98 litros",
+        "Queimador de tripla chama",
+        "Selo Conpet A"
+      ],
+      "specs": {
+        "Modelo": "Decorato Vetro Fosco",
+        "Tipo": "Fogão de piso a gás",
+        "Bocas": "5",
+        "Mesa": "Vidro temperado",
+        "Acendimento": "Superautomático",
+        "Recursos da mesa": "Queimadores de tamanhos diferentes, botões removíveis, queimador com tripla chama",
+        "Grades": "Individual",
+        "Capacidade do forno": "98 L",
+        "Prateleiras do forno": "2 reguláveis",
+        "Recursos do forno": "Luz interna, revestimento antiaderente, vidro duplo",
+        "Eficiência": "Selo Conpet A",
+        "Cor": "Preto fosco",
+        "Dimensões (A x L x P)": "95 x 75 x 62 cm",
+        "Peso": "35,9 kg",
+        "Voltagem": "Bivolt"
+      },
+      "images": [
+        "p4944-1.jpg",
+        "p4944-11.jpg",
+        "p4944-2.jpg",
+        "p4944-3.jpg",
+        "p4944-4.jpg"
+      ],
+      "coverFit": "contain",
+      "colors": [],
+      "cashPriceCents": 279900,
+      "manualInstallmentCents": null,
+      "stockQuantity": 4
+    },
+    {
+      "slug": "p4966-fogao-mueller-mfv5bf-5-bocas-titanio-mesa-de-vidro",
+      "erpCode": "4966",
+      "name": "Fogão Mueller MFV5BF 5 Bocas Titânio Mesa de Vidro",
+      "brand": "Mueller",
+      "category": "Eletrodomésticos",
+      "shortDescription": "Fogão Mueller MFV5BF 5 Bocas Titânio Mesa de Vidro.",
+      "description": "O Fogão Mueller MFV5BF tem 5 bocas, mesa de vidro temperado e acendimento automático. O forno tem 81,6 litros, com luz interna e revestimento antiaderente.",
+      "highlights": [
+        "5 bocas",
+        "Mesa de vidro temperado",
+        "Acendimento automático",
+        "Forno de 81,6 litros",
+        "Queimador de tripla chama",
+        "Selo Conpet A"
+      ],
+      "specs": {
+        "Modelo": "MFV5BF",
+        "Tipo": "Fogão de piso a gás",
+        "Bocas": "5",
+        "Mesa": "Vidro temperado",
+        "Acendimento": "Automático",
+        "Recursos da mesa": "Botões removíveis, queimador com tripla chama, queimadores de tamanhos diferentes",
+        "Grades": "Individual",
+        "Capacidade do forno": "81,6 L",
+        "Prateleiras do forno": "2 deslizantes",
+        "Recursos do forno": "Luz interna, revestimento antiaderente",
+        "Eficiência": "Selo Conpet A",
+        "Cor": "Titânio",
+        "Dimensões (A x L x P)": "91 x 75 x 62,5 cm",
+        "Peso": "31,8 kg",
+        "Voltagem": "Bivolt"
+      },
+      "images": [
+        "p4966-1.jpg",
+        "p4966-2.jpg",
+        "p4966-3.jpg"
+      ],
+      "coverFit": "contain",
+      "colors": [],
+      "cashPriceCents": 239900,
+      "manualInstallmentCents": null,
+      "stockQuantity": 2
+    },
+    {
+      "slug": "p4967-fogao-mueller-mfv5bf-5-bocas-preto-mesa-de-vidro",
+      "erpCode": "4967",
+      "name": "Fogão Mueller MFV5BF 5 Bocas Preto Mesa de Vidro",
+      "brand": "Mueller",
+      "category": "Eletrodomésticos",
+      "shortDescription": "Fogão Mueller MFV5BF 5 Bocas Preto Mesa de Vidro.",
+      "description": "O Fogão Mueller MFV5BF tem 5 bocas, mesa de vidro temperado e acendimento automático. O forno tem 81,6 litros, com luz interna e revestimento antiaderente.",
+      "highlights": [
+        "5 bocas",
+        "Mesa de vidro temperado",
+        "Acendimento automático",
+        "Forno de 81,6 litros",
+        "Queimador de tripla chama",
+        "Selo Conpet A"
+      ],
+      "specs": {
+        "Modelo": "MFV5BF",
+        "Tipo": "Fogão de piso a gás",
+        "Bocas": "5",
+        "Mesa": "Vidro temperado",
+        "Acendimento": "Automático",
+        "Recursos da mesa": "Botões removíveis, queimador com tripla chama, queimadores de tamanhos diferentes",
+        "Grades": "Individual",
+        "Capacidade do forno": "81,6 L",
+        "Prateleiras do forno": "2 deslizantes",
+        "Recursos do forno": "Luz interna, revestimento antiaderente",
+        "Eficiência": "Selo Conpet A",
+        "Cor": "Preto",
+        "Dimensões (A x L x P)": "91 x 75 x 62,5 cm",
+        "Peso": "31,8 kg",
+        "Voltagem": "Bivolt"
+      },
+      "images": [
+        "p4967-1.jpg",
+        "p4967-2.jpg",
+        "p4967-3.jpg",
+        "p4967-4.jpg"
+      ],
+      "coverFit": "contain",
+      "colors": [],
+      "cashPriceCents": 239900,
+      "manualInstallmentCents": null,
+      "stockQuantity": 4
+    },
+    {
+      "slug": "p4968-fogao-mueller-mfv5bf-5-bocas-branco-mesa-de-vidro",
+      "erpCode": "4968",
+      "name": "Fogão Mueller MFV5BF 5 Bocas Branco Mesa de Vidro",
+      "brand": "Mueller",
+      "category": "Eletrodomésticos",
+      "shortDescription": "Fogão Mueller MFV5BF 5 Bocas Branco Mesa de Vidro.",
+      "description": "O Fogão Mueller MFV5BF tem 5 bocas, mesa de vidro temperado e acendimento automático. O forno tem 81,6 litros, com luz interna e revestimento antiaderente.",
+      "highlights": [
+        "5 bocas",
+        "Mesa de vidro temperado",
+        "Acendimento automático",
+        "Forno de 81,6 litros",
+        "Queimador de tripla chama",
+        "Selo Conpet A"
+      ],
+      "specs": {
+        "Modelo": "MFV5BF",
+        "Tipo": "Fogão de piso a gás",
+        "Bocas": "5",
+        "Mesa": "Vidro temperado",
+        "Acendimento": "Automático",
+        "Recursos da mesa": "Botões removíveis, queimador com tripla chama, queimadores de tamanhos diferentes",
+        "Grades": "Individual",
+        "Capacidade do forno": "81,6 L",
+        "Prateleiras do forno": "2 deslizantes",
+        "Recursos do forno": "Luz interna, revestimento antiaderente",
+        "Eficiência": "Selo Conpet A",
+        "Cor": "Branco",
+        "Dimensões (A x L x P)": "91 x 75 x 62,5 cm",
+        "Peso": "31,8 kg",
+        "Voltagem": "Bivolt"
+      },
+      "images": [
+        "p4968-1.jpg",
+        "p4968-2.jpg",
+        "p4968-3.jpg",
+        "p4968-4.jpg"
+      ],
+      "coverFit": "contain",
+      "colors": [],
+      "cashPriceCents": 239900,
+      "manualInstallmentCents": null,
+      "stockQuantity": 2
+    },
+    {
+      "slug": "p4969-fogao-mueller-mfv5bb-5-bocas-titanio-mesa-de-vidro",
+      "erpCode": "4969",
+      "name": "Fogão Mueller MFV5BB 5 Bocas Titânio Mesa de Vidro",
+      "brand": "Mueller",
+      "category": "Eletrodomésticos",
+      "shortDescription": "Fogão Mueller MFV5BB 5 Bocas Titânio Mesa de Vidro.",
+      "description": "O Fogão Mueller MFV5BB tem 5 bocas, mesa de vidro temperado e acendimento automático. O forno tem 82 litros.",
+      "highlights": [
+        "5 bocas",
+        "Mesa de vidro temperado",
+        "Acendimento automático",
+        "Forno de 82 litros"
+      ],
+      "specs": {
+        "Modelo": "MFV5BB",
+        "Tipo": "Fogão de piso a gás",
+        "Bocas": "5",
+        "Mesa": "Vidro temperado",
+        "Acendimento": "Automático",
+        "Recursos da mesa": "Botões removíveis",
+        "Grades": "Individual",
+        "Capacidade do forno": "82 L",
+        "Prateleiras do forno": "1 deslizante",
+        "Cor": "Titânio",
+        "Dimensões (A x L x P)": "87 x 75 x 61 cm",
+        "Peso": "27,55 kg",
+        "Voltagem": "Bivolt"
+      },
+      "images": [
+        "p4969-1.jpg",
+        "p4969-2.jpg",
+        "p4969-3.jpg"
+      ],
+      "coverFit": "contain",
+      "colors": [],
+      "cashPriceCents": 199900,
+      "manualInstallmentCents": null,
+      "stockQuantity": 1
+    },
+    {
+      "slug": "p4970-fogao-mueller-mfv5bb-5-bocas-branco-mesa-de-vidro",
+      "erpCode": "4970",
+      "name": "Fogão Mueller MFV5BB 5 Bocas Branco Mesa de Vidro",
+      "brand": "Mueller",
+      "category": "Eletrodomésticos",
+      "shortDescription": "Fogão Mueller MFV5BB 5 Bocas Branco Mesa de Vidro.",
+      "description": "O Fogão Mueller MFV5BB tem 5 bocas, mesa de vidro temperado e acendimento automático. O forno tem 82 litros.",
+      "highlights": [
+        "5 bocas",
+        "Mesa de vidro temperado",
+        "Acendimento automático",
+        "Forno de 82 litros"
+      ],
+      "specs": {
+        "Modelo": "MFV5BB",
+        "Tipo": "Fogão de piso a gás",
+        "Bocas": "5",
+        "Mesa": "Vidro temperado",
+        "Acendimento": "Automático",
+        "Recursos da mesa": "Botões removíveis",
+        "Grades": "Individual",
+        "Capacidade do forno": "82 L",
+        "Cor": "Branco",
+        "Dimensões (A x L x P)": "87 x 75 x 61 cm",
+        "Peso": "27,55 kg",
+        "Voltagem": "Bivolt"
+      },
+      "images": [
+        "p4970-1.jpg",
+        "p4970-11.jpg",
+        "p4970-2.jpg",
+        "p4970-3.jpg",
+        "p4970-4.jpg"
+      ],
+      "coverFit": "contain",
+      "colors": [],
+      "cashPriceCents": 199900,
+      "manualInstallmentCents": null,
+      "stockQuantity": 3
+    },
+    {
+      "slug": "p5043-fogao-realce-ares-4-bocas-branco",
+      "erpCode": "5043",
+      "name": "Fogão Realce Ares 4 Bocas Branco",
+      "brand": "Realce",
+      "category": "Eletrodomésticos",
+      "shortDescription": "Fogão Realce Ares 4 Bocas Branco.",
+      "description": "O Fogão Ares da Realce tem 4 bocas, acendimento automático e forno com revestimento antiaderente. É compacto, ideal para cozinhas pequenas.",
+      "highlights": [
+        "4 bocas",
+        "Acendimento automático",
+        "Forno com revestimento antiaderente"
+      ],
+      "specs": {
+        "Modelo": "Ares",
+        "Tipo": "Fogão de piso a gás",
+        "Bocas": "4",
+        "Acendimento": "Automático",
+        "Cor": "Branco"
+      },
+      "images": [
+        "p5043-1.jpg",
+        "p5043-2.jpg",
+        "p5043-3.jpg"
+      ],
+      "coverFit": "contain",
+      "colors": [],
+      "cashPriceCents": 89900,
+      "manualInstallmentCents": null,
+      "stockQuantity": 33
+    },
+    {
+      "slug": "p5044-fogao-realce-ares-4-bocas-preto",
+      "erpCode": "5044",
+      "name": "Fogão Realce Ares 4 Bocas Preto",
+      "brand": "Realce",
+      "category": "Eletrodomésticos",
+      "shortDescription": "Fogão Realce Ares 4 Bocas Preto.",
+      "description": "O Fogão Ares da Realce tem 4 bocas, acendimento automático e forno com revestimento antiaderente. É compacto, ideal para cozinhas pequenas.",
+      "highlights": [
+        "4 bocas",
+        "Acendimento automático",
+        "Forno com revestimento antiaderente"
+      ],
+      "specs": {
+        "Modelo": "Ares",
+        "Tipo": "Fogão de piso a gás",
+        "Bocas": "4",
+        "Acendimento": "Automático",
+        "Cor": "Preto"
+      },
+      "images": [
+        "p5044-1.jpg",
+        "p5044-2.jpg",
+        "p5044-3.jpg"
+      ],
+      "coverFit": "contain",
+      "colors": [],
+      "cashPriceCents": 89900,
+      "manualInstallmentCents": null,
+      "stockQuantity": 54
+    },
+    {
+      "slug": "p5049-fogao-realce-smart-glass-4-bocas-branco",
+      "erpCode": "5049",
+      "name": "Fogão Realce Smart Glass 4 Bocas Branco",
+      "brand": "Realce",
+      "category": "Eletrodomésticos",
+      "shortDescription": "Fogão Realce Smart Glass 4 Bocas Branco.",
+      "description": "O Fogão Smart Glass da Realce tem 4 bocas, mesa de vidro e acendimento automático.",
+      "highlights": [
+        "4 bocas",
+        "Mesa de vidro",
+        "Acendimento automático"
+      ],
+      "specs": {
+        "Modelo": "Smart Glass",
+        "Tipo": "Fogão de piso a gás",
+        "Bocas": "4",
+        "Mesa": "Vidro temperado",
+        "Acendimento": "Automático",
+        "Cor": "Branco"
+      },
+      "images": [
+        "p5049-1.jpg",
+        "p5049-2.jpg",
+        "p5049-3.jpg"
+      ],
+      "coverFit": "contain",
+      "colors": [],
+      "cashPriceCents": 149900,
+      "manualInstallmentCents": null,
+      "stockQuantity": 2
+    },
+    {
+      "slug": "p6917-tanquinho-colormaq-lcs10-10-kg-branco",
+      "erpCode": "6917",
+      "name": "Tanquinho Colormaq LCS10 10 kg Branco",
+      "brand": "Colormaq",
+      "category": "Eletrodomésticos",
+      "shortDescription": "Tanquinho Colormaq LCS10 10 kg Branco.",
+      "description": "O tanquinho Colormaq LCS10 lava até 10 kg de roupa, com 5 programas de lavagem. Tem filtro para fiapos.",
+      "highlights": [
+        "Capacidade: 10 kg",
+        "5 programas de lavagem",
+        "Cesto em plástico",
+        "Selo Procel A"
+      ],
+      "specs": {
+        "Modelo": "LCS10",
+        "Tipo": "Tanquinho (lavadora semiautomática)",
+        "Capacidade de lavagem": "10 kg",
+        "Abertura": "Superior",
+        "Controle": "Eletromecânico",
+        "Programas de lavagem": "5",
+        "Funções": "Enxágue, lava encardidas, lava roupas básicas, lava roupas delicadas, molho, lavagem pesada",
+        "Dispenser": "Sabão",
+        "Cesto": "Plástico",
+        "Recursos": "Filtro para fiapos",
+        "Reaproveitamento de água": "Sim",
+        "Eficiência": "Selo Procel A",
+        "Consumo": "0,11 kWh por ciclo",
+        "Cor": "Branco",
+        "Dimensões (A x L x P)": "96 x 48,5 x 55,5 cm",
+        "Peso": "10,75 kg",
+        "Voltagem": "127 V ou 220 V (consulte a voltagem disponível)"
+      },
+      "images": [
+        "p6917-1.jpg",
+        "p6917-2.jpg",
+        "p6917-3.jpg",
+        "p6917-4.jpg"
+      ],
+      "coverFit": "contain",
+      "colors": [],
+      "cashPriceCents": 89900,
+      "manualInstallmentCents": null,
+      "stockQuantity": 23
+    },
+    {
+      "slug": "p6918-tanquinho-colormaq-lcs10-10-kg-prata",
+      "erpCode": "6918",
+      "name": "Tanquinho Colormaq LCS10 10 kg Prata",
+      "brand": "Colormaq",
+      "category": "Eletrodomésticos",
+      "shortDescription": "Tanquinho Colormaq LCS10 10 kg Prata.",
+      "description": "O tanquinho Colormaq LCS10 lava até 10 kg de roupa, com 5 programas de lavagem. Tem filtro para fiapos.",
+      "highlights": [
+        "Capacidade: 10 kg",
+        "5 programas de lavagem",
+        "Cesto em plástico",
+        "Selo Procel A"
+      ],
+      "specs": {
+        "Modelo": "LCS10",
+        "Tipo": "Tanquinho (lavadora semiautomática)",
+        "Capacidade de lavagem": "10 kg",
+        "Abertura": "Superior",
+        "Controle": "Eletromecânico",
+        "Programas de lavagem": "5",
+        "Funções": "Enxágue, lava encardidas, lava roupas básicas, lava roupas delicadas, molho, lavagem pesada",
+        "Dispenser": "Sabão",
+        "Cesto": "Plástico",
+        "Recursos": "Filtro para fiapos",
+        "Reaproveitamento de água": "Sim",
+        "Eficiência": "Selo Procel A",
+        "Consumo": "0,11 kWh por ciclo",
+        "Cor": "Prata",
+        "Dimensões (A x L x P)": "96 x 48,5 x 55,5 cm",
+        "Peso": "10,75 kg",
+        "Voltagem": "127 V ou 220 V (consulte a voltagem disponível)"
+      },
+      "images": [
+        "p6918-1.jpg",
+        "p6918-2.jpg",
+        "p6918-3.jpg",
+        "p6918-4.jpg"
+      ],
+      "coverFit": "contain",
+      "colors": [],
+      "cashPriceCents": 89900,
+      "manualInstallmentCents": null,
+      "stockQuantity": 7
+    },
+    {
+      "slug": "p6921-tanquinho-colormaq-lcs14-14-kg-branco",
+      "erpCode": "6921",
+      "name": "Tanquinho Colormaq LCS14 14 kg Branco",
+      "brand": "Colormaq",
+      "category": "Eletrodomésticos",
+      "shortDescription": "Tanquinho Colormaq LCS14 14 kg Branco.",
+      "description": "O Tanquinho LCS14 da Colormaq lava até 14 kg de roupa, com timer, filtro de fiapos e controle eletromecânico simples de usar.",
+      "highlights": [
+        "Capacidade: 14 kg",
+        "Timer",
+        "Filtro de fiapos",
+        "Selo Procel A",
+        "Consumo: 0,13 kWh por ciclo"
+      ],
+      "specs": {
+        "Modelo": "LCS14",
+        "Tipo": "Tanquinho (lavadora semiautomática)",
+        "Capacidade de lavagem": "14 kg",
+        "Abertura": "Superior",
+        "Controle": "Eletromecânico",
+        "Eficiência": "Selo Procel A",
+        "Consumo": "0,13 kWh por ciclo",
+        "Dimensões (A x L x P)": "96 x 55 x 59,5 cm",
+        "Voltagem": "127 V ou 220 V (consulte a voltagem disponível)",
+        "Cor": "Branco"
+      },
+      "images": [
+        "p6921-1.jpg",
+        "p6921-2.jpg"
+      ],
+      "coverFit": "contain",
+      "colors": [],
+      "cashPriceCents": 109900,
+      "manualInstallmentCents": null,
+      "stockQuantity": 2
+    },
+    {
+      "slug": "p6926-tanquinho-colormaq-lcs20-20-kg-branco",
+      "erpCode": "6926",
+      "name": "Tanquinho Colormaq LCS20 20 kg Branco",
+      "brand": "Colormaq",
+      "category": "Eletrodomésticos",
+      "shortDescription": "Tanquinho Colormaq LCS20 20 kg Branco.",
+      "description": "O tanquinho Colormaq LCS20 lava até 20 kg de roupa, com 6 programas de lavagem. Tem filtro para fiapos e controle de níveis de água.",
+      "highlights": [
+        "Capacidade: 20 kg",
+        "6 programas de lavagem",
+        "Cesto em plástico",
+        "Selo Procel A"
+      ],
+      "specs": {
+        "Modelo": "LCS20",
+        "Tipo": "Tanquinho (lavadora semiautomática)",
+        "Capacidade de lavagem": "20 kg",
+        "Abertura": "Superior",
+        "Controle": "Eletromecânico",
+        "Programas de lavagem": "6",
+        "Funções": "Ciclo rápido de lavagem, lava roupas delicadas, molho, lava encardidas, enxágue manual, lava roupas básicas",
+        "Dispenser": "Amaciante, sabão",
+        "Cesto": "Plástico",
+        "Recursos": "Filtro para fiapos, controle de níveis de água",
+        "Eficiência": "Selo Procel A",
+        "Consumo": "0,11 kWh por ciclo",
+        "Cor": "Branco",
+        "Dimensões (A x L x P)": "97 x 56 x 61 cm",
+        "Peso": "11,2 kg",
+        "Voltagem": "127 V ou 220 V (consulte a voltagem disponível)"
+      },
+      "images": [
+        "p6926-1.jpg",
+        "p6926-2.jpg",
+        "p6926-3.jpg",
+        "p6926-4.jpg"
+      ],
+      "coverFit": "contain",
+      "colors": [],
+      "cashPriceCents": 109900,
+      "manualInstallmentCents": null,
+      "stockQuantity": 10
+    },
+    {
+      "slug": "p6927-tanquinho-colormaq-lcs20-20-kg-prata",
+      "erpCode": "6927",
+      "name": "Tanquinho Colormaq LCS20 20 kg Prata",
+      "brand": "Colormaq",
+      "category": "Eletrodomésticos",
+      "shortDescription": "Tanquinho Colormaq LCS20 20 kg Prata.",
+      "description": "O tanquinho Colormaq LCS20 lava até 20 kg de roupa, com 6 programas de lavagem. Tem filtro para fiapos e controle de níveis de água.",
+      "highlights": [
+        "Capacidade: 20 kg",
+        "6 programas de lavagem",
+        "Cesto em plástico",
+        "Selo Procel A"
+      ],
+      "specs": {
+        "Modelo": "LCS20",
+        "Tipo": "Tanquinho (lavadora semiautomática)",
+        "Capacidade de lavagem": "20 kg",
+        "Abertura": "Superior",
+        "Controle": "Eletromecânico",
+        "Programas de lavagem": "6",
+        "Funções": "Ciclo rápido de lavagem, lava roupas delicadas, molho, lava encardidas, enxágue manual, lava roupas básicas",
+        "Dispenser": "Amaciante, sabão",
+        "Cesto": "Plástico",
+        "Recursos": "Filtro para fiapos, controle de níveis de água",
+        "Eficiência": "Selo Procel A",
+        "Consumo": "0,11 kWh por ciclo",
+        "Cor": "Prata",
+        "Dimensões (A x L x P)": "97 x 56 x 61 cm",
+        "Peso": "11,2 kg",
+        "Voltagem": "127 V ou 220 V (consulte a voltagem disponível)"
+      },
+      "images": [
+        "p6927-1.jpg",
+        "p6927-2.jpg",
+        "p6927-3.jpg",
+        "p6927-4.jpg"
+      ],
+      "coverFit": "contain",
+      "colors": [],
+      "cashPriceCents": 109900,
+      "manualInstallmentCents": null,
+      "stockQuantity": 3
+    },
+    {
+      "slug": "p6956-maquina-de-lavar-electrolux-efficient-lda13-13-kg-branca-220-v",
+      "erpCode": "6956",
+      "name": "Máquina de Lavar Electrolux Efficient LDA13 13 kg Branca 220V",
+      "brand": "Electrolux",
+      "category": "Eletrodomésticos",
+      "shortDescription": "Máquina de Lavar Electrolux Efficient LDA13 13 kg Branca 220V.",
+      "description": "A máquina de lavar Electrolux Efficient LDA13 lava até 13 kg de roupa, com 10 programas de lavagem. Tem filtro para fiapos, pés antiderrapantes e pés reguláveis.",
+      "highlights": [
+        "Capacidade: 13 kg",
+        "10 programas de lavagem",
+        "Cesto em aço Inox",
+        "Centrifugação de até 630 rpm",
+        "Selo Procel A"
+      ],
+      "specs": {
+        "Modelo": "Efficient LDA13",
+        "Tipo": "Máquina de lavar automática",
+        "Capacidade de lavagem": "13 kg",
+        "Abertura": "Superior",
+        "Controle": "Eletrônico",
+        "Programas de lavagem": "10",
+        "Funções": "Centrifugação, centrifugação turbo, ciclo rápido de lavagem, enxágue, lava edredom, lavagem turbo, lava roupas básicas, lava roupas delicadas",
+        "Centrifugação": "630 rpm",
+        "Dispenser": "Amaciante, sabão",
+        "Cesto": "Aço Inox",
+        "Recursos": "Filtro para fiapos, pés antiderrapante, pés reguláveis",
+        "Reaproveitamento de água": "Sim",
+        "Eficiência": "Selo Procel A",
+        "Cor": "Branca",
+        "Dimensões (A x L x P)": "104 x 59 x 66,7 cm",
+        "Peso": "37,3 kg",
+        "Voltagem": "220 V"
+      },
+      "images": [
+        "p6956-1.jpg",
+        "p6956-2.jpg",
+        "p6956-3.jpg"
+      ],
+      "coverFit": "contain",
+      "colors": [],
+      "cashPriceCents": 319900,
+      "manualInstallmentCents": null,
+      "stockQuantity": 0
+    },
+    {
+      "slug": "p6957-maquina-de-lavar-electrolux-essential-care-les11-11-kg-branca",
+      "erpCode": "6957",
+      "name": "Máquina de Lavar Electrolux Essential Care LES11 11 kg Branca",
+      "brand": "Electrolux",
+      "category": "Eletrodomésticos",
+      "shortDescription": "Máquina de Lavar Electrolux Essential Care LES11 11 kg Branca.",
+      "description": "A máquina de lavar Electrolux LES11 lava até 11 kg de roupa, com 10 programas de lavagem. Tem controle de níveis de água, filtro para fiapos e pés reguláveis.",
+      "highlights": [
+        "Capacidade: 11 kg",
+        "10 programas de lavagem",
+        "Cesto em plástico",
+        "Centrifugação de até 680 rpm",
+        "Selo Procel A"
+      ],
+      "specs": {
+        "Modelo": "LES11",
+        "Tipo": "Máquina de lavar automática",
+        "Capacidade de lavagem": "11 kg",
+        "Abertura": "Superior",
+        "Controle": "Eletromecânico",
+        "Programas de lavagem": "10",
+        "Funções": "Centrifugação, ciclo rápido de lavagem, enxágue, lava edredom, lava roupas básicas, lava roupas delicadas, lavagem pesada",
+        "Centrifugação": "680 rpm",
+        "Dispenser": "Alvejante, amaciante, sabão",
+        "Cesto": "Plástico",
+        "Recursos": "Controle de níveis de água, filtro para fiapos, pés reguláveis",
+        "Reaproveitamento de água": "Sim",
+        "Eficiência": "Selo Procel A",
+        "Consumo": "0,34 kWh por ciclo",
+        "Cor": "Branca",
+        "Dimensões (A x L x P)": "103 x 59,5 x 67 cm",
+        "Peso": "37 kg",
+        "Voltagem": "127 V ou 220 V (consulte a voltagem disponível)"
+      },
+      "images": [
+        "p6957-1.jpg",
+        "p6957-2.jpg"
+      ],
+      "coverFit": "contain",
+      "colors": [],
+      "cashPriceCents": 299900,
+      "manualInstallmentCents": null,
+      "stockQuantity": 1
+    },
+    {
+      "slug": "p7672-tanquinho-suggar-lavamatic-lc1622br-16-kg-branco-220-v",
+      "erpCode": "7672",
+      "name": "Tanquinho Suggar Lavamatic LC1622BR 16 kg Branco 220V",
+      "brand": "Suggar",
+      "category": "Eletrodomésticos",
+      "shortDescription": "Tanquinho Suggar Lavamatic LC1622BR 16 kg Branco 220V.",
+      "description": "O Tanquinho Lavamatic da Suggar lava até 16 kg de roupa, com 6 programas, função molho e filtro de fiapos.",
+      "highlights": [
+        "Capacidade: 16 kg",
+        "6 programas de lavagem",
+        "Função molho",
+        "Filtro de fiapos",
+        "Potência: 530 W"
+      ],
+      "specs": {
+        "Modelo": "Lavamatic LC1622BR",
+        "Tipo": "Tanquinho (lavadora semiautomática)",
+        "Capacidade de lavagem": "16 kg",
+        "Programas": "6",
+        "Abertura": "Superior",
+        "Potência": "530 W",
+        "Dimensões (A x L x P)": "96,1 x 51,3 x 56,7 cm",
+        "Peso": "10,55 kg",
+        "Voltagem": "220 V",
+        "Cor": "Branco"
+      },
+      "images": [
+        "p7672-1.jpg",
+        "p7672-2.jpg"
+      ],
+      "coverFit": "contain",
+      "colors": [],
+      "cashPriceCents": 89900,
+      "manualInstallmentCents": null,
+      "stockQuantity": 0
+    },
+    {
+      "slug": "p8491-geladeira-midea-cycle-defrost-duplex-rt554-410-l-branca",
+      "erpCode": "8491",
+      "name": "Geladeira Midea Cycle Defrost Duplex RT554 410 L Branca",
+      "brand": "Midea",
+      "category": "Eletrodomésticos",
+      "shortDescription": "Geladeira Midea Cycle Defrost Duplex RT554 410 L Branca.",
+      "description": "A Geladeira Midea MDRT554EV é duplex, com 410 litros no total e degelo Cycle Defrost. São 293 litros no refrigerador e 117 litros no freezer.",
+      "highlights": [
+        "Capacidade total: 410 litros",
+        "Duplex",
+        "Cycle Defrost",
+        "Tecnologia Inverter",
+        "Selo Procel A"
+      ],
+      "specs": {
+        "Modelo": "MDRT554EV",
+        "Tipo": "Geladeira duplex",
+        "Capacidade total": "410 L",
+        "Refrigerador": "293 L",
+        "Congelador / freezer": "117 L",
+        "Degelo": "Cycle Defrost",
+        "Controle": "Painel touch",
+        "Recursos": "Tecnologia Inverter",
+        "Recursos internos": "Controle de temperatura, gavetas para vegetais e frutas",
+        "Eficiência": "Selo Procel A",
+        "Consumo": "24,2 kWh/mês",
+        "Cor": "Branca",
+        "Dimensões (A x L x P)": "172 x 59,5 x 70,4 cm",
+        "Peso": "51 kg",
+        "Voltagem": "127 V ou 220 V (consulte a voltagem disponível)"
+      },
+      "images": [
+        "p8491-1.jpg",
+        "p8491-2.jpg",
+        "p8491-3.jpg",
+        "p8491-4.jpg"
+      ],
+      "coverFit": "contain",
+      "colors": [],
+      "cashPriceCents": 449900,
+      "manualInstallmentCents": null,
+      "stockQuantity": 1
+    },
+    {
+      "slug": "p8493-geladeira-midea-frost-free-duplex-rt57-425-l-branca",
+      "erpCode": "8493",
+      "name": "Geladeira Midea Frost Free Duplex RT57 425 L Branca",
+      "brand": "Midea",
+      "category": "Eletrodomésticos",
+      "shortDescription": "Geladeira Midea Frost Free Duplex RT57 425 L Branca.",
+      "description": "A Geladeira Midea MD-RT572EVD01 é duplex, com 425 litros no total e degelo Frost Free. São 305 litros no refrigerador e 120 litros no freezer.",
+      "highlights": [
+        "Capacidade total: 425 litros",
+        "Duplex",
+        "Frost Free",
+        "Alerta de porta aberta",
+        "compartimento extra-frio",
+        "Selo Procel A"
+      ],
+      "specs": {
+        "Modelo": "MD-RT572EVD01",
+        "Tipo": "Geladeira duplex",
+        "Capacidade total": "425 L",
+        "Refrigerador": "305 L",
+        "Congelador / freezer": "120 L",
+        "Degelo": "Frost Free",
+        "Controle": "Painel touch",
+        "Recursos": "Alerta de porta aberta, compartimento extra-frio, iluminação interna LED, resfriamento rápido",
+        "Recursos internos": "Controle de temperatura, gavetas para vegetais e frutas, porta-garrafas, porta-ovos, prateleira removível, prateleiras ajustáveis, prateleiras da porta ajustáveis, pés com rodízio, pés niveladores",
+        "Prateleiras": "Vidro temperado",
+        "Eficiência": "Selo Procel A",
+        "Cor": "Branca",
+        "Dimensões (A x L x P)": "185 x 59,5 x 71,4 cm",
+        "Peso": "57 kg",
+        "Voltagem": "127 V ou 220 V (consulte a voltagem disponível)"
+      },
+      "images": [
+        "p8493-1.jpg",
+        "p8493-2.jpg",
+        "p8493-3.jpg"
+      ],
+      "coverFit": "contain",
+      "colors": [],
+      "cashPriceCents": 439900,
+      "manualInstallmentCents": null,
+      "stockQuantity": 2
+    },
+    {
+      "slug": "p8502-geladeira-consul-cra30mb-degelo-seco-263-l-branca",
+      "erpCode": "8502",
+      "name": "Geladeira Consul CRA30MB Degelo Seco 263 L Branca",
+      "brand": "Consul",
+      "category": "Eletrodomésticos",
+      "shortDescription": "Geladeira Consul CRA30MB Degelo Seco 263 L Branca.",
+      "description": "A Geladeira Consul CRA30MB é de 1 porta, com 263 litros no total e degelo Degelo semiautomático/seco. São 239 litros no refrigerador e 24 litros no congelador.",
+      "highlights": [
+        "Capacidade total: 263 litros",
+        "1 porta",
+        "Degelo semiautomático/seco",
+        "Compartimento extra-frio",
+        "iluminação interna LED",
+        "Selo Procel B"
+      ],
+      "specs": {
+        "Modelo": "CRA30MB",
+        "Tipo": "Geladeira 1 porta",
+        "Capacidade total": "263 L",
+        "Refrigerador": "239 L",
+        "Congelador / freezer": "24 L",
+        "Degelo": "Degelo semiautomático/seco",
+        "Controle": "Painel eletrônico",
+        "Recursos": "Compartimento extra-frio, iluminação interna LED",
+        "Recursos internos": "Controle de temperatura, gavetas para vegetais e frutas, porta-garrafas, porta-ovos, prateleira removível, prateleiras ajustáveis, pés niveladores",
+        "Prateleiras": "Metal",
+        "Eficiência": "Selo Procel B",
+        "Consumo": "16,7 kWh/mês",
+        "Cor": "Branca",
+        "Dimensões (A x L x P)": "142 x 55 x 63 cm",
+        "Peso": "40 kg",
+        "Voltagem": "127 V ou 220 V (consulte a voltagem disponível)"
+      },
+      "images": [
+        "p8502-1.jpg",
+        "p8502-2.jpg"
+      ],
+      "coverFit": "contain",
+      "colors": [],
+      "cashPriceCents": 335900,
+      "manualInstallmentCents": null,
+      "stockQuantity": 12
+    },
+    {
+      "slug": "p8533-geladeira-consul-cycle-defrost-duplex-crd37eb-334-l-branca",
+      "erpCode": "8533",
+      "name": "Geladeira Consul Cycle Defrost Duplex CRD37EB 334 L Branca",
+      "brand": "Consul",
+      "category": "Eletrodomésticos",
+      "shortDescription": "Geladeira Consul Cycle Defrost Duplex CRD37EB 334 L Branca.",
+      "description": "A Geladeira Consul CRD37 é duplex, com 334 litros no total e degelo Cycle Defrost. São 258 litros no refrigerador e 76 litros no freezer.",
+      "highlights": [
+        "Capacidade total: 334 litros",
+        "Duplex",
+        "Cycle Defrost",
+        "Selo Procel A"
+      ],
+      "specs": {
+        "Modelo": "CRD37",
+        "Tipo": "Geladeira duplex",
+        "Capacidade total": "334 L",
+        "Refrigerador": "258 L",
+        "Congelador / freezer": "76 L",
+        "Degelo": "Cycle Defrost",
+        "Controle": "Painel eletrônico",
+        "Recursos internos": "Compartimento para laticínios, gavetas para vegetais e frutas, porta-ovos, prateleira removível, pés niveladores, prateleiras ajustáveis, porta-garrafas, controle de temperatura",
+        "Prateleiras": "Metal",
+        "Eficiência": "Selo Procel A",
+        "Consumo": "43,5 kWh/mês",
+        "Cor": "Branca",
+        "Dimensões (A x L x P)": "166,9 x 60,3 x 63,4 cm",
+        "Peso": "47 kg",
+        "Voltagem": "127 V ou 220 V (consulte a voltagem disponível)"
+      },
+      "images": [
+        "p8533-1.jpg",
+        "p8533-2.jpg",
+        "p8533-3.jpg",
+        "p8533-4.jpg"
+      ],
+      "coverFit": "contain",
+      "colors": [],
+      "cashPriceCents": 419900,
+      "manualInstallmentCents": null,
+      "stockQuantity": 23
+    },
+    {
+      "slug": "p8594-geladeira-consul-frost-free-duplex-crm50mk-412-l-inox",
+      "erpCode": "8594",
+      "name": "Geladeira Consul Frost Free Duplex CRM50MK 412 L Inox",
+      "brand": "Consul",
+      "category": "Eletrodomésticos",
+      "shortDescription": "Geladeira Consul Frost Free Duplex CRM50MK 412 L Inox.",
+      "description": "A Geladeira Consul CRM50MK é duplex, com 412 litros no total e degelo Frost Free. São 311 litros no refrigerador e 101 litros no freezer.",
+      "highlights": [
+        "Capacidade total: 412 litros",
+        "Duplex",
+        "Frost Free",
+        "Filtro anti-odor",
+        "compartimento extra-frio",
+        "Selo Procel B"
+      ],
+      "specs": {
+        "Modelo": "CRM50MK",
+        "Tipo": "Geladeira duplex",
+        "Capacidade total": "412 L",
+        "Refrigerador": "311 L",
+        "Congelador / freezer": "101 L",
+        "Degelo": "Frost Free",
+        "Recursos": "Filtro anti-odor, compartimento extra-frio",
+        "Recursos internos": "Porta-ovos, controle de temperatura, prateleira removível, prateleiras ajustáveis, prateleiras da porta ajustáveis",
+        "Eficiência": "Selo Procel B",
+        "Cor": "Inox",
+        "Dimensões (A x L x P)": "174,5 x 75,8 x 75,5 cm",
+        "Peso": "71 kg",
+        "Voltagem": "127 V ou 220 V (consulte a voltagem disponível)"
+      },
+      "images": [
+        "p8594-1.jpg",
+        "p8594-2.jpg",
+        "p8594-3.jpg",
+        "p8594-4.jpg"
+      ],
+      "coverFit": "contain",
+      "colors": [],
+      "cashPriceCents": 579900,
+      "manualInstallmentCents": null,
+      "stockQuantity": 6
+    },
+    {
+      "slug": "p8673-geladeira-midea-frost-free-duplex-rt533-394-l-branca",
+      "erpCode": "8673",
+      "name": "Geladeira Midea Frost Free Duplex RT533 394 L Branca",
+      "brand": "Midea",
+      "category": "Eletrodomésticos",
+      "shortDescription": "Geladeira Midea Frost Free Duplex RT533 394 L Branca.",
+      "description": "A Geladeira Midea MDRT533EVD é duplex, com 394 litros no total e degelo Frost Free. São 295 litros no refrigerador e 99 litros no freezer.",
+      "highlights": [
+        "Capacidade total: 394 litros",
+        "Duplex",
+        "Frost Free",
+        "Compartimento extra-frio",
+        "iluminação interna LED"
+      ],
+      "specs": {
+        "Modelo": "MDRT533EVD",
+        "Tipo": "Geladeira duplex",
+        "Capacidade total": "394 L",
+        "Refrigerador": "295 L",
+        "Congelador / freezer": "99 L",
+        "Degelo": "Frost Free",
+        "Recursos": "Compartimento extra-frio, iluminação interna LED",
+        "Prateleiras": "Vidro temperado",
+        "Cor": "Branca",
+        "Dimensões (A x L x P)": "172 x 59,5 x 71,8 cm",
+        "Peso": "51 kg",
+        "Voltagem": "127 V ou 220 V (consulte a voltagem disponível)"
+      },
+      "images": [
+        "p8673-1.jpg",
+        "p8673-2.jpg",
+        "p8673-3.jpg",
+        "p8673-4.jpg"
+      ],
+      "coverFit": "contain",
+      "colors": [],
+      "cashPriceCents": 459900,
+      "manualInstallmentCents": null,
+      "stockQuantity": 4
+    },
+    {
+      "slug": "p8674-geladeira-midea-frost-free-duplex-rt533-394-l-inox",
+      "erpCode": "8674",
+      "name": "Geladeira Midea Frost Free Duplex RT533 394 L Inox",
+      "brand": "Midea",
+      "category": "Eletrodomésticos",
+      "shortDescription": "Geladeira Midea Frost Free Duplex RT533 394 L Inox.",
+      "description": "A Geladeira Midea MDRT533EVD é duplex, com 394 litros no total e degelo Frost Free. São 295 litros no refrigerador e 99 litros no freezer.",
+      "highlights": [
+        "Capacidade total: 394 litros",
+        "Duplex",
+        "Frost Free",
+        "Compartimento extra-frio",
+        "iluminação interna LED"
+      ],
+      "specs": {
+        "Modelo": "MDRT533EVD",
+        "Tipo": "Geladeira duplex",
+        "Capacidade total": "394 L",
+        "Refrigerador": "295 L",
+        "Congelador / freezer": "99 L",
+        "Degelo": "Frost Free",
+        "Recursos": "Compartimento extra-frio, iluminação interna LED",
+        "Prateleiras": "Vidro temperado",
+        "Cor": "Inox",
+        "Dimensões (A x L x P)": "172 x 59,5 x 71,8 cm",
+        "Peso": "51 kg",
+        "Voltagem": "127 V ou 220 V (consulte a voltagem disponível)"
+      },
+      "images": [
+        "p8674-1.jpg",
+        "p8674-2.jpg",
+        "p8674-3.jpg"
+      ],
+      "coverFit": "contain",
+      "colors": [],
+      "cashPriceCents": 499900,
+      "manualInstallmentCents": null,
+      "stockQuantity": 4
+    },
+    {
+      "slug": "p9776-freezer-horizontal-midea-mdrc698fzd013-508-l-branco-bivolt",
+      "erpCode": "9776",
+      "name": "Freezer Horizontal Midea MDRC698FZD013 508 L Branco Bivolt",
+      "brand": "Midea",
+      "category": "Eletrodomésticos",
+      "shortDescription": "Freezer Horizontal Midea MDRC698FZD013 508 L Branco Bivolt.",
+      "description": "O Freezer Horizontal da Midea tem 508 litros, 2 portas e compressor Inverter, que economiza energia. Funciona como freezer ou refrigerador e é bivolt.",
+      "highlights": [
+        "Capacidade: 508 litros",
+        "2 portas",
+        "Compressor Inverter",
+        "Freezer ou refrigerador",
+        "Bivolt"
+      ],
+      "specs": {
+        "Modelo": "MDRC698FZD013",
+        "Tipo": "Freezer horizontal",
+        "Capacidade": "508 L",
+        "Portas": "2",
+        "Compressor": "Inverter",
+        "Temperatura": "-28 °C a 10 °C",
+        "Funções": "Freezer, conservar e refrigerar",
+        "Degelo": "Manual, com dreno frontal",
+        "Acessórios": "2 cestos",
+        "Dimensões (A x L x P)": "83 x 153 x 73,5 cm",
+        "Peso": "58,9 kg",
+        "Voltagem": "Bivolt",
+        "Cor": "Branco",
+        "Garantia": "12 meses (fabricante)"
+      },
+      "images": [
+        "p9776-1.jpg",
+        "p9776-2.jpg"
+      ],
+      "coverFit": "contain",
+      "colors": [],
+      "cashPriceCents": 579900,
+      "manualInstallmentCents": null,
+      "stockQuantity": 9
+    },
+    {
+      "slug": "p9874-forno-eletrico-suggar-fe5012pt-50-l-preto-220-v",
+      "erpCode": "9874",
+      "name": "Forno Elétrico Suggar FE5012PT 50 L Preto 220V",
+      "brand": "Suggar",
+      "category": "Eletrodomésticos",
+      "shortDescription": "Forno Elétrico Suggar FE5012PT 50 L Preto 220V.",
+      "description": "O Forno Elétrico de bancada da Suggar tem 50 litros, função grill e timer de 60 minutos com alarme. A temperatura vai de 100 °C a 250 °C.",
+      "highlights": [
+        "Capacidade: 50 litros",
+        "Função grill",
+        "Timer de 60 minutos",
+        "Temperatura: 100 °C a 250 °C"
+      ],
+      "specs": {
+        "Modelo": "FE5012PT",
+        "Tipo": "Forno elétrico de bancada",
+        "Capacidade": "50 L",
+        "Temperatura": "100 °C a 250 °C",
+        "Timer": "60 minutos com alarme",
+        "Funções": "Grill",
+        "Voltagem": "220 V",
+        "Cor": "Preto"
+      },
+      "images": [
+        "p9874-1.jpg",
+        "p9874-2.jpg",
+        "p9874-3.jpg",
+        "p9874-4.jpg"
+      ],
+      "coverFit": "contain",
+      "colors": [],
+      "cashPriceCents": 89900,
+      "manualInstallmentCents": null,
+      "stockQuantity": 1
+    },
+    {
+      "slug": "p9897-freezer-horizontal-midea-mdrc207sla012-145-l-branco-220-v",
+      "erpCode": "9897",
+      "name": "Freezer Horizontal Midea MDRC207SLA012 145 L Branco 220V",
+      "brand": "Midea",
+      "category": "Eletrodomésticos",
+      "shortDescription": "Freezer Horizontal Midea MDRC207SLA012 145 L Branco 220V.",
+      "description": "O Freezer Horizontal Midea tem 145 litros, 1 porta e congelamento rápido, com baixo nível de ruído.",
+      "highlights": [
+        "Capacidade: 145 litros",
+        "1 porta",
+        "Congelamento rápido",
+        "Selo Procel A"
+      ],
+      "specs": {
+        "Modelo": "MDRC207SLA012",
+        "Tipo": "Freezer horizontal",
+        "Capacidade total": "145 L",
+        "Recursos": "Baixo nível de ruído, congelamento rápido, preservação de alimentos",
+        "Eficiência": "Selo Procel A",
+        "Cor": "Branco",
+        "Dimensões (A x L x P)": "85 x 63,2 x 55 cm",
+        "Peso": "23 kg",
+        "Voltagem": "220 V"
+      },
+      "images": [
+        "p9897-1.jpg",
+        "p9897-2.jpg",
+        "p9897-3.jpg"
+      ],
+      "coverFit": "contain",
+      "colors": [],
+      "cashPriceCents": 269900,
+      "manualInstallmentCents": null,
+      "stockQuantity": 1
+    },
+    {
+      "slug": "p9907-fogao-mueller-mfi5bb-5-bocas-preto-fosco-mesa-inox",
+      "erpCode": "9907",
+      "name": "Fogão Mueller MFI5BB 5 Bocas Preto Fosco Mesa Inox",
+      "brand": "Mueller",
+      "category": "Eletrodomésticos",
+      "shortDescription": "Fogão Mueller MFI5BB 5 Bocas Preto Fosco Mesa Inox.",
+      "description": "O Fogão Mueller MFI5BB tem 5 bocas, mesa de inox e acendimento automático. O forno tem 81,6 litros, com revestimento antiaderente e sensor corta gás.",
+      "highlights": [
+        "5 bocas",
+        "Mesa de inox",
+        "Acendimento automático",
+        "Forno de 81,6 litros",
+        "Selo Conpet A"
+      ],
+      "specs": {
+        "Modelo": "MFI5BB",
+        "Tipo": "Fogão de piso a gás",
+        "Bocas": "5",
+        "Mesa": "Inox",
+        "Acendimento": "Automático",
+        "Recursos da mesa": "Botões removíveis, queimadores de tamanhos diferentes",
+        "Grades": "Inteiriça",
+        "Capacidade do forno": "81,6 L",
+        "Prateleiras do forno": "1 regulável",
+        "Recursos do forno": "Revestimento antiaderente, sensor corta gás",
+        "Eficiência": "Selo Conpet A",
+        "Cor": "Preto fosco",
+        "Dimensões (A x L x P)": "87 x 75 x 55 cm",
+        "Peso": "23,1 kg",
+        "Voltagem": "Bivolt"
+      },
+      "images": [
+        "p9907-1.jpg",
+        "p9907-11.jpg",
+        "p9907-2.jpg",
+        "p9907-3.jpg",
+        "p9907-4.jpg"
+      ],
+      "coverFit": "contain",
+      "colors": [],
+      "cashPriceCents": 159900,
+      "manualInstallmentCents": null,
+      "stockQuantity": 1
+    },
+    {
+      "slug": "p9910-maquina-de-lavar-consul-cwn13ab-13-kg-branca",
+      "erpCode": "9910",
+      "name": "Máquina de Lavar Consul CWN13AB 13 kg Branca",
+      "brand": "Consul",
+      "category": "Eletrodomésticos",
+      "shortDescription": "Máquina de Lavar Consul CWN13AB 13 kg Branca.",
+      "description": "A máquina de lavar Consul CWN13AB lava até 13 kg de roupa, com 12 programas de lavagem. Tem controle de níveis de água e filtro para fiapos.",
+      "highlights": [
+        "Capacidade: 13 kg",
+        "12 programas de lavagem",
+        "Cesto em aço Inox",
+        "Selo Procel A"
+      ],
+      "specs": {
+        "Modelo": "CWN13AB",
+        "Tipo": "Máquina de lavar automática",
+        "Capacidade de lavagem": "13 kg",
+        "Abertura": "Superior",
+        "Controle": "Eletrônico, eletromecânico",
+        "Programas de lavagem": "12",
+        "Funções": "Centrifugação, enxágue, molho, lava tênis, lava edredom, ciclo rápido de lavagem, lavagem pesada, lava roupas básicas, lava roupas delicadas",
+        "Dispenser": "Sabão, amaciante",
+        "Cesto": "Aço Inox",
+        "Recursos": "Controle de níveis de água, filtro para fiapos",
+        "Reaproveitamento de água": "Sim",
+        "Eficiência": "Selo Procel A",
+        "Consumo": "0,39 kWh por ciclo",
+        "Cor": "Branca",
+        "Dimensões (A x L x P)": "97 x 57,5 x 61,5 cm",
+        "Peso": "31,4 kg",
+        "Voltagem": "127 V ou 220 V (consulte a voltagem disponível)"
+      },
+      "images": [
+        "p9910-1.jpg",
+        "p9910-2.jpg",
+        "p9910-3.jpg"
+      ],
+      "coverFit": "contain",
+      "colors": [],
+      "cashPriceCents": 319900,
+      "manualInstallmentCents": null,
+      "stockQuantity": 1
+    },
+    {
+      "slug": "p9005-smart-tv-aoc-roku-32s5135-78g-hd-32-polegadas",
+      "erpCode": "9005",
+      "name": "Smart TV AOC Roku 32S5135/78G HD 32 Polegadas",
+      "brand": "AOC",
+      "category": "Áudio e Vídeo",
+      "shortDescription": "Smart TV AOC Roku 32S5135/78G HD 32 Polegadas.",
+      "description": "A Smart TV AOC de 32 polegadas tem resolução HD e o sistema Roku, com acesso a Netflix, YouTube, Prime Video e outros aplicativos.",
+      "highlights": [
+        "Tela: 32 polegadas DLED",
+        "Resolução: HD",
+        "Sistema: Roku",
+        "Wi-Fi integrado",
+        "3 entradas HDMI"
+      ],
+      "specs": {
+        "Modelo": "32S5135/78G",
+        "Tela": "32 polegadas DLED",
+        "Resolução": "HD",
+        "Sistema": "Roku",
+        "Aplicativos": "Amazon Prime Video, Disney+, Netflix, YouTube",
+        "Áudio": "10 W RMS",
+        "Entradas HDMI": "3",
+        "Conexões": "HDMI, USB, fone de ouvido P2, LAN (rede), Wi-Fi integrado, AirPlay, espelhamento de tela",
+        "Dimensões com base (L x A x P)": "71,6 x 46,6 x 16,4 cm",
+        "Dimensões sem base (L x A x P)": "71,6 x 43,2 x 7,5 cm",
+        "Voltagem": "Bivolt"
+      },
+      "images": [
+        "p9005-1.jpg",
+        "p9005-2.jpg",
+        "p9005-3.jpg",
+        "p9005-4.jpg"
+      ],
+      "coverFit": "contain",
+      "colors": [],
+      "cashPriceCents": 179900,
+      "manualInstallmentCents": null,
+      "stockQuantity": 3
+    },
+    {
+      "slug": "p9031-smart-tv-aoc-roku-32s5155-78g-32-polegadas",
+      "erpCode": "9031",
+      "name": "Smart TV AOC Roku 32S5155/78G 32 Polegadas",
+      "brand": "AOC",
+      "category": "Áudio e Vídeo",
+      "shortDescription": "Smart TV AOC Roku 32S5155/78G 32 Polegadas.",
+      "description": "A Smart TV AOC de 32 polegadas tem resolução HD e o sistema Roku, com acesso a Netflix, YouTube, Prime Video e outros aplicativos.",
+      "highlights": [
+        "Tela: 32 polegadas DLED",
+        "Resolução: HD",
+        "Sistema: Roku",
+        "Wi-Fi integrado",
+        "3 entradas HDMI"
+      ],
+      "specs": {
+        "Modelo": "32S5155",
+        "Tela": "32 polegadas DLED",
+        "Resolução": "HD",
+        "Sistema": "Roku",
+        "Aplicativos": "Disney+, Netflix, Apple TV, Globoplay, Amazon Prime Video, Star+, YouTube",
+        "Áudio": "10 W RMS",
+        "Entradas HDMI": "3",
+        "Conexões": "HDMI, LAN (rede), USB, Wi-Fi integrado",
+        "Dimensões com base (L x A x P)": "71,93 x 47,42 x 20,2 cm",
+        "Dimensões sem base (L x A x P)": "71,93 x 42,86 x 7,26 cm",
+        "Voltagem": "Bivolt"
+      },
+      "images": [
+        "p9031-1.jpg",
+        "p9031-2.jpg",
+        "p9031-3.jpg",
+        "p9031-4.jpg"
+      ],
+      "coverFit": "contain",
+      "colors": [],
+      "cashPriceCents": 179900,
+      "manualInstallmentCents": null,
+      "stockQuantity": 1
+    },
+    {
+      "slug": "p9357-smart-tv-samsung-un32t4300agxzd-hd-32-polegadas",
+      "erpCode": "9357",
+      "name": "Smart TV Samsung UN32T4300AGXZD HD 32 Polegadas",
+      "brand": "Samsung",
+      "category": "Áudio e Vídeo",
+      "shortDescription": "Smart TV Samsung UN32T4300AGXZD HD 32 Polegadas.",
+      "description": "A Smart TV Samsung T4300 de 32 polegadas tem resolução HD e o sistema Tizen, com os principais aplicativos de vídeo. Tem HDR e Wi-Fi.",
+      "highlights": [
+        "Tela: 32\" HD (1366 x 768)",
+        "Sistema: Tizen",
+        "HDR",
+        "2 hDMI e 1 USB",
+        "Wi-Fi"
+      ],
+      "specs": {
+        "Modelo": "UN32T4300AGXZD",
+        "Tela": "32 polegadas LED",
+        "Resolução": "HD (1366 x 768)",
+        "Sistema": "Tizen",
+        "Conexões": "2 HDMI, 1 USB e Wi-Fi",
+        "Dimensões com base (L x A x P)": "73,7 x 46,5 x 15 cm",
+        "Dimensões sem base (L x A x P)": "73,7 x 43,8 x 7,4 cm",
+        "Voltagem": "Bivolt"
+      },
+      "images": [
+        "p9357-1.jpg"
+      ],
+      "coverFit": "contain",
+      "colors": [],
+      "cashPriceCents": 199900,
+      "manualInstallmentCents": null,
+      "stockQuantity": 1
+    },
+    {
+      "slug": "p9394-smart-tv-semp-32s42r-roku-32-polegadas-full-hd",
+      "erpCode": "9394",
+      "name": "Smart TV Semp 32S42R Roku 32 Polegadas Full HD",
+      "brand": "Semp",
+      "category": "Áudio e Vídeo",
+      "shortDescription": "Smart TV Semp 32S42R Roku 32 Polegadas Full HD.",
+      "description": "A Smart TV Semp S42R de 32 polegadas tem resolução Full HD e o sistema Roku TV, com acesso a milhares de aplicativos. O som tem Dolby Audio.",
+      "highlights": [
+        "Tela: 32\" Full HD (1920 x 1080)",
+        "Sistema: Roku TV",
+        "Áudio: 16 W RMS com Dolby Audio",
+        "Wi-Fi integrado",
+        "Bivolt"
+      ],
+      "specs": {
+        "Modelo": "32S42R",
+        "Tela": "32 polegadas LED",
+        "Resolução": "Full HD (1920 x 1080)",
+        "Sistema": "Roku TV",
+        "Áudio": "16 W RMS (2 x 8 W), Dolby Audio",
+        "Conexões": "HDMI (com ARC), USB e Wi-Fi",
+        "Dimensões com base (L x A x P)": "71,6 x 47 x 18,2 cm",
+        "Dimensões sem base (L x A x P)": "71,6 x 42,3 x 7,6 cm",
+        "Peso": "3,4 kg",
+        "Voltagem": "Bivolt (100 a 240 V)",
+        "Consumo máximo": "65 W",
+        "Garantia": "12 meses (fabricante)"
+      },
+      "images": [
+        "p9394-1.jpg",
+        "p9394-2.jpg"
+      ],
+      "coverFit": "contain",
+      "colors": [],
+      "cashPriceCents": 179900,
+      "manualInstallmentCents": null,
+      "stockQuantity": 18
+    },
+    {
+      "slug": "p9396-smart-tv-semp-roku-43s42r-full-hd-43-polegadas",
+      "erpCode": "9396",
+      "name": "Smart TV Semp Roku 43S42R Full HD 43 Polegadas",
+      "brand": "Semp",
+      "category": "Áudio e Vídeo",
+      "shortDescription": "Smart TV Semp Roku 43S42R Full HD 43 Polegadas.",
+      "description": "A Smart TV Semp S42R de 43 polegadas tem resolução Full HD e o sistema Roku TV. O som tem 20 W com Dolby Audio.",
+      "highlights": [
+        "Tela: 43\" Full HD (1920 x 1080)",
+        "Sistema: Roku TV",
+        "Áudio: 20 W com Dolby Audio",
+        "2 hDMI, USB e Wi-Fi"
+      ],
+      "specs": {
+        "Modelo": "43S42R",
+        "Tela": "43 polegadas LED",
+        "Resolução": "Full HD (1920 x 1080)",
+        "Sistema": "Roku TV",
+        "Áudio": "20 W (2 x 10 W), Dolby Audio",
+        "Conexões": "2 HDMI (com ARC), USB, rede e Wi-Fi",
+        "Dimensões com base (L x A x P)": "95,5 x 60,7 x 18,5 cm",
+        "Dimensões sem base (L x A x P)": "95,5 x 55,5 x 9 cm",
+        "Peso sem base": "6 kg",
+        "Padrão VESA": "100 x 100 mm",
+        "Voltagem": "Bivolt"
+      },
+      "images": [
+        "p9396-1.jpg",
+        "p9396-2.jpg"
+      ],
+      "coverFit": "contain",
+      "colors": [],
+      "cashPriceCents": 299900,
+      "manualInstallmentCents": null,
+      "stockQuantity": 9
+    },
+    {
+      "slug": "p9397-smart-tv-semp-roku-50s42r-full-hd-50-polegadas",
+      "erpCode": "9397",
+      "name": "Smart TV Semp Roku 50S42R Full HD 50 Polegadas",
+      "brand": "Semp",
+      "category": "Áudio e Vídeo",
+      "shortDescription": "Smart TV Semp Roku 50S42R Full HD 50 Polegadas.",
+      "description": "A Smart TV Semp S42R de 50 polegadas tem resolução Full HD, brilho de até 240 nits e o sistema Roku TV.",
+      "highlights": [
+        "Tela: 50\" Full HD (1920 x 1080)",
+        "Sistema: Roku TV",
+        "Dolby Audio",
+        "Wi-Fi integrado"
+      ],
+      "specs": {
+        "Modelo": "50S42R",
+        "Tela": "50 polegadas LED",
+        "Resolução": "Full HD (1920 x 1080)",
+        "Sistema": "Roku TV",
+        "Áudio": "Dolby Audio",
+        "Conexões": "HDMI, USB e Wi-Fi",
+        "Dimensões com base (L x A x P)": "111,1 x 69,2 x 25,2 cm",
+        "Dimensões sem base (L x A x P)": "111,1 x 64,6 x 7,2 cm",
+        "Consumo máximo": "90 W",
+        "Voltagem": "Bivolt"
+      },
+      "images": [
+        "p9397-1.jpg",
+        "p9397-2.jpg"
+      ],
+      "coverFit": "contain",
+      "colors": [],
+      "cashPriceCents": 349900,
+      "manualInstallmentCents": null,
+      "stockQuantity": 5
+    },
+    {
+      "slug": "p9399-smart-tv-semp-roku-65s62r-4k-65-polegadas",
+      "erpCode": "9399",
+      "name": "Smart TV Semp Roku 65S62R 4K 65 Polegadas",
+      "brand": "Semp",
+      "category": "Áudio e Vídeo",
+      "shortDescription": "Smart TV Semp Roku 65S62R 4K 65 Polegadas.",
+      "description": "A Smart TV Semp S62R de 65 polegadas tem resolução 4K com HDR10 e o sistema Roku TV. Tem 3 entradas HDMI.",
+      "highlights": [
+        "Tela: 65\" 4K Ultra HD",
+        "HDR10",
+        "Sistema: Roku TV",
+        "3 entradas HDMI",
+        "Dolby Audio"
+      ],
+      "specs": {
+        "Modelo": "65S62R",
+        "Tela": "65 polegadas LED",
+        "Resolução": "4K Ultra HD (3840 x 2160)",
+        "HDR": "HDR10",
+        "Sistema": "Roku TV",
+        "Conexões": "3 HDMI, USB e Wi-Fi",
+        "Dimensões com base (L x A x P)": "144,5 x 88,5 x 30,5 cm",
+        "Dimensões sem base (L x A x P)": "144,5 x 83,3 x 7,3 cm",
+        "Peso": "12,6 kg",
+        "Padrão VESA": "200 x 200 mm",
+        "Consumo máximo": "145 W",
+        "Voltagem": "Bivolt",
+        "Garantia": "12 meses (fabricante)"
+      },
+      "images": [
+        "p9399-1.jpg"
+      ],
+      "coverFit": "contain",
+      "colors": [],
+      "cashPriceCents": 589900,
+      "manualInstallmentCents": null,
+      "stockQuantity": 3
+    },
+    {
+      "slug": "p9501-smart-tv-toshiba-50c350ls-4k-50-polegadas",
+      "erpCode": "9501",
+      "name": "Smart TV Toshiba 50C350LS 4K 50 Polegadas",
+      "brand": "Toshiba",
+      "category": "Áudio e Vídeo",
+      "shortDescription": "Smart TV Toshiba 50C350LS 4K 50 Polegadas.",
+      "description": "A Smart TV Toshiba C350 de 50 polegadas tem resolução 4K, tela DLED e o sistema VIDAA, com Netflix, YouTube, Prime Video, Disney+ e Globoplay.",
+      "highlights": [
+        "Tela: 50\" 4K DLED",
+        "Sistema: VIDAA",
+        "3 entradas HDMI",
+        "Wi-Fi e Bluetooth",
+        "Áudio: 16 W RMS"
+      ],
+      "specs": {
+        "Modelo": "50C350LS",
+        "Tela": "50 polegadas DLED",
+        "Resolução": "4K Ultra HD",
+        "Sistema": "VIDAA",
+        "Áudio": "16 W RMS",
+        "Conexões": "3 HDMI, USB, Wi-Fi, Bluetooth e espelhamento de tela",
+        "Frequência": "60 Hz"
+      },
+      "images": [
+        "p9501-1.jpg",
+        "p9501-2.jpg"
+      ],
+      "coverFit": "contain",
+      "colors": [],
+      "cashPriceCents": 399900,
+      "manualInstallmentCents": null,
+      "stockQuantity": 1
+    },
+    {
+      "slug": "p1083-batedeira-britania-perola-maxx-4-l-preta-220-v",
+      "erpCode": "1083",
+      "name": "Batedeira Britânia Pérola Maxx 4 L Preta 220V",
+      "brand": "Britânia",
+      "category": "Eletroportáteis",
+      "shortDescription": "Batedeira Britânia Pérola Maxx 4 L Preta 220V.",
+      "description": "A Batedeira Pérola Maxx da Britânia tem tigela de 4 litros, 4 velocidades mais turbo e pode ser usada fixa ou como batedeira de mão.",
+      "highlights": [
+        "Tigela de 4 litros",
+        "4 velocidades + turbo",
+        "Uso fixo ou portátil",
+        "2 batedores"
+      ],
+      "specs": {
+        "Modelo": "Pérola Maxx",
+        "Tipo": "Batedeira",
+        "Capacidade da tigela": "4 L",
+        "Velocidades": "4 + turbo",
+        "Cor": "Preta",
+        "Voltagem": "220 V"
+      },
+      "images": [
+        "p1083-1.jpg",
+        "p1083-2.jpg"
+      ],
+      "coverFit": "contain",
+      "colors": [],
+      "cashPriceCents": 22900,
+      "manualInstallmentCents": null,
+      "stockQuantity": 2
+    },
+    {
+      "slug": "p1085-batedeira-britania-perola-maxx-4-l-vermelha-220-v",
+      "erpCode": "1085",
+      "name": "Batedeira Britânia Pérola Maxx 4 L Vermelha 220V",
+      "brand": "Britânia",
+      "category": "Eletroportáteis",
+      "shortDescription": "Batedeira Britânia Pérola Maxx 4 L Vermelha 220V.",
+      "description": "A Batedeira Pérola Maxx da Britânia tem tigela de 4 litros, 4 velocidades mais turbo e pode ser usada fixa ou como batedeira de mão.",
+      "highlights": [
+        "Tigela de 4 litros",
+        "4 velocidades + turbo",
+        "Uso fixo ou portátil",
+        "2 batedores"
+      ],
+      "specs": {
+        "Modelo": "Pérola Maxx",
+        "Tipo": "Batedeira",
+        "Capacidade da tigela": "4 L",
+        "Velocidades": "4 + turbo",
+        "Cor": "Vermelha",
+        "Voltagem": "220 V"
+      },
+      "images": [
+        "p1085-1.jpg",
+        "p1085-2.jpg",
+        "p1085-3.jpg"
+      ],
+      "coverFit": "contain",
+      "colors": [],
+      "cashPriceCents": 24900,
+      "manualInstallmentCents": null,
+      "stockQuantity": 1
+    },
+    {
+      "slug": "p1093-batedeira-mondial-pratica-b-44-w-400-w-branca",
+      "erpCode": "1093",
+      "name": "Batedeira Mondial Prática B-44-W 400W Branca",
+      "brand": "Mondial",
+      "category": "Eletroportáteis",
+      "shortDescription": "Batedeira Mondial Prática B-44-W 400W Branca.",
+      "description": "A Batedeira Mondial Prática B-44 tem 400 W, 3 velocidades e tigela de 3,6 litros.",
+      "highlights": [
+        "Potência: 400 W",
+        "3 velocidades",
+        "Tigela de 3,6 litros",
+        "2 batedores"
+      ],
+      "specs": {
+        "Modelo": "Prática B-44",
+        "Tipo": "Batedeira fixa",
+        "Capacidade da tigela": "3,6 L",
+        "Velocidades": "3",
+        "Batedores": "2",
+        "Potência": "400 W",
+        "Cor": "Branca",
+        "Voltagem": "127 V ou 220 V (consulte a voltagem disponível)"
+      },
+      "images": [
+        "p1093-11.jpg",
+        "p1093-12.jpg",
+        "p1093-13.jpg"
+      ],
+      "coverFit": "contain",
+      "colors": [],
+      "cashPriceCents": 24900,
+      "manualInstallmentCents": null,
+      "stockQuantity": 2
+    },
+    {
+      "slug": "p6628-liquidificador-mondial-power-black-l-29-550-w",
+      "erpCode": "6628",
+      "name": "Liquidificador Mondial Power Black L-29 550W",
+      "brand": "Mondial",
+      "category": "Eletroportáteis",
+      "shortDescription": "Liquidificador Mondial Power Black L-29 550W.",
+      "description": "O Liquidificador Power Black L-29 da Mondial tem 550 W, 2 velocidades e função pulsar. O copo tem 2 litros.",
+      "highlights": [
+        "Potência: 550 W",
+        "2 velocidades + pulsar",
+        "Copo de 2 litros (1,5 L úteis)"
+      ],
+      "specs": {
+        "Modelo": "Power Black L-29",
+        "Tipo": "Liquidificador",
+        "Potência": "550 W",
+        "Velocidades": "2 + pulsar",
+        "Capacidade do copo": "2 L (1,5 L úteis)",
+        "Material do copo": "Polipropileno",
+        "Cor": "Preto",
+        "Voltagem": "127 V ou 220 V (consulte a voltagem disponível)"
+      },
+      "images": [
+        "p6628-1.jpg",
+        "p6628-2.jpg"
+      ],
+      "coverFit": "contain",
+      "colors": [],
+      "cashPriceCents": 19900,
+      "manualInstallmentCents": null,
+      "stockQuantity": 3
+    },
+    {
+      "slug": "p9835-modelador-de-cachos-mondial-spiral-infinity-em-05",
+      "erpCode": "9835",
+      "name": "Modelador de Cachos Mondial Spiral Infinity EM-05",
+      "brand": "Mondial",
+      "category": "Eletroportáteis",
+      "shortDescription": "Modelador de Cachos Mondial Spiral Infinity EM-05.",
+      "description": "O Modelador Spiral Infinity da Mondial tem revestimento de cerâmica, que distribui melhor o calor, e cabo giratório. Serve para cachear e ondular os fios.",
+      "highlights": [
+        "Revestimento de cerâmica",
+        "Cacheia e ondula",
+        "Cabo giratório",
+        "Luz indicadora",
+        "Bivolt"
+      ],
+      "specs": {
+        "Modelo": "Spiral Infinity EM-05",
+        "Tipo": "Modelador de cachos",
+        "Revestimento": "Cerâmica",
+        "Modelagem": "Cacheia, ondula",
+        "Recursos": "Cabo giratório, luz indicadora",
+        "Voltagem": "Bivolt"
+      },
+      "images": [
+        "p9835-1.jpg"
+      ],
+      "coverFit": "contain",
+      "colors": [],
+      "cashPriceCents": 39900,
+      "manualInstallmentCents": null,
+      "stockQuantity": 1
+    },
+    {
+      "slug": "p8500-geladeira-consul-cra30fb-degelo-seco-261-l-branca",
+      "erpCode": "8500",
+      "name": "Geladeira Consul CRA30FB Degelo Seco 261 L Branca",
+      "brand": "Consul",
+      "category": "Eletrodomésticos",
+      "shortDescription": "Geladeira Consul CRA30FB Degelo Seco 261 L Branca.",
+      "description": "A Geladeira Consul CRA30FB é de 1 porta, com 261 litros no total e degelo Degelo semiautomático/seco. São 236 litros no refrigerador e 25 litros no congelador.",
+      "highlights": [
+        "Capacidade total: 261 litros",
+        "1 porta",
+        "Degelo semiautomático/seco",
+        "Compartimento extra-frio",
+        "Selo Procel A"
+      ],
+      "specs": {
+        "Modelo": "CRA30FB",
+        "Tipo": "Geladeira 1 porta",
+        "Capacidade total": "261 L",
+        "Refrigerador": "236 L",
+        "Congelador / freezer": "25 L",
+        "Degelo": "Degelo semiautomático/seco",
+        "Controle": "Painel eletrônico",
+        "Recursos": "Compartimento extra-frio",
+        "Recursos internos": "Compartimento para laticínios, gavetas para vegetais e frutas, porta-ovos, prateleira removível, pés niveladores",
+        "Prateleiras": "Metal",
+        "Eficiência": "Selo Procel A",
+        "Consumo": "24,3 kWh/mês",
+        "Cor": "Branca",
+        "Dimensões (A x L x P)": "144 x 55 x 63,1 cm",
+        "Peso": "42 kg",
+        "Voltagem": "127 V ou 220 V (consulte a voltagem disponível)"
+      },
+      "images": [
+        "p8500-1.jpg",
+        "p8500-2.jpg",
+        "p8500-3.jpg"
+      ],
+      "coverFit": "contain",
+      "colors": [],
+      "cashPriceCents": 335900,
+      "manualInstallmentCents": null,
+      "stockQuantity": 1
+    },
+    {
+      "slug": "p9998-guarda-roupa-avelan-sancho-6-portas-casal",
+      "erpCode": "9998",
+      "name": "Guarda-Roupa Avelan Sancho 6 Portas Casal",
+      "brand": "Avelan",
+      "category": "Guarda-roupas",
+      "shortDescription": "Guarda-Roupa Avelan Sancho 6 Portas Casal.",
+      "description": "O Guarda-Roupa Sancho da Avelan tem 6 portas e é um modelo casal, em acabamento freijó e off white.",
+      "highlights": [
+        "6 portas",
+        "Modelo casal"
+      ],
+      "specs": {
+        "Modelo": "Sancho",
+        "Tipo": "Guarda-roupa casal",
+        "Portas": "6",
+        "Montagem": "Grátis pela Lojas Tropical"
+      },
+      "images": [
+        "v9998-freijo-off-white-11.jpg",
+        "v9998-freijo-off-white-12.jpg"
+      ],
+      "coverFit": "contain",
+      "colors": [
+        {
+          "name": "Freijó e Off White",
+          "image": "v9998-freijo-off-white-11.jpg"
+        }
+      ],
+      "cashPriceCents": 269900,
+      "manualInstallmentCents": null,
+      "stockQuantity": 1
+    },
+    {
+      "slug": "p6449-home-bechara-taurus",
+      "erpCode": "6449",
+      "name": "Home Bechara Taurus",
+      "brand": "Bechara",
+      "category": "Móveis",
+      "shortDescription": "Home Bechara Taurus.",
+      "description": "A Estante Home Taurus da Móveis Bechara tem 1 porta basculante, nichos e acabamento ripado. Comporta TV de até 47 polegadas.",
+      "highlights": [
+        "TV de até 47 polegadas",
+        "1 porta basculante",
+        "2 nichos",
+        "Prateleiras para até 5 kg cada"
+      ],
+      "specs": {
+        "Modelo": "Taurus",
+        "Tipo": "Estante home",
+        "TV suportada": "Até 47 polegadas",
+        "Portas": "1 basculante",
+        "Dimensões (A x L x P)": "175 x 160 x 38,5 cm",
+        "Material": "MDP",
+        "Montagem": "Grátis pela Lojas Tropical"
+      },
+      "images": [
+        "v6449-nogal-off-white-1.jpg",
+        "v6449-cinamomo-off-white-11.jpg",
+        "v6449-naturalle-off-white-11.jpg"
+      ],
+      "coverFit": "contain",
+      "colors": [
+        {
+          "name": "Nogal e Off White",
+          "image": "v6449-nogal-off-white-1.jpg"
+        },
+        {
+          "name": "Cinamomo e Off White",
+          "image": "v6449-cinamomo-off-white-11.jpg"
+        },
+        {
+          "name": "Naturalle e Off White",
+          "image": "v6449-naturalle-off-white-11.jpg"
+        }
+      ],
+      "cashPriceCents": 109900,
+      "manualInstallmentCents": null,
+      "stockQuantity": 7
+    },
+    {
+      "slug": "p7990-painel-bechara-ambar-tv",
+      "erpCode": "7990",
+      "name": "Painel Bechara Ambar TV",
+      "brand": "Bechara",
+      "category": "Móveis",
+      "shortDescription": "Painel Bechara Ambar TV.",
+      "description": "O Painel Âmbar da Móveis Bechara tem 2 portas e detalhe ripado. Comporta TV de até 65 polegadas.",
+      "highlights": [
+        "TV de até 65 polegadas",
+        "2 portas",
+        "Detalhe ripado"
+      ],
+      "specs": {
+        "Modelo": "Âmbar",
+        "Tipo": "Painel com bancada",
+        "TV suportada": "Até 65 polegadas",
+        "Portas": "2",
+        "Dimensões (A x L x P)": "136 x 160 x 34,5 cm",
+        "Peso": "38,9 kg",
+        "Material": "MDP",
+        "Montagem": "Grátis pela Lojas Tropical"
+      },
+      "images": [
+        "v7990-titanium-cinamomo-1.jpg",
+        "v7990-titanium-cinamomo-2.jpg",
+        "v7990-off-white-cinamomo-11.jpg",
+        "v7990-cinamomo-off-white-11.jpg"
+      ],
+      "coverFit": "contain",
+      "colors": [
+        {
+          "name": "Titanium e Cinamomo",
+          "image": "v7990-titanium-cinamomo-1.jpg"
+        },
+        {
+          "name": "Off White e Cinamomo",
+          "image": "v7990-off-white-cinamomo-11.jpg"
+        },
+        {
+          "name": "Cinamomo e Off White",
+          "image": "v7990-cinamomo-off-white-11.jpg"
+        }
+      ],
+      "cashPriceCents": 69900,
+      "manualInstallmentCents": null,
+      "stockQuantity": 1
+    },
+    {
+      "slug": "p7991-painel-bechara-atlas-tv",
+      "erpCode": "7991",
+      "name": "Painel Bechara Atlas TV",
+      "brand": "Bechara",
+      "category": "Móveis",
+      "shortDescription": "Painel Bechara Atlas TV.",
+      "description": "O Painel Atlas da Móveis Bechara é suspenso, com prateleiras e acabamento ripado. Comporta TV de até 55 polegadas.",
+      "highlights": [
+        "TV de até 55 polegadas",
+        "Painel suspenso",
+        "Prateleiras laterais",
+        "Detalhe ripado"
+      ],
+      "specs": {
+        "Modelo": "Atlas",
+        "Tipo": "Painel suspenso",
+        "TV suportada": "Até 55 polegadas",
+        "Dimensões (A x L x P)": "136 x 163,2 x 29,6 cm",
+        "Material": "MDP",
+        "Montagem": "Grátis pela Lojas Tropical"
+      },
+      "images": [
+        "v7991-nero-preto-fosco-1.jpg",
+        "v7991-nero-preto-fosco-2.jpg",
+        "v7991-off-white-naturalle-1.jpg",
+        "v7991-off-white-naturalle-2.jpg",
+        "v7991-off-white-naturalle-11.jpg",
+        "v7991-off-white-naturalle-12.jpg"
+      ],
+      "coverFit": "contain",
+      "colors": [
+        {
+          "name": "Nero Preto Fosco",
+          "image": "v7991-nero-preto-fosco-1.jpg"
+        },
+        {
+          "name": "Off White e Naturalle",
+          "image": "v7991-off-white-naturalle-1.jpg"
+        }
+      ],
+      "cashPriceCents": 69900,
+      "manualInstallmentCents": null,
+      "stockQuantity": 1
+    },
+    {
+      "slug": "p7992-painel-bechara-denver-tv",
+      "erpCode": "7992",
+      "name": "Painel Bechara Denver TV",
+      "brand": "Bechara",
+      "category": "Móveis",
+      "shortDescription": "Painel Bechara Denver TV.",
+      "description": "O Painel Denver da Móveis Bechara tem 1 porta com espelho, prateleira de vidro e iluminação de LED. Comporta TV de até 55 polegadas.",
+      "highlights": [
+        "TV de até 55 polegadas",
+        "1 porta com espelho",
+        "Prateleira de vidro",
+        "Iluminação de LED"
+      ],
+      "specs": {
+        "Modelo": "Denver",
+        "Tipo": "Painel com bancada",
+        "TV suportada": "Até 55 polegadas",
+        "Portas": "1",
+        "Dimensões (A x L x P)": "136 x 160 x 29 cm",
+        "Peso": "42,5 kg",
+        "Peso por prateleira": "Até 5 kg",
+        "Material": "MDP",
+        "Montagem": "Grátis pela Lojas Tropical"
+      },
+      "images": [
+        "v7992-off-white-cinamomo-21.jpg",
+        "v7992-preto-cinamomo-21.jpg",
+        "v7992-fendi-freijo-21.jpg"
+      ],
+      "coverFit": "contain",
+      "colors": [
+        {
+          "name": "Off White e Cinamomo",
+          "image": "v7992-off-white-cinamomo-21.jpg"
+        },
+        {
+          "name": "Preto e Cinamomo",
+          "image": "v7992-preto-cinamomo-21.jpg"
+        },
+        {
+          "name": "Fendi e Freijó",
+          "image": "v7992-fendi-freijo-21.jpg"
+        }
+      ],
+      "cashPriceCents": 95900,
+      "manualInstallmentCents": null,
+      "stockQuantity": 2
+    },
+    {
+      "slug": "p8218-rack-bechara-elegant",
+      "erpCode": "8218",
+      "name": "Rack Bechara Elegant",
+      "brand": "Bechara",
+      "category": "Móveis",
+      "shortDescription": "Rack Bechara Elegant.",
+      "description": "O Rack Elegant da Móveis Bechara tem portas, prateleira e divisórias em MDP de 15 mm. Comporta TV de até 65 polegadas.",
+      "highlights": [
+        "TV de até 65 polegadas",
+        "180 cm de largura",
+        "Estrutura em MDP de 15 mm"
+      ],
+      "specs": {
+        "Modelo": "Elegant",
+        "Tipo": "Rack",
+        "TV suportada": "Até 65 polegadas",
+        "Dimensões (A x L x P)": "61,5 x 180 x 38 cm",
+        "Material": "MDP 15 mm, fundo em HDF 3 mm",
+        "Montagem": "Grátis pela Lojas Tropical"
+      },
+      "images": [
+        "v8218-cinamomo-titanium-1.jpg"
+      ],
+      "coverFit": "contain",
+      "colors": [
+        {
+          "name": "Cinamomo e Titanium",
+          "image": "v8218-cinamomo-titanium-1.jpg"
+        }
+      ],
+      "cashPriceCents": 69900,
+      "manualInstallmentCents": null,
+      "stockQuantity": 2
+    },
+    {
+      "slug": "p8227-rack-bechara-juquehy",
+      "erpCode": "8227",
+      "name": "Rack Bechara Juquehy",
+      "brand": "Bechara",
+      "category": "Móveis",
+      "shortDescription": "Rack Bechara Juquehy.",
+      "description": "O Rack Juquehy da Móveis Bechara tem bordas arredondadas e iluminação de LED. Comporta TV de até 75 polegadas.",
+      "highlights": [
+        "TV de até 75 polegadas",
+        "Iluminação de LED",
+        "Bordas arredondadas",
+        "180 cm de largura"
+      ],
+      "specs": {
+        "Modelo": "Juquehy",
+        "Tipo": "Rack",
+        "TV suportada": "Até 75 polegadas",
+        "Iluminação": "LED",
+        "Dimensões (A x L x P)": "57 x 180 x 38,5 cm",
+        "Material": "MDP",
+        "Montagem": "Grátis pela Lojas Tropical"
+      },
+      "images": [
+        "v8227-off-white-naturalle-21.jpg",
+        "v8227-fendi-naturalle-21.jpg"
+      ],
+      "coverFit": "contain",
+      "colors": [
+        {
+          "name": "Off White e Naturalle",
+          "image": "v8227-off-white-naturalle-21.jpg"
+        },
+        {
+          "name": "Fendi e Naturalle",
+          "image": "v8227-fendi-naturalle-21.jpg"
+        }
+      ],
+      "cashPriceCents": 129900,
+      "manualInstallmentCents": null,
+      "stockQuantity": 1
+    },
+    {
+      "slug": "p8229-rack-bechara-guarapari",
+      "erpCode": "8229",
+      "name": "Rack Bechara Guarapari",
+      "brand": "Bechara",
+      "category": "Móveis",
+      "shortDescription": "Rack Bechara Guarapari.",
+      "description": "O Rack Guarapari da Móveis Bechara tem 3 portas e comporta TV de até 75 polegadas.",
+      "highlights": [
+        "TV de até 75 polegadas",
+        "3 portas",
+        "180 cm de largura"
+      ],
+      "specs": {
+        "Modelo": "Guarapari",
+        "Tipo": "Rack",
+        "TV suportada": "Até 75 polegadas",
+        "Portas": "3",
+        "Dimensões (A x L x P)": "57 x 180 x 38,5 cm",
+        "Material": "MDP",
+        "Montagem": "Grátis pela Lojas Tropical"
+      },
+      "images": [
+        "v8229-off-white-naturalle-21.jpg",
+        "v8229-naturalle-off-white-21.jpg",
+        "v8229-pistache-naturalle-21.jpg"
+      ],
+      "coverFit": "contain",
+      "colors": [
+        {
+          "name": "Off White e Naturalle",
+          "image": "v8229-off-white-naturalle-21.jpg"
+        },
+        {
+          "name": "Naturalle e Off White",
+          "image": "v8229-naturalle-off-white-21.jpg"
+        },
+        {
+          "name": "Pistache e Naturalle",
+          "image": "v8229-pistache-naturalle-21.jpg"
+        }
+      ],
+      "cashPriceCents": 94900,
+      "manualInstallmentCents": null,
+      "stockQuantity": 4
+    },
+    {
+      "slug": "p1534-bicicleta-colli-jully-aro-20-feminina",
+      "erpCode": "1534",
+      "name": "Bicicleta Colli Jully Aro 20 Feminina",
+      "brand": "Colli",
+      "category": "Bicicletas",
+      "shortDescription": "Bicicleta Colli Jully Aro 20 Feminina.",
+      "description": "A Bicicleta Jully da Colli é feminina, com aro 20, quadro de aço e freio V-Brake. Tem suspensão dianteira.",
+      "highlights": [
+        "Aro 20",
+        "Quadro de aço",
+        "Freio V-Brake",
+        "Suspensão dianteira"
+      ],
+      "specs": {
+        "Modelo": "Jully",
+        "Tipo": "Bicicleta passeio",
+        "Aro": "20",
+        "Gênero": "Infantil",
+        "Quadro": "Aço",
+        "Marchas": "Sem marchas",
+        "Suspensão": "Suspensão dianteira",
+        "Freio": "V-Brake"
+      },
+      "images": [
+        "v1534-azul-champanhe-1.jpg",
+        "v1534-branco-neon-1.jpg",
+        "v1534-rosa-1.jpg"
+      ],
+      "coverFit": "contain",
+      "colors": [
+        {
+          "name": "Azul e Champanhe",
+          "image": "v1534-azul-champanhe-1.jpg"
+        },
+        {
+          "name": "Branco Neon",
+          "image": "v1534-branco-neon-1.jpg"
+        },
+        {
+          "name": "Rosa",
+          "image": "v1534-rosa-1.jpg"
+        }
+      ],
+      "cashPriceCents": 89900,
+      "manualInstallmentCents": null,
+      "stockQuantity": 3
+    },
+    {
+      "slug": "p1536-bicicleta-colli-max-boy-aro-20-masculino",
+      "erpCode": "1536",
+      "name": "Bicicleta Colli Max Boy Aro 20 Masculino",
+      "brand": "Colli",
+      "category": "Bicicletas",
+      "shortDescription": "Bicicleta Colli Max Boy Aro 20 Masculino.",
+      "description": "A Bicicleta Max Boy 106 da Colli é masculina, com aro 20, quadro de aço carbono e freio V-Brake.",
+      "highlights": [
+        "Aro 20",
+        "Quadro de aço carbono",
+        "Freio V-Brake"
+      ],
+      "specs": {
+        "Modelo": "Max Boy 106",
+        "Tipo": "Bicicleta passeio",
+        "Aro": "20",
+        "Gênero": "Masculina",
+        "Quadro": "Aço carbono",
+        "Marchas": "Sem marchas",
+        "Suspensão": "Não",
+        "Freio": "V-Brake"
+      },
+      "images": [
+        "v1536-azul-1.jpg",
+        "v1536-laranja-neon-1.jpg",
+        "v1536-preto-fosco-1.jpg",
+        "v1536-vermelho-1.jpg"
+      ],
+      "coverFit": "contain",
+      "colors": [
+        {
+          "name": "Azul",
+          "image": "v1536-azul-1.jpg"
+        },
+        {
+          "name": "Laranja Neon",
+          "image": "v1536-laranja-neon-1.jpg"
+        },
+        {
+          "name": "Preto Fosco",
+          "image": "v1536-preto-fosco-1.jpg"
+        },
+        {
+          "name": "Vermelho",
+          "image": "v1536-vermelho-1.jpg"
+        }
+      ],
+      "cashPriceCents": 89900,
+      "manualInstallmentCents": null,
+      "stockQuantity": 5
+    },
+    {
+      "slug": "p682-armario-itatiaia-rose-6-portas-1-gaveta-105-aco",
+      "erpCode": "682",
+      "name": "Armário Itatiaia Rose 6 Portas 1 Gaveta 105 Aço",
+      "brand": "Itatiaia",
+      "category": "Móveis",
+      "shortDescription": "Armário Itatiaia Rose 6 Portas 1 Gaveta 105 Aço.",
+      "description": "O Kit Cozinha Rose da Itatiaia tem 6 portas, 1 gaveta, tampo e nicho, com estrutura em aço e pintura eletrostática.",
+      "highlights": [
+        "6 portas e 1 gaveta",
+        "Tampo e nicho",
+        "Estrutura em aço",
+        "Pés de 16 cm"
+      ],
+      "specs": {
+        "Modelo": "Rose I3G1-105",
+        "Tipo": "Cozinha compacta",
+        "Portas": "6",
+        "Gavetas": "1",
+        "Material": "Aço",
+        "Dimensões (A x L x P)": "182 x 105 x 45 cm",
+        "Peso": "32 kg",
+        "Montagem": "Grátis pela Lojas Tropical"
+      },
+      "images": [
+        "v682-branco-preto-1.jpg",
+        "v682-branco-preto-2.jpg"
+      ],
+      "coverFit": "contain",
+      "colors": [
+        {
+          "name": "Branco e Preto",
+          "image": "v682-branco-preto-1.jpg"
+        }
+      ],
+      "cashPriceCents": 109900,
+      "manualInstallmentCents": null,
+      "stockQuantity": 4
+    },
+    {
+      "slug": "p9935-armario-itatiaia-pratika-6-portas-2-gavetas-120-aco",
+      "erpCode": "9935",
+      "name": "Armário Itatiaia Pratika 6 Portas 2 Gavetas 120 Aço",
+      "brand": "Itatiaia",
+      "category": "Móveis",
+      "shortDescription": "Armário Itatiaia Pratika 6 Portas 2 Gavetas 120 Aço.",
+      "description": "A Cozinha Compacta Pratika de 120 cm da Itatiaia tem 6 portas e 2 gavetas, com estrutura em aço e pintura eletrostática.",
+      "highlights": [
+        "6 portas e 2 gavetas",
+        "120 cm de largura",
+        "Estrutura em aço"
+      ],
+      "specs": {
+        "Modelo": "Pratika 120",
+        "Tipo": "Cozinha compacta",
+        "Portas": "6",
+        "Gavetas": "2",
+        "Material": "Aço",
+        "Dimensões (A x L x P)": "196 x 120 x 52 cm",
+        "Montagem": "Grátis pela Lojas Tropical"
+      },
+      "images": [
+        "v9935-branco-21.jpg",
+        "v9935-branco-23.jpg",
+        "v9935-branco-22.jpg"
+      ],
+      "coverFit": "contain",
+      "colors": [
+        {
+          "name": "Branco",
+          "image": "v9935-branco-21.jpg"
+        }
+      ],
+      "cashPriceCents": 159900,
+      "manualInstallmentCents": null,
+      "stockQuantity": 6
+    },
+    {
+      "slug": "p7074-mesa-aco-nobre-facinare-6-cadeiras-vidro-preto",
+      "erpCode": "7074",
+      "name": "Mesa Aço Nobre Facinare com 6 Cadeiras",
+      "brand": "Aço Nobre",
+      "category": "Móveis",
+      "shortDescription": "Conjunto de mesa de jantar Aço Nobre Facinare com tampo de vidro e 6 cadeiras, disponível em diferentes acabamentos.",
+      "description": null,
+      "highlights": [],
+      "specs": {
+        "Cadeiras": "6",
+        "Tampo": "Vidro"
+      },
+      "images": [
+        "v7074-preto-cromado-21.jpg",
+        "v7074-off-white-cromado-b366-21.jpg",
+        "v7074-off-white-cromado-bc80-21.jpg",
+        "v7074-off-white-fendi-21.jpg"
+      ],
+      "coverFit": "contain",
+      "colors": [
+        {
+          "name": "Preto e Cromado",
+          "image": "v7074-preto-cromado-21.jpg"
+        },
+        {
+          "name": "Off White e Cromado — B366",
+          "image": "v7074-off-white-cromado-b366-21.jpg"
+        },
+        {
+          "name": "Off White e Cromado — BC80",
+          "image": "v7074-off-white-cromado-bc80-21.jpg"
+        },
+        {
+          "name": "Off White e Fendi",
+          "image": "v7074-off-white-fendi-21.jpg"
+        }
+      ],
+      "cashPriceCents": 289900,
+      "manualInstallmentCents": null,
+      "stockQuantity": 1
+    },
+    {
+      "slug": "p7088-mesa-aco-nobre-linea-4-cadeiras-120x75-granito",
+      "erpCode": "7088",
+      "name": "Mesa Aço Nobre Linea com 4 Cadeiras 120x75 Granito",
+      "brand": "Aço Nobre",
+      "category": "Móveis",
+      "shortDescription": "Conjunto de mesa de jantar Aço Nobre Linea com tampo granito de 120 x 75 cm e 4 cadeiras.",
+      "description": null,
+      "highlights": [],
+      "specs": {
+        "Cadeiras": "4",
+        "Medidas": "120 x 75 cm",
+        "Tampo": "Granito"
+      },
+      "images": [
+        "v7088-ocre-off-white-21.jpg"
+      ],
+      "coverFit": "contain",
+      "colors": [
+        {
+          "name": "Ocre e Off White",
+          "image": "v7088-ocre-off-white-21.jpg"
+        }
+      ],
+      "cashPriceCents": 139900,
+      "manualInstallmentCents": null,
+      "stockQuantity": 7
+    },
+    {
+      "slug": "p7094-mesa-aco-nobre-linea-6-cadeiras-150x80-granito",
+      "erpCode": "7094",
+      "name": "Mesa Aço Nobre Linea com 6 Cadeiras 150x80 Granito",
+      "brand": "Aço Nobre",
+      "category": "Móveis",
+      "shortDescription": "Conjunto de mesa de jantar Aço Nobre Linea com tampo granito de 150 x 80 cm e 6 cadeiras.",
+      "description": null,
+      "highlights": [],
+      "specs": {
+        "Cadeiras": "6",
+        "Medidas": "150 x 80 cm",
+        "Tampo": "Granito"
+      },
+      "images": [
+        "v7094-ocre-craqueado-escuro-21.jpg"
+      ],
+      "coverFit": "contain",
+      "colors": [
+        {
+          "name": "Ocre Craqueado Escuro",
+          "image": "v7094-ocre-craqueado-escuro-21.jpg"
+        }
+      ],
+      "cashPriceCents": 179900,
+      "manualInstallmentCents": null,
+      "stockQuantity": 10
+    },
+    {
+      "slug": "p9936-armario-itatiaia-florenca-8-portas-2-gavetas-140-aco",
+      "erpCode": "9936",
+      "name": "Armário Itatiaia Florença 8 Portas 2 Gavetas 140 Aço",
+      "brand": "Itatiaia",
+      "category": "Móveis",
+      "shortDescription": "Armário Itatiaia Florença 8 Portas 2 Gavetas 140 Aço.",
+      "description": "A Cozinha Compacta Florença de 140 cm da Itatiaia tem 8 portas, 2 gavetas com corrediças telescópicas e nicho, com estrutura em aço.",
+      "highlights": [
+        "8 portas e 2 gavetas",
+        "Gavetas com corrediças telescópicas",
+        "Nicho",
+        "Estrutura em aço"
+      ],
+      "specs": {
+        "Modelo": "Florença 140",
+        "Tipo": "Cozinha compacta",
+        "Portas": "8",
+        "Gavetas": "2",
+        "Material": "Aço",
+        "Dimensões (A x L x P)": "195 x 140 x 45 cm",
+        "Montagem": "Grátis pela Lojas Tropical"
+      },
+      "images": [
+        "v9936-branco-1.jpg",
+        "v9936-grafite-1.jpg",
+        "v9936-grafite-2.jpg"
+      ],
+      "coverFit": "contain",
+      "colors": [
+        {
+          "name": "Branco",
+          "image": "v9936-branco-1.jpg"
+        },
+        {
+          "name": "Grafite",
+          "image": "v9936-grafite-1.jpg"
+        }
+      ],
+      "cashPriceCents": 189900,
+      "manualInstallmentCents": null,
+      "stockQuantity": 2
+    },
+    {
+      "slug": "p4-adega-jb-bechara-4009-luxo-mdf",
+      "erpCode": "4",
+      "name": "Adega JB Bechara 4009 Luxo MDF",
+      "brand": "JB Bechara",
+      "category": "Móveis",
+      "shortDescription": "Adega JB Bechara 4009 Luxo MDF.",
+      "description": "A Adega 4009 Luxo da JB Bechara é um móvel em MDF com acabamento preto e dourado, para deixar as bebidas organizadas e à mostra.",
+      "highlights": [
+        "Estrutura em MDF",
+        "Acabamento preto e dourado"
+      ],
+      "specs": {
+        "Modelo": "4009 Luxo",
+        "Tipo": "Adega (móvel)",
+        "Material": "MDF",
+        "Montagem": "Grátis pela Lojas Tropical"
+      },
+      "images": [
+        "v4-preto-dourado-1.jpg"
+      ],
+      "coverFit": "contain",
+      "colors": [
+        {
+          "name": "Preto e Dourado",
+          "image": "v4-preto-dourado-1.jpg"
+        }
+      ],
+      "cashPriceCents": 49900,
+      "manualInstallmentCents": null,
+      "stockQuantity": 1
+    },
+    {
+      "slug": "p4519-escrivaninha-jb-bechara-6055-luxo-madeira",
+      "erpCode": "4519",
+      "name": "Escrivaninha JB Bechara 6055 Luxo Madeira",
+      "brand": "JB Bechara",
+      "category": "Móveis",
+      "shortDescription": "Escrivaninha JB Bechara 6055 Luxo Madeira.",
+      "description": "A Escrivaninha 6055 Luxo da JB Bechara tem 1 gaveta com corrediças telescópicas, entrada USB embutida no tampo e pés de madeira maciça.",
+      "highlights": [
+        "1 gaveta com corrediças telescópicas",
+        "Entrada USB no tampo",
+        "Pés de madeira maciça",
+        "Puxador de madeira maciça"
+      ],
+      "specs": {
+        "Modelo": "6055 Luxo",
+        "Tipo": "Escrivaninha",
+        "Gavetas": "1",
+        "Material": "MDF com pés de madeira maciça",
+        "Dimensões (A x L x P)": "82 x 130 x 36 cm",
+        "Medidas internas da gaveta": "59,5 x 36 x 10 cm (L x P x A)",
+        "Peso suportado": "10 kg distribuídos",
+        "Montagem": "Grátis pela Lojas Tropical"
+      },
+      "images": [
+        "v4519-nature-1.jpg",
+        "v4519-offwhite-nature-1.jpg"
+      ],
+      "coverFit": "contain",
+      "colors": [
+        {
+          "name": "Nature",
+          "image": "v4519-nature-1.jpg"
+        },
+        {
+          "name": "Off White/Nature",
+          "image": "v4519-offwhite-nature-1.jpg"
+        }
+      ],
+      "cashPriceCents": 49900,
+      "manualInstallmentCents": null,
+      "stockQuantity": 3
+    },
+    {
+      "slug": "p6465-home-madetec-theater-frizz-plus",
+      "erpCode": "6465",
+      "name": "Home Madetec Theater Frizz Plus",
+      "brand": "Madetec",
+      "category": "Móveis",
+      "shortDescription": "Home Madetec Theater Frizz Plus.",
+      "description": "O Home Theater Frizz Plus da Madetec tem 3 espelhos no painel, luminária de LED e 3 prateleiras, sendo 2 de vidro. Comporta TV de até 60 polegadas.",
+      "highlights": [
+        "TV de até 60 polegadas",
+        "3 espelhos no painel",
+        "Luminária de LED",
+        "3 prateleiras (2 de vidro de 5 mm)",
+        "Suporta até 150 kg distribuídos"
+      ],
+      "specs": {
+        "Modelo": "Frizz Plus",
+        "Tipo": "Estante home theater",
+        "TV suportada": "Até 60 polegadas",
+        "Dimensões (A x L x P)": "178,5 x 200 x 45,5 cm",
+        "Peso suportado": "150 kg distribuídos",
+        "Montagem": "Grátis pela Lojas Tropical"
+      },
+      "images": [
+        "v6465-cinamomo-off-white-1.jpg",
+        "v6465-fendi-naturale-1.jpg",
+        "v6465-off-white-savana-1.jpg"
+      ],
+      "coverFit": "contain",
+      "colors": [
+        {
+          "name": "Cinamomo e Off White",
+          "image": "v6465-cinamomo-off-white-1.jpg"
+        },
+        {
+          "name": "Fendi e Naturale",
+          "image": "v6465-fendi-naturale-1.jpg"
+        },
+        {
+          "name": "Off White e Savana",
+          "image": "v6465-off-white-savana-1.jpg"
+        }
+      ],
+      "cashPriceCents": 199900,
+      "manualInstallmentCents": null,
+      "stockQuantity": 4
+    },
+    {
+      "slug": "p6620-liquidificador-mondial-easy-power-l-550-220v",
+      "erpCode": "6620",
+      "name": "Liquidificador Mondial Easy Power L-550 220V",
+      "brand": "Mondial",
+      "category": "Eletroportáteis",
+      "shortDescription": "Liquidificador Mondial Easy Power L-550 220V.",
+      "description": "O Liquidificador Mondial Easy Power L-550 tem 550 W, 2 velocidades mais pulsar e copo de 1,9 litros. Tem auto-limpeza, base antiderrapante, porta-fio e função para triturar gelo.",
+      "highlights": [
+        "Potência: 550 W",
+        "Velocidades: 2 + pulsar",
+        "Copo de 1,9 L (1,5 L úteis)"
+      ],
+      "specs": {
+        "Modelo": "Easy Power L-550",
+        "Tipo": "Liquidificador",
+        "Potência": "550 W",
+        "Velocidades": "2 + pulsar",
+        "Capacidade do copo": "1,9 L (1,5 L úteis)",
+        "Recursos": "Auto-limpeza, base antiderrapante, porta-fio, triturar gelo",
+        "Voltagem": "220 V"
+      },
+      "images": [
+        "v6620-branco-1.jpg",
+        "v6620-preto-1.jpg",
+        "v6620-preto-2.jpg",
+        "v6620-vermelho-1.jpg"
+      ],
+      "coverFit": "contain",
+      "colors": [
+        {
+          "name": "Branco",
+          "image": "v6620-branco-1.jpg"
+        },
+        {
+          "name": "Preto",
+          "image": "v6620-preto-1.jpg"
+        },
+        {
+          "name": "Vermelho",
+          "image": "v6620-vermelho-1.jpg"
+        }
+      ],
+      "cashPriceCents": 19900,
+      "manualInstallmentCents": null,
+      "stockQuantity": 40
+    },
+    {
+      "slug": "p9728-ventilador-mondial-super-power-vsp30-30-cm-mesa-branco-preto",
+      "erpCode": "9728",
+      "name": "Ventilador Mondial Super Power VSP30 30 cm Mesa",
+      "brand": "Mondial",
+      "category": "Ventilação",
+      "shortDescription": "Ventilador Mondial Super Power VSP30 30 cm Mesa.",
+      "description": "O ventilador Mondial VSP-30 tem hélice de 30 cm, 6 pás e 3 velocidades, com alça para transporte, oscilação horizontal e inclinação ajustável.",
+      "highlights": [
+        "30 cm de diâmetro",
+        "6 pás",
+        "3 velocidades",
+        "Potência: 60 W",
+        "Oscilação horizontal"
+      ],
+      "specs": {
+        "Modelo": "VSP-30",
+        "Tipo": "Ventilador de mesa",
+        "Diâmetro": "30 cm",
+        "Pás": "6",
+        "Velocidades": "3",
+        "Potência": "60 W",
+        "Recursos": "Alça para transporte, oscilação horizontal, inclinação ajustável",
+        "Voltagem": "127 V ou 220 V (consulte a voltagem disponível)",
+        "Peso": "1,6 kg"
+      },
+      "images": [
+        "v9728-branco-1.jpg",
+        "v9728-preto-1.jpg"
+      ],
+      "coverFit": "contain",
+      "colors": [
+        {
+          "name": "Branco",
+          "image": "v9728-branco-1.jpg"
+        },
+        {
+          "name": "Preto",
+          "image": "v9728-preto-1.jpg"
+        }
+      ],
+      "cashPriceCents": 19900,
+      "manualInstallmentCents": null,
+      "stockQuantity": 76
+    },
+    {
+      "slug": "p9737-ventilador-mondial-super-power-vsp40-40-cm-mesa-branco-preto",
+      "erpCode": "9737",
+      "name": "Ventilador Mondial Super Power VSP40 40 cm Mesa",
+      "brand": "Mondial",
+      "category": "Ventilação",
+      "shortDescription": "Ventilador Mondial Super Power VSP40 40 cm Mesa.",
+      "description": "O ventilador Mondial VSP-40 tem hélice de 40 cm, 6 pás e 3 velocidades, com inclinação ajustável e oscilação horizontal.",
+      "highlights": [
+        "40 cm de diâmetro",
+        "6 pás",
+        "3 velocidades",
+        "Potência: 140 W",
+        "Oscilação horizontal"
+      ],
+      "specs": {
+        "Modelo": "VSP-40",
+        "Tipo": "Ventilador de mesa",
+        "Diâmetro": "40 cm",
+        "Pás": "6",
+        "Velocidades": "3",
+        "Potência": "140 W",
+        "Recursos": "Inclinação ajustável, oscilação horizontal",
+        "Voltagem": "127 V ou 220 V (consulte a voltagem disponível)"
+      },
+      "images": [
+        "v9737-branco-1.jpg",
+        "v9737-preto-1.jpg"
+      ],
+      "coverFit": "contain",
+      "colors": [
+        {
+          "name": "Branco",
+          "image": "v9737-branco-1.jpg"
+        },
+        {
+          "name": "Preto",
+          "image": "v9737-preto-1.jpg"
+        }
+      ],
+      "cashPriceCents": 29900,
+      "manualInstallmentCents": null,
+      "stockQuantity": 89
+    },
+    {
+      "slug": "p3549-comoda-moval-camarim-bella-penteadeira-com-espelho",
+      "erpCode": "3549",
+      "name": "Cômoda Moval Camarim Bella Penteadeira com Espelho",
+      "brand": "Moval",
+      "category": "Móveis",
+      "shortDescription": "Cômoda Moval Camarim Bella Penteadeira com Espelho.",
+      "description": "Compacto e sofisticado, o Camarim Bella é perfeito para quem busca beleza e praticidade. Possui 2 gavetas com corrediças telescópicas e uma gaveta com colmeia que facilita a organização de itens pequenos. O painel com espelho e a iluminação em LED tornam o espaço ainda mais aconchegante e funcional.",
+      "highlights": [
+        "Painel com espelho",
+        "2 gavetas com corrediças telescópicas",
+        "Gaveta com colmeia para melhor organização",
+        "Iluminação em LED"
+      ],
+      "specs": {
+        "Modelo": "Camarim Bella",
+        "Tipo": "Camarim (penteadeira)",
+        "Gavetas": "2",
+        "Espelho": "Sim, com iluminação LED",
+        "Material": "MDP com detalhes em MDF",
+        "Dimensões (A x L x P)": "137 x 110 x 47 cm",
+        "Peso": "37,78 kg",
+        "Montagem": "Grátis pela Lojas Tropical"
+      },
+      "images": [
+        "v3549-branco-21.jpg",
+        "v3549-branco-11.jpg",
+        "v3549-branco-12.jpg"
+      ],
+      "coverFit": "contain",
+      "colors": [
+        {
+          "name": "Branco",
+          "image": "v3549-branco-21.jpg"
+        }
+      ],
+      "cashPriceCents": 89900,
+      "manualInstallmentCents": null,
+      "stockQuantity": 18
+    },
+    {
+      "slug": "p3554-comoda-moval-lisboa-1-porta-5-gavetas-com-espelho",
+      "erpCode": "3554",
+      "name": "Cômoda Moval Lisboa 1 Porta 5 Gavetas com Espelho",
+      "brand": "Moval",
+      "category": "Móveis",
+      "shortDescription": "Cômoda Moval Lisboa 1 Porta 5 Gavetas com Espelho.",
+      "description": "Elegante e prática, a Cômoda Lisboa traz 5 gavetas com corrediças telescópicas, puxadores em MDF e um painel com espelho que agrega ainda mais funcionalidade ao móvel. Os pés em PVC facilitam a limpeza, tornando-a uma opção completa para o quarto.",
+      "highlights": [
+        "5 gavetas com corrediças telescópicas",
+        "Puxadores em MDF",
+        "Painel com espelho",
+        "Pés em PVC para facilitar a limpeza"
+      ],
+      "specs": {
+        "Modelo": "Cômoda Lisboa",
+        "Tipo": "Cômoda",
+        "Portas": "1",
+        "Gavetas": "5",
+        "Espelho": "Sim",
+        "Material": "MDP com detalhes em MDF",
+        "Dimensões (A x L x P)": "170 x 104 x 45 cm",
+        "Peso": "44,8 kg",
+        "Montagem": "Grátis pela Lojas Tropical"
+      },
+      "images": [
+        "v3554-freijo-off-white-1.jpg"
+      ],
+      "coverFit": "contain",
+      "colors": [
+        {
+          "name": "Freijó e Off White",
+          "image": "v3554-freijo-off-white-1.jpg"
+        }
+      ],
+      "cashPriceCents": 85900,
+      "manualInstallmentCents": null,
+      "stockQuantity": 12
+    },
+    {
+      "slug": "p3555-guarda-roupa-moval-7-portas-roma-casal",
+      "erpCode": "3555",
+      "name": "Guarda-Roupa Moval 7 Portas Roma Casal",
+      "brand": "Moval",
+      "category": "Guarda-roupas",
+      "shortDescription": "Guarda-Roupa Moval 7 Portas Roma Casal.",
+      "description": "O Guarda-Roupa Roma alia design moderno, durabilidade e máxima otimização de espaço para o seu dia a dia. Projetado para oferecer uma organização inteligente, o móvel conta com uma excelente distribuição interna de 8 compartimentos para acomodar roupas, sapatos e acessórios. Seu visual sofisticado ganha destaque pelas portas de 15mm com detalhes frisados e elegantes puxadores em MDF, enquanto a estrutura funcional entrega cabideiros resistentes e uma gaveta com deslizamento suave para garantir total praticidade na sua rotina.",
+      "highlights": [
+        "Portas com detalhes frisados",
+        "Puxadores em MDF",
+        "Sapateira",
+        "Gaveta com corrediças metálicas",
+        "Espelhos opcionais",
+        "Excelente distribuição interna",
+        "Cabideiros e calceiro em alumínio"
+      ],
+      "specs": {
+        "Modelo": "Roma",
+        "Tipo": "Guarda-roupa casal",
+        "Linha": "Smart",
+        "Portas": "7",
+        "Espelho": "Opcional",
+        "Material": "MDP com detalhes em MDF",
+        "Dimensões (A x L x P)": "204 x 165 x 47 cm",
+        "Peso": "93,87 kg (com espelho)",
+        "Montagem": "Grátis pela Lojas Tropical"
+      },
+      "images": [
+        "v3555-carvalho-fendi-11.jpg",
+        "v3555-carvalho-fendi-12.jpg",
+        "v3555-freijo-off-white-1.jpg",
+        "v3555-freijo-off-white-2.jpg"
+      ],
+      "coverFit": "contain",
+      "colors": [
+        {
+          "name": "Carvalho e Fendi",
+          "image": "v3555-carvalho-fendi-11.jpg"
+        },
+        {
+          "name": "Freijó e Off White",
+          "image": "v3555-freijo-off-white-1.jpg"
+        }
+      ],
+      "cashPriceCents": 129900,
+      "manualInstallmentCents": null,
+      "stockQuantity": 7
+    },
+    {
+      "slug": "p5994-guarda-roupa-moval-6-portas-atacama-casal",
+      "erpCode": "5994",
+      "name": "Guarda-Roupa Moval 6 Portas Atacama Casal",
+      "brand": "Moval",
+      "category": "Guarda-roupas",
+      "shortDescription": "Guarda-Roupa Moval 6 Portas Atacama Casal.",
+      "description": "O Guarda-Roupa Atacama combina sofisticação e funcionalidade para transformar seu ambiente. Possui 4 gavetas com corrediças telescópicas, garantindo abertura suave e melhor aproveitamento interno. Conta com 2 portas com vidros reflecta, cabideiros em alumínio e dobradiças de 35mm com amortecedor para fechamento silencioso. Seus puxadores em MDF e alumínio, aliados às molduras de 25mm, reforçam a resistência e o acabamento moderno do produto.",
+      "highlights": [
+        "4 gavetas com corrediças telescópicas",
+        "2 portas com vidros reflecta",
+        "Cabideiros em alumínio",
+        "Puxadores em MDF",
+        "Dobradiças 35mm com amortecedor",
+        "2 portas com puxadores em alumínio",
+        "Molduras em 25mm"
+      ],
+      "specs": {
+        "Modelo": "Atacama",
+        "Tipo": "Guarda-roupa casal",
+        "Linha": "Inspiração",
+        "Portas": "6",
+        "Gavetas": "4",
+        "Material": "MDP com detalhes em MDF",
+        "Dimensões (A x L x P)": "233 x 240 x 53 cm",
+        "Peso": "173,73 kg",
+        "Portas de vidro": "2, com vidro reflecta",
+        "Montagem": "Grátis pela Lojas Tropical"
+      },
+      "images": [
+        "v5994-carvalho-fendi-11.jpg",
+        "v5994-freijo-off-white-11.jpg",
+        "v5994-freijo-off-white-12.jpg"
+      ],
+      "coverFit": "contain",
+      "colors": [
+        {
+          "name": "Carvalho e Fendi",
+          "image": "v5994-carvalho-fendi-11.jpg"
+        },
+        {
+          "name": "Freijó e Off White",
+          "image": "v5994-freijo-off-white-11.jpg"
+        }
+      ],
+      "cashPriceCents": 349900,
+      "manualInstallmentCents": null,
+      "stockQuantity": 4
+    },
+    {
+      "slug": "p6003-guarda-roupa-moval-6-portas-araguaia-casal",
+      "erpCode": "6003",
+      "name": "Guarda-Roupa Moval 6 Portas Araguaia Casal",
+      "brand": "Moval",
+      "category": "Guarda-roupas",
+      "shortDescription": "Guarda-Roupa Moval 6 Portas Araguaia Casal.",
+      "description": "O Guarda-Roupa Araguaia oferece 3 opções de montagem, proporcionando flexibilidade para diferentes ambientes. Conta com 4 gavetas com corrediças telescópicas, 2 portas com detalhes ripados em MDF e puxadores em MDF. Possui cabideiros em alumínio e molduras laterais de 25mm, garantindo resistência. As dobradiças de 35mm com amortecedor oferecem um fechamento suave. Espelhos opcionais podem ser adicionados, proporcionando um toque moderno e funcional.",
+      "highlights": [
+        "Portas com 3 opções de montagem",
+        "4 gavetas com corrediças telescópicas",
+        "Espelhos inclusos e puxadores em MDF",
+        "2 portas com detalhes ripados em MDF",
+        "Cabideiros em alumínio",
+        "Molduras laterais em 25mm",
+        "Dobradiças 35mm com amortecedor"
+      ],
+      "specs": {
+        "Modelo": "Araguaia",
+        "Tipo": "Guarda-roupa casal",
+        "Linha": "Inspiração",
+        "Portas": "6",
+        "Gavetas": "4",
+        "Espelho": "Sim",
+        "Material": "MDP com detalhes em MDF",
+        "Dimensões (A x L x P)": "230 x 260 x 52 cm",
+        "Peso": "205,74 kg",
+        "Montagem": "Grátis pela Lojas Tropical"
+      },
+      "images": [
+        "v6003-freijo-off-white-11.jpg",
+        "v6003-freijo-off-white-12.jpg"
+      ],
+      "coverFit": "contain",
+      "colors": [
+        {
+          "name": "Freijó e Off White",
+          "image": "v6003-freijo-off-white-11.jpg"
+        }
+      ],
+      "cashPriceCents": 329900,
+      "manualInstallmentCents": null,
+      "stockQuantity": 1
+    },
+    {
+      "slug": "p6020-guarda-roupa-moval-7-portas-mafra-casal",
+      "erpCode": "6020",
+      "name": "Guarda-Roupa Moval 7 Portas Mafra Casal",
+      "brand": "Moval",
+      "category": "Guarda-roupas",
+      "shortDescription": "Guarda-Roupa Moval 7 Portas Mafra Casal.",
+      "description": "O Guarda-Roupa Mafra da Moval tem 7 portas, 2 gavetas com corrediças metálicas e 2 espelhos. Por dentro, tem cabideiros e 3 prateleiras para organizar o quarto do casal.",
+      "highlights": [
+        "7 portas e 2 gavetas",
+        "2 espelhos",
+        "Gavetas com corrediças metálicas",
+        "3 prateleiras internas",
+        "Cabideiros"
+      ],
+      "specs": {
+        "Modelo": "Mafra",
+        "Tipo": "Guarda-roupa casal",
+        "Portas": "7",
+        "Gavetas": "2",
+        "Espelho": "2 espelhos",
+        "Material": "MDP com acabamento em impressão UV",
+        "Dimensões (A x L x P)": "204 x 177 x 47 cm",
+        "Montagem": "Grátis pela Lojas Tropical"
+      },
+      "images": [
+        "v6020-freijo-cinza-1.jpg"
+      ],
+      "coverFit": "contain",
+      "colors": [
+        {
+          "name": "Freijó e Cinza",
+          "image": "v6020-freijo-cinza-1.jpg"
+        }
+      ],
+      "cashPriceCents": 129900,
+      "manualInstallmentCents": null,
+      "stockQuantity": 2
+    },
+    {
+      "slug": "p6022-guarda-roupa-moval-8-portas-diplomata-casal",
+      "erpCode": "6022",
+      "name": "Guarda-Roupa Moval 8 Portas Diplomata Casal",
+      "brand": "Moval",
+      "category": "Guarda-roupas",
+      "shortDescription": "Guarda-Roupa Moval 8 Portas Diplomata Casal.",
+      "description": "Com oito portas de giro e quatro gavetas espaçosas, o Guarda-Roupa Diplomata une beleza e funcionalidade. Os cabideiros em alumínio e os puxadores em MDF garantem praticidade no dia a dia. As portas em MDF com detalhes frisados opcionais e espelhos agregam sofisticação ao ambiente.",
+      "highlights": [
+        "Cabideiros em alumínio",
+        "8 portas de giro com dobradiças metálicas",
+        "Puxadores em MDF",
+        "4 gavetas com corrediças metálicas",
+        "Portas em MDF com detalhes frisados opcionais",
+        "Espelhos opcionais",
+        "Excelente distribuição interna"
+      ],
+      "specs": {
+        "Modelo": "Diplomata",
+        "Tipo": "Guarda-roupa casal",
+        "Linha": "Crystal Light",
+        "Portas": "8",
+        "Gavetas": "4",
+        "Espelho": "Opcional",
+        "Material": "MDP com detalhes em MDF",
+        "Dimensões (A x L x P)": "212 x 236 x 47 cm",
+        "Peso": "149,15 kg (com espelho)",
+        "Montagem": "Grátis pela Lojas Tropical"
+      },
+      "images": [
+        "v6022-branco-1.jpg",
+        "v6022-branco-2.jpg",
+        "v6022-freijo-cinza-1.jpg",
+        "v6022-freijo-1.jpg"
+      ],
+      "coverFit": "contain",
+      "colors": [
+        {
+          "name": "Branco",
+          "image": "v6022-branco-1.jpg"
+        },
+        {
+          "name": "Freijó e Cinza",
+          "image": "v6022-freijo-cinza-1.jpg"
+        },
+        {
+          "name": "Freijó",
+          "image": "v6022-freijo-1.jpg"
+        }
+      ],
+      "cashPriceCents": 229900,
+      "manualInstallmentCents": null,
+      "stockQuantity": 8
+    },
+    {
+      "slug": "p6025-guarda-roupa-moval-8-portas-san-lorenzo-casal",
+      "erpCode": "6025",
+      "name": "Guarda-Roupa Moval 8 Portas San Lorenzo Casal",
+      "brand": "Moval",
+      "category": "Guarda-roupas",
+      "shortDescription": "Guarda-Roupa Moval 8 Portas San Lorenzo Casal.",
+      "description": "Elegância e amplitude se encontram no Guarda-Roupa San Lorenzo. Com oito portas e quatro gavetas, conta com cabideiros e calceiro em alumínio, além de puxadores em MDF. As portas laterais avançadas e os maleiros espaçosos otimizam a organização. Espelhos opcionais e excelente distribuição interna garantem praticidade.",
+      "highlights": [
+        "4 gavetas com corrediças telescópicas",
+        "8 portas com puxadores de MDF",
+        "Cabideiros e calceiro em alumínio",
+        "Espelhos opcionais",
+        "Maleiros espaçosos",
+        "Portas laterais avançadas",
+        "Excelente distribuição interna"
+      ],
+      "specs": {
+        "Modelo": "San Lorenzo",
+        "Tipo": "Guarda-roupa casal",
+        "Linha": "Crystal",
+        "Portas": "8",
+        "Gavetas": "4",
+        "Espelho": "Opcional",
+        "Material": "MDP com detalhes em MDF",
+        "Dimensões (A x L x P)": "222 x 237 x 47 cm",
+        "Peso": "149,24 kg (com espelho)",
+        "Montagem": "Grátis pela Lojas Tropical"
+      },
+      "images": [
+        "v6025-carvalho-fendi-1.jpg",
+        "v6025-carvalho-fendi-2.jpg",
+        "v6025-castanho-wood-off-white-1.jpg",
+        "v6025-freijo-off-white-1.jpg",
+        "v6025-freijo-off-white-2.jpg"
+      ],
+      "coverFit": "contain",
+      "colors": [
+        {
+          "name": "Carvalho e Fendi",
+          "image": "v6025-carvalho-fendi-1.jpg"
+        },
+        {
+          "name": "Castanho Wood e Off White",
+          "image": "v6025-castanho-wood-off-white-1.jpg"
+        },
+        {
+          "name": "Freijó e Off White",
+          "image": "v6025-freijo-off-white-1.jpg"
+        }
+      ],
+      "cashPriceCents": 229900,
+      "manualInstallmentCents": null,
+      "stockQuantity": 11
+    },
+    {
+      "slug": "p9951-guarda-roupa-moval-6-portas-san-francisco-casal",
+      "erpCode": "9951",
+      "name": "Guarda-Roupa Moval 6 Portas San Francisco Casal",
+      "brand": "Moval",
+      "category": "Guarda-roupas",
+      "shortDescription": "Guarda-Roupa Moval 6 Portas San Francisco Casal.",
+      "description": "Com seis portas e seis gavetas com corrediças telescópicas, o Guarda-Roupa San Francisco é sinônimo de espaço e organização. Cabideiros e calceiro em alumínio, maleiros espaçosos e puxadores usinados completam seu design robusto e prático. Espelhos opcionais e excelente distribuição interna agregam ainda mais funcionalidade ao quarto.",
+      "highlights": [
+        "6 gavetas com corrediças telescópicas",
+        "6 portas com puxadores de MDF",
+        "Cabideiros e calceiro em alumínio",
+        "Espelhos opcionais",
+        "Maleiros espaçosos",
+        "Gavetas com puxadores usinados",
+        "Excelente distribuição interna"
+      ],
+      "specs": {
+        "Modelo": "San Francisco",
+        "Tipo": "Guarda-roupa casal",
+        "Linha": "Crystal",
+        "Portas": "6",
+        "Gavetas": "6",
+        "Espelho": "Opcional",
+        "Material": "MDP com detalhes em MDF",
+        "Dimensões (A x L x P)": "222 x 216 x 47 cm",
+        "Peso": "155,37 kg",
+        "Montagem": "Grátis pela Lojas Tropical"
+      },
+      "images": [
+        "v9951-carvalho-fendi-11.jpg",
+        "v9951-carvalho-fendi-12.jpg",
+        "v9951-cinamomo-11.jpg",
+        "v9951-freijo-off-white-1.jpg",
+        "v9951-freijo-off-white-2.jpg"
+      ],
+      "coverFit": "contain",
+      "colors": [
+        {
+          "name": "Carvalho e Fendi",
+          "image": "v9951-carvalho-fendi-11.jpg"
+        },
+        {
+          "name": "Cinamomo",
+          "image": "v9951-cinamomo-11.jpg"
+        },
+        {
+          "name": "Freijó e Off White",
+          "image": "v9951-freijo-off-white-1.jpg"
+        }
+      ],
+      "cashPriceCents": 209900,
+      "manualInstallmentCents": null,
+      "stockQuantity": 1
+    },
+    {
+      "slug": "p9953-guarda-roupa-moval-7-portas-malta-casal",
+      "erpCode": "9953",
+      "name": "Guarda-Roupa Moval 7 Portas Malta Casal",
+      "brand": "Moval",
+      "category": "Guarda-roupas",
+      "shortDescription": "Guarda-Roupa Moval 7 Portas Malta Casal.",
+      "description": "Com linhas marcantes e estrutura funcional, o Guarda-Roupa Malta é ideal para ambientes que prezam pela organização e estilo. Suas 2 gavetas com corrediças metálicas, cabideiros e calceiro em alumínio atendem às necessidades do dia a dia. Os puxadores em MDF e portas com frisos trazem um toque contemporâneo ao visual. Disponível com espelhos opcionais e pés em PVC que facilitam a limpeza.",
+      "highlights": [
+        "2 gavetas com corrediças metálicas",
+        "Cabideiros e calceiro em alumínio",
+        "Puxadores em MDF",
+        "Portas em MDF com detalhes frisados",
+        "Espelhos opcionais",
+        "Pés em PVC para facilitar a limpeza",
+        "Excelente espaço interno para organização"
+      ],
+      "specs": {
+        "Modelo": "Malta",
+        "Tipo": "Guarda-roupa casal",
+        "Linha": "Clean",
+        "Portas": "7",
+        "Gavetas": "2",
+        "Espelho": "Opcional",
+        "Material": "MDP com detalhes em MDF",
+        "Dimensões (A x L x P)": "204 x 165 x 47 cm",
+        "Peso": "94,58 kg (com espelho)",
+        "Montagem": "Grátis pela Lojas Tropical"
+      },
+      "images": [
+        "v9953-carvalho-fendi-1.jpg"
+      ],
+      "coverFit": "contain",
+      "colors": [
+        {
+          "name": "Carvalho e Fendi",
+          "image": "v9953-carvalho-fendi-1.jpg"
+        }
+      ],
+      "cashPriceCents": 139900,
+      "manualInstallmentCents": null,
+      "stockQuantity": 24
+    },
+    {
+      "slug": "p9954-guarda-roupa-moval-3-portas-bolivia-deslizante-solteiro",
+      "erpCode": "9954",
+      "name": "Guarda-Roupa Moval 3 Portas Bolívia Deslizante Solteiro",
+      "brand": "Moval",
+      "category": "Guarda-roupas",
+      "shortDescription": "Guarda-Roupa Moval 3 Portas Bolívia Deslizante Solteiro.",
+      "description": "Com visual moderno e funcionalidade elevada, o Guarda-Roupa Bolívia se destaca pelas portas deslizantes em MDF com frisos em baixo relevo e trilhos em alumínio, que otimizam o espaço. As 2 gavetas internas, cabideiros e calceiro em alumínio facilitam a organização, enquanto os puxadores em MDF e espelhos inclusos elevam a elegância do móvel. Pés em PVC completam a praticidade.",
+      "highlights": [
+        "2 gavetas com corrediças metálicas",
+        "2 portas em MDF com frisos em baixo relevo",
+        "Cabideiros e calceiro em alumínio",
+        "Portas deslizantes com trilho de alumínio",
+        "Puxadores em MDF",
+        "Espelhos inclusos",
+        "Pés em PVC para facilitar a limpeza"
+      ],
+      "specs": {
+        "Modelo": "Bolívia",
+        "Tipo": "Guarda-roupa solteiro",
+        "Linha": "Clean",
+        "Portas": "3",
+        "Gavetas": "2",
+        "Espelho": "Sim",
+        "Material": "MDP com detalhes em MDF",
+        "Dimensões (A x L x P)": "211 x 164 x 53 cm",
+        "Peso": "100,07 kg",
+        "Tipo de porta": "Deslizante, com trilho de alumínio",
+        "Montagem": "Grátis pela Lojas Tropical"
+      },
+      "images": [
+        "v9954-freijo-cinza-11.jpg",
+        "v9954-freijo-cinza-12.jpg",
+        "v9954-freijo-off-white-11.jpg"
+      ],
+      "coverFit": "contain",
+      "colors": [
+        {
+          "name": "Freijó e Cinza",
+          "image": "v9954-freijo-cinza-11.jpg"
+        },
+        {
+          "name": "Freijó e Off White",
+          "image": "v9954-freijo-off-white-11.jpg"
+        }
+      ],
+      "cashPriceCents": 159900,
+      "manualInstallmentCents": null,
+      "stockQuantity": 6
+    },
+    {
+      "slug": "p3575-comoda-notavel-2-portas-3-gavetas-nt-5165-com-espelho",
+      "erpCode": "3575",
+      "name": "Cômoda Notável 2 Portas 3 Gavetas NT 5165 com Espelho",
+      "brand": "Notável",
+      "category": "Móveis",
+      "shortDescription": "Cômoda Notável 2 Portas 3 Gavetas NT 5165 com Espelho.",
+      "description": "A Cômoda NT 5165 da Notável tem 2 portas, 3 gavetas e espelho inclinado. Por dentro, tem prateleira e cabideiro, e as gavetas correm em corrediças metálicas.",
+      "highlights": [
+        "2 portas e 3 gavetas",
+        "Espelho inclinado",
+        "Prateleira e cabideiro internos",
+        "Gavetas com corrediças metálicas"
+      ],
+      "specs": {
+        "Modelo": "NT 5165",
+        "Tipo": "Cômoda",
+        "Portas": "2",
+        "Gavetas": "3",
+        "Espelho": "Sim",
+        "Material": "MDP",
+        "Montagem": "Grátis pela Lojas Tropical"
+      },
+      "images": [
+        "v3575-madeirado-off-white-11.jpg",
+        "v3575-madeirado-off-white-12.jpg",
+        "v3575-madeirado-off-white-13.jpg",
+        "v3575-madeirado-off-white-14.jpg",
+        "v3575-branco-11.jpg",
+        "v3575-branco-rosa-11.jpg",
+        "v3575-madeirado-1.jpg",
+        "v3575-madeirado-2.jpg"
+      ],
+      "coverFit": "contain",
+      "colors": [
+        {
+          "name": "Madeirado e Off White",
+          "image": "v3575-madeirado-off-white-11.jpg"
+        },
+        {
+          "name": "Branco",
+          "image": "v3575-branco-11.jpg"
+        },
+        {
+          "name": "Branco e Rosa",
+          "image": "v3575-branco-rosa-11.jpg"
+        },
+        {
+          "name": "Madeirado",
+          "image": "v3575-madeirado-1.jpg"
+        }
+      ],
+      "cashPriceCents": 79900,
+      "manualInstallmentCents": null,
+      "stockQuantity": 5
+    },
+    {
+      "slug": "p6081-guarda-roupa-notavel-3-portas-nt-5000",
+      "erpCode": "6081",
+      "name": "Guarda-Roupa Notável 3 Portas NT 5000",
+      "brand": "Notável",
+      "category": "Guarda-roupas",
+      "shortDescription": "Guarda-Roupa Notável 3 Portas NT 5000.",
+      "description": "O Guarda-Roupa NT 5000 da Notável tem 3 portas, com cabideiro e prateleiras internas. Compacto, é uma boa opção para quarto de solteiro ou infantil.",
+      "highlights": [
+        "3 portas",
+        "Cabideiro interno",
+        "Prateleiras internas",
+        "Disponível em 4 cores"
+      ],
+      "specs": {
+        "Modelo": "NT 5000",
+        "Tipo": "Guarda-roupa solteiro",
+        "Portas": "3",
+        "Material": "MDP",
+        "Montagem": "Grátis pela Lojas Tropical"
+      },
+      "images": [
+        "v6081-branco-rosa-11.jpg",
+        "v6081-branco-rosa-12.jpg",
+        "v6081-branco-11.jpg",
+        "v6081-branco-12.jpg",
+        "v6081-madeirado-off-white-11.jpg",
+        "v6081-madeirado-off-white-12.jpg",
+        "v6081-madeirado-11.jpg"
+      ],
+      "coverFit": "contain",
+      "colors": [
+        {
+          "name": "Branco e Rosa",
+          "image": "v6081-branco-rosa-11.jpg"
+        },
+        {
+          "name": "Branco",
+          "image": "v6081-branco-11.jpg"
+        },
+        {
+          "name": "Madeirado e Off White",
+          "image": "v6081-madeirado-off-white-11.jpg"
+        },
+        {
+          "name": "Madeirado",
+          "image": "v6081-madeirado-11.jpg"
+        }
+      ],
+      "cashPriceCents": 69900,
+      "manualInstallmentCents": null,
+      "stockQuantity": 3
+    },
+    {
+      "slug": "p6090-guarda-roupa-notavel-6-portas-nt-6035",
+      "erpCode": "6090",
+      "name": "Guarda-Roupa Notável 6 Portas NT 6035",
+      "brand": "Notável",
+      "category": "Guarda-roupas",
+      "shortDescription": "Guarda-Roupa Notável 6 Portas NT 6035.",
+      "description": "O Guarda-Roupa NT 6035 da Notável tem 6 portas e 3 gavetas, com pés e espaço interno para cabides e roupas dobradas.",
+      "highlights": [
+        "6 portas e 3 gavetas",
+        "Com pés",
+        "Cabideiro interno",
+        "Prateleiras internas"
+      ],
+      "specs": {
+        "Modelo": "NT 6035",
+        "Tipo": "Guarda-roupa casal",
+        "Portas": "6",
+        "Gavetas": "3",
+        "Material": "MDP",
+        "Montagem": "Grátis pela Lojas Tropical"
+      },
+      "images": [
+        "v6090-madeirado-off-white-11.jpg",
+        "v6090-madeirado-off-white-12.jpg",
+        "v6090-madeirado-claro-11.jpg",
+        "v6090-madeirado-claro-12.jpg",
+        "v6090-madeirado-escuro-11.jpg"
+      ],
+      "coverFit": "contain",
+      "colors": [
+        {
+          "name": "Madeirado e Off White",
+          "image": "v6090-madeirado-off-white-11.jpg"
+        },
+        {
+          "name": "Madeirado Claro",
+          "image": "v6090-madeirado-claro-11.jpg"
+        },
+        {
+          "name": "Madeirado Escuro",
+          "image": "v6090-madeirado-escuro-11.jpg"
+        }
+      ],
+      "cashPriceCents": 239900,
+      "manualInstallmentCents": null,
+      "stockQuantity": 1
+    },
+    {
+      "slug": "p6091-home-notavel-nt-1400-tv",
+      "erpCode": "6091",
+      "name": "Home Notável NT 1400 TV",
+      "brand": "Notável",
+      "category": "Móveis",
+      "shortDescription": "Home Notável NT 1400 TV.",
+      "description": "O Home NT 1400 da Notável tem detalhe ripado, 2 portas basculantes, pés de madeira e fita de LED. Comporta TV de até 60 polegadas.",
+      "highlights": [
+        "TV de até 60 polegadas",
+        "2 portas basculantes",
+        "Detalhe ripado",
+        "Fita de LED",
+        "Pés de madeira"
+      ],
+      "specs": {
+        "Modelo": "NT 1400",
+        "Tipo": "Estante home",
+        "TV suportada": "Até 60 polegadas",
+        "Portas": "2 basculantes",
+        "Iluminação": "Fita de LED",
+        "Material": "MDP",
+        "Montagem": "Grátis pela Lojas Tropical"
+      },
+      "images": [
+        "v6091-madeirado-off-white-11.jpg",
+        "v6091-madeirado-off-white-12.jpg",
+        "v6091-madeirado-off-white-13.jpg",
+        "v6091-madeirado-preto-11.jpg",
+        "v6091-madeirado-preto-12.jpg"
+      ],
+      "coverFit": "contain",
+      "colors": [
+        {
+          "name": "Madeirado e Off White",
+          "image": "v6091-madeirado-off-white-11.jpg"
+        },
+        {
+          "name": "Madeirado e Preto",
+          "image": "v6091-madeirado-preto-11.jpg"
+        }
+      ],
+      "cashPriceCents": 159900,
+      "manualInstallmentCents": null,
+      "stockQuantity": 2
+    },
+    {
+      "slug": "p6092-guarda-roupa-notavel-4-portas-nt-6055",
+      "erpCode": "6092",
+      "name": "Guarda-Roupa Notável 4 Portas NT 6055",
+      "brand": "Notável",
+      "category": "Guarda-roupas",
+      "shortDescription": "Guarda-Roupa Notável 4 Portas NT 6055.",
+      "description": "O Guarda-Roupa NT 6055 da Notável tem 4 portas, 2 gavetas e espelho, com puxadores em MDF e cabideiro interno.",
+      "highlights": [
+        "4 portas e 2 gavetas",
+        "Espelho",
+        "Puxadores em MDF",
+        "Cabideiro interno"
+      ],
+      "specs": {
+        "Modelo": "NT 6055",
+        "Tipo": "Guarda-roupa",
+        "Portas": "4",
+        "Gavetas": "2",
+        "Espelho": "Sim",
+        "Material": "MDP",
+        "Montagem": "Grátis pela Lojas Tropical"
+      },
+      "images": [
+        "v6092-madeirado-off-white-11.jpg",
+        "v6092-madeirado-off-white-12.jpg",
+        "v6092-madeirado-off-white-13.jpg",
+        "v6092-madeirado-off-white-14.jpg",
+        "v6092-madeirado-off-white-15.jpg",
+        "v6092-madeirado-11.jpg",
+        "v6092-madeirado-12.jpg",
+        "v6092-madeirado-13.jpg",
+        "v6092-branco-rosa-11.jpg",
+        "v6092-branco-11.jpg"
+      ],
+      "coverFit": "contain",
+      "colors": [
+        {
+          "name": "Madeirado e Off White",
+          "image": "v6092-madeirado-off-white-11.jpg"
+        },
+        {
+          "name": "Madeirado",
+          "image": "v6092-madeirado-11.jpg"
+        },
+        {
+          "name": "Branco e Rosa",
+          "image": "v6092-branco-rosa-11.jpg"
+        },
+        {
+          "name": "Branco",
+          "image": "v6092-branco-11.jpg"
+        }
+      ],
+      "cashPriceCents": 99900,
+      "manualInstallmentCents": null,
+      "stockQuantity": 0
+    },
+    {
+      "slug": "p9879-home-notavel-nt-1340-tv",
+      "erpCode": "9879",
+      "name": "Home Notável NT 1340 TV",
+      "brand": "Notável",
+      "category": "Móveis",
+      "shortDescription": "Home Notável NT 1340 TV.",
+      "description": "O Home NT 1340 da Notável tem 2 portas e detalhe ripado de 6 mm sobre o painel. Comporta TV de até 65 polegadas.",
+      "highlights": [
+        "TV de até 65 polegadas",
+        "2 portas",
+        "Ripado de 6 mm",
+        "Espaço para TV de 162 x 90 cm"
+      ],
+      "specs": {
+        "Modelo": "NT 1340",
+        "Tipo": "Estante home",
+        "TV suportada": "Até 65 polegadas",
+        "Portas": "2",
+        "Espaço para a TV (L x A)": "162 x 90 cm",
+        "Peso suportado": "70 kg (15 kg por prateleira)",
+        "Material": "MDP",
+        "Montagem": "Grátis pela Lojas Tropical"
+      },
+      "images": [
+        "v9879-madeirado-off-white-11.jpg",
+        "v9879-madeirado-off-white-12.jpg",
+        "v9879-madeirado-off-white-13.jpg",
+        "v9879-madeirado-preto-11.jpg",
+        "v9879-madeirado-preto-12.jpg"
+      ],
+      "coverFit": "contain",
+      "colors": [
+        {
+          "name": "Madeirado e Off White",
+          "image": "v9879-madeirado-off-white-11.jpg"
+        },
+        {
+          "name": "Madeirado e Preto",
+          "image": "v9879-madeirado-preto-11.jpg"
+        }
+      ],
+      "cashPriceCents": 129900,
+      "manualInstallmentCents": null,
+      "stockQuantity": 2
+    },
+    {
+      "slug": "p9881-mesa-escrivaninha-notavel-nt-2010",
+      "erpCode": "9881",
+      "name": "Mesa Escrivaninha Notável NT 2010",
+      "brand": "Notável",
+      "category": "Móveis",
+      "shortDescription": "Mesa Escrivaninha Notável NT 2010.",
+      "description": "A Escrivaninha Office NT 2010 da Notável tem estante acoplada, 2 gavetas com puxador em alumínio e nichos para livros e objetos. Boa para estudo e home office.",
+      "highlights": [
+        "2 gavetas com puxador em alumínio",
+        "Estante com nichos",
+        "Chapa de 15 mm"
+      ],
+      "specs": {
+        "Modelo": "NT 2010 Office",
+        "Tipo": "Escrivaninha com estante",
+        "Gavetas": "2",
+        "Material": "MDP 15 mm",
+        "Dimensões (A x L x P)": "136,5 x 131,5 x 37,5 cm",
+        "Montagem": "Grátis pela Lojas Tropical"
+      },
+      "images": [
+        "v9881-branco-11.jpg",
+        "v9881-branco-rosa-11.jpg",
+        "v9881-branco-rosa-12.jpg",
+        "v9881-freijo-11.jpg",
+        "v9881-freijo-12.jpg",
+        "v9881-nogal-11.jpg",
+        "v9881-nogal-12.jpg"
+      ],
+      "coverFit": "contain",
+      "colors": [
+        {
+          "name": "Branco",
+          "image": "v9881-branco-11.jpg"
+        },
+        {
+          "name": "Branco e Rosa",
+          "image": "v9881-branco-rosa-11.jpg"
+        },
+        {
+          "name": "Freijó",
+          "image": "v9881-freijo-11.jpg"
+        },
+        {
+          "name": "Nogal",
+          "image": "v9881-nogal-11.jpg"
+        }
+      ],
+      "cashPriceCents": 49900,
+      "manualInstallmentCents": null,
+      "stockQuantity": 1
+    },
+    {
+      "slug": "p1919-cadeira-de-plastico-pisani-giorgia-com-braco-br-am-az-vm",
+      "erpCode": "1919",
+      "name": "Cadeira de Plástico Pisani Giorgia com Braço",
+      "brand": "Pisani",
+      "category": "Móveis",
+      "shortDescription": "Cadeira de Plástico Pisani Giorgia com Braço.",
+      "description": "A Cadeira Giorgia da Pisani é de plástico, com braços, e pode ser empilhada. Serve para área, varanda, festas e uso diário.",
+      "highlights": [
+        "Com braços",
+        "Empilhável",
+        "Suporta até 182 kg",
+        "Certificada pelo Inmetro"
+      ],
+      "specs": {
+        "Modelo": "Giorgia",
+        "Tipo": "Cadeira com braço",
+        "Material": "Plástico (polipropileno)",
+        "Largura": "56 cm",
+        "Altura do assento": "42 cm",
+        "Altura do braço": "59,5 cm",
+        "Peso suportado": "182 kg",
+        "Peso": "2,4 kg",
+        "Garantia": "36 meses (fabricante)"
+      },
+      "images": [
+        "v1919-azul-1.jpg",
+        "v1919-branco-1.jpg",
+        "v1919-vermelho-1.jpg"
+      ],
+      "coverFit": "contain",
+      "colors": [
+        {
+          "name": "Azul",
+          "image": "v1919-azul-1.jpg"
+        },
+        {
+          "name": "Branco",
+          "image": "v1919-branco-1.jpg"
+        },
+        {
+          "name": "Vermelho",
+          "image": "v1919-vermelho-1.jpg"
+        }
+      ],
+      "cashPriceCents": 11900,
+      "manualInstallmentCents": null,
+      "stockQuantity": 64
+    }
+  ],
+  "company": {
+    "tradeName": "Lojas Tropical",
+    "legalName": "R N SAMPAIO PIMENTA LTDA",
+    "cnpj": "10.665.286/0001-88",
+    "stateRegistration": "123121671",
+    "address": "Rua Francisco Bernadino, nº 1371-A, São Sebastião, Codó - MA, CEP 65400-000",
+    "phoneDisplay": "(99) 98177-1035",
+    "whatsapp": "559981771035",
+    "serviceHours": "segunda a sábado, das 8h às 18h"
+  }
+}

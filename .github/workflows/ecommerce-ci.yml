@@ -1,0 +1,58 @@
+name: E-commerce (verificação)
+
+# Roda só quando a nova plataforma (pasta ecommerce/) muda. Não mexe no site original.
+on:
+  pull_request:
+    paths: ["ecommerce/**", ".github/workflows/ecommerce-ci.yml"]
+  push:
+    branches: [main]
+    paths: ["ecommerce/**", ".github/workflows/ecommerce-ci.yml"]
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ecommerce-ci-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  verificar:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    defaults:
+      run:
+        working-directory: ecommerce
+    services:
+      postgres:
+        image: postgres:16-alpine
+        env:
+          POSTGRES_USER: lojas
+          POSTGRES_PASSWORD: lojas_dev
+          POSTGRES_DB: lojas_tropical_ci
+        ports: ["5432:5432"]
+        options: >-
+          --health-cmd "pg_isready -U lojas" --health-interval 5s --health-timeout 5s --health-retries 10
+    env:
+      DATABASE_URL: postgresql://lojas:lojas_dev@localhost:5432/lojas_tropical_ci
+    steps:
+      - uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v4
+        with:
+          package_json_file: ecommerce/package.json
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+          cache: pnpm
+          cache-dependency-path: ecommerce/pnpm-lock.yaml
+      - run: pnpm install --frozen-lockfile
+      - run: pnpm db:generate
+      - run: pnpm typecheck
+      - run: pnpm lint
+      - run: pnpm test
+      - name: Banco - migrações e seed
+        run: pnpm db:migrate && pnpm db:seed
+      - run: pnpm build
+      - name: Testes de navegação (Playwright)
+        run: |
+          pnpm --filter @lojas-tropical/web exec playwright install --with-deps chromium
+          pnpm test:e2e
