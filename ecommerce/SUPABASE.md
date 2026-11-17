@@ -1,6 +1,6 @@
 # Banco de dados no Supabase
 
-A nova loja usa o PostgreSQL do projeto Supabase que a Lojas Tropical já tem. O pooler do projeto fica em us-west-2 (EUA), não em São Paulo: avaliar a latência antes da publicação.
+A nova loja usa um projeto Supabase próprio em **São Paulo** (sa-east-1), criado em 17/11. O projeto antigo "Lojas Tropicais" (EUA) continua só com o login e o cadastro de clientes do site atual.
 
 ## Como fica organizado
 
