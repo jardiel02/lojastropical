@@ -32,6 +32,7 @@ jobs:
       DATABASE_URL: ${{ secrets.SUPABASE_DATABASE_URL }}
     steps:
       - name: Conferir o segredo
+        working-directory: . # roda antes do checkout
         run: |
           if [ -z "$DATABASE_URL" ]; then echo "::error::Falta o segredo SUPABASE_DATABASE_URL"; exit 1; fi
           case "$DATABASE_URL" in
