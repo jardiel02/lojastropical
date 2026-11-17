@@ -28,12 +28,12 @@ type Msg = { text: string; kind: "erro" | "ok" } | null;
 // ---------------------------------------------------------------------------
 function Field({ label, hint, mask, ...input }: InputHTMLAttributes<HTMLInputElement> & { label: string; hint?: string; mask?: (v: string) => string }) {
   return (
-    <label className="grid gap-1.5">
+    <label className="grid min-w-0 gap-1.5">
       <span className="text-sm font-bold">{label}</span>
       <input
         {...input}
         onInput={mask ? (e) => (e.currentTarget.value = mask(e.currentTarget.value)) : input.onInput}
-        className="h-12 rounded-[10px] border-2 border-line bg-surface px-3 text-[16px] outline-none focus:border-brand disabled:bg-chip disabled:text-muted-foreground"
+        className="h-12 w-full min-w-0 rounded-[10px] border-2 border-line bg-surface px-3 text-[16px] outline-none focus:border-brand disabled:bg-chip disabled:text-muted-foreground"
       />
       {hint ? <small className="text-[13px] text-muted-foreground">{hint}</small> : null}
     </label>
@@ -62,7 +62,9 @@ function CitySelect({ cities, defaultValue, name }: { cities: string[]; defaultV
 
 function Message({ msg }: { msg: Msg }) {
   const ref = useRef<HTMLParagraphElement>(null);
-  useEffect(() => ref.current?.scrollIntoView({ block: "nearest" }), [msg]);
+  useEffect(() => {
+    ref.current?.scrollIntoView({ block: "nearest" });
+  }, [msg]);
   if (!msg) return null;
   return (
     <p
