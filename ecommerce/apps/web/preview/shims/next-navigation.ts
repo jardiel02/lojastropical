@@ -27,3 +27,8 @@ const router = {
 export function useRouter() {
   return router;
 }
+
+export function useSearchParams(): URLSearchParams {
+  const search = useSyncExternalStore(locationStore.subscribe, () => locationStore.get().search, () => "");
+  return new URLSearchParams(search);
+}

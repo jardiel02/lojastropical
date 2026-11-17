@@ -1,24 +1,22 @@
 import type { Metadata } from "next";
-import { wa } from "@/lib/site";
+import { Suspense } from "react";
+import { AccountApp } from "@/components/account/account-app";
+import { catalog } from "@/modules/catalog";
 
 export const metadata: Metadata = { title: "Sua conta", robots: { index: false } };
 
 /**
- * A conta do cliente do site original usa Supabase Auth. Nesta nova plataforma ela será
- * refeita com Auth.js (etapa 7), migrando os cadastros existentes. Até lá, nada de login falso.
+ * Cadastro, login e "Sua conta" do cliente (Supabase Auth, tabela public.clientes), com as
+ * mesmas regras do site original. Pedidos online entram na etapa 7.
  */
-export default function AccountPage() {
+export default async function AccountPage() {
+  // Vende online só para as cidades onde há loja (mesma regra do site original)
+  const cities = [...new Set((await catalog.listBranches()).map((b) => b.city))];
   return (
-    <div className="wrap max-w-2xl py-12">
-      <span className="eyebrow">Sua conta</span>
-      <h1 className="mb-3 text-[clamp(28px,3.6vw,40px)]">Área do cliente em construção</h1>
-      <p className="mb-4 text-muted-foreground">
-        Nesta nova versão do site, o cadastro, o login e o acompanhamento de pedidos ainda estão sendo implantados. Enquanto isso, fale com a
-        gente pelo WhatsApp para comprar ou tirar dúvidas.
-      </p>
-      <a className="inline-flex h-12 items-center rounded-xl bg-buy px-5 font-bold text-white" href={wa("Olá! Vim pelo site.")} target="_blank" rel="noopener">
-        Falar no WhatsApp
-      </a>
+    <div className="wrap py-10">
+      <Suspense fallback={<p className="py-16 text-center text-muted-foreground">Carregando sua conta…</p>}>
+        <AccountApp cities={cities} />
+      </Suspense>
     </div>
   );
 }

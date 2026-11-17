@@ -3,7 +3,7 @@ name: E-commerce (banco Supabase)
 # Cria/atualiza as tabelas da nova loja no Supabase e carrega o catálogo.
 # Só roda quando alguém aperta "Run workflow". Não apaga dados: aplica apenas migrações
 # pendentes e o seed idempotente do catálogo. As tabelas ficam no esquema "loja",
-# separadas do cadastro de clientes (public.clientes) e fora da API pública do Supabase.
+# fora da API pública do Supabase. O cadastro de clientes (public.clientes) vem de supabase/clientes.sql.
 on:
   workflow_dispatch:
     inputs:
@@ -56,3 +56,5 @@ jobs:
         run: pnpm db:seed
       - name: Conferir catálogo do banco com o retrato atual
         run: pnpm db:check
+      - name: Cadastro de clientes (tabela public.clientes, RLS e gatilho do cadastro)
+        run: psql "${DATABASE_URL%%\?*}" -v ON_ERROR_STOP=1 -q -f supabase/clientes.sql

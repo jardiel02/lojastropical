@@ -58,10 +58,10 @@ Ver [ARCHITECTURE.md](ARCHITECTURE.md). Resumo: monorepo pnpm em `ecommerce/` co
 | 4 | Componentização | ✅ Componentes em `components/{layout,home,products,cart,ui}` |
 | 5 | Catálogo e dados | 🟡 Vitrine lê o PostgreSQL com `CATALOG_SOURCE=database` (`PrismaCatalogRepository`), conferida contra o retrato JSON (`pnpm db:check`) no CI. Banco: **projeto Supabase novo em São Paulo, esquema `loja`** ([SUPABASE.md](SUPABASE.md)). **Aplicado no Supabase São Paulo em 17/11** (112 produtos, conferido igual ao JSON). Até existir a sincronização de preço/estoque (etapa 6), a loja publicada deve continuar no retrato JSON, que já acompanha o `estoque.js` de hora em hora. |
 | 6 | Integração de estoque | 🟡 Contrato `ErpAdapter`, adaptador simulado com reservas e Sólidus somente leitura. **Estoque por loja (8 tokens) e preços sincronizados com o banco** (`pnpm sync:stock`, workflow de hora em hora). Falta worker/BullMQ para reservas e pedidos. **Bloqueio**: Sólidus sem API documentada de reserva e pedido. |
-| 7 | E-commerce funcional (contas, checkout, pedidos, entrega/retirada) | ⬜ Não iniciada. Conta do cliente mostra aviso honesto "em construção". |
+| 7 | E-commerce funcional (contas, checkout, pedidos, entrega/retirada) | 🟡 Cadastro, login, "esqueci a senha" e "Sua conta" (dados, contato, endereço, senha) com Supabase Auth de São Paulo e tabela `public.clientes` com RLS. Falta checkout, pedidos, entrega/retirada. |
 | 8 | Pagamentos (Mercado Pago, sandbox) | ⬜ Não iniciada. Ver [PAYMENTS.md](PAYMENTS.md). |
 | 9 | Painel administrativo | ⬜ Não iniciada |
-| 10 | Testes e homologação | 🟡 41 testes de unidade e 14 de navegação (desktop e celular) passando |
+| 10 | Testes e homologação | 🟡 46 testes de unidade e 14 de navegação (desktop e celular) passando |
 | 11 | Publicação | ⬜ Depende das contas de infraestrutura |
 
 ## 4. Riscos e dependências

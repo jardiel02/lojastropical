@@ -33,7 +33,7 @@ export function hashToLocation(hash: string): PreviewLocation {
     return { pathname: `/${section}/${rest}`, search, anchor: null };
   }
   if (name === "busca" || name === "catalogo") return { pathname: "/busca", search, anchor: null };
-  if (name === "conta" || name.startsWith("conta-")) return { pathname: "/conta", search: "", anchor: null };
+  if (name === "conta" || name.startsWith("conta-")) return { pathname: "/conta", search, anchor: null };
   if (LEGAL.has(name)) return { pathname: `/${name}`, search: "", anchor: null };
   // Qualquer outro nome é uma seção da página inicial (#lojas, #redes)
   return { pathname: "/", search: "", anchor: name };

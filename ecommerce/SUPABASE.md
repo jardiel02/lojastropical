@@ -29,3 +29,12 @@ O workflow nunca apaga tabelas nem dados. Para desfazer tudo, basta apagar o esq
 ## Na publicação (etapa 11)
 
 Na Vercel, a loja usa o **Transaction pooler** (porta 6543) com `?pgbouncer=true&schema=loja` em `DATABASE_URL` e `CATALOG_SOURCE=database`. As migrações continuam pelo workflow acima.
+
+## Login dos clientes (decidido em 17/11/2026)
+
+O cadastro, o login e a página "Sua conta" da nova loja usam o **Supabase Auth do projeto de São Paulo** (o mesmo do banco). O site atual continua com o projeto antigo (EUA) até a troca; como ainda não há clientes reais, ninguém precisa ser migrado.
+
+- Tabela `public.clientes`, regras (RLS) e gatilho que cria o cadastro: `supabase/clientes.sql`, aplicado pelo workflow **E-commerce (banco Supabase)**. Visitante sem login não lê nada; cada cliente só lê e altera o próprio cadastro; CPF só a loja altera.
+- A loja precisa de `NEXT_PUBLIC_SUPABASE_URL` e `NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY` (valores públicos). Sem eles, a página da conta mostra só o atendimento pelo WhatsApp (nada de login falso).
+- No painel do Supabase (Authentication → URL Configuration), cadastrar o endereço da loja como Site URL e `<endereço>/conta` em Redirect URLs quando ela for publicada.
+- Antes de abrir ao público: SMTP próprio (o e-mail padrão do Supabase envia poucas mensagens por hora) e os modelos de e-mail em português.

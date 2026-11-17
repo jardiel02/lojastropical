@@ -1,6 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
-import { UserRound } from "lucide-react";
+import { AccountButton } from "@/components/account/account-button";
 import { CartButton } from "@/components/cart/cart-button";
 import { wa } from "@/lib/site";
 import type { NavCategory } from "./category-nav";
@@ -31,14 +31,7 @@ export function Header({ categories }: { categories: NavCategory[] }) {
           >
             Compre pelo WhatsApp
           </a>
-          <Link
-            href="/conta"
-            className="inline-flex h-11 items-center gap-2 rounded-full border-2 border-white/55 px-3.5 font-bold text-white hover:bg-white/12"
-            aria-label="Entrar ou criar conta"
-          >
-            <UserRound aria-hidden className="size-[22px]" />
-            <span className="max-[480px]:hidden">Entrar</span>
-          </Link>
+          <AccountButton />
           <CartButton />
         </div>
       </div>
