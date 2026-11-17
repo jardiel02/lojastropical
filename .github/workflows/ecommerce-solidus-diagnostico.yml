@@ -1,0 +1,33 @@
+name: E-commerce (diagnóstico dos tokens do Sólidus)
+
+# Só leitura: confere cada token de loja (sem mostrar os tokens). Roda ao apertar "Run workflow".
+on:
+  workflow_dispatch:
+  push:
+    paths: [".github/workflows/ecommerce-solidus-diagnostico.yml"] # só registra; o job não roda em push
+
+permissions:
+  contents: read
+
+jobs:
+  diagnostico:
+    if: github.event_name == 'workflow_dispatch'
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    defaults:
+      run:
+        working-directory: ecommerce
+    steps:
+      - uses: actions/checkout@v4
+      - name: Consultar estoque com cada token
+        run: python3 scripts/solidus_diagnostico.py
+        env:
+          SOLIDUS_TOKEN: ${{ secrets.SOLIDUS_TOKEN }}
+          SOLIDUS_TOKEN_MATRIZ: ${{ secrets.SOLIDUS_TOKEN_MATRIZ }}
+          SOLIDUS_TOKEN_AVENIDA: ${{ secrets.SOLIDUS_TOKEN_AVENIDA }}
+          SOLIDUS_TOKEN_TIMBIRAS: ${{ secrets.SOLIDUS_TOKEN_TIMBIRAS }}
+          SOLIDUS_TOKEN_PIO_XII: ${{ secrets.SOLIDUS_TOKEN_PIO_XII }}
+          SOLIDUS_TOKEN_DOM_PEDRO: ${{ secrets.SOLIDUS_TOKEN_DOM_PEDRO }}
+          SOLIDUS_TOKEN_GONCALVES_DIAS: ${{ secrets.SOLIDUS_TOKEN_GONCALVES_DIAS }}
+          SOLIDUS_TOKEN_COROATA: ${{ secrets.SOLIDUS_TOKEN_COROATA }}
+          SOLIDUS_TOKEN_ALTO_ALEGRE: ${{ secrets.SOLIDUS_TOKEN_ALTO_ALEGRE }}
