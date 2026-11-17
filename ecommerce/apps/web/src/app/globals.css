@@ -28,20 +28,7 @@
   --radius: 14px;
   color-scheme: light;
 }
-@media (prefers-color-scheme: dark) {
-  :root:not([data-theme="light"]) {
-    --brand: #c8141c; --brand-deep: #7a0a0e; --brand-text: #ff8a8a; --eyebrow: #5cc94a; --buy: #187a2e; --buy-text: #5cc94a; --sun: #ffd84d;
-    --bg: #141010; --surface: #1e1817; --fg: #f4ece9; --muted: #c2b6b2; --line: #352b29; --chip: #2c1d1c; --price: #ff6b6b;
-    --focus-ring: #ffd84d; --success: #5cc94a; --danger: #ff8a8a;
-    color-scheme: dark;
-  }
-}
-:root[data-theme="dark"] {
-  --brand: #c8141c; --brand-deep: #7a0a0e; --brand-text: #ff8a8a; --eyebrow: #5cc94a; --buy: #187a2e; --buy-text: #5cc94a; --sun: #ffd84d;
-  --bg: #141010; --surface: #1e1817; --fg: #f4ece9; --muted: #c2b6b2; --line: #352b29; --chip: #2c1d1c; --price: #ff6b6b;
-  --focus-ring: #ffd84d; --success: #5cc94a; --danger: #ff8a8a;
-  color-scheme: dark;
-}
+/* Loja sempre clara, como a identidade da marca (decisão do Jardiel em 17/11/2026). */
 
 @theme inline {
   --color-brand: var(--brand);
