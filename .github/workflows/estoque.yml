@@ -24,6 +24,15 @@ jobs:
       - name: Buscar estoque e precos no Solidus
         env:
           SOLIDUS_TOKEN: ${{ secrets.SOLIDUS_TOKEN }}
+          # Um token por loja: o site mostra a soma das 8 lojas
+          SOLIDUS_TOKEN_MATRIZ: ${{ secrets.SOLIDUS_TOKEN_MATRIZ }}
+          SOLIDUS_TOKEN_AVENIDA: ${{ secrets.SOLIDUS_TOKEN_AVENIDA }}
+          SOLIDUS_TOKEN_TIMBIRAS: ${{ secrets.SOLIDUS_TOKEN_TIMBIRAS }}
+          SOLIDUS_TOKEN_PIO_XII: ${{ secrets.SOLIDUS_TOKEN_PIO_XII }}
+          SOLIDUS_TOKEN_DOM_PEDRO: ${{ secrets.SOLIDUS_TOKEN_DOM_PEDRO }}
+          SOLIDUS_TOKEN_GONCALVES_DIAS: ${{ secrets.SOLIDUS_TOKEN_GONCALVES_DIAS }}
+          SOLIDUS_TOKEN_COROATA: ${{ secrets.SOLIDUS_TOKEN_COROATA }}
+          SOLIDUS_TOKEN_ALTO_ALEGRE: ${{ secrets.SOLIDUS_TOKEN_ALTO_ALEGRE }}
         run: python scripts/atualizar_estoque.py
       - name: Salvar se mudou
         run: |
