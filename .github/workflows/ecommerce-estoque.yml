@@ -2,14 +2,12 @@ name: E-commerce (estoque por loja)
 
 # Lê estoque de cada loja e preços no Sólidus (SOMENTE LEITURA) e grava no banco da nova loja
 # (Supabase São Paulo, esquema "loja"). Não mexe no site no ar nem no estoque.js.
-# O agendamento só passa a valer quando este arquivo estiver no branch principal;
-# até lá roda pelo botão "Run workflow".
+# Este arquivo fica também no branch principal para o agendamento valer. Enquanto o código
+# da nova loja (pasta ecommerce/) não estiver no principal, ele é lido do branch do PR #1.
 on:
   schedule:
     - cron: "37 * * * *"
   workflow_dispatch:
-  push:
-    paths: [".github/workflows/ecommerce-estoque.yml"] # só registra o workflow; o job não roda em push
 
 permissions:
   contents: read
@@ -20,7 +18,6 @@ concurrency:
 
 jobs:
   sincronizar:
-    if: github.event_name != 'push'
     runs-on: ubuntu-latest
     timeout-minutes: 20
     defaults:
@@ -46,6 +43,13 @@ jobs:
             *) echo "::error::SUPABASE_DATABASE_URL ausente ou sem ?schema=loja (ver ecommerce/SUPABASE.md)"; exit 1 ;;
           esac
       - uses: actions/checkout@v4
+      - name: Código da nova loja (branch do PR enquanto não estiver aqui)
+        working-directory: .
+        run: |
+          if [ ! -d ecommerce ]; then
+            git fetch --depth=1 origin claude/project-thread-wxtcy9
+            git checkout --quiet FETCH_HEAD
+          fi
       - uses: pnpm/action-setup@v4
         with:
           package_json_file: ecommerce/package.json
