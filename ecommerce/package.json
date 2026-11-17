@@ -17,7 +17,8 @@
     "legacy:extract": "pnpm --filter @lojas-tropical/database legacy:extract",
     "db:generate": "pnpm --filter @lojas-tropical/database db:generate",
     "db:migrate": "pnpm --filter @lojas-tropical/database db:migrate",
-    "db:seed": "pnpm --filter @lojas-tropical/database db:seed"
+    "db:seed": "pnpm --filter @lojas-tropical/database db:seed",
+    "db:check": "pnpm --filter @lojas-tropical/database db:check"
   },
   "devDependencies": {
     "typescript": "5.9.3",

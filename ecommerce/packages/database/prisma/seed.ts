@@ -57,12 +57,9 @@ async function main() {
   }
 
   const brandIds = new Map<string, string>();
-  for (const b of snapshot.brands) {
-    const brand = await prisma.brand.upsert({
-      where: { slug: b.slug },
-      update: { name: b.name, logoUrl: b.logo ? `/img/${b.logo}` : null, featured: b.featured },
-      create: { slug: b.slug, name: b.name, logoUrl: b.logo ? `/img/${b.logo}` : null, featured: b.featured },
-    });
+  for (const [position, b] of snapshot.brands.entries()) {
+    const data = { name: b.name, logoUrl: b.logo ? `/img/${b.logo}` : null, featured: b.featured, position };
+    const brand = await prisma.brand.upsert({ where: { slug: b.slug }, update: data, create: { slug: b.slug, ...data } });
     brandIds.set(b.name, brand.id);
   }
 
@@ -73,7 +70,7 @@ async function main() {
   }
 
   const capturedAt = new Date();
-  for (const p of snapshot.products) {
+  for (const [productPosition, p] of snapshot.products.entries()) {
     await prisma.$transaction(async (tx) => {
       const data = {
         name: p.name,
@@ -88,6 +85,7 @@ async function main() {
         coverFit: p.coverFit,
         shippingClass: SHIPPING_BY_CATEGORY[p.category] ?? "STANDARD",
         status: "PUBLISHED" as const,
+        position: productPosition,
         publishedAt: capturedAt,
       };
       const product = await tx.product.upsert({ where: { slug: p.slug }, update: data, create: { slug: p.slug, ...data } });
@@ -103,6 +101,7 @@ async function main() {
           colorHex: colorName ? (snapshot.colorHex[colorName] ?? null) : null,
           position,
           isDefault: position === 0,
+          imageUrl: colorName ? `/img/${p.colors[position]!.image}` : null,
           priceCents: p.cashPriceCents,
           legacyInstallmentCents: p.manualInstallmentCents,
           priceSource: p.cashPriceCents === null ? null : ("ERP" as const),
@@ -126,6 +125,8 @@ async function main() {
         }),
       });
 
+      // Retrato do site original: substitui o anterior para o seed poder rodar várias vezes
+      await tx.inventorySnapshot.deleteMany({ where: { productId: product.id, source: "legacy-estoque.js" } });
       if (p.stockQuantity !== null) {
         await tx.inventorySnapshot.create({
           data: { productId: product.id, quantity: p.stockQuantity, source: "legacy-estoque.js", capturedAt },

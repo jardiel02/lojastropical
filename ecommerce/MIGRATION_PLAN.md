@@ -56,7 +56,7 @@ Ver [ARCHITECTURE.md](ARCHITECTURE.md). Resumo: monorepo pnpm em `ecommerce/` co
 | 2 | Preparação (monorepo, TypeScript strict, Tailwind, testes) | ✅ Concluída |
 | 3 | Migração visual para Next.js | ✅ Início, departamentos, marcas, campanha, busca, produto, carrinho, políticas, 404 |
 | 4 | Componentização | ✅ Componentes em `components/{layout,home,products,cart,ui}` |
-| 5 | Catálogo e dados | 🟡 Esquema Prisma completo, migração e seed validados em PostgreSQL local. **A vitrine ainda lê o retrato JSON** (`StaticCatalogRepository`); falta o `PrismaCatalogRepository` e um banco gerenciado. |
+| 5 | Catálogo e dados | 🟡 Vitrine lê o PostgreSQL com `CATALOG_SOURCE=database` (`PrismaCatalogRepository`), conferida contra o retrato JSON (`pnpm db:check`) no CI. Banco escolhido: **Supabase existente, esquema `loja`** ([SUPABASE.md](SUPABASE.md)). Falta o Jardiel cadastrar o segredo e rodar o workflow. Até existir a sincronização de preço/estoque (etapa 6), a loja publicada deve continuar no retrato JSON, que já acompanha o `estoque.js` de hora em hora. |
 | 6 | Integração de estoque | 🟡 Contrato `ErpAdapter`, adaptador simulado com reservas e Sólidus somente leitura, com testes. Falta worker/BullMQ e o retrato por filial. **Bloqueio**: Sólidus sem API documentada de reserva e pedido. |
 | 7 | E-commerce funcional (contas, checkout, pedidos, entrega/retirada) | ⬜ Não iniciada. Conta do cliente mostra aviso honesto "em construção". |
 | 8 | Pagamentos (Mercado Pago, sandbox) | ⬜ Não iniciada. Ver [PAYMENTS.md](PAYMENTS.md). |
@@ -67,7 +67,7 @@ Ver [ARCHITECTURE.md](ARCHITECTURE.md). Resumo: monorepo pnpm em `ecommerce/` co
 ## 4. Riscos e dependências
 
 1. **ERP (crítico para vender online)**: o Sólidus expõe consultas de produto, preço e estoque (já usadas). Não há documentação de **reserva de estoque**, **envio de pedido** nem **estoque por filial**. Sem isso, a venda online fica bloqueada por design (`canSellOnline()` retorna falso). Ação: pedir à SGI a documentação dessas operações. Alternativa, se o ERP não reservar: reserva centralizada no e-commerce com baixa manual na loja (precisa de aprovação da gerência). Ver [ERP_INTEGRATION.md](ERP_INTEGRATION.md).
-2. **Contas de infraestrutura**: Vercel, PostgreSQL gerenciado, Redis, Cloudinary/S3, Sentry e credenciais **de teste** do Mercado Pago. Recomendação para o banco: usar o projeto Supabase que a loja já tem (PostgreSQL em São Paulo) só como banco, via `DATABASE_URL`.
+2. **Contas de infraestrutura**: Vercel, Redis, Cloudinary/S3, Sentry e credenciais **de teste** do Mercado Pago. Banco: **decidido em 17/11 usar o Supabase existente** (esquema `loja`, ver SUPABASE.md).
 3. **Mudança de decisão anterior**: em 15/11 o plano era manter o GitHub Pages + Supabase Auth + Mercado Pago Checkout Pro via Edge Function. Esta reestruturação troca por Next.js + Auth.js + Prisma. Os clientes já cadastrados no Supabase Auth precisarão ser migrados (e-mail + redefinição de senha ou importação dos hashes bcrypt).
 4. **Decisões comerciais pendentes**: % de desconto no Pix, parcelamento sem juros (regras de parcelas devem vir do ERP), frete e prazo para itens volumosos, quais lojas fazem retirada, cidades atendidas.
 5. **Imagens**: hoje copiadas da pasta `img/` do site original no build (`sync-legacy-images`). Migrar para Cloudinary/S3 antes de desligar o site original.
@@ -76,3 +76,4 @@ Ver [ARCHITECTURE.md](ARCHITECTURE.md). Resumo: monorepo pnpm em `ecommerce/` co
 ## 5. Registro de mudanças
 
 - **17/11/2026** — Etapas 1 a 4 e base das etapas 5, 6 e 10: diagnóstico, monorepo, extração do catálogo (`pnpm legacy:extract`), vitrine em Next.js, carrinho com preço calculado no servidor (`POST /api/cart/quote`), SEO (URLs por produto, sitemap, robots, JSON-LD, canonical), esquema Prisma com 35 tabelas e restrições CHECK, adaptadores de ERP, testes Vitest e Playwright. Etiqueta "Oferta" removida (não havia desconto real).
+- **17/11/2026 (tarde)** — Prévia navegável (`preview:build`), loja sempre no tema claro, etapa 5: `PrismaCatalogRepository`, migração `catalog_order` (ordem de marcas e produtos, foto da cor), esquema `loja` no Supabase, workflow manual de banco, conferência banco × JSON no CI. Índice trigram removido (desnecessário com 112 produtos e incompatível com o esquema separado no Supabase).

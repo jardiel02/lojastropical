@@ -8,7 +8,7 @@ Nova loja online da **Lojas Tropical** ("Mania de preços baixos"), migrada do s
 
 | Funciona de verdade | Ainda depende de algo |
 |---|---|
-| Vitrine completa: início, departamentos (com subgrupos), marcas, campanha, busca com filtros/ordenação/paginação, página de produto com cores, carrinho persistente, políticas | Catálogo lê o retrato JSON do site original; ligar ao PostgreSQL (etapa 5) depende de um banco gerenciado |
+| Vitrine completa: início, departamentos (com subgrupos), marcas, campanha, busca com filtros/ordenação/paginação, página de produto com cores, carrinho persistente, políticas | Lê o retrato JSON ou o PostgreSQL (`CATALOG_SOURCE=database`); banco no Supabase, ver [SUPABASE.md](SUPABASE.md) |
 | Carrinho calculado no servidor (`POST /api/cart/quote`) e pedido enviado pelo WhatsApp, como no site original | Checkout, pagamento e pedidos online (etapas 7 e 8) |
 | SEO técnico: URL por produto, metadados, canonical, sitemap, robots, JSON-LD de produto e breadcrumbs, redirecionamento dos links antigos `#produto-…` | Domínio definitivo e liberação de indexação (`NEXT_PUBLIC_ALLOW_INDEXING`) |
 | Esquema do banco (35 tabelas), migração e seed testados em PostgreSQL 16 | Reserva de estoque e envio de pedidos ao Sólidus (sem API documentada) |
@@ -29,7 +29,7 @@ pnpm install
 pnpm dev            # http://localhost:3000 (copia as fotos de ../img automaticamente)
 ```
 
-Não precisa de banco para a vitrine nesta etapa.
+Sem `CATALOG_SOURCE`, a vitrine não precisa de banco.
 
 ## Atualizar o catálogo a partir do site original
 
@@ -43,7 +43,11 @@ pnpm legacy:extract   # lê ../index.html, ../estoque.js e ../legal.js → packa
 docker compose up -d postgres
 cp .env.example packages/database/.env
 pnpm db:generate && pnpm db:migrate && pnpm db:seed
+pnpm db:check         # confere o catálogo do banco com o retrato JSON
+CATALOG_SOURCE=database pnpm dev   # vitrine lendo o banco
 ```
+
+Supabase (banco oficial): ver [SUPABASE.md](SUPABASE.md).
 
 ## Testes e verificação
 

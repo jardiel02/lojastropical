@@ -14,7 +14,8 @@
     "db:migrate:dev": "prisma migrate dev",
     "db:seed": "tsx prisma/seed.ts",
     "db:validate": "prisma validate",
-    "typecheck": "tsc --noEmit"
+    "typecheck": "tsc --noEmit",
+    "db:check": "tsx scripts/check-parity.ts"
   },
   "dependencies": {
     "@lojas-tropical/shared": "workspace:*",

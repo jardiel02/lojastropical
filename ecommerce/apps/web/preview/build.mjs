@@ -29,6 +29,7 @@ const ALIASES = {
   "@/modules/legal": shim("legal.ts"),
   "@/modules/instagram": shim("instagram.ts"),
   "@/components/layout/legacy-hash-redirect": shim("legacy-hash-redirect.tsx"),
+  "@lojas-tropical/database": shim("database.ts"),
 };
 const aliasPlugin = (names) => ({
   name: "previa-aliases",

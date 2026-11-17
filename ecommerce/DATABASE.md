@@ -18,7 +18,7 @@ Esquema: [`packages/database/prisma/schema.prisma`](packages/database/prisma/sch
 |---|---|
 | Acesso | `users`, `roles`, `user_roles` (papel por filial), `accounts`, `sessions`, `verification_tokens` (Auth.js) |
 | Clientes | `customers` (CPF opcional e único, consentimentos), `addresses` |
-| Catálogo | `categories` (árvore; subgrupos com `match_pattern`), `brands`, `products` (classe logística para itens volumosos, status de publicação, índice trigram no nome), `product_variants` (cor = SKU vendável, preço), `product_images` |
+| Catálogo | `categories` (árvore; subgrupos com `match_pattern`), `brands`, `products` (classe logística para itens volumosos, status de publicação, ordem de exibição), `product_variants` (cor = SKU vendável, preço), `product_images` |
 | Estoque | `branches`, `inventory_snapshots` (retrato do ERP; `branch_id` nulo = saldo consolidado), `stock_reservations` (com expiração) |
 | Compra | `carts`, `cart_items`, `orders`, `order_items`, `order_events` |
 | Pagamento | `payment_intents`, `payment_transactions` |

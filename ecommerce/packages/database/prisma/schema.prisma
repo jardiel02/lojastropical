@@ -223,6 +223,8 @@ model Brand {
   name      String    @unique
   logoUrl   String?   @map("logo_url")
   featured  Boolean   @default(false)
+  /// Ordem de exibição (a mesma do site original).
+  position  Int       @default(0)
   createdAt DateTime  @default(now()) @map("created_at")
   updatedAt DateTime  @updatedAt @map("updated_at")
   products  Product[]
@@ -267,6 +269,8 @@ model Product {
   shippingClass    ShippingClass @default(STANDARD) @map("shipping_class")
   coverFit         String        @default("contain") @map("cover_fit")
   status           ProductStatus @default(DRAFT)
+  /// Ordem de exibição na vitrine (a mesma do site original).
+  position         Int           @default(0)
   publishedAt      DateTime?     @map("published_at")
   createdAt        DateTime      @default(now()) @map("created_at")
   updatedAt        DateTime      @updatedAt @map("updated_at")
@@ -282,7 +286,7 @@ model Product {
 
   @@index([categoryId, status])
   @@index([brandId, status])
-  @@index([name(ops: raw("gin_trgm_ops"))], type: Gin, map: "products_name_trgm_idx")
+  @@index([status, position])
   @@map("products")
 }
 
@@ -301,6 +305,8 @@ model ProductVariant {
   colorHex               String?      @map("color_hex")
   position               Int          @default(0)
   isDefault              Boolean      @default(false) @map("is_default")
+  /// Foto que representa a cor no cartão do produto (pode não estar na galeria).
+  imageUrl               String?      @map("image_url")
   /// Preço à vista em centavos. null = "consulte o preço" (não vendável online).
   priceCents             Int?         @map("price_cents")
   /// Parcela de 12x digitada à mão no site original. Será substituída por regras de parcelamento do ERP.

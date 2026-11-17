@@ -33,7 +33,7 @@ jobs:
         options: >-
           --health-cmd "pg_isready -U lojas" --health-interval 5s --health-timeout 5s --health-retries 10
     env:
-      DATABASE_URL: postgresql://lojas:lojas_dev@localhost:5432/lojas_tropical_ci
+      DATABASE_URL: postgresql://lojas:lojas_dev@localhost:5432/lojas_tropical_ci?schema=loja
     steps:
       - uses: actions/checkout@v4
       - uses: pnpm/action-setup@v4
@@ -50,9 +50,14 @@ jobs:
       - run: pnpm lint
       - run: pnpm test
       - name: Banco - migrações e seed
-        run: pnpm db:migrate && pnpm db:seed
-      - run: pnpm build
+        run: pnpm db:migrate && pnpm db:seed && pnpm db:check
+      - name: Build lendo o catálogo do banco
+        run: pnpm build
+        env:
+          CATALOG_SOURCE: database
       - name: Testes de navegação (Playwright)
         run: |
           pnpm --filter @lojas-tropical/web exec playwright install --with-deps chromium
           pnpm test:e2e
+        env:
+          CATALOG_SOURCE: database

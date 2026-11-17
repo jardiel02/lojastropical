@@ -1,6 +1,3 @@
--- Extensão para busca aproximada por nome de produto (índice GIN com trigramas)
-CREATE EXTENSION IF NOT EXISTS pg_trgm;
-
 -- CreateEnum
 CREATE TYPE "UserStatus" AS ENUM ('ACTIVE', 'BLOCKED', 'PENDING_VERIFICATION');
 
@@ -717,7 +714,6 @@ CREATE INDEX "products_category_id_status_idx" ON "products"("category_id", "sta
 CREATE INDEX "products_brand_id_status_idx" ON "products"("brand_id", "status");
 
 -- CreateIndex
-CREATE INDEX "products_name_trgm_idx" ON "products" USING GIN ("name" gin_trgm_ops);
 
 -- CreateIndex
 CREATE UNIQUE INDEX "product_variants_sku_key" ON "product_variants"("sku");

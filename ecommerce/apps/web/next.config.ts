@@ -9,7 +9,8 @@ const securityHeaders = [
 
 const nextConfig: NextConfig = {
   poweredByHeader: false,
-  transpilePackages: ["@lojas-tropical/shared"],
+  transpilePackages: ["@lojas-tropical/shared", "@lojas-tropical/database"],
+  serverExternalPackages: ["pg", "@prisma/adapter-pg"],
   images: {
     formats: ["image/avif", "image/webp"],
     minimumCacheTTL: 60 * 60 * 24 * 30,

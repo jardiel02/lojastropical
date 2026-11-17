@@ -46,7 +46,7 @@ export const subgroupSchema = z.object({ name: z.string(), pattern: z.string() }
 export const catalogSnapshotSchema = z.object({
   generatedAt: z.string(),
   stockUpdatedAt: z.string().nullable(),
-  source: z.literal("legacy-site"),
+  source: z.enum(["legacy-site", "database"]),
   categories: z.array(z.object({ slug: z.string(), name: z.string(), subgroups: z.array(subgroupSchema) })),
   brands: z.array(z.object({ slug: z.string(), name: z.string(), logo: z.string().nullable(), featured: z.boolean() })),
   colorHex: z.record(z.string(), z.string()),
