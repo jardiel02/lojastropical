@@ -1,0 +1,39 @@
+name: E-commerce (busca no Sólidus)
+
+# Só leitura: procura produtos pelo nome no cadastro do Sólidus e mostra código, preço e estoque.
+# Roda quando este arquivo muda (busca abaixo) ou ao apertar "Run workflow".
+on:
+  workflow_dispatch:
+    inputs:
+      busca:
+        description: "Palavras do nome do produto"
+        required: true
+        default: "telasul diamante"
+  push:
+    paths: [".github/workflows/ecommerce-solidus-busca.yml"]
+
+permissions:
+  contents: read
+
+jobs:
+  buscar:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    defaults:
+      run:
+        working-directory: ecommerce
+    steps:
+      - uses: actions/checkout@v4
+      - name: Buscar
+        run: python3 scripts/solidus_busca.py
+        env:
+          BUSCA: ${{ inputs.busca || 'telasul' }}
+          SOLIDUS_TOKEN: ${{ secrets.SOLIDUS_TOKEN }}
+          SOLIDUS_TOKEN_MATRIZ: ${{ secrets.SOLIDUS_TOKEN_MATRIZ }}
+          SOLIDUS_TOKEN_AVENIDA: ${{ secrets.SOLIDUS_TOKEN_AVENIDA }}
+          SOLIDUS_TOKEN_TIMBIRAS: ${{ secrets.SOLIDUS_TOKEN_TIMBIRAS }}
+          SOLIDUS_TOKEN_PIO_XII: ${{ secrets.SOLIDUS_TOKEN_PIO_XII }}
+          SOLIDUS_TOKEN_DOM_PEDRO: ${{ secrets.SOLIDUS_TOKEN_DOM_PEDRO }}
+          SOLIDUS_TOKEN_GONCALVES_DIAS: ${{ secrets.SOLIDUS_TOKEN_GONCALVES_DIAS }}
+          SOLIDUS_TOKEN_COROATA: ${{ secrets.SOLIDUS_TOKEN_COROATA }}
+          SOLIDUS_TOKEN_ALTO_ALEGRE: ${{ secrets.SOLIDUS_TOKEN_ALTO_ALEGRE }}
