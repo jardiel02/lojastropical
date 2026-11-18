@@ -1209,14 +1209,15 @@ const FICHAS = {
 // ===== Integração com o estoque da loja =====
 // O arquivo estoque.js é gerado pela página atualizar-estoque.html a partir do
 // "Relatório Posição de Estoque" do sistema. Ligação pelo campo cod (código do produto).
-// Preço: o que foi digitado no produto (parcela/avista) vale; se não tiver, usa o preço do relatório.
+// Preço: o que foi digitado no produto (parcela/avista) vale. Sem preço à vista digitado,
+// o à vista vem do estoque (Sólidus), inclusive nos produtos que só têm a parcela de 12x.
 // Quantidade 0 no relatório = produto aparece como "Esgotado" no fim da lista.
 const EST = (typeof ESTOQUE !== "undefined" && ESTOQUE.produtos) || {};
 PRODUTOS.forEach(p => {
   if (!p.cod || !Object.keys(EST).length) return;
   const e = EST[p.cod];
   if (!e) { p.qtd = 0; return; } // fora do relatório de estoque = esgotado
-  if (!p.parcela && !p.avista && e.preco) p.avista = e.preco;
+  if (!p.avista && e.preco) p.avista = e.preco;
   p.qtd = e.qtd;
 });
 const esgotado = p => p.qtd !== undefined && p.qtd <= 0;
