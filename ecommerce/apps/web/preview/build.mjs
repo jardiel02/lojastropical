@@ -82,6 +82,7 @@ const bundle = await build({
     "process.env.NODE_ENV": '"production"',
     "process.env.NEXT_PUBLIC_SITE_URL": JSON.stringify("https://jardiel02.github.io/lojastropical"),
     "process.env.NEXT_PUBLIC_ALLOW_INDEXING": '"false"',
+    "process.env.NEXT_PUBLIC_MP_CHECKOUT_ENABLED": '"true"',
     "window.location.search": "globalThis.__previewSearch",
   },
   banner: { js: "var process=globalThis.process||{env:{}};" },

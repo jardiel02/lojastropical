@@ -85,6 +85,13 @@ async function pageFor(loc: PreviewLocation): Promise<ReactNode> {
 const realFetch = window.fetch.bind(window);
 window.fetch = async (input: RequestInfo | URL, init?: RequestInit) => {
   const url = typeof input === "string" ? input : input instanceof URL ? input.href : input.url;
+  // Prévia sem servidor: o pagamento de verdade só existe com a loja hospedada
+  if (url === "/api/checkout/mercadopago") {
+    return Response.json(
+      { error: "Esta é só uma prévia: o pagamento pelo Mercado Pago funciona quando a loja estiver hospedada na Vercel.", code: "previa" },
+      { status: 503 },
+    );
+  }
   if (url !== "/api/cart/quote") return realFetch(input, init);
   let body: unknown;
   try {
