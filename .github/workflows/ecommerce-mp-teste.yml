@@ -1,7 +1,7 @@
 name: E-commerce (teste Mercado Pago)
 
 # Confere se o segredo MP_ACCESS_TOKEN cria um link de pagamento do Checkout Pro.
-# Não cobra nada. Roda quando este arquivo muda ou quando alguém aperta "Run workflow".
+# Não cobra nada (item de R$ 1,00, só cria o link). Roda quando este arquivo muda ou quando alguém aperta "Run workflow".
 on:
   workflow_dispatch:
   push:
