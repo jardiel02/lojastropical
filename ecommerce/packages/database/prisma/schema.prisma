@@ -621,6 +621,8 @@ enum PaymentMethod {
   PIX
   CREDIT_CARD
   STORE_CREDIT
+  /// Checkout Pro: o cliente escolhe Pix ou cartão na página do Mercado Pago; o aviso de pagamento troca para PIX ou CREDIT_CARD.
+  MERCADO_PAGO_CHECKOUT
 }
 
 enum PaymentIntentStatus {

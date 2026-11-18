@@ -6,9 +6,11 @@ import { formatBRL } from "@lojas-tropical/shared";
 import { Sheet, SheetContent } from "@/components/ui/sheet";
 import { Button } from "@/components/ui/button";
 import { whatsappOrderText } from "@/modules/cart/pricing";
+import { CART_PROBLEM_MESSAGE, cartProblem } from "@/modules/payments/checkout-rules";
 import { wa } from "@/lib/site";
 import { useCart } from "./cart-provider";
 import { CartItem } from "./cart-item";
+import { MercadoPagoButton, onlinePaymentEnabled } from "./mercado-pago-button";
 
 function CartEmptyState() {
   return (
@@ -60,6 +62,16 @@ export function CartDrawer() {
                 O vendedor confirma o valor no WhatsApp.
               </p>
             )}
+            {onlinePaymentEnabled && (
+              <MercadoPagoButton
+                lines={lines}
+                blockedReason={(() => {
+                  const problem = cartProblem(quote);
+                  return problem ? CART_PROBLEM_MESSAGE[problem] : null;
+                })()}
+                onNavigate={() => setOpen(false)}
+              />
+            )}
             <Button asChild variant="buy" size="lg" className="h-auto min-h-14 py-3 text-center whitespace-normal tracking-[.04em]">
               <a href={wa(whatsappOrderText(quote))} target="_blank" rel="noopener">
                 <MessageCircle aria-hidden className="size-5" />
@@ -67,8 +79,9 @@ export function CartDrawer() {
               </a>
             </Button>
             <p className="m-0 text-[13px] text-muted-foreground">
-              Você combina a forma de pagamento (crediário, cartão em até 12x ou Pix) e a entrega com o vendedor. O pagamento online
-              pelo site ainda está em implantação.
+              {onlinePaymentEnabled
+                ? "Pelo WhatsApp você também pode pagar no crediário e combinar a entrega com o vendedor."
+                : "Você combina a forma de pagamento (crediário, cartão em até 12x ou Pix) e a entrega com o vendedor. O pagamento online pelo site ainda está em implantação."}
             </p>
             <p className="m-0 text-[13px] text-muted-foreground">
               Usamos seus dados só para atender e entregar o pedido, conforme a{" "}

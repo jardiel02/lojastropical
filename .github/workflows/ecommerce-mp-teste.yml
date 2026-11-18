@@ -1,0 +1,44 @@
+name: E-commerce (teste Mercado Pago)
+
+# Confere se o segredo MP_ACCESS_TOKEN cria um link de pagamento do Checkout Pro.
+# Não cobra nada. Roda quando este arquivo muda ou quando alguém aperta "Run workflow".
+on:
+  workflow_dispatch:
+  push:
+    paths: [".github/workflows/ecommerce-mp-teste.yml"]
+
+permissions:
+  contents: read
+
+jobs:
+  testar:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    defaults:
+      run:
+        working-directory: ecommerce
+    env:
+      MP_ACCESS_TOKEN: ${{ secrets.MP_ACCESS_TOKEN }}
+    steps:
+      - name: Conferir o segredo
+        working-directory: .
+        run: |
+          if [ -z "$MP_ACCESS_TOKEN" ]; then echo "::warning::Falta o segredo MP_ACCESS_TOKEN (credencial de TESTE)"; exit 0; fi
+          echo "TEM_TOKEN=1" >> "$GITHUB_ENV"
+      - if: env.TEM_TOKEN == '1'
+        uses: actions/checkout@v4
+      - if: env.TEM_TOKEN == '1'
+        uses: pnpm/action-setup@v4
+        with:
+          package_json_file: ecommerce/package.json
+      - if: env.TEM_TOKEN == '1'
+        uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+          cache: pnpm
+          cache-dependency-path: ecommerce/pnpm-lock.yaml
+      - if: env.TEM_TOKEN == '1'
+        run: pnpm install --frozen-lockfile
+      - if: env.TEM_TOKEN == '1'
+        name: Criar preferência de teste
+        run: pnpm --filter @lojas-tropical/database exec tsx ../../apps/web/scripts/mp-teste.ts
