@@ -1,0 +1,48 @@
+{
+  "name": "@lojas-tropical/web",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "sync:images": "node scripts/sync-legacy-images.mjs",
+    "predev": "node scripts/sync-legacy-images.mjs",
+    "prebuild": "node scripts/sync-legacy-images.mjs",
+    "dev": "next dev --port 3000",
+    "build": "next build",
+    "start": "next start --port 3000",
+    "lint": "eslint .",
+    "typecheck": "tsc --noEmit",
+    "test:e2e": "playwright test --trace off",
+    "preview:build": "node preview/build.mjs"
+  },
+  "dependencies": {
+    "@lojas-tropical/database": "workspace:*",
+    "@lojas-tropical/shared": "workspace:*",
+    "@supabase/supabase-js": "2.118.0",
+    "class-variance-authority": "0.7.1",
+    "clsx": "2.1.1",
+    "lucide-react": "1.74.0",
+    "mercadopago": "3.6.2",
+    "next": "16.4.6",
+    "radix-ui": "1.8.1",
+    "react": "19.3.1",
+    "react-dom": "19.3.1",
+    "server-only": "0.0.1",
+    "sharp": "0.35.5",
+    "tailwind-merge": "3.7.0",
+    "zod": "4.6.7"
+  },
+  "devDependencies": {
+    "@playwright/test": "1.63.0",
+    "@tailwindcss/postcss": "4.3.5",
+    "@types/node": "22.20.5",
+    "@types/react": "19.3.0",
+    "@types/react-dom": "19.3.0",
+    "esbuild": "0.28.2",
+    "eslint": "9.39.2",
+    "eslint-config-next": "16.4.6",
+    "postcss": "8.5.33",
+    "tailwindcss": "4.3.5",
+    "typescript": "5.9.3"
+  }
+}
