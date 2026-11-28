@@ -1,0 +1,133 @@
+@import "tailwindcss";
+
+/*
+ * Tokens da identidade Lojas Tropical, extraídos do site original (index.html, :root).
+ * Não invente cores novas: ajuste aqui e todo o site acompanha.
+ */
+:root {
+  --brand: #d8121b;          /* vermelho do cabeçalho */
+  --brand-deep: #9c0a10;     /* vermelho escuro: barra de departamentos e benefícios */
+  --brand-text: #c3101a;     /* vermelho para texto sobre fundo claro (contraste AA) */
+  --eyebrow: #2a7a1e;        /* verde dos rótulos de seção */
+  --buy: #187a2e;            /* verde do botão de compra */
+  --buy-text: #187a2e;
+  --sun: #ffd400;            /* amarelo da marca: busca, destaques */
+  --sun-fg: #2b2200;
+  --whatsapp: #25d366;
+  --whatsapp-fg: #06301a;
+  --focus-ring: #231a18;
+  --bg: #fbf7f4;
+  --surface: #ffffff;
+  --fg: #231a18;
+  --muted: #6e6360;
+  --line: #ecdfd9;
+  --chip: #fde9e7;
+  --price: #c3101a;
+  --success: #187a2e;
+  --danger: #c3101a;
+  --radius: 14px;
+  color-scheme: light;
+}
+/* Loja sempre clara, como a identidade da marca (decisão do Jardiel em 17/11/2026). */
+
+@theme inline {
+  --color-brand: var(--brand);
+  --color-brand-deep: var(--brand-deep);
+  --color-brand-text: var(--brand-text);
+  --color-eyebrow: var(--eyebrow);
+  --color-buy: var(--buy);
+  --color-buy-text: var(--buy-text);
+  --color-sun: var(--sun);
+  --color-sun-foreground: var(--sun-fg);
+  --color-whatsapp: var(--whatsapp);
+  --color-whatsapp-foreground: var(--whatsapp-fg);
+  --color-price: var(--price);
+  --color-line: var(--line);
+  --color-chip: var(--chip);
+  --color-surface: var(--surface);
+  --color-success: var(--success);
+  --color-danger: var(--danger);
+  /* nomes usados pelos componentes shadcn/ui */
+  --color-background: var(--bg);
+  --color-foreground: var(--fg);
+  --color-card: var(--surface);
+  --color-card-foreground: var(--fg);
+  --color-popover: var(--surface);
+  --color-popover-foreground: var(--fg);
+  --color-primary: var(--brand);
+  --color-primary-foreground: #ffffff;
+  --color-secondary: var(--sun);
+  --color-secondary-foreground: var(--sun-fg);
+  --color-muted: var(--chip);
+  --color-muted-foreground: var(--muted);
+  --color-accent: var(--chip);
+  --color-accent-foreground: var(--fg);
+  --color-destructive: var(--danger);
+  --color-border: var(--line);
+  --color-input: var(--line);
+  --color-ring: var(--focus-ring);
+  --radius-card: var(--radius);
+  --font-display: var(--font-poppins), system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-sans: var(--font-inter), system-ui, -apple-system, "Segoe UI", sans-serif;
+}
+
+@layer base {
+  * { border-color: var(--line); }
+  html { -webkit-text-size-adjust: 100%; }
+  body { background: var(--bg); color: var(--fg); font-family: var(--font-sans); line-height: 1.5; }
+  h1, h2, h3 { font-family: var(--font-display); font-weight: 700; line-height: 1.2; text-wrap: balance; }
+  :focus-visible { outline: 3px solid var(--focus-ring); outline-offset: 2px; }
+  /* Sobre as faixas vermelhas o anel de foco fica amarelo */
+  .on-brand { --focus-ring: #ffd400; }
+  button { cursor: pointer; }
+  button:disabled { cursor: default; }
+}
+
+@utility no-scrollbar {
+  scrollbar-width: none;
+  &::-webkit-scrollbar { display: none; }
+}
+@utility wrap {
+  max-width: 1200px;
+  margin-inline: auto;
+  padding-left: max(16px, env(safe-area-inset-left, 0px));
+  padding-right: max(16px, env(safe-area-inset-right, 0px));
+}
+@utility eyebrow {
+  display: block;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  color: var(--eyebrow);
+  margin-bottom: 2px;
+}
+
+@keyframes ig-passa { from { transform: translateX(calc(-50% - 6px)); } to { transform: translateX(0); } }
+/* Pino do mapa pula ao passar o mouse no cartão da loja */
+@keyframes pino { 0%, 100% { transform: translateY(0); } 35% { transform: translateY(-5px); } 60% { transform: translateY(0); } 80% { transform: translateY(-2px); } }
+
+/* Páginas de políticas (conteúdo vindo das páginas do site original) */
+.legal { padding-block: 32px 56px; }
+.legal h1 { font-size: clamp(32px, 5vw, 44px); line-height: 1.1; margin: 0 0 6px; }
+.legal h2 { font-size: 26px; margin: 36px 0 8px; scroll-margin-top: 140px; }
+.legal h3 { font-size: 18px; margin: 20px 0 4px; }
+.legal p, .legal li { max-width: 72ch; margin-block: 0 10px; }
+.legal ul, .legal ol { padding-left: 22px; list-style: revert; }
+.legal a { color: var(--brand-text); font-weight: 600; text-decoration: underline; }
+.legal .lt-meta { color: var(--muted); font-size: 15px; margin: 0 0 20px; }
+.legal .lt-aviso { background: var(--chip); border-left: 4px solid var(--brand); border-radius: 10px; padding: 12px 16px; font-size: 15px; }
+.legal .lt-toc { background: var(--surface); border: 1px solid var(--line); border-radius: 14px; padding: 14px 20px; margin: 20px 0; }
+.legal .lt-toc h2 { font-size: 18px; margin: 0 0 6px; font-family: var(--font-sans); }
+.legal .lt-toc ol { margin: 0; columns: 2 260px; column-gap: 32px; font-size: 15px; }
+.legal .lt-tabela-wrap { overflow-x: auto; margin: 12px 0; border: 1px solid var(--line); border-radius: 12px; }
+.legal .lt-tabela { width: 100%; border-collapse: collapse; font-size: 15px; background: var(--surface); }
+.legal .lt-tabela th, .legal .lt-tabela td { text-align: left; vertical-align: top; padding: 10px 12px; border-bottom: 1px solid var(--line); }
+.legal .lt-tabela thead th { background: var(--chip); }
+.legal .lt-dados { background: var(--surface); border: 1px solid var(--line); border-radius: 14px; padding: 14px 20px; margin: 12px 0; }
+.legal .lt-dados dl { display: grid; grid-template-columns: max-content 1fr; gap: 4px 16px; margin: 0; }
+.legal .lt-dados dt { font-weight: 700; }
+.legal .lt-dados dd { margin: 0; overflow-wrap: anywhere; }
+.legal .lt-vh { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+.legal .lt-enviar { display: inline-flex; align-items: center; min-height: 48px; padding: 10px 20px; border-radius: 12px; background: var(--buy); color: #fff; text-decoration: none; font-weight: 700; }
+@media (max-width: 560px) { .legal .lt-dados dl { grid-template-columns: 1fr; } }

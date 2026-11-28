@@ -1,0 +1,60 @@
+name: E-commerce (banco Supabase)
+
+# Cria/atualiza as tabelas da nova loja no Supabase e carrega o catálogo.
+# Só roda quando alguém aperta "Run workflow". Não apaga dados: aplica apenas migrações
+# pendentes e o seed idempotente do catálogo. As tabelas ficam no esquema "loja",
+# fora da API pública do Supabase. O cadastro de clientes (public.clientes) vem de supabase/clientes.sql.
+on:
+  workflow_dispatch:
+    inputs:
+      confirmar:
+        description: 'Digite "aplicar" para criar/atualizar as tabelas e carregar o catálogo'
+        required: true
+  push:
+    paths: [".github/workflows/ecommerce-db.yml"] # só registra o workflow; o job abaixo não roda em push
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ecommerce-db
+  cancel-in-progress: false
+
+jobs:
+  aplicar:
+    if: github.event_name == 'workflow_dispatch' && inputs.confirmar == 'aplicar'
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    defaults:
+      run:
+        working-directory: ecommerce
+    env:
+      DATABASE_URL: ${{ secrets.SUPABASE_DATABASE_URL }}
+    steps:
+      - name: Conferir o segredo
+        working-directory: . # roda antes do checkout
+        run: |
+          if [ -z "$DATABASE_URL" ]; then echo "::error::Falta o segredo SUPABASE_DATABASE_URL"; exit 1; fi
+          case "$DATABASE_URL" in
+            *schema=loja*) ;;
+            *) echo "::error::O endereço precisa terminar com ?schema=loja (ver ecommerce/SUPABASE.md)"; exit 1 ;;
+          esac
+      - uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v4
+        with:
+          package_json_file: ecommerce/package.json
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+          cache: pnpm
+          cache-dependency-path: ecommerce/pnpm-lock.yaml
+      - run: pnpm install --frozen-lockfile
+      - run: pnpm db:generate
+      - name: Migrações pendentes
+        run: pnpm db:migrate
+      - name: Catálogo (seed idempotente)
+        run: pnpm db:seed
+      - name: Conferir catálogo do banco com o retrato atual
+        run: pnpm db:check
+      - name: Cadastro de clientes (tabela public.clientes, RLS e gatilho do cadastro)
+        run: pnpm --filter @lojas-tropical/database exec tsx scripts/apply-sql.ts ../../supabase/clientes.sql
